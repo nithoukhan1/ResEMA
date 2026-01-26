@@ -1,4 +1,3 @@
-# File: ultralytics/nn/modules/custom.py
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -11,7 +10,8 @@ class DySample(nn.Module):
         self.scale = 2
         self.style = 'lp'
         self.groups = 4
-        # Robust parsing for shifted args
+        
+        # Robust Parsing: Check args for int (scale) and str (style)
         for arg in args:
             if isinstance(arg, int): self.scale = arg
             elif isinstance(arg, str): self.style = arg
@@ -50,13 +50,14 @@ class ResEMA(nn.Module):
     def __init__(self, c1, *args, **kwargs):
         super().__init__()
         self.groups = 8
+        # Robust Parsing
         for arg in args:
             if isinstance(arg, int) and arg < 100: self.groups = arg
-        if c1 // self.groups <= 0: self.groups = 1
+        
         mid_channels = c1 // 2 if c1 > 1 else c1
         self.conv_block1 = nn.Sequential(nn.Conv2d(c1, mid_channels, 1, bias=False), nn.BatchNorm2d(mid_channels), nn.ReLU(inplace=True))
         self.conv_block2 = nn.Sequential(nn.Conv2d(mid_channels, c1, 1, bias=False), nn.BatchNorm2d(c1))
-        self.internal_c = c1 // self.groups
+        self.internal_c = max(1, c1 // self.groups)
         self.softmax = nn.Softmax(dim=-1)
         self.agp = nn.AdaptiveAvgPool2d((1, 1))
         self.pool_h = nn.AdaptiveAvgPool2d((None, 1))
