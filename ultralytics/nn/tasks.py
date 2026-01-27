@@ -1691,13 +1691,16 @@ def parse_model(d, ch, verbose=True):
             args = [c1, c2, *args[1:]]
         elif m is CBFuse:
             c2 = ch[f[-1]]
-        
-        # --- INSERT THIS BLOCK ---
+
+        # ==================== INSERT THIS BLOCK ====================
         elif m in {DySample, ResEMA}:
             c1 = ch[f]
-            c2 = c1  # Maintain channel count (input = output)
-            args = [c1, *args]  # Prepend input channels to args
-        # -------------------------
+            c2 = c1  # Output channels = Input channels
+            args = [c1, *args] # Add input channels to args list
+        # ===========================================================
+
+        elif m in frozenset({TorchVision, Index}):
+            c2 = args[0]
 
         elif m in {TorchVision, Index}:
             c2 = args[0]
