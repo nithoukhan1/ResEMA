@@ -15,8 +15,6 @@ from ultralytics.nn.autobackend import check_class_names
 from ultralytics.nn.modules import (
     AIFI,
     C1,
-    DySample,
-    ResEMA,
     C2,
     C2PSA,
     C3,
