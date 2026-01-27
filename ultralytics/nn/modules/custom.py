@@ -11,10 +11,13 @@ class DySample(nn.Module):
         self.style = 'lp'
         self.groups = 4
         
-        # Robust Parsing: Check args for int (scale) and str (style)
+        # Robust Argument Parsing: Scan *args for scale (int) and style (str)
+        # This prevents errors if YOLO shifts arguments.
         for arg in args:
-            if isinstance(arg, int): self.scale = arg
-            elif isinstance(arg, str): self.style = arg
+            if isinstance(arg, int): 
+                self.scale = arg
+            elif isinstance(arg, str): 
+                self.style = arg
             
         if self.style == 'pl':
             offset_in = c1 // (self.scale ** 2)
@@ -50,14 +53,27 @@ class ResEMA(nn.Module):
     def __init__(self, c1, *args, **kwargs):
         super().__init__()
         self.groups = 8
-        # Robust Parsing
-        for arg in args:
-            if isinstance(arg, int) and arg < 100: self.groups = arg
         
+        # Robust Argument Parsing
+        for arg in args:
+            if isinstance(arg, int) and arg < 100: 
+                self.groups = arg
+        
+        # Safety check for groups
+        if c1 // self.groups <= 0: 
+            self.groups = 1
+
         mid_channels = c1 // 2 if c1 > 1 else c1
-        self.conv_block1 = nn.Sequential(nn.Conv2d(c1, mid_channels, 1, bias=False), nn.BatchNorm2d(mid_channels), nn.ReLU(inplace=True))
-        self.conv_block2 = nn.Sequential(nn.Conv2d(mid_channels, c1, 1, bias=False), nn.BatchNorm2d(c1))
-        self.internal_c = max(1, c1 // self.groups)
+        self.conv_block1 = nn.Sequential(
+            nn.Conv2d(c1, mid_channels, 1, bias=False),
+            nn.BatchNorm2d(mid_channels),
+            nn.ReLU(inplace=True)
+        )
+        self.conv_block2 = nn.Sequential(
+            nn.Conv2d(mid_channels, c1, 1, bias=False),
+            nn.BatchNorm2d(c1)
+        )
+        self.internal_c = c1 // self.groups
         self.softmax = nn.Softmax(dim=-1)
         self.agp = nn.AdaptiveAvgPool2d((1, 1))
         self.pool_h = nn.AdaptiveAvgPool2d((None, 1))
@@ -78,7 +94,16 @@ class ResEMA(nn.Module):
         x_h, x_w = torch.split(hw, [h, w], dim=2)
         x1 = self.gn(group_x * x_h.sigmoid() * x_w.permute(0, 1, 3, 2).sigmoid())
         x2 = self.conv3x3(group_x)
+        
+        # --- FIXED WEIGHT CALCULATION ---
+        # 1. Calculate weights. Shape comes out as (B * Groups, 1, Channels)
         w1 = self.softmax(self.agp(x1).reshape(b * self.groups, -1, 1).permute(0, 2, 1))
         w2 = self.softmax(self.agp(x2).reshape(b * self.groups, -1, 1).permute(0, 2, 1))
+        
+        # 2. FIX: Reshape to (B * Groups, Channels, 1, 1) so it can broadcast correctly over (H, W)
+        w1 = w1.permute(0, 2, 1).reshape(b * self.groups, self.internal_c, 1, 1)
+        w2 = w2.permute(0, 2, 1).reshape(b * self.groups, self.internal_c, 1, 1)
+        # --------------------------------
+
         out = (x1 * w1 + x2 * w2).reshape(b, c, h, w)
         return residual + out
