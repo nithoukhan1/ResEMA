@@ -339,7 +339,13 @@ class v8DetectionLoss:
         h = model.args  # hyperparameters
 
         m = model.model[-1]  # Detect() module
-        self.bce = nn.BCEWithLogitsLoss(reduction="none")
+        # --- CUSTOM PATCH START ---
+        if hasattr(h, 'fl_gamma') and h.fl_gamma > 0.0:
+            print(f"✅ ACTIVATING FOCAL LOSS (Gamma={h.fl_gamma})")
+            self.bce = FocalLoss(gamma=h.fl_gamma)
+        else:
+            self.bce = nn.BCEWithLogitsLoss(reduction="none")
+        # --- CUSTOM PATCH END ---
         self.hyp = h
         self.stride = m.stride  # model strides
         self.nc = m.nc  # number of classes
