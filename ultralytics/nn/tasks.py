@@ -1694,10 +1694,17 @@ def parse_model(d, ch, verbose=True):
             c2 = ch[f[-1]]
 
         # ==================== INSERT THIS BLOCK ====================
+        # ==================== CORRECTED CUSTOM BLOCK ====================
+        elif m is SPD:
+            c1 = ch[f]
+            c2 = c1 * 4  # <--- CRITICAL: Output channels = Input * 4
+            args = args  # SPD takes 1 arg (dimension), no channel arg needed
+
         elif m in {DySample, ResEMA}:
             c1 = ch[f]
-            c2 = c1  # Output channels = Input channels
-            args = [c1, *args] # Add input channels to args list
+            c2 = c1      # Output channels = Input channels
+            args = [c1, *args] # These need input_channels as the first arg
+        # ================================================================
         # ===========================================================
 
         elif m in frozenset({TorchVision, Index}):
