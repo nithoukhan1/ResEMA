@@ -15,6 +15,7 @@ from ultralytics.nn.autobackend import check_class_names
 from ultralytics.nn.modules import (
     AIFI,
     C1,
+    C3k2_SC,
     C2,
     C2PSA,
     C3,
@@ -1573,6 +1574,7 @@ def parse_model(d, ch, verbose=True):
             C2,
             C2f,
             C3k2,
+            C3k2_SC,
             RepNCSPELAN4,
             ELAN1,
             ADown,
@@ -1599,6 +1601,7 @@ def parse_model(d, ch, verbose=True):
             C2,
             C2f,
             C3k2,
+            C3k2_SC,
             C2fAttn,
             C3,
             C3TR,
