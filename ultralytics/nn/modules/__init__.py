@@ -60,6 +60,7 @@ from .block import (
     ResNetLayer,
     SCDown,
     TorchVision,
+    C3k2_SC,
 )
 from .conv import (
     CBAM,
@@ -191,4 +192,5 @@ __all__ = (
     "DySample",
     "ResEMA",
     "SPD",
+    "C3k2_SC"
 )
