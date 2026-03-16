@@ -134,6 +134,9 @@ class BboxLoss(nn.Module):
         
         # Check if the training script explicitly activated WIoU
         if os.getenv('USE_WIOU') == 'True':
+            # ---> ADD THIS EXACT LINE <---
+            print("\n🚨 SUCCESS: WIOU V3 IS ACTIVELY CALCULATING THIS BATCH! 🚨\n")
+            
             # --- CUSTOM WIOU v3 (Dynamic Focusing) ---
             iou, exp_term = bbox_iou(pred_bboxes[fg_mask], target_bboxes[fg_mask], xywh=False, WIoU=True)
             iou_loss = 1.0 - iou
