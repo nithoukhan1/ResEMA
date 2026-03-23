@@ -128,40 +128,9 @@ class BboxLoss(nn.Module):
     ) -> tuple[torch.Tensor, torch.Tensor]:
         """Compute IoU and DFL losses for bounding boxes."""
         weight = target_scores.sum(-1)[fg_mask].unsqueeze(-1)
-        # ==========================================
-        # SMART LOSS SWITCH (CIoU vs WIoU v3)
-        # =========================================
         
-        # Check if the training script explicitly activated WIoU
-        if os.getenv('USE_WIOU') == 'True':
-            
-            # --- THE "PRINT ONCE" TRICK ---
-            if not hasattr(self, '_wiou_printed'):
-                print("\n✅ WIOU V3 IS ACTIVELY CALCULATING! (Silencing future alerts...) ✅\n")
-                self._wiou_printed = True
-            # ------------------------------
-            
-            # --- CUSTOM WIOU v3 (Dynamic Focusing) ---
-            iou, exp_term = bbox_iou(pred_bboxes[fg_mask], target_bboxes[fg_mask], xywh=False, WIoU=True)
-            # ... (rest of your math)
-            
-            # --- CUSTOM WIOU v3 (Dynamic Focusing) ---
-            iou, exp_term = bbox_iou(pred_bboxes[fg_mask], target_bboxes[fg_mask], xywh=False, WIoU=True)
-            iou_loss = 1.0 - iou
-            alpha = 1.9 
-            delta = 3.0 
-            iou_mean = iou_loss.detach().mean()
-            beta = iou_loss.detach() / (iou_mean + 1e-7)
-            r = beta / (delta * torch.pow(alpha, beta - delta))
-            
-            wiou_loss_values = (iou_loss * exp_term * r).unsqueeze(-1) if iou.dim() == 1 else (iou_loss * exp_term * r)
-            loss_iou = (wiou_loss_values * weight).sum() / target_scores_sum
-            
-        else:
-            # --- STANDARD YOLO BASELINE (CIoU) ---
-            iou = bbox_iou(pred_bboxes[fg_mask], target_bboxes[fg_mask], xywh=False, CIoU=True)
-            loss_iou = ((1.0 - iou) * weight).sum() / target_scores_sum
-        # ==========================================
+        iou = bbox_iou(pred_bboxes[fg_mask], target_bboxes[fg_mask], xywh=False, CIoU=True)
+        loss_iou = ((1.0 - iou) * weight).sum() / target_scores_sum
 
         # DFL loss
         if self.dfl_loss:
