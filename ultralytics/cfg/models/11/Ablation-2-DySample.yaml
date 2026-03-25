@@ -1,7 +1,11 @@
 # ABLATION A: NO DYSAMPLE
 nc: 9
 scales:
-  s: [0.50, 0.50, 1024]  
+  # [depth, width, max_channels]
+  #n: [0.50, 0.25, 1024]  
+  #s: [0.50, 0.50, 1024]  
+   m: [0.50, 1.00, 512]   
+  #l: [1.00, 1.00, 512]  
 
 backbone:
   - [-1, 1, Conv, [64, 3, 2]]  # 0-P1/2
