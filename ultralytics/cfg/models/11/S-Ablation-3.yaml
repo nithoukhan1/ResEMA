@@ -1,0 +1,51 @@
+# yolo11-ResEMA_only-S.yaml
+# Ablation 3: ResEMA neck attention ONLY
+# C3k2_SC replaced with standard C3k2 in backbone
+# DySample replaced with nn.Upsample (standard)
+# ResEMA kept in neck at all 4 positions
+# Purpose: isolate contribution of ResEMA attention module
+
+nc: 9
+scales:
+  s: [0.50, 0.50, 1024]
+
+backbone:
+  - [-1, 1, Conv, [64, 3, 2]]                    # 0-P1/2
+  - [-1, 1, Conv, [128, 3, 2]]                   # 1-P2/4
+  - [-1, 2, C3k2, [256, False, 0.25]]            # 2  ← standard C3k2
+  - [-1, 1, Conv, [256, 3, 2]]                   # 3-P3/8
+  - [-1, 2, C3k2, [512, False, 0.25]]            # 4  ← standard C3k2
+  - [-1, 1, Conv, [512, 3, 2]]                   # 5-P4/16
+  - [-1, 2, C3k2, [512, True]]                   # 6  ← standard C3k2
+  - [-1, 1, Conv, [1024, 3, 2]]                  # 7-P5/32
+  - [-1, 2, C3k2, [1024, True]]                  # 8  ← standard C3k2
+  - [-1, 1, SPPF, [1024, 5]]                     # 9
+  - [-1, 2, C2PSA, [1024]]                       # 10
+
+head:
+  # Layer numbering matches full model exactly — only backbone changed
+  # Upsample P5 -> P4 (standard upsample, ResEMA kept)
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']]   # 11
+  - [[-1, 6], 1, Concat, [1]]                    # 12
+  - [-1, 2, C3k2, [512, False]]                  # 13
+  - [-1, 1, ResEMA, [512, 8]]                    # 14  ← ResEMA kept
+
+  # Upsample P4 -> P3
+  - [-1, 1, nn.Upsample, [None, 2, 'nearest']]   # 15
+  - [[-1, 4], 1, Concat, [1]]                    # 16
+  - [-1, 2, C3k2, [256, False]]                  # 17
+  - [-1, 1, ResEMA, [256, 8]]                    # 18  ← ResEMA, DETECT small
+
+  # Downsample P3 -> P4
+  - [-1, 1, Conv, [256, 3, 2]]                   # 19
+  - [[-1, 14], 1, Concat, [1]]                   # 20  refs ResEMA at 14
+  - [-1, 2, C3k2, [512, False]]                  # 21
+  - [-1, 1, ResEMA, [512, 8]]                    # 22  ← ResEMA, DETECT medium
+
+  # Downsample P4 -> P5
+  - [-1, 1, Conv, [512, 3, 2]]                   # 23
+  - [[-1, 10], 1, Concat, [1]]                   # 24
+  - [-1, 2, C3k2, [1024, True]]                  # 25
+  - [-1, 1, ResEMA, [1024, 8]]                   # 26  ← ResEMA, DETECT large
+
+  - [[18, 22, 26], 1, Detect, [nc]]              # 27
