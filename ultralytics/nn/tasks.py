@@ -19,7 +19,6 @@ from ultralytics.nn.modules import (
     C2,
     C2PSA,
     C3,
-    SPD,
     C3TR,
     ELAN1,
     OBB,
@@ -1698,25 +1697,17 @@ def parse_model(d, ch, verbose=True):
 
         # ==================== INSERT THIS BLOCK ====================
         # ==================== CORRECTED CUSTOM BLOCK ====================
-        elif m is SPD:
+        elif m is DySample:
             c1 = ch[f]
-            c2 = c1 * 4  # <--- CRITICAL: Output channels = Input * 4
-            args = args  # SPD takes 1 arg (dimension), no channel arg needed
+            c2 = c1
+            args = [c1, *args]
 
-        elif m in {DySample, ResEMA}:
+        elif m is ResEMA:
             c1 = ch[f]
-            c2 = c1      # Output channels = Input channels
-            args = [c1, *args] # These need input_channels as the first arg
+            c2 = c1
+            args = [c1, *args]
         # ================================================================
         # ===========================================================
-
-        elif m in frozenset({TorchVision, Index}):
-            c2 = args[0]
-
-        elif m in {TorchVision, Index}:
-            c2 = args[0]
-            c1 = ch[f]
-            args = [*args[1:]]
             
         elif m in frozenset({TorchVision, Index}):
             c2 = args[0]

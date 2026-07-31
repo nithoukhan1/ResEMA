@@ -37,6 +37,7 @@ __all__ = (
     "C2fPSA",
     "C3Ghost",
     "C3k2",
+    "C3k2_SC",
     "C3x",
     "CBFuse",
     "CBLinear",
@@ -2067,69 +2068,225 @@ class RealNVP(nn.Module):
         return self.prior.log_prob(z) + log_det
     
     
-class SPD(nn.Module):
-    # Space-to-Depth layer for lossless downsampling
-    def __init__(self, dimension=1):
-        super().__init__()
-        self.d = dimension
-
-    def forward(self, x):
-        return torch.cat([
-            x[..., ::2, ::2],
-            x[..., 1::2, ::2],
-            x[..., ::2, 1::2],
-            x[..., 1::2, 1::2]
-        ], 1)
-
-
-import torch.nn.functional as F
-
-# 1. The Core Physics (SCConv)
 class SCConv(nn.Module):
-    def __init__(self, c, pooling_r=2):
+    """Self-Calibrated Convolution adapted from SCNet (CVPR 2020)."""
+
+    def __init__(
+        self,
+        channels: int,
+        pooling_r: int = 4,
+        groups: int = 1,
+    ) -> None:
         super().__init__()
-        # SRU: Spatial Reconstruction Unit
+
+        if pooling_r < 1:
+            raise ValueError(
+                f"pooling_r must be at least 1, but received {pooling_r}."
+            )
+
+        if groups < 1:
+            raise ValueError(
+                f"groups must be at least 1, but received {groups}."
+            )
+
+        if channels % groups != 0:
+            raise ValueError(
+                f"channels ({channels}) must be divisible by groups ({groups})."
+            )
+
         self.k2 = nn.Sequential(
-            nn.AvgPool2d(kernel_size=pooling_r, stride=pooling_r),
-            nn.Conv2d(c, c, kernel_size=3, padding=1, bias=False),
-            nn.BatchNorm2d(c),
+            nn.AvgPool2d(
+                kernel_size=pooling_r,
+                stride=pooling_r,
+            ),
+            nn.Conv2d(
+                channels,
+                channels,
+                kernel_size=3,
+                stride=1,
+                padding=1,
+                groups=groups,
+                bias=False,
+            ),
+            nn.BatchNorm2d(channels),
         )
+
         self.k3 = nn.Sequential(
-            nn.Conv2d(c, c, kernel_size=3, padding=1, bias=False),
-            nn.BatchNorm2d(c),
+            nn.Conv2d(
+                channels,
+                channels,
+                kernel_size=3,
+                stride=1,
+                padding=1,
+                groups=groups,
+                bias=False,
+            ),
+            nn.BatchNorm2d(channels),
         )
+
         self.k4 = nn.Sequential(
-            nn.Conv2d(c, c, kernel_size=3, padding=1, bias=False),
-            nn.BatchNorm2d(c),
-            nn.ReLU()
+            nn.Conv2d(
+                channels,
+                channels,
+                kernel_size=3,
+                stride=1,
+                padding=1,
+                groups=groups,
+                bias=False,
+            ),
+            nn.BatchNorm2d(channels),
         )
 
-    def forward(self, x):
-        identity = x
-        # SRU Logic: Separate "Redundant" (Background) from "Informative" (Bone)
-        q = self.k2(x)
-        
-        # Interpolate back to original size to match identity
-        if q.size()[-2:] != identity.size()[-2:]:
-            q = F.interpolate(q, size=identity.size()[-2:], mode='nearest')
-            
-        out = torch.sigmoid(torch.add(identity, q)) # Weighting map
-        out = torch.mul(self.k3(x), out) # Apply weights
-        out = self.k4(out) # Refine
-        return out
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        context = self.k2(x)
 
-# 2. The YOLO Wrapper (C3k2_SC)
-class C3k2_SC(nn.Module):
-    # CSP Bottleneck with SCConv
-    def __init__(self, c1, c2, n=1, shortcut=False, g=1, e=0.5):
+        context = F.interpolate(
+            context,
+            size=x.shape[-2:],
+            mode="nearest",
+        )
+
+        calibration = torch.sigmoid(x + context)
+        calibrated_features = self.k3(x) * calibration
+
+        return self.k4(calibrated_features)
+
+
+class SCBlock(nn.Module):
+    """Self-calibrated transform with an optional residual shortcut."""
+
+    def __init__(
+        self,
+        channels: int,
+        shortcut: bool = False,
+        groups: int = 1,
+        pooling_r: int = 4,
+    ) -> None:
         super().__init__()
-        c_ = int(c2 * e)  # hidden channels
-        self.cv1 = Conv(c1, c_, 1, 1)
-        self.cv2 = Conv(c1, c_, 1, 1)
-        self.cv3 = Conv(2 * c_, c2, 1)
-        
-        # Replace standard Bottlenecks with SCConv blocks
-        self.m = nn.Sequential(*(SCConv(c_) for _ in range(n)))
 
-    def forward(self, x):
-        return self.cv3(torch.cat((self.m(self.cv1(x)), self.cv2(x)), 1))
+        self.scconv = SCConv(
+            channels=channels,
+            pooling_r=pooling_r,
+            groups=groups,
+        )
+
+        self.use_shortcut = shortcut
+        self.activation = nn.SiLU(inplace=True)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        y = self.activation(self.scconv(x))
+
+        if self.use_shortcut:
+            return x + y
+
+        return y
+
+
+class C3k2_SC(nn.Module):
+    """
+    C3k2-style CSP block using Self-Calibrated Convolution transforms.
+
+    This is a YOLO-oriented architectural adaptation. It is not the
+    Spatial and Channel Reconstruction Convolution introduced in 2023.
+    """
+
+    def __init__(
+        self,
+        c1: int,
+        c2: int,
+        n: int = 1,
+        shortcut: bool = False,
+        e: float = 0.5,
+        g: int = 1,
+        pooling_r: int = 4,
+    ) -> None:
+        super().__init__()
+
+        if n < 1:
+            raise ValueError(
+                f"n must be at least 1, but received {n}."
+            )
+
+        if not 0.0 < e <= 1.0:
+            raise ValueError(
+                f"Expansion e must be in the interval (0, 1], "
+                f"but received {e}."
+            )
+
+        if g < 1:
+            raise ValueError(
+                f"g must be at least 1, but received {g}."
+            )
+
+        hidden_channels = int(c2 * e)
+
+        if hidden_channels < 1:
+            raise ValueError(
+                f"Calculated hidden channels are {hidden_channels}. "
+                "Increase c2 or e."
+            )
+
+        if hidden_channels % g != 0:
+            raise ValueError(
+                f"Hidden channels ({hidden_channels}) must be divisible "
+                f"by groups ({g})."
+            )
+
+        self.hidden_channels = hidden_channels
+        self.use_shortcut = shortcut
+        self.expansion = e
+        self.groups = g
+        self.pooling_r = pooling_r
+
+        self.cv1 = Conv(
+            c1,
+            hidden_channels,
+            1,
+            1,
+        )
+
+        self.cv2 = Conv(
+            c1,
+            hidden_channels,
+            1,
+            1,
+        )
+
+        self.cv3 = Conv(
+            2 * hidden_channels,
+            c2,
+            1,
+            1,
+        )
+
+        self.blocks = nn.Sequential(
+            *(
+                SCBlock(
+                    channels=hidden_channels,
+                    shortcut=shortcut,
+                    groups=g,
+                    pooling_r=pooling_r,
+                )
+                for _ in range(n)
+            )
+        )
+
+    def forward(
+        self,
+        x: torch.Tensor,
+    ) -> torch.Tensor:
+        calibrated_branch = self.blocks(
+            self.cv1(x)
+        )
+
+        bypass_branch = self.cv2(x)
+
+        concatenated = torch.cat(
+            (
+                calibrated_branch,
+                bypass_branch,
+            ),
+            dim=1,
+        )
+
+        return self.cv3(concatenated)

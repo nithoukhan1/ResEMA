@@ -20,7 +20,6 @@ from .custom import DySample, ResEMA
 from .block import (
     C1,
     C2,
-    SPD,
     C2PSA,
     C3,
     C3TR,
@@ -191,6 +190,5 @@ __all__ = (
     "v10Detect",
     "DySample",
     "ResEMA",
-    "SPD",
     "C3k2_SC"
 )
