@@ -16,7 +16,12 @@ Examples:
     >>> torch.onnx.export(m, x, f)
     >>> subprocess.run(f"onnxslim {f} {f} && open {f}", shell=True, check=True)  # pip install onnxslim
 """
-from .custom import DySample, ResEMA
+from .custom import (
+    DySample,
+    EMAOfficial,
+    ResEMA,
+    ResEMA_V3,
+)
 from .block import (
     C1,
     C2,
@@ -189,6 +194,8 @@ __all__ = (
     "YOLOESegment26",
     "v10Detect",
     "DySample",
+    "EMAOfficial",
     "ResEMA",
-    "C3k2_SC"
+    "ResEMA_V3",
+    "C3k2_SC",
 )

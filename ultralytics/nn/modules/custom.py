@@ -9,7 +9,12 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-__all__ = ("DySample", "ResEMA")
+__all__ = (
+    "DySample",
+    "ResEMA",
+    "EMAOfficial",
+    "ResEMA_V3",
+)
 
 
 def _normal_init(
@@ -525,3 +530,223 @@ class ResEMA(nn.Module):
         )
 
         return residual + output
+    
+    
+    
+class EMAOfficial(nn.Module):
+    """
+    Reference-faithful Efficient Multi-Scale Attention core.
+
+    Adapted from the released implementation of:
+    Efficient Multi-Scale Attention Module with Cross-Spatial Learning,
+    ICASSP 2023.
+
+    This class implements the EMA attention core only.
+    It does not include the external residual connection used by ResEMA_V3.
+    """
+
+    def __init__(
+        self,
+        c1: int,
+        factor: int = 32,
+    ) -> None:
+        super().__init__()
+
+        if c1 < 1:
+            raise ValueError(
+                f"Input channels must be positive, but received {c1}."
+            )
+
+        if factor < 1:
+            raise ValueError(
+                f"factor must be positive, but received {factor}."
+            )
+
+        if c1 % factor != 0:
+            raise ValueError(
+                f"Input channels ({c1}) must be divisible "
+                f"by factor ({factor})."
+            )
+
+        self.channels = c1
+        self.groups = factor
+        self.group_channels = c1 // factor
+
+        self.softmax = nn.Softmax(dim=-1)
+
+        self.global_pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.pool_h = nn.AdaptiveAvgPool2d((None, 1))
+        self.pool_w = nn.AdaptiveAvgPool2d((1, None))
+
+        # Matches the normalization structure of the released EMA core:
+        # one normalization group per channel inside each feature group.
+        self.group_norm = nn.GroupNorm(
+            self.group_channels,
+            self.group_channels,
+        )
+
+        # Keep bias enabled to match the reference EMA convolutions.
+        self.conv1x1 = nn.Conv2d(
+            self.group_channels,
+            self.group_channels,
+            kernel_size=1,
+            stride=1,
+            padding=0,
+            bias=True,
+        )
+
+        self.conv3x3 = nn.Conv2d(
+            self.group_channels,
+            self.group_channels,
+            kernel_size=3,
+            stride=1,
+            padding=1,
+            bias=True,
+        )
+
+    def forward(
+        self,
+        x: torch.Tensor,
+    ) -> torch.Tensor:
+
+        batch_size, channels, height, width = x.shape
+
+        if channels != self.channels:
+            raise ValueError(
+                f"EMAOfficial was initialized for {self.channels} channels "
+                f"but received {channels} channels."
+            )
+
+        grouped = x.reshape(
+            batch_size * self.groups,
+            self.group_channels,
+            height,
+            width,
+        )
+
+        feature_h = self.pool_h(grouped)
+
+        feature_w = self.pool_w(grouped).permute(
+            0,
+            1,
+            3,
+            2,
+        )
+
+        directional = self.conv1x1(
+            torch.cat(
+                (feature_h, feature_w),
+                dim=2,
+            )
+        )
+
+        feature_h, feature_w = torch.split(
+            directional,
+            (height, width),
+            dim=2,
+        )
+
+        branch_1 = self.group_norm(
+            grouped
+            * feature_h.sigmoid()
+            * feature_w.permute(
+                0,
+                1,
+                3,
+                2,
+            ).sigmoid()
+        )
+
+        branch_2 = self.conv3x3(grouped)
+
+        branch_1_descriptor = self.softmax(
+            self.global_pool(branch_1)
+            .reshape(
+                batch_size * self.groups,
+                self.group_channels,
+                1,
+            )
+            .permute(0, 2, 1)
+        )
+
+        branch_2_spatial = branch_2.reshape(
+            batch_size * self.groups,
+            self.group_channels,
+            height * width,
+        )
+
+        branch_2_descriptor = self.softmax(
+            self.global_pool(branch_2)
+            .reshape(
+                batch_size * self.groups,
+                self.group_channels,
+                1,
+            )
+            .permute(0, 2, 1)
+        )
+
+        branch_1_spatial = branch_1.reshape(
+            batch_size * self.groups,
+            self.group_channels,
+            height * width,
+        )
+
+        spatial_weights = (
+            torch.matmul(
+                branch_1_descriptor,
+                branch_2_spatial,
+            )
+            + torch.matmul(
+                branch_2_descriptor,
+                branch_1_spatial,
+            )
+        ).reshape(
+            batch_size * self.groups,
+            1,
+            height,
+            width,
+        )
+
+        attended = (
+            grouped
+            * spatial_weights.sigmoid()
+        )
+
+        return attended.reshape(
+            batch_size,
+            channels,
+            height,
+            width,
+        )
+
+
+class ResEMA_V3(nn.Module):
+    """
+    Residual Efficient Multi-Scale Attention version 3.
+
+    Uses a reference-faithful EMA core followed by an external residual:
+
+        output = x + EMA(x)
+    """
+
+    def __init__(
+        self,
+        c1: int,
+        factor: int = 32,
+    ) -> None:
+        super().__init__()
+
+        self.channels = c1
+        self.factor = factor
+
+        self.ema = EMAOfficial(
+            c1=c1,
+            factor=factor,
+        )
+
+    def forward(
+        self,
+        x: torch.Tensor,
+    ) -> torch.Tensor:
+
+        return x + self.ema(x)

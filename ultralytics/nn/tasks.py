@@ -75,7 +75,11 @@ from ultralytics.nn.modules import (
     YOLOESegment26,
     v10Detect,
 )
-from ultralytics.nn.modules.custom import DySample, ResEMA
+from ultralytics.nn.modules.custom import (
+    DySample,
+    ResEMA,
+    ResEMA_V3,
+)
 from ultralytics.utils import DEFAULT_CFG_DICT, LOGGER, YAML, colorstr, emojis
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
 from ultralytics.utils.loss import (
@@ -1703,6 +1707,11 @@ def parse_model(d, ch, verbose=True):
             args = [c1, *args]
 
         elif m is ResEMA:
+            c1 = ch[f]
+            c2 = c1
+            args = [c1, *args]
+            
+        elif m is ResEMA_V3:
             c1 = ch[f]
             c2 = c1
             args = [c1, *args]
