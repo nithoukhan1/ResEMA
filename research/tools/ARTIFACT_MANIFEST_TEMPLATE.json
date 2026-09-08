@@ -1,0 +1,45 @@
+{
+  "experiment_id": "MXX",
+  "code": {
+    "repository": "https://github.com/nithoukhan1/ResEMA.git",
+    "commit": "FILL_ME",
+    "dirty": false
+  },
+  "dataset": {
+    "protocol": "Split-B-V2",
+    "manifest_sha256": "FILL_ME"
+  },
+  "model": {
+    "yaml_path": "FILL_ME",
+    "yaml_sha256": "FILL_ME",
+    "pretrained_path": "FILL_ME",
+    "pretrained_sha256": "FILL_ME"
+  },
+  "runtime": {
+    "python": "FILL_ME",
+    "ultralytics": "FILL_ME",
+    "torch": "FILL_ME",
+    "torchvision": "FILL_ME",
+    "cuda": "FILL_ME",
+    "gpu": "FILL_ME"
+  },
+  "artifacts": {
+    "kaggle_model_path": "FILL_ME",
+    "best_pt": {
+      "sha256": "FILL_ME",
+      "size": null
+    },
+    "last_pt": {
+      "sha256": "FILL_ME",
+      "size": null
+    },
+    "results_csv": {
+      "sha256": "FILL_ME",
+      "size": null
+    },
+    "args_yaml": {
+      "sha256": "FILL_ME",
+      "size": null
+    }
+  }
+}

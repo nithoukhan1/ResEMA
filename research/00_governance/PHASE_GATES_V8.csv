@@ -1,0 +1,14 @@
+phase,purpose,training_budget,deliverable,exit_gate
+P0,Repository/provenance consolidation,No,"All B0-C2 evidence, literature, trackers and CI in research branch",Repository is authoritative project memory
+P1,D00 diagnostics,No,"Transfer, axis, projection, geometry, patient sensitivity, pair audit",Mechanism order justified by evidence
+P2,M01 TP-CDA,1 screening run,Implementation tests + matched run,Pass/reject M1
+P3,M02 PELT,1 screening run,Sampler/exposure audit + matched run,Pass/reject M2
+P4,M03 APCF,1 screening run,Axis/projection conditioning + matched run,Pass/reject M3
+P5,Combine winners,2-3 runs max,Only independently justified mechanisms,One final candidate
+P6,Second-seed confirmation,1-2 runs,Paired repeat,Stable candidate
+P7,Optional paired-view,3-5 runs max,Only if D00 supports,Use or close branch
+P8,Method lock,No,Freeze commit/config/evaluation,Release candidate
+P9,3-fold CV,6 runs,Baseline vs proposed on matched folds,Robustness evidence
+P10,Sealed test,No training,Baseline + proposed once,Primary final evidence
+P11,External/efficiency/explainability,No full development training,"FracAtlas, profiling, figures",Generalization/deployment evidence
+P12,Manuscript/submission,No,CLAIM/STARD-AI compliant paper,Submitted manuscript

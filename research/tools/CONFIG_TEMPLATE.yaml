@@ -1,0 +1,40 @@
+experiment_id: MXX
+parent_experiment: A0
+code_commit: FILL_ME
+dataset:
+  protocol: Split-B-V2
+  train_count: 14227
+  val_path_count: 3050
+  operational_val_readable: 3049
+  test_sealed: true
+model:
+  yaml: FILL_ME
+  pretrained: yolo11s.pt
+training:
+  epochs: 150
+  patience: 150
+  imgsz: 1024
+  batch: 16
+  optimizer: SGD
+  lr0: 0.01
+  lrf: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+  cos_lr: true
+  box: 7.5
+  cls: 0.5
+  dfl: 1.5
+  mosaic: 1.0
+  mixup: 0.0
+  copy_paste: 0.0
+  close_mosaic: 10
+  seed: 42
+  deterministic: true
+runtime:
+  device: [0, 1]
+  workers: 4
+  amp: true
+  cache: false
+decision_rule:
+  primary: FILL_ME
+  guardrails: FILL_ME

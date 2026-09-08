@@ -1,0 +1,12 @@
+# Publication research workspace line-ending policy.
+# Keep source/configuration files LF-normalized across Windows, GitHub Actions, and Kaggle.
+
+.github/workflows/research-*.yml text eol=lf
+
+research/**/*.py   text eol=lf
+research/**/*.yml  text eol=lf
+research/**/*.yaml text eol=lf
+research/**/*.json text eol=lf
+research/**/*.csv  text eol=lf
+research/**/*.md   text eol=lf
+research/**/*.sh   text eol=lf

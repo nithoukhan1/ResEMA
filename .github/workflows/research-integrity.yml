@@ -1,0 +1,41 @@
+name: Research Integrity
+
+on:
+  push:
+    branches:
+      - research-v7-publication
+      - "diagnostic/**"
+      - "feat/**"
+      - "train/**"
+    paths:
+      - "research/**"
+      - ".github/workflows/research-integrity.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install lightweight test tools
+        run: python -m pip install --upgrade pip pytest
+
+      - name: Verify repository state
+        run: python research/tools/verify_repo_state.py
+
+      - name: Run research integrity tests
+        run: python -m pytest research/tests/test_research_integrity.py -q

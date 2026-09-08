@@ -1,0 +1,13 @@
+# Local Preflight
+- [ ] correct research branch
+- [ ] pull latest
+- [ ] feature branch created
+- [ ] implementation isolated
+- [ ] unit tests pass
+- [ ] dummy CPU forward pass
+- [ ] model builds
+- [ ] parameter count expected
+- [ ] identity init verified if required
+- [ ] config committed
+- [ ] experiment README committed
+- [ ] exact Git SHA registered
