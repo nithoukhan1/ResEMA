@@ -21,3 +21,19 @@
 - No new model training was launched.
 - Split-B test remains sealed.
 - Next scientific phase: D00 diagnostics.
+
+## 2026-09-08 — Phase 0 remote closure
+
+- Publication commit: `57dee3efdaf234f5ac6eaf0950c3f3e8824b56af`
+- Remote branch: `origin/research-v7-publication`
+- Remote SHA independently verified equal to local SHA.
+- Research Integrity GitHub Action: PASS.
+- Research Model Smoke GitHub Action: PASS.
+- Local Git `origin` changed from HTTPS to SSH because repeated HTTPS DNS/reset failures prevented push.
+- SSH authentication verified for GitHub.
+- SSH transport uses `ssh.github.com:443` through the local SSH config.
+- `upstream` remains unchanged.
+- Phase 0 complete.
+- Next phase: P1 / D00 diagnostics.
+- No new model training performed.
+- Split-B test remains sealed.

@@ -22,3 +22,5 @@
 "P10","TEST","Final sealed Split-B test","NOT_STARTED","","","","CV","final test",""
 "P11","EXT","External/comparability/efficiency","NOT_STARTED","","","","LOCK","external evidence",""
 "P12","PAPER","Manuscript and submission package","NOT_STARTED","","","","P10/P11","submission",""
+"P0","P0-06","Create first publication-research commit","COMPLETE","","2026-09-08","2026-09-08","P0-05","Commit 57dee3efdaf234f5ac6eaf0950c3f3e8824b56af","57 files; Phase-0 governance, provenance, trackers, CI and research workspace."
+"P0","P0-07","Publish research branch and verify GitHub CI","COMPLETE","","2026-09-08","2026-09-08","P0-06","origin/research-v7-publication + successful research CI","Remote SHA matches local. Research Integrity and Research Model Smoke both passed. Origin switched from HTTPS to SSH over port 443 after HTTPS transport failures."
