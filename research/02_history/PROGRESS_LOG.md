@@ -56,3 +56,20 @@
 - Local repair and verification are complete. Git commit, push,
   local/remote SHA equality, and GitHub Research Integrity CI remain
   the P0-08 remote-closure gate.
+
+## 2026-09-10 — P0-08 remote closure
+
+- P0-08 implementation commit:
+  `67e3237d1cf1d918635e78680e6760d4da82720e`.
+- Commit parent:
+  `f4d6b08e5af20451e32d5f8fd5bc9264b3a22004`.
+- Push to `origin/research-v7-publication`: PASS.
+- Local/remote SHA equality: PASS.
+- GitHub Research Integrity workflow run: `34456349763`.
+- Workflow head SHA exactly matched the P0-08 implementation commit.
+- GitHub Research Integrity status: completed.
+- GitHub Research Integrity conclusion: success.
+- P0-08 is therefore CLOSED.
+- No model training or scientific-result modification occurred during P0-08.
+- Split-B test remained sealed.
+- Next scientific phase: P1 / D00 diagnostics.

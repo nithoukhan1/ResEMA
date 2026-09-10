@@ -85,3 +85,31 @@ P0-08 remote closure requires:
 
 Split-B test remains sealed.
 No scientific training occurred during P0-08.
+
+## P0-08 remote closure — 2026-09-10
+
+The local P0-08 repair and regression-protection transaction was committed
+as:
+
+`67e3237d1cf1d918635e78680e6760d4da82720e`
+
+Remote verification:
+
+- `origin/research-v7-publication` resolved to the same commit SHA;
+- GitHub Research Integrity run ID: `34456349763`;
+- workflow head SHA:
+  `67e3237d1cf1d918635e78680e6760d4da82720e`;
+- workflow status: completed;
+- workflow conclusion: success.
+
+All P0-08 local and remote closure gates therefore passed.
+
+P0-08 status: COMPLETE / CLOSED.
+
+No model architecture, training configuration, dataset membership,
+scientific result, or test-set outcome was changed.
+
+Split-B test remained sealed.
+
+The project may now proceed to P1 / D00 diagnostics under the frozen
+research governance.
