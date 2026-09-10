@@ -61,3 +61,54 @@ def test_test_policy_is_documented():
 def test_runtime_manifest_template_is_valid_json():
     path = RESEARCH / "tools/ARTIFACT_MANIFEST_TEMPLATE.json"
     json.loads(path.read_text(encoding="utf-8"))
+
+def test_research_text_files_are_utf8():
+    """All publication-governed text files must be strict UTF-8."""
+    extensions = {
+        ".md",
+        ".csv",
+        ".py",
+        ".yml",
+        ".yaml",
+        ".json",
+        ".txt",
+        ".sh",
+    }
+
+    paths = [
+        p
+        for p in RESEARCH.rglob("*")
+        if p.is_file() and p.suffix.lower() in extensions
+    ]
+
+    workflows = ROOT / ".github" / "workflows"
+
+    if workflows.exists():
+        paths.extend(
+            p
+            for p in workflows.glob("research-*.yml")
+            if p.is_file()
+        )
+        paths.extend(
+            p
+            for p in workflows.glob("research-*.yaml")
+            if p.is_file()
+        )
+
+    bad = []
+
+    for path in sorted(set(paths)):
+        try:
+            path.read_text(
+                encoding="utf-8",
+                errors="strict",
+            )
+        except UnicodeDecodeError as exc:
+            bad.append(
+                f"{path.relative_to(ROOT)}: {exc}"
+            )
+
+    assert not bad, (
+        "Non-UTF-8 publication-governed text files:\n"
+        + "\n".join(bad)
+    )

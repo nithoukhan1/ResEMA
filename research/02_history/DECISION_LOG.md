@@ -12,7 +12,7 @@ Continue in existing `nithoukhan1/ResEMA`; create a new publication research bra
 ## 2026-09-08 — Test policy
 Split-B test remains sealed until final method lock and robustness evaluation.
 
-## 2026-09-08 � Research CI strategy
+## 2026-09-08 — Research CI strategy
 
 Use two research-specific CI layers:
 
@@ -24,3 +24,18 @@ Use two research-specific CI layers:
 The inherited Ultralytics CI is not treated as the primary research CI.
 Feature-branch pull-request usage will be reviewed separately because
 the inherited workflow can run on pull requests.
+
+## 2026-09-10 — P0-08 publication text-encoding policy
+
+All publication-governed research text files and research-specific GitHub
+workflow YAML files must decode as strict UTF-8.
+
+The research integrity suite enforces this policy.
+
+Legacy Windows-1252 byte `0x97` in three historical Markdown files was
+replaced by the intended Unicode em dash, and those targeted files were
+normalized to LF-only line endings.
+
+This is a repository-integrity repair. It does not change scientific
+results, dataset membership, model configuration, experiment outcomes,
+or the sealed Split-B test policy.

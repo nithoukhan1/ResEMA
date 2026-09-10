@@ -1,4 +1,4 @@
-# Phase-0 Provenance Audit � 2026-09-08
+# Phase-0 Provenance Audit — 2026-09-08
 
 ## Repository state
 
@@ -55,3 +55,33 @@ P1 / D00 diagnostics.
 
 No new scientific training occurred during Phase 0.
 Split-B test remains sealed.
+
+## P0-08 — publication text-encoding hardening (2026-09-10)
+
+A post-closure repository-integrity audit detected legacy Windows-1252
+byte `0x97` in three publication-governed historical Markdown files.
+
+Corrective action:
+
+- replace the three legacy `0x97` bytes with the intended Unicode em dash;
+- normalize only the affected Markdown files to LF-only line endings;
+- add a persistent strict-UTF-8 research-integrity regression test;
+- make no scientific, model, dataset-membership, or experiment-result change.
+
+Local verification evidence before the documentation append:
+
+- strict UTF-8 audit: 47 governed text files checked, 0 invalid;
+- targeted text normalization: PASS;
+- repository-state verifier with `--allow-dirty`: PASS;
+- research integrity suite: 9/9 PASS;
+- `git diff --check`: PASS.
+
+P0-08 remote closure requires:
+
+- commit of the reviewed P0-08 scope;
+- push to `origin/research-v7-publication`;
+- equality of local and remote commit SHA;
+- PASS of the GitHub Research Integrity workflow for that commit.
+
+Split-B test remains sealed.
+No scientific training occurred during P0-08.
