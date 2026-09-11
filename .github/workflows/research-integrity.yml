@@ -37,5 +37,5 @@ jobs:
       - name: Verify repository state
         run: python research/tools/verify_repo_state.py
 
-      - name: Run research integrity tests
-        run: python -m pytest research/tests/test_research_integrity.py -q
+      - name: Run research integrity and D00 provenance tests
+        run: python -m pytest research/tests/test_research_integrity.py research/tests/test_d00_input_provenance.py -q

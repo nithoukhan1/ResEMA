@@ -73,3 +73,38 @@
 - No model training or scientific-result modification occurred during P0-08.
 - Split-B test remained sealed.
 - Next scientific phase: P1 / D00 diagnostics.
+
+## 2026-09-11 - P1/D00 input provenance freeze
+
+- D00-PRE-A local source inventory: PASS.
+- D00-PRE-B controlled provenance freeze construction: PASS.
+- D00-PRE-C physical Kaggle-package binding: PASS.
+- D00-PRE-D upload-provenance semantic audit: PASS.
+- Original `dataset.csv` matched the authoritative frozen SHA256.
+- Five authoritative source archives matched expected SHA256 values.
+- Frozen Split-B internal file registry passed 37/37.
+- Split-B candidate-v2 matched the embedded accepted-candidate audit 26/26.
+- Frozen patient/image counts remain 4,264/914/913 and
+  14,227/3,050/3,050.
+- Foreignbody-positive patients are authoritatively 4/0/0;
+  held-out foreignbody AP is N/A.
+- Clean physical train/validation/test image memberships exactly match
+  their frozen Split-B memberships.
+- Physical image/label counts match exactly for train, validation, and test.
+- User-reported Kaggle dataset ref:
+  `nettokhan/grazpedwri-dx-split-b`.
+- Authoritative clean package YAML is `split_B_original.yaml`
+  with train=`images/train`.
+- Historical `train_aug_historical` is non-authoritative for D00.
+- Historical augmentation YAML provenance drift was detected:
+  old snapshot SHA `df8cfe5d70b9127dce2713aa02a0166ff7df13c61b4d67eee3f7c0934b687986`;
+  current SHA `d5e5336b401f88be6bfb8026e26e573738101462fc21d6b971a3d183819b7ff0`.
+- Exact cause/time of the historical YAML change was not reconstructed.
+- Kaggle runtime mount path remains unverified and must be checked in Kaggle
+  before D00 execution.
+- Individual test membership CSVs remain external to the development
+  repository.
+- No model training, architecture change, test prediction, or test metric
+  evaluation occurred.
+- Split-B test remains sealed until P10.
+- Next scientific checkpoint: D00-A transfer coverage audit.

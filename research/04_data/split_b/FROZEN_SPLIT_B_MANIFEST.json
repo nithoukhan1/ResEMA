@@ -1,0 +1,52 @@
+{
+  "freeze_version": "Frozen-Split-B-v1.0",
+  "status": "FROZEN / ACCEPTED",
+  "accepted_candidate": "Split-B-candidate-v2.0",
+  "selection_basis": "Data-only pre-training audit. No model predictions, losses, validation mAP, or test mAP were used to generate or select this split.",
+  "source_provenance": {
+    "dataset_csv_sha256": "55a53cbe9673e5f29ef0f2f6074ae791f1c27a3b48efadcd0b771225ff6379e8",
+    "yolo_meta_sha256": "94466dff8faf4c587b46df65aa7d84452df572d0d4446621750beb5567e9c3f6",
+    "images": 20327,
+    "patients": 6091,
+    "operative_yolo_boxes": 47443
+  },
+  "split": {
+    "target_ratio": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "patients": {
+      "train": 4264,
+      "val": 914,
+      "test": 913
+    },
+    "images": {
+      "train": 14227,
+      "test": 3050,
+      "val": 3050
+    },
+    "bone_lesion_positive_patients": {
+      "train": 16,
+      "val": 4,
+      "test": 4
+    },
+    "foreign_body_positive_patients": {
+      "train": 4,
+      "val": 0,
+      "test": 0
+    },
+    "foreign_body_heldout_metric": "N/A"
+  },
+  "accepted_candidate_objective": 8.604848058496984,
+  "accepted_candidate_seed": 20260824,
+  "accepted_candidate_restart": 6,
+  "important_interpretation": [
+    "Patient ID is the leakage-control unit.",
+    "Foreign-body positive patients are all retained in training because only four independent positive patients exist.",
+    "Bone-lesion positive patients are allocated 16/4/4.",
+    "Bone-lesion large-geometry-positive patients are allocated 2/1/1.",
+    "The held-out test set must not be used for architecture or hyperparameter selection."
+  ],
+  "next_stage": "Construct physical train/val/test dataset from these frozen CSVs; apply augmentation to training only."
+}

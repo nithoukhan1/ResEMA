@@ -1,0 +1,29 @@
+{
+  "version": "Physical-Split-B-original-v1.0",
+  "status": "PHYSICAL ORIGINAL SPLIT CONSTRUCTED / NO AUGMENTATION",
+  "source": {
+    "base": "E:\\PhD\\Admitted\\Research\\Bone Fracture Datasets\\GRAZPEDWRI-DX\\GRAZPEDWRI-DX",
+    "frozen_split": "E:\\PhD\\Admitted\\Research\\Bone Fracture Datasets\\GRAZPEDWRI-DX\\GRAZPEDWRI-DX\\_split_B_FROZEN_v1"
+  },
+  "counts": {
+    "patients": {
+      "train": 4264,
+      "val": 914,
+      "test": 913
+    },
+    "images": {
+      "train": 14227,
+      "val": 3050,
+      "test": 3050
+    },
+    "total_images": 20327,
+    "total_boxes": 47443
+  },
+  "critical_rules": [
+    "Source files were not modified.",
+    "No augmentation was performed.",
+    "Validation and test contain original images only.",
+    "Use frozen Split B assignments only."
+  ],
+  "next_step": "Review audit ZIP. Only after audit approval should training-only augmentation be generated."
+}

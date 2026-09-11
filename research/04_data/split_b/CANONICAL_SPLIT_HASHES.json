@@ -1,0 +1,8 @@
+{
+  "split_B_train.csv": "515f35bf0960b506f79ffbb2c4f7959eeb620adfe020fbe9aa2ce0bd7793a32d",
+  "split_B_val.csv": "c7314c93fa2afba96d24a770bb99a2c1cb271c9a32ae1a21f360aef4cae2741e",
+  "split_B_test.csv": "f22b6b288742c10b438f4122c0f42956fc7433c6965630e8c3181258c07b0497",
+  "split_B_train_patients.csv": "af49035167074baa19d715600096d7c1bdb73e18e4dd57429a65d3afbb0a6abb",
+  "split_B_val_patients.csv": "be17bc46334de388c8204a931e45589e0b8f9c979ad874e1c997244038234cca",
+  "split_B_test_patients.csv": "367c170d639ee04ec21c10e28b54115d7cdf9c639fec73f7157d2df654db641c"
+}

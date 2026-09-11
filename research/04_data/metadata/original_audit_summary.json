@@ -1,0 +1,39 @@
+{
+  "root": "E:\\PhD\\Admitted\\Research\\Bone Fracture Datasets\\GRAZPEDWRI-DX\\GRAZPEDWRI-DX\\folder_structure",
+  "output": "E:\\PhD\\Admitted\\Research\\Bone Fracture Datasets\\GRAZPEDWRI-DX\\GRAZPEDWRI-DX\\_audit_original_v1_1",
+  "dataset_csv_shape": [
+    20327,
+    17
+  ],
+  "dataset_csv_columns": [
+    "filestem",
+    "patient_id",
+    "study_number",
+    "timehash",
+    "gender",
+    "age",
+    "laterality",
+    "projection",
+    "initial_exam",
+    "ao_classification",
+    "cast",
+    "diagnosis_uncertain",
+    "osteopenia",
+    "fracture_visible",
+    "metal",
+    "pixel_spacing",
+    "device_manufacturer"
+  ],
+  "structure_size_manifest": {
+    "file_count": 81344,
+    "total_size_bytes": 16276606080,
+    "sha256_of_relative_path_plus_size_manifest": "84f0ec4f4fb723f0742e9b4ec1e6dd269116f20a37b4ecb1a3861ab0b44f3ac0"
+  },
+  "verification_gate": "PASS",
+  "check_counts": {
+    "PASS": 43,
+    "WARN": 1,
+    "FAIL": 0
+  },
+  "important_note": "Do not create Split B unless verification_gate == PASS and all WARN items have been reviewed. In particular, cross-format annotation differences must be documented rather than silently corrected."
+}

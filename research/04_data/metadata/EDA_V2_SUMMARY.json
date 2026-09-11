@@ -1,0 +1,124 @@
+{
+  "environment": {
+    "pandas_version": "2.3.3",
+    "numpy_version": "2.2.6"
+  },
+  "dataset": {
+    "images": 20327,
+    "patients": 6091,
+    "boxes_total_yolo": 47443,
+    "empty_detection_images": 15
+  },
+  "class_prevalence": [
+    {
+      "class_name": "boneanomaly",
+      "boxes": 276,
+      "positive_images": 192,
+      "positive_patients": 95,
+      "boxes_per_positive_image": 1.4375,
+      "positive_images_per_positive_patient": 2.0210526315789474,
+      "positive_patient_prevalence_pct": 1.5596782137580036
+    },
+    {
+      "class_name": "bonelesion",
+      "boxes": 45,
+      "positive_images": 42,
+      "positive_patients": 24,
+      "boxes_per_positive_image": 1.0714285714285714,
+      "positive_images_per_positive_patient": 1.75,
+      "positive_patient_prevalence_pct": 0.3940239697914957
+    },
+    {
+      "class_name": "foreignbody",
+      "boxes": 8,
+      "positive_images": 8,
+      "positive_patients": 4,
+      "boxes_per_positive_image": 1.0,
+      "positive_images_per_positive_patient": 2.0,
+      "positive_patient_prevalence_pct": 0.06567066163191594
+    },
+    {
+      "class_name": "fracture",
+      "boxes": 18090,
+      "positive_images": 13550,
+      "positive_patients": 3587,
+      "boxes_per_positive_image": 1.3350553505535054,
+      "positive_images_per_positive_patient": 3.777529969333705,
+      "positive_patient_prevalence_pct": 58.89016581842062
+    },
+    {
+      "class_name": "metal",
+      "boxes": 818,
+      "positive_images": 707,
+      "positive_patients": 157,
+      "boxes_per_positive_image": 1.157001414427157,
+      "positive_images_per_positive_patient": 4.503184713375796,
+      "positive_patient_prevalence_pct": 2.577573469052701
+    },
+    {
+      "class_name": "periostealreaction",
+      "boxes": 3453,
+      "positive_images": 2235,
+      "positive_patients": 1089,
+      "boxes_per_positive_image": 1.54496644295302,
+      "positive_images_per_positive_patient": 2.0523415977961434,
+      "positive_patient_prevalence_pct": 17.878837629289116
+    },
+    {
+      "class_name": "pronatorsign",
+      "boxes": 567,
+      "positive_images": 566,
+      "positive_patients": 555,
+      "boxes_per_positive_image": 1.0017667844522968,
+      "positive_images_per_positive_patient": 1.0198198198198198,
+      "positive_patient_prevalence_pct": 9.111804301428338
+    },
+    {
+      "class_name": "softtissue",
+      "boxes": 464,
+      "positive_images": 439,
+      "positive_patients": 405,
+      "boxes_per_positive_image": 1.0569476082004556,
+      "positive_images_per_positive_patient": 1.0839506172839506,
+      "positive_patient_prevalence_pct": 6.649154490231489
+    },
+    {
+      "class_name": "text",
+      "boxes": 23722,
+      "positive_images": 20274,
+      "positive_patients": 6089,
+      "boxes_per_positive_image": 1.1700700404458912,
+      "positive_images_per_positive_patient": 3.3296107735260305,
+      "positive_patient_prevalence_pct": 99.96716466918404
+    }
+  ],
+  "study_identifier_diagnostics": [
+    {
+      "candidate_definition": "patient+study_number",
+      "unique_groups": 10699,
+      "distance_from_paper_10643": 56
+    },
+    {
+      "candidate_definition": "patient+timehash",
+      "unique_groups": 20327,
+      "distance_from_paper_10643": 9684
+    },
+    {
+      "candidate_definition": "patient+timehash+study_number",
+      "unique_groups": 20327,
+      "distance_from_paper_10643": 9684
+    }
+  ],
+  "rare_class_flags": [
+    "RARE patient-level class: boneanomaly has 95 positive patients.",
+    "VERY RARE patient-level class: bonelesion has only 24 positive patients (42 positive images, 45 boxes).",
+    "VERY RARE patient-level class: foreignbody has only 4 positive patients (8 positive images, 8 boxes).",
+    "Supervisely↔YOLO metal conversion difference found in 1 image(s); do not silently edit the supplied YOLO labels.",
+    "Released patient_id+study_number count does not equal the paper's 10,643 PACS studies; do not use this field pair as a study-level split unit until the study-ID diagnostics are reviewed."
+  ],
+  "source_fingerprints": {
+    "dataset_csv_sha256": "55a53cbe9673e5f29ef0f2f6074ae791f1c27a3b48efadcd0b771225ff6379e8",
+    "yolo_meta_sha256": "94466dff8faf4c587b46df65aa7d84452df572d0d4446621750beb5567e9c3f6"
+  },
+  "decision_rule": "DO NOT create Split B from this script. Review the positive-patient counts, co-occurrence structure, study-ID diagnostics, metadata distributions, and split/CV feasibility table first."
+}

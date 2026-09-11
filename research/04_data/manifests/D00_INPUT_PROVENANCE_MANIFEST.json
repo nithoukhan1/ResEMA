@@ -1,0 +1,397 @@
+{
+  "schema_version": "D00-input-provenance-v1.0",
+  "created_date": "2026-09-11",
+  "status": "FROZEN_FOR_P1_D00",
+  "repository_base_commit": "9f51a8af00e65a288774ce41809d1014d79567b3",
+  "dataset": {
+    "name": "GRAZPEDWRI-DX",
+    "source_root_binding": "External dataset root supplied at runtime through GRAZPEDWRI_ROOT",
+    "dataset_csv": {
+      "logical_path": "dataset.csv",
+      "size_bytes": 1850724,
+      "sha256": "55a53cbe9673e5f29ef0f2f6074ae791f1c27a3b48efadcd0b771225ff6379e8",
+      "repository_policy": "external_only"
+    },
+    "canonical_counts": {
+      "images": 20327,
+      "patients": 6091,
+      "operative_yolo_boxes": 47443,
+      "empty_detection_images": 15
+    }
+  },
+  "local_root_inventory_warning": {
+    "mixed_purpose_root": true,
+    "total_png_observed": 69111,
+    "original_images": 20327,
+    "physical_split_train": 14227,
+    "physical_split_val": 3050,
+    "physical_split_test": 3050,
+    "historical_train_aug": 28454,
+    "eda_png": 3,
+    "sum_check": 69111,
+    "rule": "Never recursively glob the dataset root for model or diagnostic image selection. Use explicit governed source paths and frozen membership."
+  },
+  "source_precedence": [
+    "Frozen-Split-B-v1.0 for split identity and membership",
+    "Split-B-candidate-v2.0 only for accepted-candidate provenance",
+    "original dataset.csv plus original annotation metadata",
+    "EDA v2.1 and original-audit v1.1 as derived evidence",
+    "historical augmented/split artifacts are non-authoritative for D00 source selection"
+  ],
+  "source_archives": [
+    {
+      "logical_path": "GRAZPEDWRI_DX_SPLIT_B_FROZEN_V1.zip",
+      "size_bytes": 1944273,
+      "sha256": "2269ae12be544c3835a63d383fd2c749d5ed3ef7f1bc9ec9596675c96a286610",
+      "repository_policy": "external_only"
+    },
+    {
+      "logical_path": "GRAZPEDWRI_DX_SPLIT_B_CANDIDATE_V2.zip",
+      "size_bytes": 985682,
+      "sha256": "6b9c0b06ae843cc446b5a61f294f52333b0a17dc7cba676cfa59c09f31bef82b",
+      "repository_policy": "external_only"
+    },
+    {
+      "logical_path": "GRAZPEDWRI_DX_UNSPLIT_EDA_V2_1.zip",
+      "size_bytes": 2483210,
+      "sha256": "b4e165c62e51df5fee8ae80c6874b721863a0f00b2f5fa133ff2159dcd869dfc",
+      "repository_policy": "external_only"
+    },
+    {
+      "logical_path": "_audit_original_v1_1.zip",
+      "size_bytes": 10389,
+      "sha256": "05490d75b26f431e3b572614e3355a411681badeac38df380e027006f97c2a0c",
+      "repository_policy": "external_only"
+    },
+    {
+      "logical_path": "folder_structure.zip",
+      "size_bytes": 28378509,
+      "sha256": "244c03c08cecac766a96efdd94cd46097cbc735fb75ee225ce5c42889f6041a5",
+      "repository_policy": "external_only"
+    }
+  ],
+  "repository_text_normalization": {
+    "reason": "research/.gitattributes requires LF-normalized publication-governed text files",
+    "source_identity": "source_sha256 records original archive-member bytes",
+    "repository_identity": "repo_sha256 records the LF-normalized Git mirror",
+    "semantic_transformation": "newline normalization only; no field/value edits"
+  },
+  "committed_mirrors": [
+    {
+      "repo_path": "research/04_data/split_b/FROZEN_SPLIT_B_MANIFEST.json",
+      "source_archive": "GRAZPEDWRI_DX_SPLIT_B_FROZEN_V1.zip",
+      "source_member": "FROZEN_SPLIT_B_MANIFEST.json",
+      "source_size_bytes": 1811,
+      "source_sha256": "3337c35408a9de21940c9ea64dae4cfc4c621e620a0047295c37cdb3d19f9e9c",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 1760,
+      "repo_sha256": "bf895f760f3fbe9fe5a19f7eaf2eab06b481278077b6f34158508ab4b31500d9"
+    },
+    {
+      "repo_path": "research/04_data/split_b/CANONICAL_SPLIT_HASHES.json",
+      "source_archive": "GRAZPEDWRI_DX_SPLIT_B_FROZEN_V1.zip",
+      "source_member": "CANONICAL_SPLIT_HASHES.json",
+      "source_size_bytes": 576,
+      "source_sha256": "0d0eda232ce0d2c452740b2c0f2619b805d11434b3d37acb7417e56a0d697f6c",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 569,
+      "repo_sha256": "7ff4dcf305254bc560cb165f637f98cce9f9a429e92bc676c4993f0f9a90e544"
+    },
+    {
+      "repo_path": "research/04_data/split_b/FROZEN_FILE_HASHES.csv",
+      "source_archive": "GRAZPEDWRI_DX_SPLIT_B_FROZEN_V1.zip",
+      "source_member": "FROZEN_FILE_HASHES.csv",
+      "source_size_bytes": 4345,
+      "source_sha256": "d29bf8896a7947d018eb271f558b53d71f231dc141b1a871976e23ec931a7d4a",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 4307,
+      "repo_sha256": "5b1eefb198e3b3b9e38a3d0ffb55326514853e7d2d43751a342f48387cc09265"
+    },
+    {
+      "repo_path": "research/04_data/split_b/split_B_train.csv",
+      "source_archive": "GRAZPEDWRI_DX_SPLIT_B_FROZEN_V1.zip",
+      "source_member": "split_B_train.csv",
+      "source_size_bytes": 1940616,
+      "source_sha256": "515f35bf0960b506f79ffbb2c4f7959eeb620adfe020fbe9aa2ce0bd7793a32d",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 1926388,
+      "repo_sha256": "6b99f5d08e62eb2c4c3cf5c3481a1e2ca37bfb983f79d462b6ab3fed254fdf0e"
+    },
+    {
+      "repo_path": "research/04_data/split_b/split_B_val.csv",
+      "source_archive": "GRAZPEDWRI_DX_SPLIT_B_FROZEN_V1.zip",
+      "source_member": "split_B_val.csv",
+      "source_size_bytes": 409937,
+      "source_sha256": "c7314c93fa2afba96d24a770bb99a2c1cb271c9a32ae1a21f360aef4cae2741e",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 406886,
+      "repo_sha256": "f33c14ae479cffe0ee769549a1e3d53d5c5e198734c6bebb86258afad7bd074e"
+    },
+    {
+      "repo_path": "research/04_data/split_b/split_B_train_patients.csv",
+      "source_archive": "GRAZPEDWRI_DX_SPLIT_B_FROZEN_V1.zip",
+      "source_member": "split_B_train_patients.csv",
+      "source_size_bytes": 360548,
+      "source_sha256": "af49035167074baa19d715600096d7c1bdb73e18e4dd57429a65d3afbb0a6abb",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 356283,
+      "repo_sha256": "56c74b78ef6fb764b980d77823ab039a19ae5ae77e690ec0cc92c3282d38328f"
+    },
+    {
+      "repo_path": "research/04_data/split_b/split_B_val_patients.csv",
+      "source_archive": "GRAZPEDWRI_DX_SPLIT_B_FROZEN_V1.zip",
+      "source_member": "split_B_val_patients.csv",
+      "source_size_bytes": 75918,
+      "source_sha256": "be17bc46334de388c8204a931e45589e0b8f9c979ad874e1c997244038234cca",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 75003,
+      "repo_sha256": "ae8847d974fda341212e6fca44b943c7bbaa81a09c1d1639317827d099d00de7"
+    },
+    {
+      "repo_path": "research/04_data/metadata/EDA_V2_SUMMARY.json",
+      "source_archive": "GRAZPEDWRI_DX_UNSPLIT_EDA_V2_1.zip",
+      "source_member": "EDA_V2_SUMMARY.json",
+      "source_size_bytes": 4595,
+      "source_sha256": "af8769d32110eefa3b83cdc60913d1988ea623aec590ffbb710712a2c88b0f14",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 4472,
+      "repo_sha256": "63179f86a04aa39dd2cdf344d39319f2ed6ec52947a5935115f5f6e373f6907b"
+    },
+    {
+      "repo_path": "research/04_data/metadata/original_audit_summary.json",
+      "source_archive": "_audit_original_v1_1.zip",
+      "source_member": "_audit_original_v1_1/audit_summary.json",
+      "source_size_bytes": 1204,
+      "source_sha256": "04264aaf4ca2b1c315aaf66fb99b390d506fb930c962963d097cfa83e6a62783",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 1166,
+      "repo_sha256": "bd8dae6210afd0621b609308b9085ea568f11e0230d8fdc5e998dd930dfbc165"
+    },
+    {
+      "repo_path": "research/04_data/metadata/yolo_meta.yaml",
+      "source_archive": "folder_structure.zip",
+      "source_member": "folder_structure/yolov5/meta.yaml",
+      "source_size_bytes": 208,
+      "source_sha256": "94466dff8faf4c587b46df65aa7d84452df572d0d4446621750beb5567e9c3f6",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 193,
+      "repo_sha256": "1e099d65b0ac1e77be3d73757fcd8bfe445b377fc247155fc537e2d4a9b823f8"
+    },
+    {
+      "repo_path": "research/04_data/metadata/supervisely_meta.json",
+      "source_archive": "folder_structure.zip",
+      "source_member": "folder_structure/supervisely/meta.json",
+      "source_size_bytes": 908,
+      "source_sha256": "3f9fbdafe1c332668ac6dd329ac7df9f9bb5464428b691f82251e6c3baad5104",
+      "transformation": "strict UTF-8 decode; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 908,
+      "repo_sha256": "3f9fbdafe1c332668ac6dd329ac7df9f9bb5464428b691f82251e6c3baad5104"
+    },
+    {
+      "repo_path": "research/04_data/split_b/PHYSICAL_SPLIT_B_MANIFEST.json",
+      "source_archive": "physical_kaggle_upload_package",
+      "source_member": "PHYSICAL_SPLIT_B_MANIFEST.json",
+      "source_size_bytes": 936,
+      "source_sha256": "e83914d8d387c619dfee50cb39722596443559646a53d2e4083d91f5fd1ab4ea",
+      "transformation": "strict UTF-8 decode; optional UTF-8 BOM removed; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 908,
+      "repo_sha256": "f48f74fcb4634840eefe61b0107fffe3f6ae3cbeca31f579545c3ce2ab38fae7"
+    },
+    {
+      "repo_path": "research/04_data/split_b/split_B_original.yaml",
+      "source_archive": "physical_kaggle_upload_package",
+      "source_member": "split_B_original.yaml",
+      "source_size_bytes": 233,
+      "source_sha256": "5afcd08e6025ce16ff57716b88f2bee80bd884a44c542f92e52ccd2c83511999",
+      "transformation": "strict UTF-8 decode; optional UTF-8 BOM removed; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 218,
+      "repo_sha256": "eaa0b0e8b94ded00c99c87395bc23d0b30f829fb3ca6818c3b025ab720e878dd"
+    },
+    {
+      "repo_path": "research/04_data/manifests/kaggle_upload/KAGGLE_PACKAGE_MANIFEST.json",
+      "source_archive": "physical_kaggle_upload_package",
+      "source_member": "kaggle_upload_provenance/KAGGLE_PACKAGE_MANIFEST.json",
+      "source_size_bytes": 1175,
+      "source_sha256": "533eaa241818874b31b84ed6c17d8a3cc98219f24637800f4c6f985e32cbb174",
+      "transformation": "strict UTF-8 decode; optional UTF-8 BOM removed; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 1142,
+      "repo_sha256": "973a70e8c4c8d3ca4549706870d29ef7fa04a84e8e213720aee316c614bf2792"
+    },
+    {
+      "repo_path": "research/04_data/manifests/kaggle_upload/01_expected_folder_counts.csv",
+      "source_archive": "physical_kaggle_upload_package",
+      "source_member": "kaggle_upload_provenance/01_expected_folder_counts.csv",
+      "source_size_bytes": 353,
+      "source_sha256": "e3006fea4d671325ff84c5867f04b7a10f95b938a4fe7699ee21327eb6bfe24e",
+      "transformation": "strict UTF-8 decode; optional UTF-8 BOM removed; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 344,
+      "repo_sha256": "fd06132ea15dcd4e220d2b75baa83d040b34053070131e7f29f46eed7f28cf72"
+    },
+    {
+      "repo_path": "research/04_data/manifests/kaggle_upload/02_image_label_stem_checks.csv",
+      "source_archive": "physical_kaggle_upload_package",
+      "source_member": "kaggle_upload_provenance/02_image_label_stem_checks.csv",
+      "source_size_bytes": 186,
+      "source_sha256": "bfd04d39a375fa79d79adf18ce2ee34150cc708e8ba2f589fdbd5bc21b3b4d96",
+      "transformation": "strict UTF-8 decode; optional UTF-8 BOM removed; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 181,
+      "repo_sha256": "0ba38b554ac7e2f60302eccfa85be0a58ea2bfecae2fa0e0344d393ed1a60967"
+    },
+    {
+      "repo_path": "research/04_data/manifests/kaggle_upload/04_critical_small_file_hashes.csv",
+      "source_archive": "physical_kaggle_upload_package",
+      "source_member": "kaggle_upload_provenance/04_critical_small_file_hashes.csv",
+      "source_size_bytes": 873,
+      "source_sha256": "14b38458d8bcfdeddace2c5d1418596097b8386015cc26835941fc5350f43bab",
+      "transformation": "strict UTF-8 decode; optional UTF-8 BOM removed; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 864,
+      "repo_sha256": "2d5620f42caa4d14985ed18c212bf222f63418d7b9198943c9f4af2ac3cda4cd"
+    },
+    {
+      "repo_path": "research/04_data/manifests/kaggle_upload/README_KAGGLE_PACKAGE.txt",
+      "source_archive": "physical_kaggle_upload_package",
+      "source_member": "kaggle_upload_provenance/README_KAGGLE_PACKAGE.txt",
+      "source_size_bytes": 639,
+      "source_sha256": "2caebff46a9a0597a65decc3ad817ad36286df516349dbf914eabd58234fab5d",
+      "transformation": "strict UTF-8 decode; optional UTF-8 BOM removed; CRLF/CR normalized to LF only",
+      "repo_size_bytes": 610,
+      "repo_sha256": "7d7c5653266451b2a3bb1d69c525f9b2c5dbba746c9b6b1597901df2a6512a42"
+    }
+  ],
+  "split_b": {
+    "version": "Frozen-Split-B-v1.0",
+    "accepted_candidate": "Split-B-candidate-v2.0",
+    "patients": {
+      "train": 4264,
+      "val": 914,
+      "test": 913
+    },
+    "images": {
+      "train": 14227,
+      "val": 3050,
+      "test": 3050
+    },
+    "bone_lesion_positive_patients": {
+      "train": 16,
+      "val": 4,
+      "test": 4
+    },
+    "foreign_body_positive_patients": {
+      "train": 4,
+      "val": 0,
+      "test": 0
+    },
+    "foreign_body_heldout_metric": "N/A"
+  },
+  "canonical_split_source_hashes": {
+    "split_B_train.csv": "515f35bf0960b506f79ffbb2c4f7959eeb620adfe020fbe9aa2ce0bd7793a32d",
+    "split_B_val.csv": "c7314c93fa2afba96d24a770bb99a2c1cb271c9a32ae1a21f360aef4cae2741e",
+    "split_B_test.csv": "f22b6b288742c10b438f4122c0f42956fc7433c6965630e8c3181258c07b0497",
+    "split_B_train_patients.csv": "af49035167074baa19d715600096d7c1bdb73e18e4dd57429a65d3afbb0a6abb",
+    "split_B_val_patients.csv": "be17bc46334de388c8204a931e45589e0b8f9c979ad874e1c997244038234cca",
+    "split_B_test_patients.csv": "367c170d639ee04ec21c10e28b54115d7cdf9c639fec73f7157d2df654db641c"
+  },
+  "test_seal": {
+    "status": "SEALED_UNTIL_P10",
+    "development_access": "No test predictions, metrics, error analysis, geometry analysis, patient sensitivity, or model selection before P10.",
+    "pre_p10_allowed": "Source fingerprint/hash and frozen aggregate split-integrity verification only.",
+    "external_only_until_p10": {
+      "split_B_test.csv": "f22b6b288742c10b438f4122c0f42956fc7433c6965630e8c3181258c07b0497",
+      "split_B_test_patients.csv": "367c170d639ee04ec21c10e28b54115d7cdf9c639fec73f7157d2df654db641c",
+      "split_B_all_images.csv": "not_committed_pre_P10",
+      "split_B_all_patients.csv": "not_committed_pre_P10"
+    }
+  },
+  "scientific_state": {
+    "model_training_performed": false,
+    "model_architecture_changed": false,
+    "test_model_outcomes_accessed": false,
+    "purpose": "Bind authoritative development inputs before D00 diagnostics."
+  },
+  "runtime_dataset_package": {
+    "role": "physical Split-B package used as the source for Kaggle upload",
+    "kaggle_dataset_ref_user_reported": "nettokhan/grazpedwri-dx-split-b",
+    "kaggle_dataset_url_user_reported": "https://www.kaggle.com/datasets/nettokhan/grazpedwri-dx-split-b",
+    "kaggle_runtime_mount": "UNVERIFIED_PRE_D00_A; must be discovered and verified inside Kaggle before execution",
+    "physical_manifest": {
+      "version": "Physical-Split-B-original-v1.0",
+      "status": "PHYSICAL ORIGINAL SPLIT CONSTRUCTED / NO AUGMENTATION",
+      "source_sha256": "e83914d8d387c619dfee50cb39722596443559646a53d2e4083d91f5fd1ab4ea"
+    },
+    "clean_dataset_yaml": {
+      "filename": "split_B_original.yaml",
+      "source_sha256": "5afcd08e6025ce16ff57716b88f2bee80bd884a44c542f92e52ccd2c83511999",
+      "train": "images/train",
+      "val": "images/val",
+      "test": "images/test",
+      "role": "authoritative clean Split-B definition"
+    },
+    "physical_counts": {
+      "train": {
+        "images": 14227,
+        "labels": 14227
+      },
+      "val": {
+        "images": 3050,
+        "labels": 3050
+      },
+      "test": {
+        "images": 3050,
+        "labels": 3050
+      }
+    },
+    "physical_membership_stem_sha256": {
+      "train": "4ab032d669ee40daeaa6d37680def3ba4aad4dc64b9d0f16b7b658be9e48812b",
+      "val": "f36040d4a798cbda113909907ba21e3dac1bb91b268124ec51c4fb2899e4a816",
+      "test": "edbcaa1393f874cd27903e3b5ffec419f3be3f821ef32fab1d2b99a8bd4e6128"
+    },
+    "physical_membership_result": "Exact equality with frozen train/val/test membership.",
+    "package_binding_sha256": "5db20741f23496208429db87a4625e2e9fb45ae70071b266696602b30374e16e",
+    "upload_provenance_binding_sha256": "8dac94724f58f3329ce3014ad9db5190b0a3be7e307ae57fef0bde630713ccce",
+    "upload_provenance": {
+      "small_file_count": 6,
+      "large_structure_manifest": {
+        "logical_path": "kaggle_upload_provenance/03_upload_structure_manifest.csv",
+        "size_bytes": 10049844,
+        "sha256": "2d6e9afdc881dacadb0c51cab08485a4f2576854db7891db71bc46405f311f23",
+        "repository_policy": "external_only_hash_recorded"
+      },
+      "package_manifest_sha256": "533eaa241818874b31b84ed6c17d8a3cc98219f24637800f4c6f985e32cbb174",
+      "image_structure_sha256": "264c29aeca23a1bae18d0d90c3bc21fdd81d484b3980f0015f2188503ecfc8d9",
+      "label_collection_sha256": "75cdb2e030b38614f7045f28889d917d8756e0e537f39d0bc9c440c0bfc2d2cf"
+    },
+    "historical_augmentation": {
+      "status": "NON_AUTHORITATIVE_FOR_D00",
+      "images": 28454,
+      "labels": 28454,
+      "contains_all_clean_train_stems": true,
+      "clean_train_stem_overlap": 14227,
+      "current_stem_sha256": "4799e44ace20ab724974984f4cab60740a3fd8ad5cad3e1570bc895f02eefded",
+      "current_yaml": {
+        "size_bytes": 303,
+        "sha256": "d5e5336b401f88be6bfb8026e26e573738101462fc21d6b971a3d183819b7ff0",
+        "declared_train": "images/train_aug_historical"
+      },
+      "historical_provenance_snapshot": {
+        "size_bytes": 248,
+        "sha256": "df8cfe5d70b9127dce2713aa02a0166ff7df13c61b4d67eee3f7c0934b687986"
+      },
+      "drift_status": "DETECTED; exact reason/time not reconstructed",
+      "governance": "Do not use for D00 or new controlled development. Preserve only as historical B0 continuity evidence."
+    },
+    "known_validation_operational_note": {
+      "frozen_membership_images": 3050,
+      "known_problematic_filestem": "1502_0635264266_05_WRI-R2_M015",
+      "physical_member_present": true,
+      "project_operational_readable_images": 3049,
+      "project_operational_objects": 7110,
+      "rule": "Frozen membership is unchanged. Operational evaluation excludes only the known unreadable image under the existing project policy."
+    },
+    "runtime_configuration_policy": {
+      "d00_and_new_development": "Use clean Split-B train/validation membership only.",
+      "historical_aug_yaml": "historical evidence only",
+      "recursive_dataset_root_glob": "FORBIDDEN",
+      "runtime_mount": "Must be discovered and verified inside Kaggle before use."
+    }
+  }
+}

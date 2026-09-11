@@ -1,0 +1,9 @@
+relative_folder,suffix,expected,observed,status
+images/train,.png,14227,14227,PASS
+labels/train,.txt,14227,14227,PASS
+images/val,.png,3050,3050,PASS
+labels/val,.txt,3050,3050,PASS
+images/test,.png,3050,3050,PASS
+labels/test,.txt,3050,3050,PASS
+images/train_aug_historical,.png,28454,28454,PASS
+labels/train_aug_historical,.txt,28454,28454,PASS

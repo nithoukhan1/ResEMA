@@ -1,0 +1,34 @@
+{
+  "version": "Kaggle-Package-v1.0",
+  "status": "READY_FOR_KAGGLE_UPLOAD",
+  "dataset_root_name": "_split_B_physical_original_v1",
+  "expected_folder_counts": {
+    "images/train": 14227,
+    "labels/train": 14227,
+    "images/val": 3050,
+    "labels/val": 3050,
+    "images/test": 3050,
+    "labels/test": 3050,
+    "images/train_aug_historical": 28454,
+    "labels/train_aug_historical": 28454
+  },
+  "totals": {
+    "image_files": 48781,
+    "label_files": 48781,
+    "all_manifest_records": 97562,
+    "image_bytes": 37073465785,
+    "image_gib": 34.52735560480505,
+    "label_bytes": 4279074
+  },
+  "digests": {
+    "image_structure_sha256": "264c29aeca23a1bae18d0d90c3bc21fdd81d484b3980f0015f2188503ecfc8d9",
+    "label_collection_sha256": "75cdb2e030b38614f7045f28889d917d8756e0e537f39d0bc9c440c0bfc2d2cf"
+  },
+  "rules": [
+    "Do not modify Frozen Split B after upload.",
+    "Do not augment validation or test.",
+    "Use split_B_historical_aug.yaml only for B0 historical-continuity runs.",
+    "Use split_B_original.yaml for clean-training calibration runs.",
+    "Do not use test results for calibration/model selection."
+  ]
+}
