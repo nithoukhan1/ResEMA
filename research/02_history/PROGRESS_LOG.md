@@ -108,3 +108,38 @@
   evaluation occurred.
 - Split-B test remains sealed until P10.
 - Next scientific checkpoint: D00-A transfer coverage audit.
+
+## 2026-09-12 - P1/D00-A0 runtime binding and D00-A implementation start
+
+- D00-PRE remote closure commit:
+  `072dfc47f52a14f3266eae1b66128efc329749bf`.
+- GitHub Research Integrity run `34617725501`: PASS.
+- D00-A0 Kaggle runtime root:
+  `/kaggle/input/datasets/nettokhan/grazpedwri-dx-split-b/GRAZPEDWRI-DX Split B`.
+- Five critical package fingerprints matched exactly.
+- Eight physical clean/historical folder counts matched exactly.
+- D00-A0 runtime binding SHA256:
+  `eddffe25ded04c7df598d76769a3dd224a794efe542da040a25dadc3c16f90ef`.
+- Clean runtime definition remains `images/train`, `images/val`,
+  and sealed `images/test`.
+- Historical `train_aug_historical` remains non-authoritative for D00.
+- Split-B test label content, predictions, metrics, and errors were not accessed.
+- D00-A transfer coverage implementation started.
+- Transfer coverage is deterministic and architecture-level; seed duplication is
+  not required.
+- Eight historical architecture states are registered as a complete
+  C3k2_SC ? DySample ? ResEMA factorial matrix.
+- Primary transfer metric reproduces exact Ultralytics state-dict key + shape
+  intersection.
+- Additional same-top-level-module-type coverage is recorded to distinguish
+  loader-compatible tensors from stricter architecture-consistent transfer.
+- Non-Detect coverage is reported separately to control for the expected
+  COCO-80 to GRAZPEDWRI-9 Detect-head mismatch.
+- No source checkpoint is committed to Git; runtime checkpoint SHA256 will be
+  recorded during D00-A execution.
+- Independent D00-A1 logic review distinguished tensor-level unmatched
+  evidence from genuine top-level layer aggregation.
+- Persistent Research Model Smoke coverage was expanded to all eight registered
+  D00-A architectures using the exact YOLO11s `s` scale and 9-class target
+  construction path.
+- No training or dataset model evaluation occurred.

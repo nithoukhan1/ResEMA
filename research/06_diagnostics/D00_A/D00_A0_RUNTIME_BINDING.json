@@ -1,0 +1,43 @@
+{
+  "clean_runtime_definition": {
+    "nc": 9,
+    "test": "images/test",
+    "train": "images/train",
+    "val": "images/val"
+  },
+  "critical_fingerprints": {
+    "PHYSICAL_SPLIT_B_MANIFEST.json": "e83914d8d387c619dfee50cb39722596443559646a53d2e4083d91f5fd1ab4ea",
+    "kaggle_upload_provenance/KAGGLE_PACKAGE_MANIFEST.json": "533eaa241818874b31b84ed6c17d8a3cc98219f24637800f4c6f985e32cbb174",
+    "split_B_original.yaml": "5afcd08e6025ce16ff57716b88f2bee80bd884a44c542f92e52ccd2c83511999",
+    "split_provenance/CANONICAL_SPLIT_HASHES.json": "0d0eda232ce0d2c452740b2c0f2619b805d11434b3d37acb7417e56a0d697f6c",
+    "split_provenance/FROZEN_SPLIT_B_MANIFEST.json": "3337c35408a9de21940c9ea64dae4cfc4c621e620a0047295c37cdb3d19f9e9c"
+  },
+  "date": "2026-09-12",
+  "files_written_by_kaggle_probe": 0,
+  "folder_counts": {
+    "images/test_integrity_only": 3050,
+    "images/train": 14227,
+    "images/train_aug_historical": 28454,
+    "images/val": 3050,
+    "labels/test_integrity_only": 3050,
+    "labels/train": 14227,
+    "labels/train_aug_historical": 28454,
+    "labels/val": 3050
+  },
+  "historical_augmentation": {
+    "current_yaml_sha256": "d5e5336b401f88be6bfb8026e26e573738101462fc21d6b971a3d183819b7ff0",
+    "selects_train_aug_historical": true,
+    "status": "NON_AUTHORITATIVE_FOR_D00"
+  },
+  "kaggle_python": "3.12.13",
+  "model_evaluation": "NONE",
+  "repository_base_commit": "072dfc47f52a14f3266eae1b66128efc329749bf",
+  "runtime_binding_sha256": "eddffe25ded04c7df598d76769a3dd224a794efe542da040a25dadc3c16f90ef",
+  "runtime_root": "/kaggle/input/datasets/nettokhan/grazpedwri-dx-split-b/GRAZPEDWRI-DX Split B",
+  "schema_version": "D00-A0-runtime-binding-v1.0",
+  "test_label_content_read": false,
+  "test_metrics_accessed": false,
+  "test_predictions_run": false,
+  "test_seal": "SEALED_UNTIL_P10",
+  "training": "NONE"
+}

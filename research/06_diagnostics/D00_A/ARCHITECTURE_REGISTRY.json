@@ -1,0 +1,119 @@
+{
+  "architectures": [
+    {
+      "id": "baseline_yolo11s",
+      "label": "YOLO11s baseline",
+      "modules": [],
+      "role": "PRIMARY_BASELINE",
+      "scale": "s",
+      "target_nc": 9,
+      "yaml_path": "ultralytics/cfg/models/11/yolo11.yaml"
+    },
+    {
+      "id": "sc_e50",
+      "label": "SC-e50",
+      "modules": [
+        "C3k2_SC"
+      ],
+      "role": "PRIMARY_SINGLE_MODULE",
+      "scale": "s",
+      "target_nc": 9,
+      "yaml_path": "ultralytics/cfg/models/11/yolo11s-sc-e50-v2.yaml"
+    },
+    {
+      "id": "dysample",
+      "label": "DySample-only",
+      "modules": [
+        "DySample"
+      ],
+      "role": "PRIMARY_SINGLE_MODULE",
+      "scale": "s",
+      "target_nc": 9,
+      "yaml_path": "ultralytics/cfg/models/11/yolo11s-dysample-v2.yaml"
+    },
+    {
+      "id": "resema",
+      "label": "ResEMA-only",
+      "modules": [
+        "ResEMA"
+      ],
+      "role": "PRIMARY_SINGLE_MODULE",
+      "scale": "s",
+      "target_nc": 9,
+      "yaml_path": "ultralytics/cfg/models/11/yolo11s-resema-only-v2.yaml"
+    },
+    {
+      "id": "sc_dysample_e50",
+      "label": "SC-e50 + DySample",
+      "modules": [
+        "C3k2_SC",
+        "DySample"
+      ],
+      "role": "PRIMARY_COMBINATION",
+      "scale": "s",
+      "target_nc": 9,
+      "yaml_path": "ultralytics/cfg/models/11/yolo11s-sc-dysample-e50-v2.yaml"
+    },
+    {
+      "id": "sc_resema_e50",
+      "label": "SC-e50 + ResEMA",
+      "modules": [
+        "C3k2_SC",
+        "ResEMA"
+      ],
+      "role": "CONTEXTUAL_COMBINATION",
+      "scale": "s",
+      "target_nc": 9,
+      "yaml_path": "ultralytics/cfg/models/11/yolo11s-sc-resema-e50-v2.yaml"
+    },
+    {
+      "id": "dysample_resema",
+      "label": "DySample + ResEMA",
+      "modules": [
+        "DySample",
+        "ResEMA"
+      ],
+      "role": "CONTEXTUAL_COMBINATION",
+      "scale": "s",
+      "target_nc": 9,
+      "yaml_path": "ultralytics/cfg/models/11/yolo11s-dysample-resema-v2.yaml"
+    },
+    {
+      "id": "full_e50",
+      "label": "SC-e50 + DySample + ResEMA",
+      "modules": [
+        "C3k2_SC",
+        "DySample",
+        "ResEMA"
+      ],
+      "role": "PRIMARY_FULL_MODEL",
+      "scale": "s",
+      "target_nc": 9,
+      "yaml_path": "ultralytics/cfg/models/11/yolo11s-resema-v2-e50.yaml"
+    }
+  ],
+  "coverage_views": [
+    "loader_effective",
+    "loader_effective_non_detect",
+    "same_top_level_module_type",
+    "same_top_level_module_type_non_detect"
+  ],
+  "date": "2026-09-12",
+  "loader_match_definition": "Exact state_dict key intersection with exact tensor-shape equality; same contract as intersect_dicts().",
+  "objective": "Measure deterministic pretrained-weight transfer coverage before new architecture development.",
+  "repository_base_commit": "072dfc47f52a14f3266eae1b66128efc329749bf",
+  "runtime_binding_record": "research/06_diagnostics/D00_A/D00_A0_RUNTIME_BINDING.json",
+  "runtime_binding_sha256": "eddffe25ded04c7df598d76769a3dd224a794efe542da040a25dadc3c16f90ef",
+  "schema_version": "D00-A-transfer-registry-v1.0",
+  "source_checkpoint": {
+    "expected_nc": 80,
+    "expected_scale": "s",
+    "logical_name": "yolo11s.pt",
+    "policy": "EXTERNAL_REQUIRED_NO_AUTO_DOWNLOAD",
+    "sha256": "TO_BE_RECORDED_AT_RUNTIME",
+    "topology_validation": "Must match repository YOLO11s 80-class reference model by state-dict keys and shapes."
+  },
+  "target_nc": 9,
+  "test_policy": "SEALED_UNTIL_P10",
+  "training": "NONE"
+}

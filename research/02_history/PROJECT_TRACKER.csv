@@ -4,7 +4,7 @@
 "P0","P0-03","Import historical B0-C2 registry/results/hashes","COMPLETE","","2026-09-08","2026-09-08","P0-02","history records","B0-C2 registry/results imported; unresolved historical artifact gaps explicitly documented"
 "P0","P0-04","Import literature library and V6/V7 framework","COMPLETE","","2026-09-08","2026-09-08","P0-02","literature docs","literature library plus V7/V8 governance and publication framework imported"
 "P0","P0-05","Add research-specific CI/tests","COMPLETE","","2026-09-08","2026-09-08","P0-02","research-integrity.yml + research-model-smoke.yml + local tests","8/8 research integrity tests and 4/4 model smoke tests passed locally."
-"P1","D00-A","Transfer coverage audit","NOT_STARTED","","","","P0 complete","transfer_coverage.csv",""
+"P1","D00-A","Transfer coverage audit","IN_PROGRESS","","2026-09-12","","D00-PRE","research/06_diagnostics/D00_A + transfer_coverage.csv","D00-A0 Kaggle runtime binding PASS (5/5 critical fingerprints; 8/8 folder counts; binding eddffe25ded04c7df598d76769a3dd224a794efe542da040a25dadc3c16f90ef); transfer-coverage implementation in progress; no training; test sealed."
 "P1","D00-B","Axis annotation inventory/parser","NOT_STARTED","","","","P0 complete","axis_inventory.csv",""
 "P1","D00-C","Projection mapping/performance audit","NOT_STARTED","","","","D00-B","projection_performance.csv",""
 "P1","D00-D","Paired-study feasibility audit","NOT_STARTED","","","","D00-C","paired_study_inventory.csv",""
