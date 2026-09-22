@@ -28,3 +28,16 @@ Model checkpoints remain outside Git and are registered by immutable reference a
 ## 2026-09-21 - Test policy
 
 Split A and Split B test partitions remain outside architecture, loss, epoch-budget and training-recipe selection.
+## 2026-09-22 - Baseline refresh framework remotely closed
+
+The active baseline-refresh framework was committed and pushed on `research/baseline-refresh`.
+
+Closure evidence:
+- framework commit: `0a7b6304cc4bd2f064618f873304bd849f82e3c0`;
+- local and remote branch heads matched;
+- local working tree was clean after push;
+- local pre-push validation passed all 33 research tests;
+- GitHub Research Integrity workflow run `35687683929` completed successfully;
+- the GitHub integrity job passed repository-state verification and research integrity/D00 contract tests.
+
+The active project state advances from framework installation to `DATA-01` dataset binding freeze.
