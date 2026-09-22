@@ -1,143 +1,121 @@
-# 04 — Local VS Code -> GitHub -> Kaggle Workflow
+# 04 - Local VS Code -> GitHub -> Kaggle Workflow
 
 ## Core rule
-Scientific code lives in Git.
+
+Scientific logic lives in Git.
+GitHub is the source of truth.
 Kaggle executes an immutable Git commit.
-Kaggle notebooks are runners, not the authoritative source of scientific logic.
 
-## A. Local VS Code
-1. Update research branch:
-```bash
-git checkout research-v7-publication
-git pull
-```
+Kaggle notebooks are launchers and inspection surfaces, not the authoritative source of scientific logic.
 
-2. Create short-lived branch:
-```bash
-git checkout -b feat/tp-cda
-# or feat/apcf, train/pelt, diagnostic/d00
-```
+## A. Local development
 
-3. Implement locally.
+1. Start from the active branch recorded in `research/CURRENT.md`.
+2. Verify the working tree is clean.
+3. Implement one governed change at a time.
+4. Run:
+   - `python -m pytest research/tests -q`
+   - `python research/tools/verify_repo_state.py`
+5. Review the complete diff.
+6. Commit and push.
+7. Record the immutable Git SHA used for Kaggle.
 
-4. Run preflight:
-```bash
-python -m pytest research/tests -q
-python research/tools/verify_repo_state.py
-```
+## B. Register an experiment before Kaggle
 
-5. Commit one scientific change per commit where possible.
-
-6. Push branch.
-
-7. Use a PR even for solo work for diff review/provenance.
-
-8. Merge only after tests pass.
-
-## B. Register experiment BEFORE Kaggle
 Create:
-`research/05_experiments/<ID>/`
 
-Required before run:
-- README.md
-- config.yaml
-- run.py
-- resume.py or standardized resume command
-- verify.py
-- predeclared decision rule
+`research/05_experiments/records/<EXPERIMENT-ID>/`
 
-Commit everything.
+At minimum before launch, record:
+- experiment ID;
+- scientific question;
+- dataset binding;
+- initialization;
+- seed;
+- training configuration;
+- primary metric;
+- decision rule;
+- exact Git SHA.
 
-Record:
-```bash
-git rev-parse HEAD
-```
+Reusable scientific execution code should live in version-controlled shared tools rather than being copied into every experiment directory.
 
-That SHA is the experiment code identity.
+Per-experiment records store configuration and provenance, not duplicate implementations.
 
 ## C. Kaggle setup
-Notebook runner should:
-1. clone repo;
-2. checkout exact registered commit;
-3. assert clean Git status;
-4. verify imported Ultralytics source;
-5. record runtime versions;
-6. verify dataset counts/manifests;
-7. call committed experiment entrypoint.
 
-Preferred:
-```bash
-git clone https://github.com/nithoukhan1/ResEMA.git
-cd ResEMA
-git checkout <EXPERIMENT_SHA>
-pip install -e . --no-deps
-```
+The Kaggle launcher should:
+
+1. clone `nithoukhan1/ResEMA`;
+2. checkout the exact registered Git SHA;
+3. assert clean Git status;
+4. install the local fork with `pip install -e . --no-deps` unless a documented runtime change is required;
+5. verify the imported Ultralytics source;
+6. record Python, Ultralytics, PyTorch, torchvision, CUDA, GPU and GPU-count information;
+7. verify the dataset binding and counts;
+8. verify the pretrained checkpoint SHA256 when applicable;
+9. call the committed reusable training entrypoint.
 
 Why `--no-deps`:
-the pinned fork's pyproject declares `torch<2.10`, while successful Kaggle runs used `torch 2.10.0+cu128`. Do not let pip silently replace the working CUDA stack.
+the pinned fork and successful Kaggle CUDA environment may have dependency-version differences. Do not allow pip to silently replace a working CUDA/PyTorch stack.
 
-Then:
-```bash
-python research/05_experiments/M01/run.py   --config research/05_experiments/M01/config.yaml
-```
+## D. Runtime record
 
-## D. Runtime manifest
-Before training save:
-- remote
-- commit SHA
-- clean/dirty state
-- Python
-- Ultralytics
-- PyTorch
-- torchvision
-- CUDA
-- GPU
-- GPU count
-- dataset paths/counts
-- config SHA256
-- model YAML SHA256
-- pretrained checkpoint SHA256
+Before training, record at minimum:
+- remote;
+- Git SHA;
+- clean/dirty state;
+- runtime versions;
+- GPU model/count;
+- dataset binding;
+- dataset counts;
+- config hash;
+- model config/source hash;
+- pretrained checkpoint hash when applicable.
 
-File:
-`runtime_manifest.json`
+## E. Kaggle Save Version and resume
 
-## E. Resume
-Resume uses:
-- complete previous run folder
-- latest last.pt
-- same scientific config
+One scientific experiment may span multiple Kaggle sessions.
 
-Do not redefine scientific hyperparameters manually.
+Resume requires:
+- the complete previous persisted run directory;
+- the latest valid `last.pt`;
+- the same Git SHA;
+- the same dataset binding;
+- the same scientific configuration.
 
-If a code change is required only for resume mechanics, document both original and resume commit SHA.
+Restore the full previous run directory into writable `/kaggle/working`, verify hashes, then resume from `last.pt` with `resume=True`.
+
+Do not redefine scientific hyperparameters in a resume session.
+
+If the previous Kaggle session was not successfully persisted, resume from the most recent successfully persisted version.
 
 ## F. Completion
-Generate:
-- best.pt
-- last.pt
-- results.csv
-- args.yaml
-- runtime_manifest.json
-- artifact_manifest.json
-- results_summary.yaml
-- independent-validation CSV
-- per-class CSV
-- plots
 
-Hash critical files.
+Persist the final complete run folder externally.
 
-Publish entire run folder as immutable Kaggle Model version.
+Register compact evidence in Git:
+- resolved configuration;
+- epoch metrics;
+- validation summary;
+- per-class metrics;
+- runtime/session history;
+- artifact hashes;
+- scientific decision.
+
+Large `.pt` weights remain outside Git.
 
 ## G. Return to local
-1. download/copy small metadata/results;
-2. update artifact registry;
-3. update experiment registry;
-4. write decision.md;
-5. update project tracker;
-6. commit/push.
 
-Weights remain in Kaggle.
+Update:
+- `research/05_experiments/EXPERIMENTS.csv`;
+- `research/01_provenance/ARTIFACTS.csv`;
+- the relevant `records/<EXPERIMENT-ID>/` files;
+- `research/CURRENT.md`;
+- `research/DECISIONS.md` when a project-level decision is made.
+
+Then commit and push.
 
 ## H. Analysis-code rule
-Any analysis that can alter a scientific conclusion must be version-controlled.
-Paper tables should be generated from registered CSV/JSON whenever possible, not manual calculator transcription.
+
+Any analysis that can change a scientific conclusion must be version-controlled.
+Paper tables should be generated from registered machine-readable evidence whenever possible.

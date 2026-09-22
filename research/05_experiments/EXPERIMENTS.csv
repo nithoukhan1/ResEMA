@@ -1,0 +1,7 @@
+experiment_id,split,train_data,initialization,seed,status,source_commit,data_binding,init_checkpoint_sha256,epochs,best_epoch,imgsz,batch,optimizer,primary_metric,primary_value,mAP50,precision,recall,f1,best_pt_sha256,best_pt_external_ref,decision,notes
+BASE-B-ORG-PT-S42,B,original,pretrained,42,NOT_STARTED,,,,100,,1024,16,SGD,val_mAP50-95,,,,,,,,,
+BASE-B-ORG-SCR-S42,B,original,scratch,42,NOT_STARTED,,,,100,,1024,16,SGD,val_mAP50-95,,,,,,,,,
+BASE-B-AUG-PT-S42,B,augmented,pretrained,42,NOT_STARTED,,,,100,,1024,16,SGD,val_mAP50-95,,,,,,,,,
+BASE-B-AUG-SCR-S42,B,augmented,scratch,42,NOT_STARTED,,,,100,,1024,16,SGD,val_mAP50-95,,,,,,,,,
+BASE-A-AUG-PT-S42,A,augmented,pretrained,42,NOT_STARTED,,,,100,,1024,16,SGD,val_mAP50-95,,,,,,,,,
+BASE-A-AUG-SCR-S42,A,augmented,scratch,42,NOT_STARTED,,,,100,,1024,16,SGD,val_mAP50-95,,,,,,,,,

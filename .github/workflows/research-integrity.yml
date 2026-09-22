@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - research-v7-publication
+      - "research/**"
       - "diagnostic/**"
       - "feat/**"
       - "train/**"

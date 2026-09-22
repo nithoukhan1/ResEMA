@@ -1,66 +1,96 @@
-# 06 — Experiment Governance
+# 06 - Experiment Governance
 
-## IDs
-- Dxx diagnostics
-- Mxx mechanism development
-- Rxx confirmation
-- CVxx robustness
-- Txx final test
-- Exx external validation
+## Experiment IDs
 
-Never reuse an ID.
+Use clear, non-reused scientific IDs.
+
+Active baseline reverification:
+- `BASE-<SPLIT>-<DATA>-<INIT>-S<SEED>`
+- SPLIT: `A` or `B`
+- DATA: `ORG` or `AUG`
+- INIT: `PT` or `SCR`
+
+Examples:
+- `BASE-B-ORG-PT-S42`
+- `BASE-B-AUG-SCR-S42`
+
+Existing mechanism/diagnostic families remain valid:
+- `Dxx` diagnostics
+- `Mxx` mechanism development
+- `Rxx` confirmation
+- `CVxx` robustness
+- `Txx` final test
+- `Exx` external validation
+
+Never reuse an experiment ID.
 
 ## Before-run registration
+
 Required:
-- hypothesis
-- parent model
-- exactly one intended scientific change
-- dataset/split
-- seed
-- primary metric
-- secondary metrics
-- pass/fail rule
-- code commit SHA
+- scientific question or hypothesis;
+- parent/control model;
+- intended scientific change or controlled condition;
+- dataset/split;
+- seed;
+- initialization;
+- primary metric;
+- secondary metrics;
+- decision rule;
+- code commit SHA.
+
+Baseline factorial conditions may differ in split, training representation, or initialization by design. These dimensions must be explicit in the experiment ID and registry.
 
 ## Primary endpoint
-Development primary: `mAP50-95` on frozen operational Split-B validation.
+
+Development primary:
+`mAP50-95` on the applicable frozen validation partition.
+
+Split-B original is the primary development environment unless a registered experiment explicitly targets another training representation or split.
 
 ## Secondary metrics
-- mAP50
-- Clinical-7
-- Core-6
-- per-class AP
-- fracture AP
-- target-specific metric
-- convergence
-- params
 
-## Screening rule
-A mechanism normally passes if:
-A. overall mAP50-95 improves >=0.5 percentage points;
-OR
-B. a prespecified targeted metric improves >=1.0 pp and overall mAP50-95 decreases no more than 0.2 pp.
+Report where applicable:
+- precision;
+- recall;
+- F1;
+- mAP50;
+- mAP50-95;
+- Clinical-7;
+- Core-6;
+- per-class AP;
+- fracture AP;
+- target-specific metric;
+- convergence;
+- parameters.
 
-Guards:
+## Mechanism screening rule
+
+For later architecture/loss mechanism screening, predeclare the exact pass/fail rule before training.
+
+Historical guidance:
+- overall mAP50-95 gain >= 0.5 percentage points; OR
+- a prespecified targeted metric gain >= 1.0 pp with overall mAP50-95 decrease <= 0.2 pp.
+
+Guardrails:
 - no major fracture AP collapse;
-- no conclusion driven by one bonelesion patient;
+- no conclusion driven by one rare patient;
 - no hidden recipe change;
-- complexity justified.
+- complexity must be justified.
 
-## Strong final-method target
-Prefer:
-- >=1.0 pp reproducible gain
-- stronger SOTA-oriented target: ~1.5–2.0 pp
-- positive Core-6
-- robust rare-class behavior
+The baseline-reverification phase does not use this mechanism-pass rule. Its purpose is to measure controlled baseline conditions and convergence.
 
 ## Repeats
-One seed for screening.
-Second seed only for shortlisted candidates.
+
+Initial baseline matrix:
+- seed 42 for all six registered baseline conditions.
+
+Additional seeds are added only after the initial matrix and convergence analysis identify the primary confirmation conditions.
 
 ## Test policy
-Split-B test is never used for development choices.
-Final test evaluates exactly frozen baseline and frozen proposed method.
+
+Split-A and Split-B test partitions are not used for development choices.
+Final test evaluation occurs only after method lock.
 
 ## Negative results
-Negative experiments remain in the registry.
+
+Negative and null experiments remain registered.

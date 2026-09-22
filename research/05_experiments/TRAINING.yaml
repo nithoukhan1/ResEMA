@@ -1,0 +1,65 @@
+schema_version: baseline_training_v1
+status: provisional_locked_for_baseline_refresh
+
+model:
+  family: YOLO11s
+  task: detect
+  scale: s
+  classes: 9
+
+training:
+  epochs: 100
+  next_budget_if_not_converged: 200
+  patience: 100
+  imgsz: 1024
+  batch_global: 16
+  optimizer: SGD
+  lr0: 0.01
+  lrf: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+  cos_lr: true
+  warmup_epochs: 3.0
+  warmup_momentum: 0.8
+  warmup_bias_lr: 0.1
+  deterministic: true
+  seed: 42
+  amp: true
+  multi_scale: false
+  freeze: 0
+  cache: false
+
+loss:
+  box: 7.5
+  cls: 0.5
+  dfl: 1.5
+  fl_gamma: 0.0
+  custom_class_balance: false
+
+augmentation:
+  hsv_h: 0.015
+  hsv_s: 0.7
+  hsv_v: 0.4
+  degrees: 0.0
+  translate: 0.10
+  scale: 0.50
+  shear: 0.0
+  perspective: 0.0
+  flipud: 0.0
+  fliplr: 0.5
+  mosaic: 1.0
+  close_mosaic: 10
+  mixup: 0.0
+  cutmix: 0.0
+  copy_paste: 0.0
+
+runtime:
+  platform: Kaggle
+  intended_gpu: T4x2
+  workers: 4
+  editable_install_no_deps: true
+  multi_session_resume_expected: true
+
+selection:
+  primary_metric: validation_mAP50-95
+  test_for_selection: false

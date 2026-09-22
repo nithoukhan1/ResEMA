@@ -1,42 +1,55 @@
-# 09 — Tracking System
+# 09 - Tracking System
 
-## Authoritative trackers
-### PROJECT_TRACKER.csv
-One row per phase/work package.
+## Active trackers
 
-### EXPERIMENT_REGISTRY.csv
-One row per scientific run.
-Never delete historical rows.
+### `research/CURRENT.md`
+Human-readable current phase, completed work, next work and blocked work.
 
-### ARTIFACT_REGISTRY.csv
-One row per external artifact/checkpoint set.
+### `research/DECISIONS.md`
+Append-only project-level scientific and governance decisions.
 
-### DECISION_LOG.md
-Append-only chronological decisions.
+### `research/05_experiments/EXPERIMENTS.csv`
+One row per active scientific experiment.
+Never delete completed or negative rows.
 
-### PROGRESS_LOG.md
-Short dated work diary.
+### `research/01_provenance/ARTIFACTS.csv`
+One row per externally stored artifact or checkpoint identity.
 
-### RESULTS_MASTER.csv
-Canonical machine-readable table used for paper tables/plots.
+### `research/05_experiments/records/<EXPERIMENT-ID>/`
+Compact per-experiment configuration, runtime, session, metric, artifact and decision records.
+
+## Historical trackers
+
+The following files under `research/02_history/` are frozen historical evidence from earlier project phases:
+- `PROJECT_TRACKER.csv`
+- `EXPERIMENT_REGISTRY.csv`
+- `ARTIFACT_REGISTRY.csv`
+- `DECISION_LOG.md`
+- `PROGRESS_LOG.md`
+- `RESULTS_MASTER.csv`
+
+Do not rewrite historical rows to imitate the active framework.
 
 ## Status vocabulary
-Use only:
-- NOT_STARTED
-- IN_PROGRESS
-- BLOCKED
-- COMPLETE
-- REJECTED
-- SUPERSEDED
-- LOCKED
 
-## Weekly checkpoint
-At least once per week:
-- update project tracker
-- update experiment registry
-- update decision log
-- commit/push
-- write `WEEKLY_STATUS_YYYY-MM-DD.md`
+Use only:
+- `NOT_STARTED`
+- `IN_PROGRESS`
+- `BLOCKED`
+- `COMPLETE`
+- `REJECTED`
+- `SUPERSEDED`
+- `LOCKED`
+
+## Update rule
+
+At every meaningful milestone:
+- update `CURRENT.md`;
+- update `EXPERIMENTS.csv` when experiment state changes;
+- update `ARTIFACTS.csv` when an external artifact is created or used;
+- append a project-level decision to `DECISIONS.md` when required;
+- commit and push compact evidence.
 
 ## Chat handoff rule
-Future assistance should work from the latest repository tracker, decision log and experiment registry whenever available, rather than conversation memory alone.
+
+Future assistance should reconstruct project state from the latest repository current-state file, active registries, decisions and experiment records before relying on conversation memory.
