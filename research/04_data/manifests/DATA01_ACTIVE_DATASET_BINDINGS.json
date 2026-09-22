@@ -1,0 +1,212 @@
+{
+  "schema_version": "DATA01-active-dataset-bindings-v1.0",
+  "created_date": "2026-09-22",
+  "status": "COMPLETE",
+  "purpose": "Freeze the exact active dataset bindings used by the baseline-refresh experiment matrix before initialization and training implementation.",
+  "repository_parent_commit": "76980ecd05416361cd4f133f869981d3af1bef8b",
+  "training_authorization": "LOCKED_PENDING_INIT01_TRAIN01_RESUME01",
+  "canonical_dataset": {
+    "name": "GRAZPEDWRI-DX",
+    "dataset_csv_sha256": "55a53cbe9673e5f29ef0f2f6074ae791f1c27a3b48efadcd0b771225ff6379e8",
+    "images": 20327,
+    "patients": 6091
+  },
+  "binding_ids": {
+    "A_AUG": "DATA01:A-AUG:v1",
+    "B_ORG": "DATA01:B-ORG:v1",
+    "B_AUG": "DATA01:B-AUG-HIST:v1"
+  },
+  "bindings": {
+    "A_AUG": {
+      "binding_id": "DATA01:A-AUG:v1",
+      "role": "Historical Split-A augmented baseline comparator. Not authoritative for Split-B method selection.",
+      "kaggle_dataset_ref": "nithoukhan/grazpedwri-dx-aug",
+      "runtime_root_observed": "/kaggle/input/datasets/nithoukhan/grazpedwri-dx-aug/GRAZPEDWRI-DX/data",
+      "source_identity": {
+        "dataset_csv_sha256": "55a53cbe9673e5f29ef0f2f6074ae791f1c27a3b48efadcd0b771225ff6379e8",
+        "train_data_csv_sha256": "09299d1f0d2ba324de930319c50c5116f893fa10f14d23ff612a7968d4b5ac0e",
+        "valid_data_csv_sha256": "4af98f174ff3bac82eb1d5c2caaf1888e035911b94a8ad3e69f922dd06a3d93c",
+        "test_data_csv_sha256": "23de2db554d00499cd2685ff3a3970fd2413c197436071c4c8c61305a9fb611d",
+        "meta_yaml_sha256": "f311d5fbdad78fd19307832822a059df913c1813e133f4978cc30751dc9dd5ed",
+        "meta_yaml_runtime_policy": "Identity/provenance evidence only. The historical YAML contains the correct relative split keys but an obsolete Windows path and must not be used unchanged on Kaggle."
+      },
+      "runtime_counts": {
+        "train_aug_images": 28408,
+        "train_aug_labels": 28408,
+        "original_component": 14204,
+        "augmented_component": 14204,
+        "other_component": 0,
+        "validation_images": 4094,
+        "validation_labels": 4094,
+        "test_images": 2029,
+        "test_labels": 2029
+      },
+      "naming_contract": {
+        "original_prefix": "orig_",
+        "augmented_prefix": "aug_",
+        "original_bases_equal_augmented_bases": true,
+        "both_base_sets_equal_train_data_csv": true
+      },
+      "membership_sha256_final_newline": {
+        "train_base": "db552b4606838cc792b73fd81794c404d4d0686a1e015c8728e2f02ac7db24fb",
+        "runtime_train_aug_raw": "5ff1ad718d6fea386521f2a747f5204354fd9a9c7737c8b5a12eebbe02a144a3",
+        "validation": "c851383bc9a6d51c16ed580c104e8498b13fdd7edeb74f9dd19a0ed359776545",
+        "test": "15bca28d4cf800d0c29398c23ec5e54a8eca16c02e490a0b26ae764e499d6c2d"
+      },
+      "patients": {
+        "train": 4263,
+        "validation": 1218,
+        "test": 610,
+        "train_validation_overlap": 0,
+        "train_test_overlap": 0,
+        "validation_test_overlap": 0
+      },
+      "train_local_label_pair_integrity": {
+        "pairs_checked": 14204,
+        "missing_original_labels": 0,
+        "missing_augmented_labels": 0,
+        "byte_mismatches": 0,
+        "pass": true
+      },
+      "cross_split_firewall": {
+        "reason": "Split A and Split B are different patient-level partitions. Split-A training membership overlaps Split-B validation/test, so Split-A experiments cannot inform Split-B development.",
+        "A_train_overlap_B_train_images": 9852,
+        "A_train_overlap_B_validation_images": 2171,
+        "A_train_overlap_B_test_images": 2181,
+        "allowed_use": "Baseline reconstruction and split-robustness reporting only.",
+        "forbidden_use": "Architecture, loss, epoch-budget, training-recipe or final-model selection for the Split-B development path."
+      }
+    },
+    "B_ORG": {
+      "binding_id": "DATA01:B-ORG:v1",
+      "role": "Primary clean patient-disjoint Split-B development condition.",
+      "kaggle_dataset_ref": "utopianstar/grazpedwri-dx-split-b",
+      "runtime_root_observed": "/kaggle/input/datasets/utopianstar/grazpedwri-dx-split-b/GRAZPEDWRI-DX Split B",
+      "runtime_counts": {
+        "train_images": 14227,
+        "train_labels": 14227,
+        "validation_images": 3050,
+        "validation_labels": 3050,
+        "test_images": 3050,
+        "test_labels": 3050
+      },
+      "membership_sha256_final_newline": {
+        "train": "4ab032d669ee40daeaa6d37680def3ba4aad4dc64b9d0f16b7b658be9e48812b",
+        "validation": "f36040d4a798cbda113909907ba21e3dac1bb91b268124ec51c4fb2899e4a816",
+        "test": "edbcaa1393f874cd27903e3b5ffec419f3be3f821ef32fab1d2b99a8bd4e6128"
+      },
+      "patients": {
+        "train": 4264,
+        "validation": 914,
+        "test": 913,
+        "train_validation_overlap": 0,
+        "train_test_overlap": 0,
+        "validation_test_overlap": 0
+      },
+      "identity_files": {
+        "split_B_original_yaml_sha256": "5afcd08e6025ce16ff57716b88f2bee80bd884a44c542f92e52ccd2c83511999",
+        "PHYSICAL_SPLIT_B_MANIFEST_sha256": "e83914d8d387c619dfee50cb39722596443559646a53d2e4083d91f5fd1ab4ea",
+        "FROZEN_SPLIT_B_MANIFEST_sha256": "3337c35408a9de21940c9ea64dae4cfc4c621e620a0047295c37cdb3d19f9e9c",
+        "CANONICAL_SPLIT_HASHES_sha256": "0d0eda232ce0d2c452740b2c0f2619b805d11434b3d37acb7417e56a0d697f6c",
+        "KAGGLE_PACKAGE_MANIFEST_sha256": "533eaa241818874b31b84ed6c17d8a3cc98219f24637800f4c6f985e32cbb174"
+      },
+      "yaml": {
+        "filename": "split_B_original.yaml",
+        "train": "images/train",
+        "validation": "images/val",
+        "test": "images/test"
+      },
+      "inherited_operational_validation_note": {
+        "source": "research/04_data/manifests/D00_INPUT_PROVENANCE_MANIFEST.json",
+        "frozen_validation_membership": 3050,
+        "known_problematic_filestem": "1502_0635264266_05_WRI-R2_M015",
+        "operational_readable_images": 3049,
+        "rule": "Frozen membership remains unchanged. Apply the existing project operational policy to the known unreadable image."
+      }
+    },
+    "B_AUG": {
+      "binding_id": "DATA01:B-AUG-HIST:v1",
+      "role": "Intentional historical offline-augmentation comparator on the frozen Split-B training membership.",
+      "kaggle_dataset_ref": "utopianstar/grazpedwri-dx-split-b",
+      "runtime_root_observed": "/kaggle/input/datasets/utopianstar/grazpedwri-dx-split-b/GRAZPEDWRI-DX Split B",
+      "runtime_counts": {
+        "train_aug_historical_images": 28454,
+        "train_aug_historical_labels": 28454,
+        "original_component": 14227,
+        "augmented_component": 14227,
+        "validation_images": 3050,
+        "validation_labels": 3050,
+        "test_images": 3050,
+        "test_labels": 3050
+      },
+      "membership_sha256_final_newline": {
+        "train_aug_historical": "4799e44ace20ab724974984f4cab60740a3fd8ad5cad3e1570bc895f02eefded"
+      },
+      "membership_integrity": {
+        "original_component_equals_B_ORG_train": true,
+        "augmented_prefix": "aug_",
+        "augmented_bases_equal_B_ORG_train": true,
+        "validation_base_overlap": 0,
+        "test_base_overlap": 0,
+        "label_pairs_checked": 14227,
+        "label_byte_mismatches": 0,
+        "pass": true
+      },
+      "yaml": {
+        "filename": "split_B_historical_aug.yaml",
+        "sha256": "d5e5336b401f88be6bfb8026e26e573738101462fc21d6b971a3d183819b7ff0",
+        "train": "images/train_aug_historical",
+        "validation": "images/val",
+        "test": "images/test"
+      },
+      "provenance_caveat": {
+        "status": "HISTORICAL_COMPARATOR_ONLY",
+        "statement": "Earlier D00 evidence recorded unresolved historical augmentation provenance/YAML drift. DATA-01 verifies the mounted membership and annotation-copy integrity but does not reconstruct or certify the exact historical generation event. Claims must therefore describe this as the historical offline-augmented comparator, not as a newly generated or fully reconstructed augmentation recipe."
+      }
+    }
+  },
+  "test_policy": {
+    "development_use": "FORBIDDEN",
+    "allowed_pre_final_test": "Membership identity, source fingerprints/hashes and aggregate split-integrity evidence only.",
+    "forbidden_pre_final_test": "Test predictions, test metrics, error analysis, geometry/content analysis, patient-sensitivity analysis, annotation-content analysis, architecture/loss/epoch-budget/training-recipe selection or model selection.",
+    "split_b_primary_development_environment": true,
+    "A_AUG_firewalled_from_B_development": true
+  },
+  "contained_incident": {
+    "incident_id": "DATA01-R3-CROSS-SPLIT-TEST-LABEL-BYTE-ACCESS",
+    "status": "SUPERSEDED",
+    "source_transaction": "DATA-01B-R3",
+    "description": "A superseded read-only diagnostic compared Split-A training annotation bytes with canonical labels located through Split-B train/validation/test folders. Membership containment shows that 2181 Split-A train images fall inside the Split-B test membership, so the R3 helper would have opened the corresponding Split-B test label files for byte-equality checking.",
+    "inferred_split_b_test_label_files_opened": 2181,
+    "annotation_semantics_parsed_or_reported": false,
+    "model_predictions_or_test_metrics_accessed": false,
+    "dataset_or_repository_modified": false,
+    "used_for_development_or_model_selection": false,
+    "authoritative_evidence": false,
+    "containment": "Exclude the R3 cross-Split-B label-byte result from DATA-01 and all development logic. R4 replaced it with a train-local Split-A orig_/aug_ label-pair check and opened no Split-B label files."
+  },
+  "runtime_evidence": {
+    "DATA01_READONLY_DISCOVERY.json": {
+      "sha256": "9e18e9b4ee70f48c3116fd674318358f41ef1667f600e923b10ecb6278704dc2",
+      "status": "AUTHORITATIVE_DISCOVERY_EVIDENCE"
+    },
+    "DATA01_BINDING_VERIFICATION_R2.json": {
+      "sha256": "414b59ba9a06e3ea43cd939ac360a3023804bbaf5fff48abece34163c0292057",
+      "status": "AUTHORITATIVE_FOR_B_ORG_AND_B_AUG"
+    },
+    "DATA01_SPLIT_A_PROVENANCE_DIAGNOSTIC_R3.json": {
+      "sha256": "661df71eda58b09f26b2d352e8b60bd203b9f2b147f08aa7a8a1ca12d11c4daf",
+      "status": "SUPERSEDED_DIAGNOSTIC; CROSS-SPLIT LABEL-BYTE RESULT EXCLUDED"
+    },
+    "DATA01_SPLIT_A_FINAL_BINDING_R4.json": {
+      "sha256": "553bfb7f99109f2f09bd88b155806b86a759b2afa68fa4254f6c4af3a2552a77",
+      "status": "AUTHORITATIVE_SPLIT_A_BINDING_EVIDENCE"
+    }
+  },
+  "scientific_state": {
+    "model_training_performed_during_DATA01": false,
+    "model_architecture_changed_during_DATA01": false,
+    "test_model_outcomes_accessed_during_DATA01": false,
+    "baseline_experiments_authorized_to_start": false
+  }
+}
