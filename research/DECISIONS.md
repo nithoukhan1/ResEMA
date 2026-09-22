@@ -65,3 +65,25 @@ A superseded read-only `DATA-01B-R3` helper compared Split-A training annotation
 No model predictions, test metrics, annotation semantics, architecture/loss decisions, model selection, training or persistent dataset/repository modification resulted from this diagnostic. Its cross-Split-B label-byte comparison is excluded from authoritative DATA-01 evidence and from all development logic.
 
 `DATA-01B-R4` replaced that operation with a Split-A train-local `orig_` versus `aug_` annotation comparison and opened no Split-B label files. Going forward, pre-final-test Split-B handling is limited to source identity, membership/hash and aggregate split-integrity evidence.
+
+## 2026-09-22 - DATA-01 remotely closed
+
+The active dataset-binding freeze is remotely closed on `research/baseline-refresh`.
+
+Closure evidence:
+- DATA-01 commit: `4473ff57126e2427c6a6e6e5f24c40528f76e5f7`;
+- local pre-push research validation passed all 40 tests;
+- the commit contained exactly the five approved DATA-01 binding files;
+- local and remote branch heads matched after push;
+- the local working tree was clean after push;
+- GitHub Research Integrity workflow run `35711226411` completed successfully on the exact DATA-01 commit;
+- the `integrity` job passed repository verification and the research-integrity/D00 contract test step.
+
+The frozen active binding IDs are:
+- `DATA01:A-AUG:v1`;
+- `DATA01:B-ORG:v1`;
+- `DATA01:B-AUG-HIST:v1`.
+
+No model training or model-architecture change occurred during DATA-01. The superseded R3 cross-Split-B label-byte comparison remains excluded from authoritative evidence and development logic.
+
+The project advances to `INIT-01`. Baseline training remains locked until `INIT-01`, `TRAIN-01` and `RESUME-01` are complete and committed.

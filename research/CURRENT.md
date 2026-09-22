@@ -37,19 +37,38 @@ The baseline-refresh research framework is remotely closed and CI-verified.
 - Research Integrity CI activation for `research/**`
 - DATA-01A read-only runtime discovery
 - DATA-01B active binding verification for Split A augmented, Split B original and Split B historical augmented
+- DATA-01 active dataset-binding freeze remotely closed and CI-verified
 
-## Current task
+## DATA-01 remote closure
 
-`DATA-01C` - commit, push and remotely close the active dataset-binding freeze.
+DATA-01 is complete and remotely CI-verified.
 
-Local DATA-01 binding implementation records:
+- DATA-01 commit: `4473ff57126e2427c6a6e6e5f24c40528f76e5f7`
+- GitHub Research Integrity workflow run: `35711226411`
+- workflow status: completed
+- workflow conclusion: success
+- integrity job: success
+- local pre-push validation: 40/40 research tests passed
+- local/remote branch heads matched after push
+- local working tree was clean after push
+- model training during DATA-01: no
+- model architecture change during DATA-01: no
+- test model outcomes accessed during DATA-01: no
+
+Frozen active bindings:
 
 - `DATA01:A-AUG:v1`
 - `DATA01:B-ORG:v1`
 - `DATA01:B-AUG-HIST:v1`
 
+## Current task
+
+`INIT-01` - freeze the exact official YOLO11s pretrained initialization identity before any baseline training.
+
+INIT-01 must record the official checkpoint source/reference, runtime acquisition path, exact file size and SHA256, checkpoint/model identity, relevant Ultralytics/runtime version evidence, and the transfer-versus-scratch initialization contract.
+
 The six baseline experiment rows remain `NOT_STARTED`.
-Their `data_binding` fields are populated by DATA-01C, but training remains locked until `INIT-01`, `TRAIN-01` and `RESUME-01` are complete.
+Training remains locked until `INIT-01`, `TRAIN-01` and `RESUME-01` are complete and committed.
 
 ## DATA-01 binding summary
 
@@ -93,16 +112,15 @@ No model predictions, test metrics, model selection, architecture decision or pe
 
 ## Next
 
-1. close `DATA-01C` with commit/push/remote CI verification
-2. `INIT-01` - freeze official YOLO11s pretrained checkpoint identity and SHA256
-3. `TRAIN-01` - implement reusable governed baseline trainer
-4. `RESUME-01` - implement Kaggle Save-Version/resume helper
-5. launch `BASE-B-ORG-PT-S42`
-6. register validation/per-class/convergence evidence
-7. continue the remaining five seed-42 baseline conditions
-8. perform fresh Split-B-validation-only model diagnostics
-9. freeze architecture and loss
-10. implement the final method
+1. `INIT-01` - freeze official YOLO11s pretrained checkpoint identity and SHA256
+2. `TRAIN-01` - implement reusable governed baseline trainer
+3. `RESUME-01` - implement Kaggle Save-Version/resume helper
+4. launch `BASE-B-ORG-PT-S42`
+5. register validation/per-class/convergence evidence
+6. continue the remaining five seed-42 baseline conditions
+7. perform fresh Split-B-validation-only model diagnostics
+8. freeze architecture and loss
+9. implement the final method
 
 ## Active baseline experiments
 
