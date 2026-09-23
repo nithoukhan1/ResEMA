@@ -188,3 +188,25 @@ and frozen-runtime evidence.
 
 These checks close authorization drift and preflight-to-DDP time-of-check/time-of-use
 gaps without changing the scientific recipe.
+
+## 2026-09-23 - Frozen source commit S remotely accepted and authorization binding approved
+
+The governed TRAIN-01/RESUME-01 implementation is frozen at:
+
+- `S = 2954eab070368932ae68370532b73295feb3ca2d`;
+- parent `6bf9764c8455815d57cd253be8284717d6711962`;
+- GitHub Research Integrity run `35853996772` (run #13) completed with
+  conclusion `success`;
+- integrity job `107158063197` completed with conclusion `success`;
+- both the repository-state verification step and the research-integrity/D00/RESUME-01
+  test step completed successfully.
+
+The six baseline rows may now be atomically bound to `S`.
+
+Authorization rules:
+- every baseline row must remain `NOT_STARTED`;
+- every `source_commit` value must equal exactly `S`;
+- no other `EXPERIMENTS.csv` field may differ from its value at `S`;
+- no guarded scientific/runtime path may change in the authorization commit;
+- model training remains locked until the authorization commit is remotely pushed and
+  its exact GitHub Research Integrity run succeeds.

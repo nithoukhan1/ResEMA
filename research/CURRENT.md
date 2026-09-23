@@ -66,7 +66,7 @@ Frozen active bindings:
 
 ## Current task
 
-`RESUME-01` - freeze and remotely verify the governed multi-session continuation runtime, then bind the frozen source commit before any baseline launch.
+`AUTH-01` - atomically bind all six frozen baseline experiments to source commit `S`, then remotely close the authorization commit before the first governed launch.
 
 INIT-01 is complete at the evidence/freezing level.
 
@@ -153,15 +153,13 @@ No model predictions, test metrics, model selection, architecture decision or pe
 
 ## Next
 
-1. finish RESUME-01 local validation and freeze candidate review
-2. create and remotely CI-verify frozen source commit `S`
-3. create authorization commit `A` binding all six `source_commit` fields to `S`
-4. launch `BASE-B-ORG-PT-S42`
-5. register validation/per-class/convergence evidence
-6. continue the remaining five seed-42 baseline conditions
-7. perform fresh Split-B-validation-only model diagnostics
-8. freeze architecture and loss
-9. implement the final method
+1. push authorization commit `A` and verify GitHub Research Integrity on the exact authorization SHA
+2. launch `BASE-B-ORG-PT-S42` only after authorization remote closure
+3. register validation/per-class/convergence evidence
+4. continue the remaining five seed-42 baseline conditions
+5. perform fresh Split-B-validation-only model diagnostics
+6. freeze architecture and loss
+7. implement the final method
 
 ## Active baseline experiments
 
@@ -231,3 +229,28 @@ A post-R1 code-level audit identified governance surfaces that required strength
 - `best.pt` must satisfy the same model, Git-commit, branch, and Ultralytics-runtime identity contract before continuation.
 
 This is pre-commit hardening, not a rollback of TRAIN-01. Training remains locked and all six experiment rows remain `NOT_STARTED`.
+
+## 2026-09-23 - RESUME-01 source freeze remotely verified
+
+Frozen training-source commit:
+
+- source commit `S`: `2954eab070368932ae68370532b73295feb3ca2d`
+- parent: `6bf9764c8455815d57cd253be8284717d6711962`
+- commit subject: `research: freeze governed resume runtime`
+- GitHub Research Integrity run: `35853996772` (run #13)
+- event: `push`
+- exact workflow head SHA: `2954eab070368932ae68370532b73295feb3ca2d`
+- workflow conclusion: `success`
+- integrity job: `107158063197` / `success`
+- repository-state verification step: `success`
+- research-integrity/D00/RESUME-01 test step: `success`
+
+The source-freeze half of RESUME-01 is therefore remotely closed.
+
+Authorization is intentionally separate. The authorization commit binds all six
+`EXPERIMENTS.csv::source_commit` values to `S` while leaving every guarded
+scientific/runtime path byte-identical to `S`. All six experiment statuses remain
+`NOT_STARTED`.
+
+Model training remains locked until the authorization commit itself is pushed and its
+GitHub Research Integrity workflow succeeds.
