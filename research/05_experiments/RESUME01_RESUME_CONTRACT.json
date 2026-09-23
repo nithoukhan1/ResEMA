@@ -1,0 +1,94 @@
+{
+  "schema_version": "RESUME01-governed-resume-v1.0",
+  "created_date": "2026-09-23",
+  "status": "IMPLEMENTED",
+  "purpose": "Govern Kaggle Save-Version continuation of the six frozen baseline experiments without changing scientific configuration or accessing test outcomes.",
+  "training_authorization": "DERIVED_FROM_NONEMPTY_EXPERIMENT_SOURCE_COMMIT",
+  "source_freeze_protocol": {
+    "implementation_commit_role": "The remotely CI-verified RESUME-01 implementation commit becomes the frozen training source commit S.",
+    "authorization_commit_role": "A separate descendant commit A writes S into EXPERIMENTS.csv source_commit for all six baseline rows.",
+    "reason_for_two_commits": "A commit cannot contain its own SHA. Separating implementation freeze from source binding avoids circular self-reference.",
+    "scientific_runtime_paths_must_not_change_between_S_and_execution": true,
+    "resume_sessions_require_exact_original_execution_commit": true,
+    "experiment_matrix_rule": "At execution, the entire EXPERIMENTS.csv matrix must match source commit S for every field except source_commit; all six current source_commit values must equal S."
+  },
+  "resume_preconditions": {
+    "complete_prior_run_directory_required": true,
+    "required_files": [
+      "args.yaml",
+      "results.csv",
+      "weights/last.pt",
+      "weights/best.pt",
+      "governance/PRETRAIN_PREFLIGHT.json",
+      "governance/RUNTIME_MANIFEST.json"
+    ],
+    "last_pt_sha256_verified_before_and_after_copy": true,
+    "last_pt_optimizer_state_required": true,
+    "last_pt_scaler_state_required": true,
+    "last_pt_ema_required": true,
+    "completed_or_stripped_checkpoint_resume_forbidden": true,
+    "results_csv_epoch_must_match_checkpoint_epoch": true,
+    "same_experiment_id_required": true,
+    "same_training_source_commit_required": true,
+    "same_execution_commit_required": true,
+    "same_data_binding_required": true,
+    "same_initialization_identity_required": true,
+    "same_frozen_scientific_args_required": true,
+    "args_yaml_must_match_last_pt_train_args": true,
+    "results_csv_must_match_last_pt_train_results": true,
+    "best_pt_model_git_runtime_identity_verified": true
+  },
+  "dataset_firewall": {
+    "dataset_discovery_prunes_test_paths": true,
+    "runtime_yaml_contains_train": true,
+    "runtime_yaml_contains_val": true,
+    "runtime_yaml_contains_test": false,
+    "regenerated_runtime_yaml_must_match_original_session_sha256": true,
+    "test_predictions": "FORBIDDEN",
+    "test_metrics": "FORBIDDEN",
+    "test_error_analysis": "FORBIDDEN",
+    "runtime_yaml_sha256_reverified_inside_trainer": true,
+    "preflight_and_runtime_yaml_verified_before_ultralytics_get_dataset": true
+  },
+  "copy_and_lineage": {
+    "source_run_tree_hashed_before_copy": true,
+    "destination_tree_must_exactly_match_before_session_append": true,
+    "original_runtime_manifest_preserved_unmodified": true,
+    "pre_resume_args_yaml_archived_before_ultralytics_rewrites_args_yaml": true,
+    "resume_preflight_manifests_append_only": true,
+    "resume_runtime_manifests_append_only": true,
+    "session_indices_contiguous": true,
+    "resume_preflight_sha256_bound_through_environment_and_reverified_in_trainer": true
+  },
+  "ultralytics_resume_binding": {
+    "entrypoint": "YOLO(last.pt).train(trainer=GovernedDetectionTrainer, resume=True)",
+    "manual_scientific_hyperparameter_overrides": false,
+    "checkpoint_train_args_restored_by_upstream": true,
+    "optimizer_scaler_ema_best_fitness_restored_by_upstream": true,
+    "start_epoch_rule": "checkpoint epoch + 1",
+    "ddp_existing_save_dir_preserved_on_resume": true
+  },
+  "governed_trainer_resume_model_contract": {
+    "target_classes": 9,
+    "target_parameters": 9431275,
+    "target_state_items": 499,
+    "all_checkpoint_state_keys_and_shapes_must_match_target": true,
+    "all_trained_checkpoint_tensors_loaded_exactly": true,
+    "fresh_INIT01_493_of_499_transfer_contract_is_not_reapplied_on_resume": true
+  },
+  "runtime_lock": {
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "ultralytics": "8.4.7",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ]
+  },
+  "files": {
+    "trainer": "ultralytics/research/baseline_trainer.py",
+    "fresh_launcher": "research/runtime/baseline_runner.py",
+    "resume_launcher": "research/runtime/resume_runner.py",
+    "training_recipe": "research/05_experiments/TRAINING.yaml"
+  }
+}

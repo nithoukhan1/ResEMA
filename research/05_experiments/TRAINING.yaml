@@ -1,5 +1,5 @@
 schema_version: baseline_training_v2
-status: TRAIN01_IMPLEMENTED_LOCKED_PENDING_RESUME01
+status: FROZEN_BASELINE_RECIPE_V2
 
 model:
   family: YOLO11s

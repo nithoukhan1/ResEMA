@@ -39,4 +39,10 @@ jobs:
         run: python research/tools/verify_repo_state.py
 
       - name: Run research integrity and D00 contract tests
-        run: python -m pytest research/tests/test_research_integrity.py research/tests/test_d00_input_provenance.py research/tests/test_d00_transfer_contract.py -q
+        run: >-
+          python -m pytest
+          research/tests/test_research_integrity.py
+          research/tests/test_d00_input_provenance.py
+          research/tests/test_d00_transfer_contract.py
+          research/tests/test_resume01_static.py
+          -q

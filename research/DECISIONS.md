@@ -142,3 +142,49 @@ The actual training-time model construction rechecks the INIT-01 target paramete
 The dataset firewall is structural: TRAIN-01 creates a runtime dataset YAML containing only `train` and `val`; it contains no `test` key. Dataset discovery prunes test-like paths and verifies only frozen train/validation membership and image/label stem equality.
 
 TRAIN-01 fresh launch remains locked while `EXPERIMENTS.csv` `source_commit` is blank. RESUME-01 must be implemented and remotely closed before the source commit is bound and any model training is authorized.
+
+## 2026-09-23 - RESUME-01 continuation and source-freeze governance
+
+The exact fork's resume pathway was audited before implementation.
+
+Continuation uses the native checkpoint-state pathway:
+`YOLO(last.pt).train(trainer=GovernedDetectionTrainer, resume=True)`.
+
+Scientific hyperparameters are not manually redefined during continuation. The prior
+checkpoint must contain optimizer, scaler and EMA state, and its completed epoch must
+match the last row of `results.csv`.
+
+Resume sessions must use the exact `execution_commit` recorded by the original TRAIN-01
+runtime manifest. A merely compatible descendant commit is not accepted for continuation.
+
+Because upstream trainer construction rewrites `args.yaml`, the governed resume launcher
+archives the pre-resume `args.yaml` inside the numbered append-only resume-session
+governance directory before constructing the trainer.
+
+The original TRAIN-01 `RUNTIME_MANIFEST.json` is immutable during continuation.
+RESUME-01 adds numbered `RESUME_PREFLIGHT_NNN.json` and `RESUME_RUNTIME_NNN.json`
+records instead of overwriting original provenance.
+
+Source binding uses two commits to avoid circular self-reference:
+- implementation commit `S`: contains the complete frozen TRAIN-01/RESUME-01 runtime;
+- authorization commit `A`: descendant of `S`, writes `S` into all six
+  `EXPERIMENTS.csv::source_commit` fields without modifying guarded scientific/runtime
+  paths.
+
+All six baseline experiment rows remain `NOT_STARTED` until actual governed execution,
+and test predictions/metrics/error analysis remain forbidden during development.
+
+## 2026-09-23 - RESUME-01 evidence-binding hardening
+
+Before freezing the RESUME-01 implementation, the authorization exception for
+`EXPERIMENTS.csv::source_commit` is constrained explicitly: every other matrix field
+must remain identical to source commit `S`, and all six current source bindings must
+equal `S`.
+
+The preflight manifest SHA256 and runtime data-YAML SHA256 are rechecked before
+Ultralytics opens train/validation data and again inside trainer setup. Resume also
+cross-checks the persisted `args.yaml`, `results.csv`, and `best.pt` against checkpoint
+and frozen-runtime evidence.
+
+These checks close authorization drift and preflight-to-DDP time-of-check/time-of-use
+gaps without changing the scientific recipe.

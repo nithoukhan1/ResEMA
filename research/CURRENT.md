@@ -39,6 +39,8 @@ The baseline-refresh research framework is remotely closed and CI-verified.
 - DATA-01B active binding verification for Split A augmented, Split B original and Split B historical augmented
 - DATA-01 active dataset-binding freeze remotely closed and CI-verified
 - INIT-01 official YOLO11s initialization identity and pretrained-versus-scratch transfer contract frozen
+- TRAIN-01 governed baseline trainer remotely closed and CI-verified
+- RESUME-01A exact-fork resume source/interface audit passed
 
 ## DATA-01 remote closure
 
@@ -64,7 +66,7 @@ Frozen active bindings:
 
 ## Current task
 
-`TRAIN-01` - implement the reusable governed baseline trainer against the frozen DATA-01 bindings and INIT-01 initialization contract.
+`RESUME-01` - freeze and remotely verify the governed multi-session continuation runtime, then bind the frozen source commit before any baseline launch.
 
 INIT-01 is complete at the evidence/freezing level.
 
@@ -151,14 +153,15 @@ No model predictions, test metrics, model selection, architecture decision or pe
 
 ## Next
 
-1. `TRAIN-01` - implement reusable governed baseline trainer
-2. `RESUME-01` - implement Kaggle Save-Version/resume helper
-3. launch `BASE-B-ORG-PT-S42`
-4. register validation/per-class/convergence evidence
-5. continue the remaining five seed-42 baseline conditions
-6. perform fresh Split-B-validation-only model diagnostics
-7. freeze architecture and loss
-8. implement the final method
+1. finish RESUME-01 local validation and freeze candidate review
+2. create and remotely CI-verify frozen source commit `S`
+3. create authorization commit `A` binding all six `source_commit` fields to `S`
+4. launch `BASE-B-ORG-PT-S42`
+5. register validation/per-class/convergence evidence
+6. continue the remaining five seed-42 baseline conditions
+7. perform fresh Split-B-validation-only model diagnostics
+8. freeze architecture and loss
+9. implement the final method
 
 ## Active baseline experiments
 
@@ -178,3 +181,53 @@ Neither Split A test nor Split B test is used for architecture, loss, training-r
 For Split B, pre-final-test access is limited to governed membership/fingerprint and aggregate split-integrity evidence. Test annotation contents, predictions, metrics and error analysis are not used for development.
 
 Because Split-A train overlaps Split-B validation/test membership, Split-A experiments are reporting-only comparators and are not inputs to the Split-B development or final-model-selection path.
+
+## 2026-09-23 - RESUME-01 implementation freeze preparation
+
+`RESUME-01A` read-only source/interface audit passed at repository HEAD
+`6bf9764c8455815d57cd253be8284717d6711962`.
+
+The audit confirmed:
+- upstream `Model.train(resume=...)` binds continuation to the loaded checkpoint;
+- checkpoint training arguments are restored by `BaseTrainer.check_resume`;
+- optimizer, AMP scaler, EMA and best-fitness state are restored from `last.pt`;
+- DDP preserves the existing save directory during resume;
+- the current pre-RESUME `GovernedDetectionTrainer` was fresh-run-only and required an explicit resume-aware branch;
+- upstream trainer construction rewrites `args.yaml`, so governed continuation must archive the pre-resume file before trainer construction.
+
+`RESUME-01B` implements the governed continuation path:
+- a dedicated `research/runtime/resume_runner.py`;
+- strict prior-run discovery and full-run copy verification;
+- exact `last.pt` SHA256 verification before and after copy;
+- exact original execution-commit continuity across sessions;
+- frozen scientific-argument verification;
+- regeneration of the train/validation-only runtime YAML with exact original-session SHA256 equality;
+- resume-aware 499/499 trained-state restoration in `GovernedDetectionTrainer`;
+- append-only numbered resume preflight/runtime manifests;
+- preservation of the original TRAIN-01 `RUNTIME_MANIFEST.json`;
+- archival of the pre-resume `args.yaml`;
+- no manual scientific hyperparameter override surface.
+
+The baseline recipe status is now durable as `FROZEN_BASELINE_RECIPE_V2`, and the
+TRAIN-01 trainer contract is durable as `IMPLEMENTED_RESUME_AWARE`.
+
+Training remains fail-closed while `EXPERIMENTS.csv::source_commit` is blank.
+
+The source-freeze protocol is two-stage:
+1. remotely CI-verify and freeze the RESUME-01 implementation commit as source commit `S`;
+2. create a separate descendant authorization commit that writes `S` into all six baseline `source_commit` fields.
+
+No baseline training is authorized by the RESUME-01B implementation commit itself.
+
+## RESUME-01B R3 hardening before source freeze
+
+A post-R1 code-level audit identified governance surfaces that required strengthening before commit:
+
+- `EXPERIMENTS.csv` is now frozen relative to source commit `S` for every field except the intentional atomic `source_commit` binding; all six current bindings must equal `S`.
+- The preflight manifest SHA256 and runtime train/validation YAML SHA256 are bound into the actual trainer startup.
+- The runtime YAML test-key absence and exact train/validation paths are verified **before Ultralytics opens any dataset**, then checked again during trainer setup.
+- Resume cross-checks `args.yaml` against `last.pt::train_args`.
+- Resume cross-checks `results.csv` against `last.pt::train_results`.
+- `best.pt` must satisfy the same model, Git-commit, branch, and Ultralytics-runtime identity contract before continuation.
+
+This is pre-commit hardening, not a rollback of TRAIN-01. Training remains locked and all six experiment rows remain `NOT_STARTED`.

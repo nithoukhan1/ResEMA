@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import io
 import json
 import os
 import platform
@@ -32,10 +33,22 @@ IMAGE_SUFFIXES = {
     ".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp",
 }
 SOURCE_GUARD_PATHS = [
+    "ultralytics",
+    "research/runtime",
     "ultralytics/research/baseline_trainer.py",
     "research/runtime/baseline_runner.py",
+    "research/runtime/resume_runner.py",
     "research/05_experiments/TRAINING.yaml",
     "research/05_experiments/TRAIN01_TRAINER_CONTRACT.json",
+    "research/05_experiments/RESUME01_RESUME_CONTRACT.json",
+    "research/01_provenance/INIT01_INITIALIZATION_LOCK.json",
+    "research/04_data/manifests/DATA01_ACTIVE_DATASET_BINDINGS.json",
+    "ultralytics/engine/model.py",
+    "ultralytics/engine/trainer.py",
+    "ultralytics/nn/tasks.py",
+    "ultralytics/utils/dist.py",
+    "ultralytics/models/yolo/detect/train.py",
+    "ultralytics/cfg/models/11/yolo11.yaml",
 ]
 
 
@@ -76,9 +89,26 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8", errors="strict"))
 
 
+def _read_experiment_matrix_text(text: str) -> tuple[list[str], list[dict[str, str]]]:
+    reader = csv.DictReader(io.StringIO(text.lstrip("\ufeff")))
+    fieldnames = list(reader.fieldnames or [])
+    rows = list(reader)
+    if not fieldnames or "experiment_id" not in fieldnames or "source_commit" not in fieldnames:
+        raise GovernanceError("Experiment matrix schema is incomplete.")
+    ids = [row["experiment_id"] for row in rows]
+    if len(ids) != len(set(ids)):
+        raise GovernanceError("Experiment matrix contains duplicate experiment IDs.")
+    return fieldnames, rows
+
+
+def _read_current_experiment_matrix() -> tuple[list[str], list[dict[str, str]]]:
+    return _read_experiment_matrix_text(
+        EXPERIMENTS_CSV.read_text(encoding="utf-8-sig", errors="strict")
+    )
+
+
 def load_experiment(experiment_id: str) -> dict[str, str]:
-    with EXPERIMENTS_CSV.open(newline="", encoding="utf-8-sig") as handle:
-        rows = list(csv.DictReader(handle))
+    _fieldnames, rows = _read_current_experiment_matrix()
 
     matches = [r for r in rows if r["experiment_id"] == experiment_id]
     if len(matches) != 1:
@@ -89,7 +119,8 @@ def load_experiment(experiment_id: str) -> dict[str, str]:
     row = matches[0]
     if row["status"] != "NOT_STARTED":
         raise GovernanceError(
-            f"Fresh TRAIN-01 launch requires NOT_STARTED; observed {row['status']!r}"
+            "Governed baseline execution requires NOT_STARTED until the "
+            f"experiment finishes; observed {row['status']!r}"
         )
     if row["seed"] != "42":
         raise GovernanceError(f"TRAIN-01 seed drift: {row['seed']!r}")
@@ -209,6 +240,57 @@ def verify_image_label_pair(image_dir: Path, label_dir: Path) -> None:
         )
 
 
+
+def verify_experiment_matrix_binding(source_commit: str) -> None:
+    """Allow only the atomic source_commit binding to differ from source commit S."""
+    frozen_text = git(
+        "show",
+        f"{source_commit}:research/05_experiments/EXPERIMENTS.csv",
+    )
+    frozen_fields, frozen_rows = _read_experiment_matrix_text(frozen_text)
+    current_fields, current_rows = _read_current_experiment_matrix()
+
+    if current_fields != frozen_fields:
+        raise GovernanceError(
+            "EXPERIMENTS.csv field order/schema changed after the frozen source commit."
+        )
+    if len(current_rows) != 6 or len(frozen_rows) != 6:
+        raise GovernanceError(
+            "The governed baseline matrix must contain exactly six experiments."
+        )
+
+    frozen_by_id = {row["experiment_id"]: row for row in frozen_rows}
+    current_by_id = {row["experiment_id"]: row for row in current_rows}
+    if set(current_by_id) != set(frozen_by_id):
+        raise GovernanceError(
+            "EXPERIMENTS.csv experiment IDs changed after the frozen source commit."
+        )
+
+    for experiment_id in sorted(frozen_by_id):
+        frozen = frozen_by_id[experiment_id]
+        current = current_by_id[experiment_id]
+
+        if frozen["source_commit"].strip():
+            raise GovernanceError(
+                "Frozen source commit S must contain blank source_commit bindings."
+            )
+        if current["source_commit"].strip() != source_commit:
+            raise GovernanceError(
+                "Authorization binding drift: every experiment source_commit must "
+                f"equal frozen source commit {source_commit}."
+            )
+
+        for field in frozen_fields:
+            if field == "source_commit":
+                continue
+            if current.get(field) != frozen.get(field):
+                raise GovernanceError(
+                    "EXPERIMENTS.csv changed outside the permitted source_commit "
+                    f"binding: experiment={experiment_id}, field={field}, "
+                    f"frozen={frozen.get(field)!r}, current={current.get(field)!r}"
+                )
+
+
 def verify_git_provenance(row: dict[str, str]) -> tuple[str, str]:
     branch = git("branch", "--show-current")
     head = git("rev-parse", "HEAD")
@@ -235,6 +317,8 @@ def verify_git_provenance(row: dict[str, str]) -> tuple[str, str]:
         raise GovernanceError(
             "Frozen training source commit is not an ancestor of the execution commit."
         )
+
+    verify_experiment_matrix_binding(source_commit)
 
     diff = git(
         "diff", "--name-only", source_commit, head, "--", *SOURCE_GUARD_PATHS
@@ -440,9 +524,9 @@ def perform_preflight(
     train_contract = load_json(TRAIN_CONTRACT_JSON)
     row = load_experiment(experiment_id)
 
-    if train_contract["status"] != "IMPLEMENTED_LOCKED_PENDING_RESUME01":
+    if train_contract["status"] != "IMPLEMENTED_RESUME_AWARE":
         raise GovernanceError("TRAIN-01 contract status drift.")
-    if training["status"] != "TRAIN01_IMPLEMENTED_LOCKED_PENDING_RESUME01":
+    if training["status"] != "FROZEN_BASELINE_RECIPE_V2":
         raise GovernanceError("TRAINING.yaml status drift.")
 
     source_commit, execution_commit = verify_git_provenance(row)
@@ -608,6 +692,7 @@ def execute(
     os.environ["RESEMA_EXPERIMENT_ID"] = experiment_id
     os.environ["RESEMA_INITIALIZATION"] = preflight["initialization"]
     os.environ["RESEMA_PREFLIGHT_MANIFEST"] = str(preflight_path)
+    os.environ["RESEMA_PREFLIGHT_SHA256"] = sha256_file(preflight_path)
     os.environ["RESEMA_REPO_ROOT"] = str(ROOT.resolve())
 
     from ultralytics import YOLO

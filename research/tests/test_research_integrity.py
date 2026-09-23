@@ -125,9 +125,9 @@ def test_train01_contract_is_static_ci_verifiable():
     )
 
     assert contract["schema_version"] == "TRAIN01-governed-trainer-v1.0"
-    assert contract["status"] == "IMPLEMENTED_LOCKED_PENDING_RESUME01"
+    assert contract["status"] == "IMPLEMENTED_RESUME_AWARE"
     assert contract["training_authorization"] == (
-        "LOCKED_UNTIL_RESUME01_BINDS_EXPERIMENT_SOURCE_COMMIT"
+        "LOCKED_UNTIL_EXPERIMENT_SOURCE_COMMIT_IS_BOUND"
     )
 
     firewall = contract["test_firewall"]
@@ -148,7 +148,7 @@ def test_train01_training_yaml_is_frozen_and_val_only():
 
     required = [
         "schema_version: baseline_training_v2",
-        "status: TRAIN01_IMPLEMENTED_LOCKED_PENDING_RESUME01",
+        "status: FROZEN_BASELINE_RECIPE_V2",
         "epochs: 100",
         "imgsz: 1024",
         "batch_global: 16",
@@ -170,6 +170,7 @@ def test_train01_runtime_sources_exist_and_compile():
     sources = [
         ROOT / "ultralytics/research/baseline_trainer.py",
         RESEARCH / "runtime/baseline_runner.py",
+        RESEARCH / "runtime/resume_runner.py",
     ]
 
     for path in sources:
@@ -180,13 +181,16 @@ def test_train01_runtime_sources_exist_and_compile():
         compile(source, str(path), "exec")
 
 
-def test_train01_launch_remains_locked_pre_resume01():
+def test_train01_source_binding_is_atomic_and_fail_closed_when_blank():
     rows = read_csv("05_experiments/EXPERIMENTS.csv")
     assert len(rows) == 6
+    assert all(row["status"] == "NOT_STARTED" for row in rows)
 
-    for row in rows:
-        assert row["status"] == "NOT_STARTED"
-        assert not row["source_commit"]
+    bindings = {row["source_commit"].strip() for row in rows}
+    assert bindings == {""} or (
+        len(bindings) == 1
+        and re.fullmatch(r"[0-9a-f]{40}", next(iter(bindings)))
+    )
 
     runner = (
         RESEARCH
@@ -196,10 +200,29 @@ def test_train01_launch_remains_locked_pre_resume01():
         errors="strict",
     )
 
-    # The runtime error message is split across adjacent Python string
-    # literals in the launcher source. Check the two fail-closed
-    # fragments independently rather than requiring one raw-source
-    # contiguous substring.
+    # The implementation-freeze commit is fail-closed while the binding is
+    # blank. A later authorization commit may atomically bind the frozen SHA.
     assert "source_commit is blank." in runner
     assert "RESUME-01 closure must bind" in runner
     assert '"test_directory_scan_pruned": True' in runner
+
+def test_resume01_matrix_binding_and_runtime_hash_guards_are_present():
+    runner = (
+        RESEARCH / "runtime/baseline_runner.py"
+    ).read_text(encoding="utf-8", errors="strict")
+    trainer = (
+        ROOT / "ultralytics/research/baseline_trainer.py"
+    ).read_text(encoding="utf-8", errors="strict")
+
+    assert "def verify_experiment_matrix_binding" in runner
+    assert "verify_experiment_matrix_binding(source_commit)" in runner
+    assert "EXPERIMENTS.csv changed outside the permitted source_commit " in runner
+    assert "binding: experiment=" in runner
+    assert "RESEMA_PREFLIGHT_SHA256" in runner
+
+    assert "RESEMA_RESUME_PREFLIGHT_SHA256" in trainer
+    assert "Governed preflight manifest changed before trainer setup." in trainer
+    assert "Governed runtime data YAML hash mismatch." in trainer
+    assert "def _verify_preflight_before_dataset_access" in trainer
+    assert "def get_dataset(self):" in trainer
+    assert "changed before dataset access" in trainer

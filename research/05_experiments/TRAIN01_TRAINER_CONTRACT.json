@@ -1,18 +1,19 @@
 {
   "schema_version": "TRAIN01-governed-trainer-v1.0",
   "created_date": "2026-09-23",
-  "status": "IMPLEMENTED_LOCKED_PENDING_RESUME01",
+  "status": "IMPLEMENTED_RESUME_AWARE",
   "repository_parent_commit": "df11d221a01f88e5ba5df9d1740d0b42bd070fe8",
-  "purpose": "Implement a single experiment-ID-driven, fail-closed baseline trainer for the six frozen seed-42 YOLO11s conditions.",
-  "training_authorization": "LOCKED_UNTIL_RESUME01_BINDS_EXPERIMENT_SOURCE_COMMIT",
+  "purpose": "Implement a single experiment-ID-driven, fail-closed baseline trainer for the six frozen seed-42 YOLO11s conditions, with governed multi-session continuation through RESUME-01.",
+  "training_authorization": "LOCKED_UNTIL_EXPERIMENT_SOURCE_COMMIT_IS_BOUND",
   "scientific_invariants": {
     "model_family": "YOLO11s detect",
     "classes": 9,
     "configured_seed": 42,
     "primary_metric": "validation_mAP50-95",
     "test_for_selection": false,
-    "fresh_run_only": true,
-    "no_cli_scientific_hyperparameter_overrides": true
+    "no_cli_scientific_hyperparameter_overrides": true,
+    "initial_launch_fresh_run_only": true,
+    "multi_session_resume": "RESUME01_GOVERNED_ONLY"
   },
   "ddp_initialization_policy": {
     "upstream_observation": "BaseTrainer initializes outer rank RNG as args.seed + 1 + RANK; configured seed 42 therefore corresponds to rank-0 outer RNG seed 43 under DDP.",
@@ -30,13 +31,15 @@
     "directory_discovery_prunes_test_paths": true,
     "test_predictions": "FORBIDDEN",
     "test_metrics": "FORBIDDEN",
-    "test_error_analysis": "FORBIDDEN"
+    "test_error_analysis": "FORBIDDEN",
+    "preflight_and_runtime_yaml_verified_before_ultralytics_get_dataset": true
   },
   "dataset_preflight": {
     "membership_identity": "Immediate-directory image and label stems are sorted, joined with newline separators plus a final newline, and SHA256 matched to DATA-01.",
     "image_label_stem_equality_required": true,
     "split_b_validation_frozen_membership": 3050,
-    "split_b_validation_expected_operational_readable": 3049
+    "split_b_validation_expected_operational_readable": 3049,
+    "runtime_yaml_sha256_reverified_inside_trainer": true
   },
   "runtime_lock": {
     "python": "3.12.13",
@@ -61,14 +64,20 @@
     "last_pt_written_each_completed_epoch": true
   },
   "provenance": {
-    "experiment_source_commit_rule": "Training is blocked while EXPERIMENTS.csv source_commit is blank. RESUME-01 closure will bind the frozen training source commit. Execution may occur on a descendant closure commit only when guarded scientific runtime files are unchanged.",
+    "experiment_source_commit_rule": "Training is blocked while EXPERIMENTS.csv source_commit is blank. After the RESUME-01 implementation commit is remotely CI-verified, a separate authorization commit binds that frozen implementation SHA into all six rows. Execution may occur only on descendants whose guarded scientific/runtime paths are unchanged; resume sessions additionally require the exact execution commit recorded by the original session.",
     "runtime_manifest_inside_run_dir": true,
     "preflight_manifest_inside_run_dir": true,
-    "checkpoint_artifacts_in_git": false
+    "checkpoint_artifacts_in_git": false,
+    "resume_runtime_manifest_append_only": true,
+    "original_runtime_manifest_must_not_be_overwritten_on_resume": true,
+    "experiment_matrix_authorization_rule": "After source commit S is bound, all EXPERIMENTS.csv fields must match S exactly except source_commit, and all six source_commit cells must equal S.",
+    "preflight_sha256_bound_into_trainer_environment": true
   },
   "files": {
     "trainer": "ultralytics/research/baseline_trainer.py",
     "launcher": "research/runtime/baseline_runner.py",
-    "training_recipe": "research/05_experiments/TRAINING.yaml"
+    "training_recipe": "research/05_experiments/TRAINING.yaml",
+    "resume_launcher": "research/runtime/resume_runner.py",
+    "resume_contract": "research/05_experiments/RESUME01_RESUME_CONTRACT.json"
   }
 }
