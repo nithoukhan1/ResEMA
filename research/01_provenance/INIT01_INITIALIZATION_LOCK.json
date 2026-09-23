@@ -1,0 +1,124 @@
+{
+  "schema_version": "INIT01-initialization-lock-v1.0",
+  "created_date": "2026-09-23",
+  "status": "COMPLETE",
+  "repository_parent_commit": "60abdfce6ede6a954ffcd804daa08c224856481a",
+  "current_task_after_freeze": "TRAIN-01",
+  "training_authorization": "LOCKED_PENDING_TRAIN01_RESUME01",
+  "policy": {
+    "training_performed_during_INIT01": false,
+    "dataset_content_accessed_during_INIT01A_R3": false,
+    "test_data_accessed_during_INIT01A_R3": false,
+    "remote_repository_modified_during_INIT01A_R3": false,
+    "checkpoint_artifact_committed_to_git": false
+  },
+  "runtime_evidence": {
+    "report_name": "INIT01_CHECKPOINT_DISCOVERY_R3_OFFLINE.json",
+    "report_sha256": "d233133814a0c1ad145b76a8f33c85a36349c4ff915d632aab3d8af60329e181",
+    "report_bytes": 4374,
+    "kaggle_report_path": "/kaggle/working/INIT01_CHECKPOINT_DISCOVERY_R3_OFFLINE.json",
+    "offline_input_dataset_ref": "nithoukhan1/init01-offline-artifacts-60abdfce",
+    "offline_git_bundle": {
+      "name": "ResEMA_INIT01_60abdfce.gitbundle",
+      "bytes": 32156145,
+      "sha256": "77f9f9cd7380606a72a8c1855bcc2bbe3252d168792b8693531cb6edda8d9f83",
+      "expected_commit_advertised": true,
+      "bundle_verify_passed": true,
+      "git_fsck_passed": true
+    }
+  },
+  "official_checkpoint": {
+    "source_repository": "ultralytics/assets",
+    "release_tag": "v8.4.0",
+    "release_id": 276461319,
+    "asset_name": "yolo11s.pt",
+    "asset_id": 340060754,
+    "bytes": 19313732,
+    "sha256": "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5",
+    "external_artifact_only": true
+  },
+  "exact_fork_runtime": {
+    "repository_commit": "60abdfce6ede6a954ffcd804daa08c224856481a",
+    "ultralytics_version": "8.4.7",
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "cuda_available": true,
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ]
+  },
+  "checkpoint_model_identity": {
+    "task": "detect",
+    "model_class": "DetectionModel",
+    "scale": "s",
+    "source_classes": 80,
+    "source_names_count": 80,
+    "parameters": 9458752,
+    "checkpoint_inspection_trainable_parameters": 0,
+    "state_dict_items": 499,
+    "state_dict_total_numel": 9488817,
+    "architecture_fingerprint_sha256": "a54872e4d2aed7b30ef63f6ebf0dd066d5065960205df704dc5cbc7cb67d2709",
+    "stride": [
+      8.0,
+      16.0,
+      32.0
+    ],
+    "source_checkpoint_train_args_provenance_only": {
+      "task": "detect",
+      "model": "yolo11s.yaml",
+      "data": "/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml",
+      "epochs": 600,
+      "imgsz": 640,
+      "batch": 128,
+      "optimizer": "auto",
+      "seed": 0,
+      "deterministic": true,
+      "not_our_baseline_training_recipe": true
+    }
+  },
+  "nine_class_initialization_contract": {
+    "contract_id": "INIT01:YOLO11S-9C-PTVSCR-S42:v1",
+    "target_family": "YOLO11s detect",
+    "target_scale": "s",
+    "target_classes": 9,
+    "seed": 42,
+    "target_parameters": 9431275,
+    "scratch_parameters": 9431275,
+    "target_state_dict_items": 499,
+    "target_architecture_fingerprint_sha256": "b30aa533034b0464af768e1dbce2e919c8ff188af45c234db2fdf6e8aaca4afe",
+    "same_architecture_pretrained_and_scratch": true,
+    "same_seeded_initial_state_before_transfer": true,
+    "transferable_state_items": 493,
+    "nontransferable_target_state_items": 6,
+    "nontransferable_source_state_items": 6,
+    "nontransferable_target_keys": [
+      "model.23.cv3.0.2.weight",
+      "model.23.cv3.0.2.bias",
+      "model.23.cv3.1.2.weight",
+      "model.23.cv3.1.2.bias",
+      "model.23.cv3.2.2.weight",
+      "model.23.cv3.2.2.bias"
+    ],
+    "all_transferable_tensors_loaded_exactly": true,
+    "all_nontransferable_target_tensors_preserved_from_seeded_initialization": true,
+    "pretrained_condition": "Construct the same 9-class YOLO11s target under seed 42 and load every official checkpoint tensor whose key and shape match the target.",
+    "scratch_condition": "Construct the identical 9-class YOLO11s target under seed 42 and load no checkpoint tensors."
+  },
+  "experiment_binding": {
+    "pretrained_experiment_ids": [
+      "BASE-B-ORG-PT-S42",
+      "BASE-B-AUG-PT-S42",
+      "BASE-A-AUG-PT-S42"
+    ],
+    "scratch_experiment_ids": [
+      "BASE-B-ORG-SCR-S42",
+      "BASE-B-AUG-SCR-S42",
+      "BASE-A-AUG-SCR-S42"
+    ],
+    "pretrained_init_checkpoint_sha256": "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5",
+    "scratch_init_checkpoint_sha256": null,
+    "all_experiments_remain_not_started": true,
+    "source_commit_remains_unbound_until_training_code_freeze": true
+  }
+}

@@ -38,6 +38,7 @@ The baseline-refresh research framework is remotely closed and CI-verified.
 - DATA-01A read-only runtime discovery
 - DATA-01B active binding verification for Split A augmented, Split B original and Split B historical augmented
 - DATA-01 active dataset-binding freeze remotely closed and CI-verified
+- INIT-01 official YOLO11s initialization identity and pretrained-versus-scratch transfer contract frozen
 
 ## DATA-01 remote closure
 
@@ -63,12 +64,32 @@ Frozen active bindings:
 
 ## Current task
 
-`INIT-01` - freeze the exact official YOLO11s pretrained initialization identity before any baseline training.
+`TRAIN-01` - implement the reusable governed baseline trainer against the frozen DATA-01 bindings and INIT-01 initialization contract.
 
-INIT-01 must record the official checkpoint source/reference, runtime acquisition path, exact file size and SHA256, checkpoint/model identity, relevant Ultralytics/runtime version evidence, and the transfer-versus-scratch initialization contract.
+INIT-01 is complete at the evidence/freezing level.
 
-The six baseline experiment rows remain `NOT_STARTED`.
-Training remains locked until `INIT-01`, `TRAIN-01` and `RESUME-01` are complete and committed.
+Frozen initialization contract:
+
+- contract ID: `INIT01:YOLO11S-9C-PTVSCR-S42:v1`
+- official asset: `ultralytics/assets` release `v8.4.0` / `yolo11s.pt`
+- checkpoint bytes: `19,313,732`
+- checkpoint SHA256: `85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5`
+- exact repository parent: `60abdfce6ede6a954ffcd804daa08c224856481a`
+- Ultralytics runtime: `8.4.7`
+- target: YOLO11s detect, scale `s`, 9 classes, seed 42
+- target parameters: `9,431,275`
+- transferable state items: `493 / 499`
+- non-transferable state items: `6 / 499`, limited to the three class-prediction conv weight/bias pairs
+- pretrained and scratch targets share the same architecture and the same seed-42 initial state before transfer
+- all 493 compatible tensors loaded exactly
+- all 6 incompatible target tensors remained at their seed-42 initialization
+- INIT-01 evidence report SHA256: `d233133814a0c1ad145b76a8f33c85a36349c4ff915d632aab3d8af60329e181`
+
+The three pretrained baseline rows are now bound to the frozen checkpoint SHA256.
+The three scratch rows remain explicitly checkpoint-free.
+All six experiment rows remain `NOT_STARTED`.
+
+Training remains locked until both `TRAIN-01` and `RESUME-01` are complete and committed.
 
 ## DATA-01 binding summary
 
@@ -112,15 +133,14 @@ No model predictions, test metrics, model selection, architecture decision or pe
 
 ## Next
 
-1. `INIT-01` - freeze official YOLO11s pretrained checkpoint identity and SHA256
-2. `TRAIN-01` - implement reusable governed baseline trainer
-3. `RESUME-01` - implement Kaggle Save-Version/resume helper
-4. launch `BASE-B-ORG-PT-S42`
-5. register validation/per-class/convergence evidence
-6. continue the remaining five seed-42 baseline conditions
-7. perform fresh Split-B-validation-only model diagnostics
-8. freeze architecture and loss
-9. implement the final method
+1. `TRAIN-01` - implement reusable governed baseline trainer
+2. `RESUME-01` - implement Kaggle Save-Version/resume helper
+3. launch `BASE-B-ORG-PT-S42`
+4. register validation/per-class/convergence evidence
+5. continue the remaining five seed-42 baseline conditions
+6. perform fresh Split-B-validation-only model diagnostics
+7. freeze architecture and loss
+8. implement the final method
 
 ## Active baseline experiments
 

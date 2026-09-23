@@ -87,3 +87,44 @@ The frozen active binding IDs are:
 No model training or model-architecture change occurred during DATA-01. The superseded R3 cross-Split-B label-byte comparison remains excluded from authoritative evidence and development logic.
 
 The project advances to `INIT-01`. Baseline training remains locked until `INIT-01`, `TRAIN-01` and `RESUME-01` are complete and committed.
+
+## 2026-09-23 - INIT-01 initialization contract frozen
+
+The official YOLO11s initialization identity and controlled pretrained-versus-scratch contract are accepted for the fresh six-run baseline matrix.
+
+Authoritative runtime evidence:
+- report: `INIT01_CHECKPOINT_DISCOVERY_R3_OFFLINE.json`;
+- report SHA256: `d233133814a0c1ad145b76a8f33c85a36349c4ff915d632aab3d8af60329e181`;
+- exact repository commit restored and verified: `60abdfce6ede6a954ffcd804daa08c224856481a`;
+- offline Git bundle SHA256: `77f9f9cd7380606a72a8c1855bcc2bbe3252d168792b8693531cb6edda8d9f83`;
+- exact fork runtime: Ultralytics `8.4.7`, Python `3.12.13`, PyTorch `2.10.0+cu128`, Tesla T4 x2;
+- no model training, dataset-content access, test-data access or remote repository modification occurred during INIT-01A-R3.
+
+Frozen official checkpoint:
+- source: `ultralytics/assets`;
+- release: `v8.4.0`;
+- asset: `yolo11s.pt`;
+- bytes: `19,313,732`;
+- SHA256: `85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5`;
+- checkpoint remains external to Git.
+
+Frozen 9-class initialization contract:
+- contract ID: `INIT01:YOLO11S-9C-PTVSCR-S42:v1`;
+- target: YOLO11s detect scale `s`, 9 classes, seed 42;
+- target parameters: `9,431,275`;
+- pretrained and scratch targets have identical architecture and identical seed-42 initial state before checkpoint transfer;
+- `493 / 499` state items transfer exactly from the official checkpoint;
+- the only six non-transferable target items are the three class-prediction conv weight/bias pairs:
+  - `model.23.cv3.0.2.weight`;
+  - `model.23.cv3.0.2.bias`;
+  - `model.23.cv3.1.2.weight`;
+  - `model.23.cv3.1.2.bias`;
+  - `model.23.cv3.2.2.weight`;
+  - `model.23.cv3.2.2.bias`;
+- all six incompatible target tensors remain at their deterministic seed-42 initialization.
+
+The source checkpoint's historical COCO training arguments are provenance only and are not the project baseline training recipe.
+
+The three pretrained baseline rows are bound to checkpoint SHA256 `85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5`. The three scratch baseline rows remain checkpoint-free. All six experiments remain `NOT_STARTED`; their `source_commit` values remain blank until the governed training implementation is frozen.
+
+The project advances to `TRAIN-01`. Training remains locked until both `TRAIN-01` and `RESUME-01` are complete and committed.
