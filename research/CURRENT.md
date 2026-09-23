@@ -91,6 +91,24 @@ All six experiment rows remain `NOT_STARTED`.
 
 Training remains locked until both `TRAIN-01` and `RESUME-01` are complete and committed.
 
+### TRAIN-01 implementation substate
+
+TRAIN-01A governed-trainer implementation is locally prepared for review.
+
+The implementation:
+- uses one experiment-ID-driven launcher for all six frozen baseline conditions;
+- uses a repository-installed `GovernedDetectionTrainer` so Ultralytics DDP subprocesses import the exact governed trainer;
+- isolates model construction under configured seed 42, then restores the normal rank-specific DDP RNG state;
+- verifies the INIT-01 9-class parameter/transfer contract at actual model construction;
+- creates a train/validation-only runtime YAML with no test key;
+- verifies DATA-01 train/validation membership by count and frozen stem SHA256 before launch;
+- requires exact Python/PyTorch/Ultralytics/T4x2 runtime identity;
+- refuses existing fresh-run output directories;
+- writes preflight and runtime manifests into the persisted run evidence;
+- refuses any launch while the experiment `source_commit` field remains blank.
+
+No training has been authorized or executed. `RESUME-01` remains required before source-commit binding and launch authorization.
+
 ## DATA-01 binding summary
 
 ### Split A augmented

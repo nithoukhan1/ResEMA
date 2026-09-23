@@ -128,3 +128,17 @@ The source checkpoint's historical COCO training arguments are provenance only a
 The three pretrained baseline rows are bound to checkpoint SHA256 `85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5`. The three scratch baseline rows remain checkpoint-free. All six experiments remain `NOT_STARTED`; their `source_commit` values remain blank until the governed training implementation is frozen.
 
 The project advances to `TRAIN-01`. Training remains locked until both `TRAIN-01` and `RESUME-01` are complete and committed.
+
+## 2026-09-23 - TRAIN-01 governed baseline trainer design
+
+TRAIN-01 uses a single experiment-ID-driven launcher plus a repository-installed `GovernedDetectionTrainer` for all six frozen seed-42 baseline conditions.
+
+The trainer class is placed under the installed `ultralytics` package so the Ultralytics-generated DDP subprocess can import the exact governed class independent of notebook working directory.
+
+A source-level audit of the exact fork found that `BaseTrainer` initializes outer rank RNG as `args.seed + 1 + RANK`; therefore configured seed 42 corresponds to outer rank-0 RNG seed 43 during DDP. To preserve the already-frozen INIT-01 seed-42 model-initialization contract without changing rank-specific data/augmentation randomness, model construction is executed in an isolated seed-42 RNG scope and the outer DDP RNG states are restored immediately afterward.
+
+The actual training-time model construction rechecks the INIT-01 target parameter count, state-item count, 493 compatible pretrained transfers and six class-head-specific incompatible tensors.
+
+The dataset firewall is structural: TRAIN-01 creates a runtime dataset YAML containing only `train` and `val`; it contains no `test` key. Dataset discovery prunes test-like paths and verifies only frozen train/validation membership and image/label stem equality.
+
+TRAIN-01 fresh launch remains locked while `EXPERIMENTS.csv` `source_commit` is blank. RESUME-01 must be implemented and remotely closed before the source commit is bound and any model training is authorized.

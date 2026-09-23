@@ -1,5 +1,5 @@
-schema_version: baseline_training_v1
-status: provisional_locked_for_baseline_refresh
+schema_version: baseline_training_v2
+status: TRAIN01_IMPLEMENTED_LOCKED_PENDING_RESUME01
 
 model:
   family: YOLO11s
@@ -18,6 +18,7 @@ training:
   lrf: 0.01
   momentum: 0.937
   weight_decay: 0.0005
+  nbs: 64
   cos_lr: true
   warmup_epochs: 3.0
   warmup_momentum: 0.8
@@ -25,9 +26,15 @@ training:
   deterministic: true
   seed: 42
   amp: true
-  multi_scale: false
+  multi_scale: 0.0
   freeze: 0
   cache: false
+  single_cls: false
+  rect: false
+  fraction: 1.0
+  profile: false
+  compile: false
+  time: null
 
 loss:
   box: 7.5
@@ -47,18 +54,37 @@ augmentation:
   perspective: 0.0
   flipud: 0.0
   fliplr: 0.5
+  bgr: 0.0
   mosaic: 1.0
   close_mosaic: 10
   mixup: 0.0
   cutmix: 0.0
   copy_paste: 0.0
 
+validation:
+  enabled: true
+  split: val
+  conf: null
+  iou: 0.7
+  max_det: 300
+  save_json: false
+  plots: true
+  test_key_in_runtime_yaml: forbidden
+
 runtime:
   platform: Kaggle
   intended_gpu: T4x2
-  workers: 4
+  device: [0, 1]
+  workers_per_rank: 4
   editable_install_no_deps: true
   multi_session_resume_expected: true
+  force_yolo_offline: true
+
+output:
+  project_dir: /kaggle/working/ResEMA_baseline_runs
+  exist_ok: false
+  save: true
+  save_period: -1
 
 selection:
   primary_metric: validation_mAP50-95

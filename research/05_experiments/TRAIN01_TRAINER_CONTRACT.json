@@ -1,0 +1,74 @@
+{
+  "schema_version": "TRAIN01-governed-trainer-v1.0",
+  "created_date": "2026-09-23",
+  "status": "IMPLEMENTED_LOCKED_PENDING_RESUME01",
+  "repository_parent_commit": "df11d221a01f88e5ba5df9d1740d0b42bd070fe8",
+  "purpose": "Implement a single experiment-ID-driven, fail-closed baseline trainer for the six frozen seed-42 YOLO11s conditions.",
+  "training_authorization": "LOCKED_UNTIL_RESUME01_BINDS_EXPERIMENT_SOURCE_COMMIT",
+  "scientific_invariants": {
+    "model_family": "YOLO11s detect",
+    "classes": 9,
+    "configured_seed": 42,
+    "primary_metric": "validation_mAP50-95",
+    "test_for_selection": false,
+    "fresh_run_only": true,
+    "no_cli_scientific_hyperparameter_overrides": true
+  },
+  "ddp_initialization_policy": {
+    "upstream_observation": "BaseTrainer initializes outer rank RNG as args.seed + 1 + RANK; configured seed 42 therefore corresponds to rank-0 outer RNG seed 43 under DDP.",
+    "governed_resolution": "GovernedDetectionTrainer isolates model construction under the configured seed 42 and restores the outer DDP RNG state immediately afterward.",
+    "reason": "Preserve the INIT-01 seed-42 pretrained-versus-scratch initialization contract without changing rank-specific data/augmentation RNG behavior.",
+    "expected_target_parameters": 9431275,
+    "expected_target_state_items": 499,
+    "expected_transferable_state_items": 493,
+    "expected_nontransferable_target_items": 6
+  },
+  "test_firewall": {
+    "runtime_yaml_contains_train": true,
+    "runtime_yaml_contains_val": true,
+    "runtime_yaml_contains_test": false,
+    "directory_discovery_prunes_test_paths": true,
+    "test_predictions": "FORBIDDEN",
+    "test_metrics": "FORBIDDEN",
+    "test_error_analysis": "FORBIDDEN"
+  },
+  "dataset_preflight": {
+    "membership_identity": "Immediate-directory image and label stems are sorted, joined with newline separators plus a final newline, and SHA256 matched to DATA-01.",
+    "image_label_stem_equality_required": true,
+    "split_b_validation_frozen_membership": 3050,
+    "split_b_validation_expected_operational_readable": 3049
+  },
+  "runtime_lock": {
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "ultralytics": "8.4.7",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "device": [
+      0,
+      1
+    ],
+    "editable_install_no_deps": true,
+    "force_yolo_offline": true
+  },
+  "output_contract": {
+    "project_dir": "/kaggle/working/ResEMA_baseline_runs",
+    "run_name": "exact experiment_id",
+    "exist_ok": false,
+    "complete_run_directory_must_be_persisted": true,
+    "last_pt_written_each_completed_epoch": true
+  },
+  "provenance": {
+    "experiment_source_commit_rule": "Training is blocked while EXPERIMENTS.csv source_commit is blank. RESUME-01 closure will bind the frozen training source commit. Execution may occur on a descendant closure commit only when guarded scientific runtime files are unchanged.",
+    "runtime_manifest_inside_run_dir": true,
+    "preflight_manifest_inside_run_dir": true,
+    "checkpoint_artifacts_in_git": false
+  },
+  "files": {
+    "trainer": "ultralytics/research/baseline_trainer.py",
+    "launcher": "research/runtime/baseline_runner.py",
+    "training_recipe": "research/05_experiments/TRAINING.yaml"
+  }
+}
