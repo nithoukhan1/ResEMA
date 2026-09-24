@@ -342,3 +342,29 @@ Existing B-ORG and A-AUG runs already started under A2 remain valid and must res
 on exact A2. The failed B-AUG A2 attempts produced no completed epoch and are not
 canonical. Future B-AUG fresh execution requires a remotely CI-verified S3/A3
 successor chain.
+
+## 2026-09-24 - S3 remotely verified; A3 authorization preparation
+
+The B-AUG operational-readability correction source freeze is remotely closed:
+
+- source commit `S3`: `18e75338ae116beccf3f5e4a0481efede601026b`;
+- parent: `A2 = 9fe475175d3963a083d7afc29426f07d86c1887d`;
+- commit subject: `research: freeze B-AUG operational readability correction`;
+- GitHub Research Integrity run: `36024485727` (run #17);
+- workflow conclusion: `success`;
+- integrity job: `107717414682` / `success`;
+- repository-state verification step: `success`;
+- research-integrity/D00/RESUME-01 test step: `success`.
+
+`S3` preserves the frozen B-AUG membership at 28,454 while recording 28,452
+operationally readable training images and exactly two immutable unreadable PNGs.
+No dataset repair, deletion, regeneration or relabeling occurred.
+
+Authorization remains separate. `A3` may change only:
+- `EXPERIMENTS.csv::source_commit`, atomically binding all six rows to exact `S3`;
+- authorization bookkeeping in `CURRENT.md` and `DECISIONS.md`.
+
+All six experiment rows remain `NOT_STARTED`. No guarded scientific/runtime path may
+differ from `S3`. Existing runs that originally executed at `A2` retain their exact A2
+resume lineage; `A3` authorizes future fresh execution from the S3 source, including the
+two previously blocked B-AUG conditions.

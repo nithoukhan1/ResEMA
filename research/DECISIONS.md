@@ -262,3 +262,24 @@ Existing A2 B-ORG/A-AUG execution and resume lineages remain valid and unchanged
 B-AUG A2 attempts are noncanonical because they failed before epoch 1 on the
 operational-count guard. B-AUG fresh execution is blocked until a successor S3/A3
 source/authorization chain is remotely CI-verified.
+
+## 2026-09-24 - S3 remotely accepted; A3 authorization approved
+
+The B-AUG correction source is remotely accepted at:
+
+- `S3 = 18e75338ae116beccf3f5e4a0481efede601026b`;
+- GitHub Research Integrity run `36024485727` (run #17) completed
+  with conclusion `success`;
+- integrity job `107717414682` completed with conclusion `success`;
+- repository-state verification and research-integrity/D00/RESUME-01 tests passed.
+
+A3 authorization is approved under the existing two-commit governance rule:
+
+- every baseline row remains `NOT_STARTED`;
+- every `source_commit` is atomically bound to exact `S3`;
+- every other `EXPERIMENTS.csv` field remains unchanged from S3;
+- no guarded model, runtime, data-contract, initialization, training-recipe or resume
+  path may differ from S3;
+- existing A2-originated resume lineages remain on exact A2;
+- B-AUG fresh training remains locked until A3 itself is pushed and its exact GitHub
+  Research Integrity workflow succeeds.
