@@ -66,7 +66,7 @@ Frozen active bindings:
 
 ## Current task
 
-`AUTH-01` - atomically bind all six frozen baseline experiments to source commit `S`, then remotely close the authorization commit before the first governed launch.
+`TRAIN-01C` - correct the zero-epoch construction-time class-count interface defect, then create replacement frozen source commit `S2` and authorization commit `A2` before any baseline training.
 
 INIT-01 is complete at the evidence/freezing level.
 
@@ -153,13 +153,18 @@ No model predictions, test metrics, model selection, architecture decision or pe
 
 ## Next
 
-1. push authorization commit `A` and verify GitHub Research Integrity on the exact authorization SHA
-2. launch `BASE-B-ORG-PT-S42` only after authorization remote closure
-3. register validation/per-class/convergence evidence
-4. continue the remaining five seed-42 baseline conditions
-5. perform fresh Split-B-validation-only model diagnostics
-6. freeze architecture and loss
-7. implement the final method
+1. complete TRAIN-01C local semantic review
+2. create replacement frozen source commit `S2` with all six `source_commit` bindings blank
+3. push `S2` and verify GitHub Research Integrity on the exact `S2` SHA
+4. create replacement authorization commit `A2` binding all six rows to `S2`
+5. push `A2` and verify GitHub Research Integrity on the exact `A2` SHA
+6. start a fresh Kaggle working session and rerun `BASE-B-ORG-PT-S42` preflight
+7. launch `BASE-B-ORG-PT-S42` only after the corrected preflight passes
+8. preserve the complete run directory for Save-Version continuation
+9. continue the remaining five seed-42 baseline conditions
+10. perform fresh Split-B-validation-only model diagnostics
+11. freeze architecture and loss
+12. implement the final method
 
 ## Active baseline experiments
 
@@ -254,3 +259,33 @@ scientific/runtime path byte-identical to `S`. All six experiment statuses remai
 
 Model training remains locked until the authorization commit itself is pushed and its
 GitHub Research Integrity workflow succeeds.
+
+## 2026-09-24 - TRAIN-01C zero-epoch exact-fork interface correction
+
+The first governed `BASE-B-ORG-PT-S42` launch used source commit
+`2954eab070368932ae68370532b73295feb3ca2d` and authorization commit
+`4b07d32846188cf9d6d5d0368f1f6db0d9bc32f0`. The governed preflight
+passed twice with identical SHA256
+`3b3a6a8f8e507f04d457c3364b3cac1659c7d4a6d739254142a79ebebeb61360`,
+with `TEST_ACCESS=NONE`.
+
+Execution constructed the correct nine-class YOLO11s target
+(9,431,275 parameters) but failed before epoch 1 because
+`GovernedDetectionTrainer.get_model()` read `model.nc` immediately after
+`DetectionModel(...)` construction.
+
+Exact-fork source review confirmed:
+- construction-time class count is available as `model.yaml["nc"]`;
+- the Detect head exposes `model.model[-1].nc`;
+- direct `model.nc` is attached only later by
+  `DetectionTrainer.set_model_attributes()` during `_setup_train()`.
+
+Disposition:
+- epochs started: 0;
+- training metrics/model-selection evidence produced: none;
+- Split-B test predictions/metrics/error analysis accessed: none;
+- old `S/A` remain historical provenance but are superseded for execution;
+- all six experiments remain `NOT_STARTED`;
+- old source bindings are cleared before replacement source freeze;
+- corrected execution requires new remotely CI-verified `S2` and `A2`;
+- the failed Kaggle run directory must not be resumed.

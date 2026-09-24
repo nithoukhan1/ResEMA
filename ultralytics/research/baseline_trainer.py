@@ -226,8 +226,19 @@ class GovernedDetectionTrainer(DetectionTrainer):
             "text",
         ]
 
-        if int(model.nc) != 9:
-            raise RuntimeError(f"TRAIN-01 expected nc=9, observed nc={model.nc}")
+        dataset_nc = int(self.data["nc"])
+        model_yaml_nc = int(model.yaml["nc"])
+        detect_head_nc = int(getattr(model.model[-1], "nc", -1))
+        construction_nc = {
+            "dataset_nc": dataset_nc,
+            "model_yaml_nc": model_yaml_nc,
+            "detect_head_nc": detect_head_nc,
+        }
+        if any(value != 9 for value in construction_nc.values()):
+            raise RuntimeError(
+                "TRAIN-01 construction-time class-count mismatch: "
+                f"{construction_nc}"
+            )
 
         if _normalize_names(self.data["names"]) != expected_names:
             raise RuntimeError("TRAIN-01 class-name/order contract mismatch.")
@@ -253,6 +264,10 @@ class GovernedDetectionTrainer(DetectionTrainer):
             "target_parameters": parameter_count,
             "target_state_items": len(initial_state),
             "target_architecture_fingerprint_sha256": architecture_fingerprint(initial_state),
+            "dataset_nc": dataset_nc,
+            "model_yaml_nc": model_yaml_nc,
+            "detect_head_nc": detect_head_nc,
+            "construction_time_class_count_verified": True,
             "expected_initialization": expected_initialization,
             "resume": is_resume,
         }

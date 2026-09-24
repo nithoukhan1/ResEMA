@@ -79,5 +79,14 @@
     "training_recipe": "research/05_experiments/TRAINING.yaml",
     "resume_launcher": "research/runtime/resume_runner.py",
     "resume_contract": "research/05_experiments/RESUME01_RESUME_CONTRACT.json"
+  },
+  "construction_time_class_identity": {
+    "dataset_nc_source": "self.data['nc']",
+    "model_yaml_nc_source": "model.yaml['nc']",
+    "detect_head_nc_source": "model.model[-1].nc",
+    "required_value": 9,
+    "direct_model_nc_inside_get_model": "FORBIDDEN_IN_EXACT_FORK",
+    "model_nc_attached_later_by": "DetectionTrainer.set_model_attributes",
+    "incident_outcome": "ZERO_EPOCH_FAIL_CLOSED"
   }
 }

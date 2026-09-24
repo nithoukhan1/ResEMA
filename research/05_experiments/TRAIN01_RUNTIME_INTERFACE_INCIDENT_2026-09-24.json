@@ -1,0 +1,56 @@
+{
+  "schema_version": "TRAIN01-runtime-interface-incident-v1.0",
+  "date": "2026-09-24",
+  "status": "CONTAINED_ZERO_EPOCH_SOURCE_SUPERSESSION",
+  "experiment_id": "BASE-B-ORG-PT-S42",
+  "old_source_commit_S": "2954eab070368932ae68370532b73295feb3ca2d",
+  "old_authorization_commit_A": "4b07d32846188cf9d6d5d0368f1f6db0d9bc32f0",
+  "preflight": {
+    "status": "PASS",
+    "sha256": "3b3a6a8f8e507f04d457c3364b3cac1659c7d4a6d739254142a79ebebeb61360",
+    "repeat_same_sha256_count": 2,
+    "test_access": "NONE",
+    "data_binding": "DATA01:B-ORG:v1",
+    "initialization": "pretrained"
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "ultralytics": "8.4.7",
+    "gpus": [
+      "Tesla T4",
+      "Tesla T4"
+    ]
+  },
+  "constructed_target": {
+    "classes": 9,
+    "parameters": 9431275,
+    "gradients": 9431259
+  },
+  "failure": {
+    "exception_type": "AttributeError",
+    "message": "'DetectionModel' object has no attribute 'nc'",
+    "failed_expression": "model.nc",
+    "epochs_started": 0,
+    "training_metrics_produced": false,
+    "model_selection_evidence_produced": false
+  },
+  "root_cause": {
+    "construction_time_nc_sources": [
+      "self.data['nc']",
+      "model.yaml['nc']",
+      "model.model[-1].nc"
+    ],
+    "model_nc_attached_later_by": "DetectionTrainer.set_model_attributes",
+    "classification": "governance implementation / exact-fork interface defect"
+  },
+  "containment": {
+    "old_S_A_valid_for_future_execution": false,
+    "all_six_experiments_remain_NOT_STARTED": true,
+    "old_source_bindings_cleared": true,
+    "failed_run_must_not_be_resumed": true,
+    "replacement_source_freeze_required": "S2",
+    "replacement_authorization_required": "A2",
+    "test_outcomes_accessed": false
+  }
+}

@@ -210,3 +210,17 @@ Authorization rules:
 - no guarded scientific/runtime path may change in the authorization commit;
 - model training remains locked until the authorization commit is remotely pushed and
   its exact GitHub Research Integrity run succeeds.
+
+## 2026-09-24 - Supersede original S/A for execution after zero-epoch interface failure
+
+The original source/authorization chain was governance-valid but is superseded for
+execution after the first governed launch exposed an exact-fork interface defect before
+epoch 1.
+
+The corrective implementation verifies construction-time class identity from
+`self.data["nc"]`, `model.yaml["nc"]`, and `model.model[-1].nc`, and forbids
+direct `model.nc` access inside governed `get_model()`.
+
+All six experiments remain `NOT_STARTED`. Their source bindings are cleared, and a new
+remotely CI-verified `S2` followed by a separate remotely CI-verified `A2` is required
+before any training.

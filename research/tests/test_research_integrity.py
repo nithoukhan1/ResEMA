@@ -226,3 +226,33 @@ def test_resume01_matrix_binding_and_runtime_hash_guards_are_present():
     assert "def _verify_preflight_before_dataset_access" in trainer
     assert "def get_dataset(self):" in trainer
     assert "changed before dataset access" in trainer
+
+def test_train01_construction_time_class_count_uses_exact_fork_interface():
+    # Guard both the governed fix and the exact fork interface that motivated it.
+    trainer = (
+        ROOT / "ultralytics/research/baseline_trainer.py"
+    ).read_text(encoding="utf-8", errors="strict")
+
+    start = trainer.index("    def get_model(")
+    end = trainer.index("    def _setup_train(", start)
+    get_model = trainer[start:end]
+
+    assert 'dataset_nc = int(self.data["nc"])' in get_model
+    assert 'model_yaml_nc = int(model.yaml["nc"])' in get_model
+    assert 'detect_head_nc = int(getattr(model.model[-1], "nc", -1))' in get_model
+    assert '"construction_time_class_count_verified": True' in get_model
+    assert "model.nc" not in get_model
+
+    tasks = (
+        ROOT / "ultralytics/nn/tasks.py"
+    ).read_text(encoding="utf-8", errors="strict")
+    detect_train = (
+        ROOT / "ultralytics/models/yolo/detect/train.py"
+    ).read_text(encoding="utf-8", errors="strict")
+    head = (
+        ROOT / "ultralytics/nn/modules/head.py"
+    ).read_text(encoding="utf-8", errors="strict")
+
+    assert 'self.yaml["nc"] = nc' in tasks
+    assert "self.nc = nc" in head
+    assert 'self.model.nc = self.data["nc"]' in detect_train
