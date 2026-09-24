@@ -1,5 +1,5 @@
 {
-  "schema_version": "DATA01-active-dataset-bindings-v1.0",
+  "schema_version": "DATA01-active-dataset-bindings-v1.1",
   "created_date": "2026-09-22",
   "status": "COMPLETE",
   "purpose": "Freeze the exact active dataset bindings used by the baseline-refresh experiment matrix before initialization and training implementation.",
@@ -162,6 +162,30 @@
       "provenance_caveat": {
         "status": "HISTORICAL_COMPARATOR_ONLY",
         "statement": "Earlier D00 evidence recorded unresolved historical augmentation provenance/YAML drift. DATA-01 verifies the mounted membership and annotation-copy integrity but does not reconstruct or certify the exact historical generation event. Claims must therefore describe this as the historical offline-augmented comparator, not as a newly generated or fully reconstructed augmentation recipe."
+      },
+      "operational_readability_note": {
+        "evidence_date": "2026-09-24",
+        "source_record": "research/04_data/manifests/DATA01_B_AUG_OPERATIONAL_READABILITY_RECORD_2026-09-24.json",
+        "source_record_sha256": "7b021d6f6a19df23946c11972cd8311bb50b40e5ea5bc3be2903a728491066af",
+        "external_diagnostic_sha256": "e24d3b2f7fc123360ab1513508a958c5a0dc25ceaa4b108ea5778c5d5a10dbc0",
+        "frozen_train_membership": 28454,
+        "operational_readable_images": 28452,
+        "operational_corrupt_images": 2,
+        "corrupt_images": [
+          {
+            "filename": "6015_0845856403_01_WRI-R2_M017.png",
+            "sha256": "eed6b57b8d1d0a7279d7366978d9cdb9c1ccc1fbbd0cfff773b48b75b9f87a23",
+            "label_exists": true
+          },
+          {
+            "filename": "aug_1355_0485876132_01_WRI-L1_M014.png",
+            "sha256": "1963d76af0fffcc07f70dc87f869243ad30c13127916396019d35f1eb65ba5f0",
+            "label_exists": true
+          }
+        ],
+        "test_access": "NONE",
+        "dataset_modified": false,
+        "rule": "Frozen B-AUG membership remains 28,454 with unchanged membership SHA256. TRAIN-01 operational image-count expectation is 28,452 because Ultralytics excludes exactly the two recorded unreadable PNGs."
       }
     }
   },
@@ -201,6 +225,10 @@
     "DATA01_SPLIT_A_FINAL_BINDING_R4.json": {
       "sha256": "553bfb7f99109f2f09bd88b155806b86a759b2afa68fa4254f6c4af3a2552a77",
       "status": "AUTHORITATIVE_SPLIT_A_BINDING_EVIDENCE"
+    },
+    "DATA01_B_AUG_OPERATIONAL_READABILITY_RECORD_2026-09-24.json": {
+      "sha256": "7b021d6f6a19df23946c11972cd8311bb50b40e5ea5bc3be2903a728491066af",
+      "status": "AUTHORITATIVE_B_AUG_OPERATIONAL_READABILITY_EVIDENCE"
     }
   },
   "scientific_state": {

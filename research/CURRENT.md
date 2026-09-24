@@ -66,7 +66,7 @@ Frozen active bindings:
 
 ## Current task
 
-`AUTH-02` - bind all six frozen baseline experiments to corrected source commit `S2`, then remotely close authorization commit `A2` before restarting governed baseline training.
+`DATA-01C / TRAIN-01D` - record the Split-B historical-augmentation operational-readability correction (28,454 frozen members; 28,452 operationally readable), then create and remotely close successor `S3 -> A3` for future B-AUG fresh execution. Existing A2 lineages continue/resume on exact A2.
 
 INIT-01 is complete at the evidence/freezing level.
 
@@ -313,3 +313,32 @@ Authorization remains intentionally separate. `A2` may change only:
 - project bookkeeping in `CURRENT.md` and `DECISIONS.md`.
 
 No guarded scientific/runtime path may differ from `S2`.
+
+## 2026-09-24 - B-AUG operational-readability correction preparation
+
+A train-only read-only diagnostic of `DATA01:B-AUG-HIST:v1` confirmed:
+
+- frozen image membership: 28,454;
+- frozen label membership: 28,454;
+- frozen membership SHA256: `4799e44ace20ab724974984f4cab60740a3fd8ad5cad3e1570bc895f02eefded`;
+- operationally readable images: 28,452;
+- structurally unreadable PNGs: exactly 2;
+- diagnostic JSON SHA256: `e24d3b2f7fc123360ab1513508a958c5a0dc25ceaa4b108ea5778c5d5a10dbc0`;
+- test access: none;
+- dataset modification: none.
+
+The two recorded unreadable files are:
+
+1. `6015_0845856403_01_WRI-R2_M017.png`
+   - SHA256 `eed6b57b8d1d0a7279d7366978d9cdb9c1ccc1fbbd0cfff773b48b75b9f87a23`
+2. `aug_1355_0485876132_01_WRI-L1_M014.png`
+   - SHA256 `1963d76af0fffcc07f70dc87f869243ad30c13127916396019d35f1eb65ba5f0`
+
+Resolution: preserve the frozen 28,454-member identity unchanged and set the
+TRAIN-01 operational expectation to 28,452 for B-AUG only. No image is deleted,
+repaired, regenerated or relabeled.
+
+Existing B-ORG and A-AUG runs already started under A2 remain valid and must resume
+on exact A2. The failed B-AUG A2 attempts produced no completed epoch and are not
+canonical. Future B-AUG fresh execution requires a remotely CI-verified S3/A3
+successor chain.

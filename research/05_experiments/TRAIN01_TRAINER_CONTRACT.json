@@ -39,7 +39,14 @@
     "image_label_stem_equality_required": true,
     "split_b_validation_frozen_membership": 3050,
     "split_b_validation_expected_operational_readable": 3049,
-    "runtime_yaml_sha256_reverified_inside_trainer": true
+    "runtime_yaml_sha256_reverified_inside_trainer": true,
+    "split_b_aug_frozen_membership": 28454,
+    "split_b_aug_membership_sha256": "4799e44ace20ab724974984f4cab60740a3fd8ad5cad3e1570bc895f02eefded",
+    "split_b_aug_expected_operational_readable": 28452,
+    "split_b_aug_known_corrupt_images": 2,
+    "split_b_aug_operational_readability_record": "research/04_data/manifests/DATA01_B_AUG_OPERATIONAL_READABILITY_RECORD_2026-09-24.json",
+    "split_b_aug_dataset_modified": false,
+    "split_b_aug_rule": "Frozen membership remains 28,454; operational count is 28,452 after deterministic exclusion of the two recorded unreadable PNGs."
   },
   "runtime_lock": {
     "python": "3.12.13",

@@ -256,3 +256,70 @@ def test_train01_construction_time_class_count_uses_exact_fork_interface():
     assert 'self.yaml["nc"] = nc' in tasks
     assert "self.nc = nc" in head
     assert 'self.model.nc = self.data["nc"]' in detect_train
+
+def test_b_aug_operational_readability_contract_is_explicit():
+    manifest = json.loads(
+        (
+            RESEARCH
+            / "04_data/manifests/DATA01_ACTIVE_DATASET_BINDINGS.json"
+        ).read_text(encoding="utf-8", errors="strict")
+    )
+
+    b_aug = manifest["bindings"]["B_AUG"]
+    assert b_aug["runtime_counts"]["train_aug_historical_images"] == 28454
+    assert b_aug["runtime_counts"]["train_aug_historical_labels"] == 28454
+    assert (
+        b_aug["membership_sha256_final_newline"]["train_aug_historical"]
+        == "4799e44ace20ab724974984f4cab60740"
+           "a3fd8ad5cad3e1570bc895f02eefded"
+    )
+
+    note = b_aug["operational_readability_note"]
+    assert note["frozen_train_membership"] == 28454
+    assert note["operational_readable_images"] == 28452
+    assert note["operational_corrupt_images"] == 2
+    assert note["test_access"] == "NONE"
+    assert note["dataset_modified"] is False
+
+    assert [row["filename"] for row in note["corrupt_images"]] == [
+        "6015_0845856403_01_WRI-R2_M017.png",
+        "aug_1355_0485876132_01_WRI-L1_M014.png",
+    ]
+    assert [row["sha256"] for row in note["corrupt_images"]] == [
+        "eed6b57b8d1d0a7279d7366978d9cdb9c1ccc1fbbd0cfff773b48b75b9f87a23",
+        "1963d76af0fffcc07f70dc87f869243ad30c13127916396019d35f1eb65ba5f0",
+    ]
+
+    record = json.loads(
+        (
+            RESEARCH
+            / "04_data/manifests/"
+              "DATA01_B_AUG_OPERATIONAL_READABILITY_RECORD_2026-09-24.json"
+        ).read_text(encoding="utf-8", errors="strict")
+    )
+    assert record["external_diagnostic_sha256"] == (
+        "e24d3b2f7fc123360ab1513508a958c5a0dc25ceaa4b108ea5778c5d5a10dbc0"
+    )
+    assert record["test_access"] == "NONE"
+    assert record["dataset_modified"] is False
+
+    runner = (
+        RESEARCH / "runtime/baseline_runner.py"
+    ).read_text(encoding="utf-8", errors="strict")
+    assert 'readability = b_aug["operational_readability_note"]' in runner
+    assert (
+        '"operational_train_images": '
+        'readability["operational_readable_images"]'
+    ) in runner
+
+    contract = json.loads(
+        (
+            RESEARCH
+            / "05_experiments/TRAIN01_TRAINER_CONTRACT.json"
+        ).read_text(encoding="utf-8", errors="strict")
+    )
+    pre = contract["dataset_preflight"]
+    assert pre["split_b_aug_frozen_membership"] == 28454
+    assert pre["split_b_aug_expected_operational_readable"] == 28452
+    assert pre["split_b_aug_known_corrupt_images"] == 2
+    assert pre["split_b_aug_dataset_modified"] is False

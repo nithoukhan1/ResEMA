@@ -145,13 +145,14 @@ def binding_expectation(row: dict[str, str], manifest: dict) -> dict:
     if binding_id == "DATA01:B-AUG-HIST:v1":
         b_aug = manifest["bindings"]["B_AUG"]
         b_org = manifest["bindings"]["B_ORG"]
+        readability = b_aug["operational_readability_note"]
         return {
             "binding_id": binding_id,
             "train_count": b_aug["runtime_counts"]["train_aug_historical_images"],
             "train_hash": b_aug["membership_sha256_final_newline"]["train_aug_historical"],
             "validation_count": b_aug["runtime_counts"]["validation_images"],
             "validation_hash": b_org["membership_sha256_final_newline"]["validation"],
-            "operational_train_images": 28454,
+            "operational_train_images": readability["operational_readable_images"],
             "operational_validation_images": 3049,
         }
 

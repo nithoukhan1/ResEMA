@@ -243,3 +243,22 @@ A2 authorization rules:
 - no guarded scientific/runtime path changes relative to `S2`;
 - training remains locked until `A2` is pushed and its exact GitHub Research Integrity
   workflow succeeds.
+
+## 2026-09-24 - Preserve B-AUG frozen membership; correct only operational readability
+
+A train-only diagnostic established that `DATA01:B-AUG-HIST:v1` still contains the
+exact frozen 28,454 image/label members with the frozen membership SHA256
+`4799e44ace20ab724974984f4cab60740a3fd8ad5cad3e1570bc895f02eefded`.
+
+Ultralytics deterministically excludes exactly two structurally unreadable PNGs at
+runtime, leaving 28,452 operationally readable training images. The dataset is not
+repaired, deleted, regenerated or relabeled. The frozen membership remains 28,454.
+
+TRAIN-01 therefore distinguishes membership identity from operational readability for
+B-AUG, matching the existing Split-B validation policy that distinguishes 3,050 frozen
+members from 3,049 operationally readable images.
+
+Existing A2 B-ORG/A-AUG execution and resume lineages remain valid and unchanged.
+B-AUG A2 attempts are noncanonical because they failed before epoch 1 on the
+operational-count guard. B-AUG fresh execution is blocked until a successor S3/A3
+source/authorization chain is remotely CI-verified.

@@ -1,0 +1,49 @@
+{
+  "schema_version": "DATA01-B-AUG-operational-readability-record-v1.0",
+  "date": "2026-09-24",
+  "status": "AUTHORITATIVE_RUNTIME_CORRECTION_EVIDENCE",
+  "binding_id": "DATA01:B-AUG-HIST:v1",
+  "scope": "TRAIN_ONLY",
+  "test_access": "NONE",
+  "external_diagnostic_sha256": "e24d3b2f7fc123360ab1513508a958c5a0dc25ceaa4b108ea5778c5d5a10dbc0",
+  "dataset_modified": false,
+  "frozen_membership": {
+    "images": 28454,
+    "labels": 28454,
+    "membership_sha256_final_newline": "4799e44ace20ab724974984f4cab60740a3fd8ad5cad3e1570bc895f02eefded",
+    "preserved_unchanged": true
+  },
+  "operational_readability": {
+    "readable_images": 28452,
+    "corrupt_images": 2,
+    "corrupt_records": [
+      {
+        "filename": "6015_0845856403_01_WRI-R2_M017.png",
+        "sha256": "eed6b57b8d1d0a7279d7366978d9cdb9c1ccc1fbbd0cfff773b48b75b9f87a23",
+        "label_exists": true,
+        "error_type": "SyntaxError",
+        "error": "broken PNG file (bad header checksum in b'IDAT')"
+      },
+      {
+        "filename": "aug_1355_0485876132_01_WRI-L1_M014.png",
+        "sha256": "1963d76af0fffcc07f70dc87f869243ad30c13127916396019d35f1eb65ba5f0",
+        "label_exists": true,
+        "error_type": "SyntaxError",
+        "error": "broken PNG file (bad header checksum in b'IDAT')"
+      }
+    ]
+  },
+  "governance_resolution": {
+    "dataset_repair": "FORBIDDEN_FOR_THIS_CORRECTION",
+    "dataset_deletion": "FORBIDDEN_FOR_THIS_CORRECTION",
+    "dataset_regeneration": "FORBIDDEN_FOR_THIS_CORRECTION",
+    "frozen_membership_rule": "Keep the frozen B-AUG membership at 28,454 and its membership SHA256 unchanged.",
+    "operational_runtime_rule": "TRAIN-01 may expect 28,452 operationally readable images because Ultralytics deterministically excludes exactly the two recorded structurally unreadable PNGs.",
+    "scientific_interpretation": "This is an operational-readability correction only. It does not change the historical B-AUG membership, labels, augmentation provenance, recipe, epoch budget, or model-selection policy."
+  },
+  "lineage_policy": {
+    "existing_A2_runs": "Existing B-ORG and A-AUG runs that started at A2 remain valid and must resume on their exact original execution commit A2.",
+    "B_AUG_A2_attempts": "B-AUG A2 attempts are blocked/noncanonical because execution failed before epoch 1 on the operational-count guard.",
+    "future_B_AUG_execution": "Requires a new remotely CI-verified source/authorization successor chain S3/A3."
+  }
+}
