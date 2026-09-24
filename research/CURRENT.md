@@ -66,7 +66,7 @@ Frozen active bindings:
 
 ## Current task
 
-`TRAIN-01C` - correct the zero-epoch construction-time class-count interface defect, then create replacement frozen source commit `S2` and authorization commit `A2` before any baseline training.
+`AUTH-02` - bind all six frozen baseline experiments to corrected source commit `S2`, then remotely close authorization commit `A2` before restarting governed baseline training.
 
 INIT-01 is complete at the evidence/freezing level.
 
@@ -289,3 +289,27 @@ Disposition:
 - old source bindings are cleared before replacement source freeze;
 - corrected execution requires new remotely CI-verified `S2` and `A2`;
 - the failed Kaggle run directory must not be resumed.
+
+## 2026-09-24 - Replacement source freeze S2 remotely verified
+
+Corrected frozen training source:
+
+- replacement source commit `S2`: `46f40838c1c24a8ced77a2b868dfa0f7f1037f9c`;
+- commit subject: `research: freeze corrected governed trainer source`;
+- GitHub Research Integrity run: `35956458084` (run #15);
+- event: `push`;
+- exact workflow head SHA: `46f40838c1c24a8ced77a2b868dfa0f7f1037f9c`;
+- workflow conclusion: `success`;
+- integrity job: `107495713588` / `success`;
+- repository-state verification step: `success`;
+- research-integrity/D00/RESUME-01 test step: `success`.
+
+`S2` contains the exact-fork construction-time class-count correction and the
+zero-epoch incident record. All six baseline rows remain `NOT_STARTED` and all six
+`source_commit` values remain blank at `S2`.
+
+Authorization remains intentionally separate. `A2` may change only:
+- `EXPERIMENTS.csv::source_commit` by binding all six rows to exact `S2`;
+- project bookkeeping in `CURRENT.md` and `DECISIONS.md`.
+
+No guarded scientific/runtime path may differ from `S2`.

@@ -224,3 +224,22 @@ direct `model.nc` access inside governed `get_model()`.
 All six experiments remain `NOT_STARTED`. Their source bindings are cleared, and a new
 remotely CI-verified `S2` followed by a separate remotely CI-verified `A2` is required
 before any training.
+
+## 2026-09-24 - Corrected source S2 remotely accepted; A2 authorization approved
+
+The corrected governed TRAIN-01/RESUME-01 source is remotely accepted at:
+
+- `S2 = 46f40838c1c24a8ced77a2b868dfa0f7f1037f9c`;
+- GitHub Research Integrity run `35956458084` completed successfully;
+- integrity job `107495713588` completed successfully;
+- repository-state verification and research-integrity/D00/RESUME-01 tests all passed.
+
+The six baseline rows may now be atomically bound to `S2`.
+
+A2 authorization rules:
+- every row remains `NOT_STARTED`;
+- every `source_commit` equals exactly `S2`;
+- no other `EXPERIMENTS.csv` field changes relative to `S2`;
+- no guarded scientific/runtime path changes relative to `S2`;
+- training remains locked until `A2` is pushed and its exact GitHub Research Integrity
+  workflow succeeds.
