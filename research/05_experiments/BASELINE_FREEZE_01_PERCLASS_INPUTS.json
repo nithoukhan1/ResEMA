@@ -1,0 +1,107 @@
+{
+  "schema_version": "BASELINE-FREEZE-01-perclass-inputs-v1.0",
+  "created_date": "2026-09-28",
+  "status": "REGISTERED_FOR_STANDARDIZED_VALIDATION_ONLY_FREEZE",
+  "runtime_contract": {
+    "python": "3.12.13",
+    "torch": "2.10.0+cu128",
+    "ultralytics": "8.4.7",
+    "gpu_inventory": [
+      "Tesla T4",
+      "Tesla T4"
+    ],
+    "evaluation_device": 0,
+    "imgsz": 1024,
+    "batch": 16,
+    "workers": 4,
+    "rect": false,
+    "conf": null,
+    "iou": 0.7,
+    "max_det": 300,
+    "half": false,
+    "plots": true,
+    "save_json": false,
+    "deterministic": true,
+    "seed": 42,
+    "split": "val"
+  },
+  "class_names": [
+    "boneanomaly",
+    "bonelesion",
+    "foreignbody",
+    "fracture",
+    "metal",
+    "periostealreaction",
+    "pronatorsign",
+    "softtissue",
+    "text"
+  ],
+  "experiments": [
+    {
+      "experiment_id": "BASE-B-ORG-SCR-S42",
+      "source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "runtime_group": "A2",
+      "data_binding": "DATA01:B-ORG:v1",
+      "initialization": "scratch",
+      "checkpoint_sha256": "64752b7d5a9451f5ae0a767032af81de2d833d5eca26abe6941322967f725a7e",
+      "checkpoint_kaggle_ref": "nithoukhan/base-b-org-scr-s42-1",
+      "canonical_archive": "BASE-B-ORG-SCR-S42-1.zip"
+    },
+    {
+      "experiment_id": "BASE-B-ORG-PT-S42",
+      "source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "runtime_group": "A2",
+      "data_binding": "DATA01:B-ORG:v1",
+      "initialization": "pretrained",
+      "checkpoint_sha256": "65e3c59901e0429f70a7b368dc29ebb698c427a799cfcf66354a882ec48bc4c7",
+      "checkpoint_kaggle_ref": "nithoukhan1/base-b-org-pt-s42-2",
+      "canonical_archive": "BASE-B-ORG-PT-S42-2.zip"
+    },
+    {
+      "experiment_id": "BASE-A-AUG-PT-S42",
+      "source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "runtime_group": "A2",
+      "data_binding": "DATA01:A-AUG:v1",
+      "initialization": "pretrained",
+      "checkpoint_sha256": "28e440680a024dfce52810933977b7cd69de209b71f9c5a48bae57cb8e307f7f",
+      "checkpoint_kaggle_ref": "vickyhit/base-a-aug-pt-s42-2",
+      "canonical_archive": "BASE-A-AUG-PT-S42-2.zip"
+    },
+    {
+      "experiment_id": "BASE-A-AUG-SCR-S42",
+      "source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "runtime_group": "A2",
+      "data_binding": "DATA01:A-AUG:v1",
+      "initialization": "scratch",
+      "checkpoint_sha256": "82946ced355005f062f81bb6cfcdaf221fec5cfb121a4d1caac8352afa1a005f",
+      "checkpoint_kaggle_ref": "abasitive/base-a-aug-scr-s42-2",
+      "canonical_archive": "BASE-A-AUG-SCR-S42-2.zip"
+    },
+    {
+      "experiment_id": "BASE-B-AUG-PT-S42",
+      "source_commit": "18e75338ae116beccf3f5e4a0481efede601026b",
+      "execution_commit": "fe95e2d51c4d545111ae2fa7be70c8e1c8e77487",
+      "runtime_group": "A3",
+      "data_binding": "DATA01:B-AUG-HIST:v1",
+      "initialization": "pretrained",
+      "checkpoint_sha256": "a68b6303779c06e95ac931e068b16c87c2150d221172d7455f85292dc77eaa85",
+      "checkpoint_kaggle_ref": "hebut123/base-b-aug-pt-s42-2",
+      "canonical_archive": "BASE-B-AUG-PT-S42-2.zip"
+    },
+    {
+      "experiment_id": "BASE-B-AUG-SCR-S42",
+      "source_commit": "18e75338ae116beccf3f5e4a0481efede601026b",
+      "execution_commit": "fe95e2d51c4d545111ae2fa7be70c8e1c8e77487",
+      "runtime_group": "A3",
+      "data_binding": "DATA01:B-AUG-HIST:v1",
+      "initialization": "scratch",
+      "checkpoint_sha256": "154befb68436c3248a844accd240f84624cce6f152992238aa1a4b12ec4bead3",
+      "checkpoint_kaggle_ref": "nithoukhan2/base-b-aug-scr-s42-2",
+      "canonical_archive": "BASE-B-AUG-SCR-S42-2.zip"
+    }
+  ]
+}
