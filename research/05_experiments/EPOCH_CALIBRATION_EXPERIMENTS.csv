@@ -1,2 +1,2 @@
 experiment_id,status,source_commit,comparison_parent,data_binding,initialization,seed,epochs,patience,imgsz,batch,optimizer,primary_metric,test_access,decision
-BASE-B-ORG-SCR-S42-E200-CAL,NOT_STARTED,,BASE-B-ORG-SCR-S42,DATA01:B-ORG:v1,scratch,42,200,200,1024,16,SGD,val_mAP50-95,NONE,PENDING
+BASE-B-ORG-SCR-S42-E200-CAL,NOT_STARTED,fa65a5548b75f38a1088593729ca4e78757bb000,BASE-B-ORG-SCR-S42,DATA01:B-ORG:v1,scratch,42,200,200,1024,16,SGD,val_mAP50-95,NONE,PENDING
