@@ -16,6 +16,8 @@ from ultralytics.nn.modules import (
     AIFI,
     C1,
     C3k2_SC,
+    C3k2_TPSC,
+    C3k2_TPSCG4,
     C2,
     C2PSA,
     C3,
@@ -1574,6 +1576,8 @@ def parse_model(d, ch, verbose=True):
             C2f,
             C3k2,
             C3k2_SC,
+            C3k2_TPSC,
+            C3k2_TPSCG4,
             RepNCSPELAN4,
             ELAN1,
             ADown,
@@ -1601,6 +1605,8 @@ def parse_model(d, ch, verbose=True):
             C2f,
             C3k2,
             C3k2_SC,
+            C3k2_TPSC,
+            C3k2_TPSCG4,
             C2fAttn,
             C3,
             C3TR,
@@ -1638,7 +1644,7 @@ def parse_model(d, ch, verbose=True):
             if m in repeat_modules:
                 args.insert(2, n)  # number of repeats
                 n = 1
-            if m is C3k2:  # for M/L/X sizes
+            if m in {C3k2, C3k2_TPSC, C3k2_TPSCG4}:  # preserve native C3k2 scale semantics
                 legacy = False
                 if scale in "mlx":
                     args[3] = True

@@ -38,6 +38,8 @@ __all__ = (
     "C3Ghost",
     "C3k2",
     "C3k2_SC",
+    "C3k2_TPSC",
+    "C3k2_TPSCG4",
     "C3x",
     "CBFuse",
     "CBLinear",
@@ -2290,3 +2292,103 @@ class C3k2_SC(nn.Module):
         )
 
         return self.cv3(concatenated)
+
+class _SCResidualAdapter(nn.Module):
+    """Zero-gated Self-Calibrated Convolution refinement used by transfer-preserving C3k2 variants."""
+
+    def __init__(self, channels: int, groups: int = 1, pooling_r: int = 4) -> None:
+        super().__init__()
+        if channels % groups != 0:
+            raise ValueError(
+                f"Adapter channels ({channels}) must be divisible by SC groups ({groups})."
+            )
+        self.scconv = SCConv(channels=channels, pooling_r=pooling_r, groups=groups)
+        self.alpha = nn.Parameter(torch.zeros(()))
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Refine x while remaining exactly identity at alpha=0 initialization."""
+        return x + torch.tanh(self.alpha) * self.scconv(x)
+
+
+class C3k2_TPSC(C3k2):
+    """
+    Transfer-Preserving Self-Calibrated C3k2.
+
+    The complete native C3k2 parameterized path (cv1, cv2 and m) is retained unchanged.
+    A zero-gated SCConv refinement is applied only after each native m[i] transform.
+    Consequently, when native weights are copied from an ordinary C3k2 and alpha=0,
+    this block is functionally identical to the native block at initialization.
+
+    SCConv here means Self-Calibrated Convolution (SCNet, CVPR 2020), not the later
+    Spatial and Channel Reconstruction Convolution commonly abbreviated ScConv.
+    """
+
+    def __init__(
+        self,
+        c1: int,
+        c2: int,
+        n: int = 1,
+        c3k: bool = False,
+        e: float = 0.5,
+        attn: bool = False,
+        g: int = 1,
+        shortcut: bool = True,
+        *,
+        sc_groups: int = 1,
+        pooling_r: int = 4,
+    ) -> None:
+        super().__init__(c1, c2, n=n, c3k=c3k, e=e, attn=attn, g=g, shortcut=shortcut)
+        if sc_groups < 1:
+            raise ValueError(f"sc_groups must be at least 1, received {sc_groups}.")
+        if self.c % sc_groups != 0:
+            raise ValueError(
+                f"Native hidden channels ({self.c}) must be divisible by sc_groups ({sc_groups})."
+            )
+        self.sc_groups = sc_groups
+        self.pooling_r = pooling_r
+        self.sc_adapters = nn.ModuleList(
+            _SCResidualAdapter(self.c, groups=sc_groups, pooling_r=pooling_r) for _ in range(n)
+        )
+
+    def _forward_from_parts(self, y: list[torch.Tensor]) -> torch.Tensor:
+        for native_block, adapter in zip(self.m, self.sc_adapters):
+            y.append(adapter(native_block(y[-1])))
+        return self.cv2(torch.cat(y, 1))
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Run native C3k2 aggregation with zero-gated SC refinements."""
+        return self._forward_from_parts(list(self.cv1(x).chunk(2, 1)))
+
+    def forward_split(self, x: torch.Tensor) -> torch.Tensor:
+        """Run the transfer-preserving path using split() instead of chunk()."""
+        parts = self.cv1(x).split((self.c, self.c), 1)
+        return self._forward_from_parts([parts[0], parts[1]])
+
+
+class C3k2_TPSCG4(C3k2_TPSC):
+    """C3k2_TPSC with a fixed four-group SCConv adapter and native C3k2 positional semantics."""
+
+    def __init__(
+        self,
+        c1: int,
+        c2: int,
+        n: int = 1,
+        c3k: bool = False,
+        e: float = 0.5,
+        attn: bool = False,
+        g: int = 1,
+        shortcut: bool = True,
+    ) -> None:
+        super().__init__(
+            c1,
+            c2,
+            n=n,
+            c3k=c3k,
+            e=e,
+            attn=attn,
+            g=g,
+            shortcut=shortcut,
+            sc_groups=4,
+            pooling_r=4,
+        )
+
