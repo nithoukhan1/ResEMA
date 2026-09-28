@@ -96,4 +96,10 @@ def test_parser_registers_tpsc_as_native_c3k2_family():
     text = (ROOT / "ultralytics/nn/tasks.py").read_text(encoding="utf-8")
     assert "C3k2_TPSC" in text
     assert "C3k2_TPSCG4" in text
-    assert "if m in {C3k2, C3k2_TPSC, C3k2_TPSCG4}" in text
+
+    scale_line = next(
+        line for line in text.splitlines()
+        if "preserve native C3k2 scale semantics" in line
+    )
+    assert "C3k2_TPSC" in scale_line
+    assert "C3k2_TPSCG4" in scale_line
