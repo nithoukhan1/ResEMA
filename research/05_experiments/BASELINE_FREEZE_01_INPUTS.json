@@ -1,0 +1,149 @@
+{
+  "schema_version": "BASELINE-FREEZE-01-input-registry-v1.0",
+  "created_date": "2026-09-28",
+  "status": "REGISTERED_EXTERNAL_INPUTS_PENDING_LOCAL_HASH_AUDIT",
+  "local_root_policy": "Pass the local Baseline Output directory at runtime; do not commit machine-specific absolute paths.",
+  "local_archive_root": "artifacts_external/baseline_freeze_01",
+  "expected_total_zip_archives": 11,
+  "expected_canonical_final_runs": 6,
+  "commits": {
+    "S2": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+    "A2": "9fe475175d3963a083d7afc29426f07d86c1887d",
+    "S3": "18e75338ae116beccf3f5e4a0481efede601026b",
+    "A3": "fe95e2d51c4d545111ae2fa7be70c8e1c8e77487"
+  },
+  "sessions": [
+    {
+      "archive": "BASE-B-ORG-SCR-S42-1.zip",
+      "experiment_id": "BASE-B-ORG-SCR-S42",
+      "session_role": "canonical_final_single_session",
+      "canonical_final": true,
+      "kaggle_ref": "nithoukhan/base-b-org-scr-s42-1",
+      "kaggle_mount": "/kaggle/input/datasets/nithoukhan/base-b-org-scr-s42-1",
+      "expected_source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "expected_execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "expected_data_binding": "DATA01:B-ORG:v1",
+      "expected_initialization": "scratch"
+    },
+    {
+      "archive": "BASE-B-ORG-PT-S42-1.zip",
+      "experiment_id": "BASE-B-ORG-PT-S42",
+      "session_role": "resume_parent",
+      "canonical_final": false,
+      "kaggle_ref": "nithoukhan1/base-b-org-pt-s42-1",
+      "kaggle_mount": "/kaggle/input/datasets/nithoukhan1/base-b-org-pt-s42-1",
+      "expected_source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "expected_execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "expected_data_binding": "DATA01:B-ORG:v1",
+      "expected_initialization": "pretrained"
+    },
+    {
+      "archive": "BASE-B-ORG-PT-S42-2.zip",
+      "experiment_id": "BASE-B-ORG-PT-S42",
+      "session_role": "canonical_final_after_resume",
+      "canonical_final": true,
+      "kaggle_ref": "nithoukhan1/base-b-org-pt-s42-2",
+      "kaggle_mount": "/kaggle/input/datasets/nithoukhan1/base-b-org-pt-s42-2",
+      "expected_source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "expected_execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "expected_data_binding": "DATA01:B-ORG:v1",
+      "expected_initialization": "pretrained"
+    },
+    {
+      "archive": "BASE-A-AUG-PT-S42-1.zip",
+      "experiment_id": "BASE-A-AUG-PT-S42",
+      "session_role": "resume_parent",
+      "canonical_final": false,
+      "kaggle_ref": "vickyhit/base-a-aug-pt-s42-1",
+      "kaggle_mount": "/kaggle/input/datasets/vickyhit/base-a-aug-pt-s42-1",
+      "expected_source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "expected_execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "expected_data_binding": "DATA01:A-AUG:v1",
+      "expected_initialization": "pretrained"
+    },
+    {
+      "archive": "BASE-A-AUG-PT-S42-2.zip",
+      "experiment_id": "BASE-A-AUG-PT-S42",
+      "session_role": "canonical_final_after_resume",
+      "canonical_final": true,
+      "kaggle_ref": "vickyhit/base-a-aug-pt-s42-2",
+      "kaggle_mount": "/kaggle/input/datasets/vickyhit/base-a-aug-pt-s42-2",
+      "expected_source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "expected_execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "expected_data_binding": "DATA01:A-AUG:v1",
+      "expected_initialization": "pretrained"
+    },
+    {
+      "archive": "BASE-A-AUG-SCR-S42-1.zip",
+      "experiment_id": "BASE-A-AUG-SCR-S42",
+      "session_role": "resume_parent",
+      "canonical_final": false,
+      "kaggle_ref": "abasitive/base-a-aug-scr-s42-1",
+      "kaggle_mount": "/kaggle/input/datasets/abasitive/base-a-aug-scr-s42-1",
+      "expected_source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "expected_execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "expected_data_binding": "DATA01:A-AUG:v1",
+      "expected_initialization": "scratch"
+    },
+    {
+      "archive": "BASE-A-AUG-SCR-S42-2.zip",
+      "experiment_id": "BASE-A-AUG-SCR-S42",
+      "session_role": "canonical_final_after_resume",
+      "canonical_final": true,
+      "kaggle_ref": "abasitive/base-a-aug-scr-s42-2",
+      "kaggle_mount": "/kaggle/input/datasets/abasitive/base-a-aug-scr-s42-2",
+      "expected_source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+      "expected_execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+      "expected_data_binding": "DATA01:A-AUG:v1",
+      "expected_initialization": "scratch"
+    },
+    {
+      "archive": "BASE-B-AUG-PT-S42-1.zip",
+      "experiment_id": "BASE-B-AUG-PT-S42",
+      "session_role": "resume_parent",
+      "canonical_final": false,
+      "kaggle_ref": "hebut123/base-b-aug-pt-s42-1",
+      "kaggle_mount": "/kaggle/input/datasets/hebut123/base-b-aug-pt-s42-1",
+      "expected_source_commit": "18e75338ae116beccf3f5e4a0481efede601026b",
+      "expected_execution_commit": "fe95e2d51c4d545111ae2fa7be70c8e1c8e77487",
+      "expected_data_binding": "DATA01:B-AUG-HIST:v1",
+      "expected_initialization": "pretrained"
+    },
+    {
+      "archive": "BASE-B-AUG-PT-S42-2.zip",
+      "experiment_id": "BASE-B-AUG-PT-S42",
+      "session_role": "canonical_final_after_resume",
+      "canonical_final": true,
+      "kaggle_ref": "hebut123/base-b-aug-pt-s42-2",
+      "kaggle_mount": "/kaggle/input/datasets/hebut123/base-b-aug-pt-s42-2",
+      "expected_source_commit": "18e75338ae116beccf3f5e4a0481efede601026b",
+      "expected_execution_commit": "fe95e2d51c4d545111ae2fa7be70c8e1c8e77487",
+      "expected_data_binding": "DATA01:B-AUG-HIST:v1",
+      "expected_initialization": "pretrained"
+    },
+    {
+      "archive": "BASE-B-AUG-SCR-S42-1.zip",
+      "experiment_id": "BASE-B-AUG-SCR-S42",
+      "session_role": "resume_parent",
+      "canonical_final": false,
+      "kaggle_ref": "nithoukhan2/base-b-aug-scr-s42-1",
+      "kaggle_mount": "/kaggle/input/datasets/nithoukhan2/base-b-aug-scr-s42-1",
+      "expected_source_commit": "18e75338ae116beccf3f5e4a0481efede601026b",
+      "expected_execution_commit": "fe95e2d51c4d545111ae2fa7be70c8e1c8e77487",
+      "expected_data_binding": "DATA01:B-AUG-HIST:v1",
+      "expected_initialization": "scratch"
+    },
+    {
+      "archive": "BASE-B-AUG-SCR-S42-2.zip",
+      "experiment_id": "BASE-B-AUG-SCR-S42",
+      "session_role": "canonical_final_after_resume",
+      "canonical_final": true,
+      "kaggle_ref": "nithoukhan2/base-b-aug-scr-s42-2",
+      "kaggle_mount": "/kaggle/input/datasets/nithoukhan2/base-b-aug-scr-s42-2",
+      "expected_source_commit": "18e75338ae116beccf3f5e4a0481efede601026b",
+      "expected_execution_commit": "fe95e2d51c4d545111ae2fa7be70c8e1c8e77487",
+      "expected_data_binding": "DATA01:B-AUG-HIST:v1",
+      "expected_initialization": "scratch"
+    }
+  ]
+}
