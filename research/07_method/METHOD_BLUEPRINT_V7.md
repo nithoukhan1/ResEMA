@@ -1,3 +1,14 @@
+# STATUS — PAUSED / NOT THE ACTIVE METHOD DIRECTION
+
+This file preserves the earlier anatomy-conditioned TP-CDA/APCF/PELT concept for
+historical provenance. That direction is paused. The active workstream is the
+C3k2 + DySample + attention line under ARCH-CORR-01, with transfer-preserving
+corrected implementations and validation-before-training governance.
+
+Do not use this file as the current architecture specification.
+
+---
+
 # 02 — Method Blueprint
 
 ## Working concept

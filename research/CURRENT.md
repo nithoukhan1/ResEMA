@@ -46,3 +46,23 @@ transfer-preserving corrected C3k2/SC design, then controlled Split-B pretrained
 ablations and multi-seed finalist confirmation.
 
 Split-A remains reporting-only. Split-B test remains sealed.
+
+## Parallel architecture-correction workstream
+
+A separate non-training branch is active:
+
+`research/arch-corr-01b`
+
+Purpose:
+- forensically audit the historical C3k2_SC / ResEMA implementations;
+- preserve the validated DySample operator;
+- implement transfer-preserving Self-Calibrated C3k2 candidates;
+- implement a canonical EMA candidate without shifting native YOLO layer indices;
+- verify native state, official checkpoint transfer, zero-gate identity, gradients and parameter counts before any architecture training.
+
+Architecture training remains **NOT AUTHORIZED** until:
+1. dedicated GitHub runtime audit passes on the current architecture head;
+2. exact-head local verification reproduces the same contracts;
+3. ARCH-CORR-01 verification evidence and tracker are frozen in Git.
+
+The E200 calibration continues independently on `research/baseline-refresh`.

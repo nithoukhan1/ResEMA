@@ -45,6 +45,7 @@ jobs:
           -o addopts=''
           research/tests/test_arch_corr_01b_tpsc.py
           research/tests/test_arch_corr_01c_ema.py
+          research/tests/test_arch_corr_01d_dysample.py
           -q
 
       - name: Fetch locked official YOLO11s checkpoint

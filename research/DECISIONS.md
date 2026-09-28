@@ -326,3 +326,38 @@ the governed runner itself changed, the previous EPOCH-CAL source/authorization 
 is superseded by a new source-freeze/authorization pair. The calibration recipe,
 dataset binding, architecture, seed, and 200-epoch scientific protocol are unchanged.
 
+## 2026-09-28 - ARCH-CORR-01 verification-before-training gate
+
+Historical C3k2_SC and ResEMA-V2 results are retained as exploratory history but are not
+accepted as clean causal module evidence for the new study.
+
+Reasons:
+- historical C3k2_SC changes native C3k2 topology and reinterprets positional arguments;
+- historical C3k2_SC loses ordinary native pretrained key/shape compatibility in the replaced blocks;
+- historical ResEMA-V2 is EMA-inspired but does not implement the published cross-spatial EMA mechanism.
+
+The new architecture path therefore requires:
+- native-topology transfer-preserving TPSC variants;
+- existing reference-consistent DySample retained unchanged;
+- canonical EMA implemented separately through a transfer-preserving wrapper;
+- exact shared-state and official-checkpoint transfer contracts;
+- zero-gate native functional identity;
+- local reproduction at an exact Git SHA;
+- repository evidence freeze before any corrected-module training.
+
+The previous METHOD_BLUEPRINT_V7 anatomy-conditioned direction remains paused and must
+not be interpreted as the active method blueprint.
+
+## 2026-09-28 - ARCH-CORR-01C combined runtime-audit stale assertion
+
+Commit `9b2a8ff6cb67af0e7882c8a44122007af010cef2` passed ordinary Research Integrity
+but its dedicated architecture runtime workflow stopped after 11 focused tests passed
+and one stale TPSC parser string assertion failed. The assertion assumed the native
+C3k2-family parser set ended at TPSC/TPSCG4; adding TPEMA legitimately expanded that
+set.
+
+The failure occurred before the locked checkpoint transfer stages, so the EMA runtime
+transfer audit at that commit is not considered complete. The assertion is repaired in
+successor commit `9416a56795767ea13d215dfb705a87141bc76878`. No architecture
+training or test-split access occurred.
+
