@@ -1,0 +1,74 @@
+schema_version: epoch_calibration_v1
+status: FROZEN_EPOCH_CALIBRATION_RECIPE_V1
+
+purpose:
+  question: >-
+    Determine whether the 100-epoch Split-B-original scratch baseline is
+    materially budget-limited under a fresh 200-epoch version of the frozen
+    training recipe.
+  comparison_parent: BASE-B-ORG-SCR-S42
+  canonical_parent_epochs: 100
+  calibration_epochs: 200
+  test_for_selection: false
+
+parent_recipe:
+  path: research/05_experiments/TRAINING.yaml
+  required_status: FROZEN_BASELINE_RECIPE_V2
+
+explicit_overrides:
+  training:
+    epochs: 200
+    patience: 200
+  output:
+    project_dir: /kaggle/working/ResEMA_epoch_calibration_runs
+
+preserved:
+  model: YOLO11s
+  data_binding: DATA01:B-ORG:v1
+  initialization: scratch
+  seed: 42
+  deterministic: true
+  imgsz: 1024
+  batch_global: 16
+  optimizer: SGD
+  lr0: 0.01
+  lrf: 0.01
+  momentum: 0.937
+  weight_decay: 0.0005
+  nbs: 64
+  cos_lr: true
+  warmup_epochs: 3.0
+  close_mosaic: 10
+  loss_and_augmentation: inherited_from_parent_recipe
+  split: val
+  test_key_in_runtime_yaml: forbidden
+
+budget_semantics:
+  fresh_training: true
+  resume_from_100_epoch_baseline: false
+  notes:
+    - >-
+      This is a fresh 200-epoch budget calibration, not a pure continuation of
+      the frozen 100-epoch run.
+    - >-
+      Because cos_lr=True, changing the total epoch budget changes the cosine
+      learning-rate horizon.
+    - >-
+      close_mosaic=10 remains unchanged, so mosaic is disabled only for the
+      final 10 epochs of the 200-epoch run.
+    - >-
+      patience is raised from 100 to 200 only to preserve the parent recipe's
+      effective no-early-stop-within-budget behavior.
+
+runtime:
+  platform: Kaggle
+  intended_gpu: T4x2
+  device: [0, 1]
+  workers_per_rank: 4
+  multi_session_resume_expected: true
+  force_yolo_offline: true
+
+selection:
+  primary_metric: validation_mAP50-95
+  compare_against_parent_selection_metric: 0.40360
+  test_for_selection: false

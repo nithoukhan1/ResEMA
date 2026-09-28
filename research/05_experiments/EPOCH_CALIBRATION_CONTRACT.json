@@ -1,0 +1,44 @@
+{
+  "schema_version": "EPOCH-CAL-01-contract-v1.0",
+  "status": "IMPLEMENTED_RESUME_AWARE",
+  "experiment_id": "BASE-B-ORG-SCR-S42-E200-CAL",
+  "comparison_parent": "BASE-B-ORG-SCR-S42",
+  "parent_baseline_selection_map50_95": 0.4036,
+  "invariants": {
+    "data_binding": "DATA01:B-ORG:v1",
+    "initialization": "scratch",
+    "seed": 42,
+    "model": "YOLO11s",
+    "imgsz": 1024,
+    "batch_global": 16,
+    "optimizer": "SGD",
+    "validation_split": "val",
+    "test_access": "NONE"
+  },
+  "allowed_explicit_changes": {
+    "epochs": [
+      100,
+      200
+    ],
+    "patience": [
+      100,
+      200
+    ],
+    "output_project": [
+      "/kaggle/working/ResEMA_baseline_runs",
+      "/kaggle/working/ResEMA_epoch_calibration_runs"
+    ]
+  },
+  "derived_consequences": [
+    "cosine scheduler horizon changes because cos_lr=True and scheduler depends on total epochs",
+    "close_mosaic=10 remains final-10-epochs behavior, so absolute mosaic closure point moves",
+    "optimizer iteration horizon doubles with the epoch budget"
+  ],
+  "prohibited": [
+    "resume from the completed canonical 100-epoch baseline",
+    "pretrained initialization",
+    "test split access",
+    "architecture or loss changes",
+    "silent hyperparameter overrides"
+  ]
+}
