@@ -7,9 +7,13 @@ on:
     paths:
       - "ultralytics/nn/**"
       - "ultralytics/cfg/models/11/yolo11s-tpsc-*.yaml"
+      - "ultralytics/cfg/models/11/yolo11s-tpema-*.yaml"
       - "research/07_method/ARCH_CORR_01B_TPSC_PROTOCOL.md"
+      - "research/07_method/ARCH_CORR_01C_EMA_PROTOCOL.md"
       - "research/tools/arch_corr_01b_transfer_audit.py"
+      - "research/tools/arch_corr_01c_ema_audit.py"
       - "research/tests/test_arch_corr_01b_tpsc.py"
+      - "research/tests/test_arch_corr_01c_ema.py"
       - ".github/workflows/arch-corr-01b-runtime.yml"
   workflow_dispatch:
 
@@ -40,6 +44,7 @@ jobs:
           python -m pytest
           -o addopts=''
           research/tests/test_arch_corr_01b_tpsc.py
+          research/tests/test_arch_corr_01c_ema.py
           -q
 
       - name: Fetch locked official YOLO11s checkpoint
@@ -51,9 +56,17 @@ jobs:
         run: |
           python research/tools/arch_corr_01b_transfer_audit.py             --checkpoint /tmp/yolo11s.pt             --output /tmp/ARCH_CORR_01B_AUDIT.json
 
+      - name: Run canonical EMA transfer and identity audit
+        run: |
+          python research/tools/arch_corr_01c_ema_audit.py \
+            --checkpoint /tmp/yolo11s.pt \
+            --output /tmp/ARCH_CORR_01C_EMA_AUDIT.json
+
       - name: Upload audit evidence
         uses: actions/upload-artifact@v4
         with:
-          name: ARCH_CORR_01B_AUDIT
-          path: /tmp/ARCH_CORR_01B_AUDIT.json
+          name: ARCH_CORR_01_AUDITS
+          path: |
+            /tmp/ARCH_CORR_01B_AUDIT.json
+            /tmp/ARCH_CORR_01C_EMA_AUDIT.json
           if-no-files-found: error

@@ -10,6 +10,7 @@ import torch.nn.functional as F
 from ultralytics.utils.torch_utils import fuse_conv_and_bn
 
 from .conv import Conv, DWConv, GhostConv, LightConv, RepConv, autopad
+from .custom import CanonicalEMA
 from .transformer import TransformerBlock
 
 __all__ = (
@@ -40,6 +41,7 @@ __all__ = (
     "C3k2_SC",
     "C3k2_TPSC",
     "C3k2_TPSCG4",
+    "C3k2_TPEMA",
     "C3x",
     "CBFuse",
     "CBLinear",
@@ -2391,4 +2393,51 @@ class C3k2_TPSCG4(C3k2_TPSC):
             sc_groups=4,
             pooling_r=4,
         )
+
+class _EMAResidualAdapter(nn.Module):
+    """Zero-gated canonical EMA refinement used by transfer-preserving C3k2 attention variants."""
+
+    def __init__(self, channels: int, factor: int = 32) -> None:
+        super().__init__()
+        self.ema = CanonicalEMA(channels=channels, factor=factor)
+        self.alpha = nn.Parameter(torch.zeros(()))
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Refine x while remaining exactly identity at alpha=0 initialization."""
+        return x + torch.tanh(self.alpha) * self.ema(x)
+
+
+class C3k2_TPEMA(C3k2):
+    """
+    Transfer-Preserving C3k2 with canonical Efficient Multi-Scale Attention.
+
+    Native C3k2 members cv1, cv2 and m are retained unchanged. Canonical EMA is
+    applied as a zero-gated post-C3k2 residual adapter, so a target loaded with
+    native weights is functionally identical to native C3k2 at initialization.
+    """
+
+    def __init__(
+        self,
+        c1: int,
+        c2: int,
+        n: int = 1,
+        c3k: bool = False,
+        e: float = 0.5,
+        attn: bool = False,
+        g: int = 1,
+        shortcut: bool = True,
+        *,
+        ema_factor: int = 32,
+    ) -> None:
+        super().__init__(c1, c2, n=n, c3k=c3k, e=e, attn=attn, g=g, shortcut=shortcut)
+        self.ema_factor = ema_factor
+        self.ema_adapter = _EMAResidualAdapter(c2, factor=ema_factor)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Run native C3k2 and then a zero-gated canonical EMA refinement."""
+        return self.ema_adapter(super().forward(x))
+
+    def forward_split(self, x: torch.Tensor) -> torch.Tensor:
+        """Run native split-path C3k2 and then the zero-gated EMA refinement."""
+        return self.ema_adapter(super().forward_split(x))
 

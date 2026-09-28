@@ -9,7 +9,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-__all__ = ("DySample", "ResEMA")
+__all__ = ("DySample", "ResEMA", "CanonicalEMA")
 
 
 def _normal_init(
@@ -525,3 +525,107 @@ class ResEMA(nn.Module):
         )
 
         return residual + output
+
+class CanonicalEMA(nn.Module):
+    """
+    Efficient Multi-Scale Attention with Cross-Spatial Learning (ICASSP 2023).
+
+    This implementation follows the authors' published EMA operator: channel groups
+    are folded into the batch dimension, horizontal/vertical directional gates form
+    one branch, a 3x3 convolution forms the second branch, and two cross-spatial
+    matrix products produce the final pixel-wise attention map.
+
+    Args:
+        channels (int): Number of input/output channels.
+        factor (int): Number of channel groups. The paper's released reference
+            implementation uses 32 by default.
+    """
+
+    def __init__(self, channels: int, factor: int = 32) -> None:
+        super().__init__()
+        if factor < 1:
+            raise ValueError(f"factor must be at least 1, received {factor}.")
+        if channels < factor:
+            raise ValueError(
+                f"channels ({channels}) must be at least factor ({factor})."
+            )
+        if channels % factor != 0:
+            raise ValueError(
+                f"channels ({channels}) must be divisible by factor ({factor})."
+            )
+
+        self.groups = factor
+        self.group_channels = channels // factor
+        self.softmax = nn.Softmax(dim=-1)
+        self.agp = nn.AdaptiveAvgPool2d((1, 1))
+        self.pool_h = nn.AdaptiveAvgPool2d((None, 1))
+        self.pool_w = nn.AdaptiveAvgPool2d((1, None))
+        self.gn = nn.GroupNorm(self.group_channels, self.group_channels)
+        self.conv1x1 = nn.Conv2d(
+            self.group_channels,
+            self.group_channels,
+            kernel_size=1,
+            stride=1,
+            padding=0,
+        )
+        self.conv3x3 = nn.Conv2d(
+            self.group_channels,
+            self.group_channels,
+            kernel_size=3,
+            stride=1,
+            padding=1,
+        )
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Apply canonical EMA cross-spatial attention without changing tensor shape."""
+        batch, channels, height, width = x.shape
+        grouped = x.reshape(
+            batch * self.groups,
+            self.group_channels,
+            height,
+            width,
+        )
+
+        feature_h = self.pool_h(grouped)
+        feature_w = self.pool_w(grouped).permute(0, 1, 3, 2)
+        directional = self.conv1x1(torch.cat((feature_h, feature_w), dim=2))
+        feature_h, feature_w = torch.split(directional, (height, width), dim=2)
+
+        branch_1 = self.gn(
+            grouped
+            * feature_h.sigmoid()
+            * feature_w.permute(0, 1, 3, 2).sigmoid()
+        )
+        branch_2 = self.conv3x3(grouped)
+
+        descriptor_1 = self.softmax(
+            self.agp(branch_1)
+            .reshape(batch * self.groups, -1, 1)
+            .permute(0, 2, 1)
+        )
+        spatial_2 = branch_2.reshape(
+            batch * self.groups,
+            self.group_channels,
+            -1,
+        )
+
+        descriptor_2 = self.softmax(
+            self.agp(branch_2)
+            .reshape(batch * self.groups, -1, 1)
+            .permute(0, 2, 1)
+        )
+        spatial_1 = branch_1.reshape(
+            batch * self.groups,
+            self.group_channels,
+            -1,
+        )
+
+        weights = (
+            torch.matmul(descriptor_1, spatial_2)
+            + torch.matmul(descriptor_2, spatial_1)
+        ).reshape(batch * self.groups, 1, height, width)
+
+        return (
+            grouped * weights.sigmoid()
+        ).reshape(batch, channels, height, width)
+
