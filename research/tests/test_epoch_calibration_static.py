@@ -45,6 +45,16 @@ def test_epoch_calibration_registration_and_recipe():
     assert "resume from the completed canonical 100-epoch baseline" in contract["prohibited"]
 
 
+def test_epoch_calibration_runner_bootstraps_repo_root_for_direct_execution():
+    text = (RESEARCH / "runtime/epoch_calibration_runner.py").read_text(encoding="utf-8")
+    assert "import sys" in text
+    assert "_REPO_ROOT_HINT = Path(__file__).resolve().parents[2]" in text
+    assert "sys.path.insert(0, str(_REPO_ROOT_HINT))" in text
+    assert text.index("sys.path.insert(0, str(_REPO_ROOT_HINT))") < text.index(
+        "from research.runtime import baseline_runner as br"
+    )
+
+
 def test_epoch_calibration_runner_has_fresh_and_resume_firewalls():
     text = (RESEARCH / "runtime/epoch_calibration_runner.py").read_text(encoding="utf-8")
     for token in [

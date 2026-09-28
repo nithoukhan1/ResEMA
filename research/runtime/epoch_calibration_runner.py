@@ -8,7 +8,15 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
+
+# When this file is executed directly (python research/runtime/epoch_calibration_runner.py),
+# Python places research/runtime on sys.path rather than the repository root. Bootstrap
+# the repository root before importing the project-local research namespace.
+_REPO_ROOT_HINT = Path(__file__).resolve().parents[2]
+if str(_REPO_ROOT_HINT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT_HINT))
 
 from research.runtime import baseline_runner as br
 from research.runtime import resume_runner as rr

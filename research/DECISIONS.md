@@ -304,3 +304,25 @@ governed longer-budget diagnostic: `BASE-B-ORG-SCR-S42-E200-CAL`.
 
 The diagnostic must not overwrite/resume the canonical run and must not use Split-B
 test.
+
+## 2026-09-28 - EPOCH-CAL-01 direct-execution import bootstrap repair
+
+The first Kaggle EPOCH-CAL-01 fresh preflight failed before dataset access and before
+training with:
+
+`ModuleNotFoundError: No module named 'research'`
+
+Root cause: `research/runtime/epoch_calibration_runner.py` was invoked directly by
+absolute path. Python therefore placed `research/runtime`, not the repository root,
+at `sys.path[0]`. The editable Ultralytics install does not install the top-level
+`research` namespace, so the runner could not import `research.runtime`.
+
+Repair: bootstrap the repository root from `Path(__file__).resolve().parents[2]`
+before importing `research.runtime`, matching the established pattern already used
+by `resume_runner.py`.
+
+The failed attempt performed no training, no validation, and no test access. Because
+the governed runner itself changed, the previous EPOCH-CAL source/authorization pair
+is superseded by a new source-freeze/authorization pair. The calibration recipe,
+dataset binding, architecture, seed, and 200-epoch scientific protocol are unchanged.
+
