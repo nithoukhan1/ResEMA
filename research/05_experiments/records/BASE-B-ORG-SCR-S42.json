@@ -1,0 +1,70 @@
+{
+  "schema_version": "BASELINE-FREEZE-01-experiment-record-v1.0",
+  "freeze_date": "2026-09-28",
+  "experiment_id": "BASE-B-ORG-SCR-S42",
+  "status": "COMPLETE",
+  "scientific_role": "split_b_baseline",
+  "split": "B",
+  "train_data": "original",
+  "initialization": "scratch",
+  "seed": 42,
+  "provenance": {
+    "source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+    "execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+    "data_binding": "DATA01:B-ORG:v1",
+    "canonical_kaggle_ref": "nithoukhan/base-b-org-scr-s42-1",
+    "canonical_archive": "BASE-B-ORG-SCR-S42-1.zip"
+  },
+  "completion": {
+    "epochs": 100,
+    "resume_sessions": 0,
+    "test_access": "NONE"
+  },
+  "selection_metrics": {
+    "source": "canonical results.csv maximum val mAP50-95",
+    "best_epoch": 100,
+    "precision": 0.69276,
+    "recall": 0.63409,
+    "f1": 0.6621278794136489,
+    "map50": 0.63611,
+    "map50_95": 0.4036,
+    "final_epoch_map50_95": 0.4036
+  },
+  "standardized_checkpoint_validation": {
+    "split": "val",
+    "device": 0,
+    "imgsz": 1024,
+    "batch": 16,
+    "half": false,
+    "precision": 0.6633444550271792,
+    "recall": 0.6042261798512758,
+    "f1": 0.6324067076940952,
+    "map50": 0.6222699335828461,
+    "map50_95": 0.39544391699672266,
+    "evaluation_class_count": 8,
+    "per_class_combined_sha256": "6610ee0d3381d643d30a532117ec1c58375b10f97f472956b3ece61ae2ee2ccb",
+    "summary_sha256": "a434da26ef623e465c436420ba1f234c1255c890b98de41638b6a3965211ddab",
+    "per_class_csv_sha256": "532659ba4cdd06a4ea7d12bb929ab4b9c64c036da3fa54588cfca61a897cfd44",
+    "artifact_manifest_sha256": "d67c80048c2669667d9d9a780ef8e1ed693d867f22716bafcdfae41a0a43bb10"
+  },
+  "artifacts": {
+    "best_pt_sha256": "64752b7d5a9451f5ae0a767032af81de2d833d5eca26abe6941322967f725a7e",
+    "last_pt_sha256": "e08049131c6b1063cbfcda2fa8dd12cda2a4d9597bce4f4773969f825c1f8ec4",
+    "results_csv_sha256": "465534f2eaaf26e7f21ea3434a8164cdf36dc3b64c9061fc71bbd85cefd4d84d",
+    "args_yaml_sha256": "11d66ffc37cddfebe5db1a5efabdbd9b5198a3504a3fcb386ad3499b29df18de",
+    "canonical_archive_sha256": "2ad67a84a8026fead5126c4a86a96319988c7a1408a0fda85e7686a2c3d7843d",
+    "full_file_manifest_sha256": "5f78a903d8c365386c4ba9518f2e5a53855112cae8d919ec0e625c572417f336",
+    "standardized_full_output_zip_sha256": "15004b6c14219f654d7b4e8e34e62b1b483b5ba127a15f8d208826ebbefa2d14"
+  },
+  "convergence": {
+    "budget_review": "REGISTER_EXPLICIT_LONGER_BUDGET_DIAGNOSTIC",
+    "followup": "BASE-B-ORG-SCR-S42-E200-CAL"
+  },
+  "governance": {
+    "split_a_firewall": "NOT_APPLICABLE",
+    "test_access": "NONE",
+    "test_predictions": false,
+    "test_metrics": false
+  },
+  "decision": "COMPLETE_CALIBRATION_FOLLOWUP_REGISTERED"
+}

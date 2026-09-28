@@ -181,30 +181,39 @@ def test_train01_runtime_sources_exist_and_compile():
         compile(source, str(path), "exec")
 
 
-def test_train01_source_binding_is_atomic_and_fail_closed_when_blank():
+def test_train01_baseline_ledger_is_phase_consistent():
     rows = read_csv("05_experiments/EXPERIMENTS.csv")
     assert len(rows) == 6
-    assert all(row["status"] == "NOT_STARTED" for row in rows)
+    statuses = {row["status"] for row in rows}
+    if statuses == {"NOT_STARTED"}:
+        bindings = {row["source_commit"].strip() for row in rows}
+        assert bindings == {""} or (
+            len(bindings) == 1
+            and re.fullmatch(r"[0-9a-f]{40}", next(iter(bindings)))
+        )
+    else:
+        assert statuses == {"COMPLETE"}
+        expected = {
+            "BASE-B-ORG-PT-S42": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+            "BASE-B-ORG-SCR-S42": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+            "BASE-A-AUG-PT-S42": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+            "BASE-A-AUG-SCR-S42": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+            "BASE-B-AUG-PT-S42": "18e75338ae116beccf3f5e4a0481efede601026b",
+            "BASE-B-AUG-SCR-S42": "18e75338ae116beccf3f5e4a0481efede601026b",
+        }
+        assert {r["experiment_id"]: r["source_commit"] for r in rows} == expected
+        records = RESEARCH / "05_experiments/records"
+        for row in rows:
+            record = json.loads((records / f"{row['experiment_id']}.json").read_text(encoding="utf-8"))
+            assert record["status"] == "COMPLETE"
+            assert record["selection_metrics"]["map50_95"] == float(row["primary_value"])
+            assert record["governance"]["test_access"] == "NONE"
 
-    bindings = {row["source_commit"].strip() for row in rows}
-    assert bindings == {""} or (
-        len(bindings) == 1
-        and re.fullmatch(r"[0-9a-f]{40}", next(iter(bindings)))
-    )
-
-    runner = (
-        RESEARCH
-        / "runtime/baseline_runner.py"
-    ).read_text(
-        encoding="utf-8",
-        errors="strict",
-    )
-
-    # The implementation-freeze commit is fail-closed while the binding is
-    # blank. A later authorization commit may atomically bind the frozen SHA.
+    runner = (RESEARCH / "runtime/baseline_runner.py").read_text(encoding="utf-8", errors="strict")
     assert "source_commit is blank." in runner
     assert "RESUME-01 closure must bind" in runner
     assert '"test_directory_scan_pruned": True' in runner
+
 
 def test_resume01_matrix_binding_and_runtime_hash_guards_are_present():
     runner = (

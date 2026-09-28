@@ -283,3 +283,24 @@ A3 authorization is approved under the existing two-commit governance rule:
 - existing A2-originated resume lineages remain on exact A2;
 - B-AUG fresh training remains locked until A3 itself is pushed and its exact GitHub
   Research Integrity workflow succeeds.
+
+## 2026-09-28 - BASELINE-FREEZE-01 closed
+
+All six seed-42 YOLO11s baseline runs are accepted as complete canonical 100-epoch
+experiments. The ledger records actual S2/A2 lineage for B-ORG/A-AUG and S3/A3 lineage
+for B-AUG. Selection metrics remain the canonical results.csv maxima; standardized
+FP32 best.pt validation is a separate evidence layer.
+
+Freeze closure includes 11/11 execution archives, 6/6 canonical finals, 600 epoch rows,
+6/6 standardized validation-only passes, 54 per-class rows, exact artifact hashes, no
+training during freeze, and no test predictions or metrics. Foreignbody has zero
+validation support and is reported as N/A rather than AP=0.
+
+## 2026-09-28 - Register separate B-ORG scratch E200 calibration
+
+BASE-B-ORG-SCR-S42 remains frozen at 100 epochs. Its best epoch is 100 and positive
+late-window validation mAP50-95 slopes satisfy the protocol trigger for a separately
+governed longer-budget diagnostic: `BASE-B-ORG-SCR-S42-E200-CAL`.
+
+The diagnostic must not overwrite/resume the canonical run and must not use Split-B
+test.

@@ -1,0 +1,42 @@
+{
+  "schema_version": "BASELINE-FREEZE-01-closure-v1.0",
+  "closure_date": "2026-09-28",
+  "status": "COMPLETE",
+  "baseline_matrix": {
+    "expected": 6,
+    "complete": 6,
+    "epochs_each": 100
+  },
+  "archive_ingestion": {
+    "registered_sessions": 11,
+    "ingested_sessions": 11,
+    "canonical_final_pass": 6
+  },
+  "convergence": {
+    "epoch_rows": 600,
+    "followup_experiment": "BASE-B-ORG-SCR-S42-E200-CAL",
+    "canonical_100_epoch_run_remains_frozen": true
+  },
+  "standardized_validation": {
+    "experiments": 6,
+    "successful_children": 6,
+    "per_class_rows": 54,
+    "evaluated_classes_per_experiment": 8,
+    "zero_support_class": "foreignbody",
+    "full_output_zip_sha256": "15004b6c14219f654d7b4e8e34e62b1b483b5ba127a15f8d208826ebbefa2d14",
+    "review_package_sha256": "71b5de9ea3a92cb93b76c4ba824aa85149b588c4d8bf11b0effcecc5b0e9d6c5",
+    "aggregate_sha256": "6a8a9100d7cbe5794ecf0bba3721e5035cf45780306ce7e8853c90bdba759e5a",
+    "per_class_sha256": "6610ee0d3381d643d30a532117ec1c58375b10f97f472956b3ece61ae2ee2ccb",
+    "batch_summary_sha256": "5a9e987d95549ab481a5db06db22b3b8c28d384f2671b6cc56a5bf2f36e8b42f",
+    "training_started": false,
+    "test_access": "NONE"
+  },
+  "source_lineages": {
+    "S2": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+    "A2": "9fe475175d3963a083d7afc29426f07d86c1887d",
+    "S3": "18e75338ae116beccf3f5e4a0481efede601026b",
+    "A3": "fe95e2d51c4d545111ae2fa7be70c8e1c8e77487"
+  },
+  "split_b_test": "SEALED",
+  "next_phase": "REGISTER_AND_EXECUTE_BASE-B-ORG-SCR-S42-E200-CAL_THEN_CORRECTED_MODULE_REABLATION"
+}

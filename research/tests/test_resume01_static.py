@@ -143,20 +143,30 @@ def test_source_guard_includes_resume_and_upstream_resume_semantics():
         assert f'"{path}"' in source
 
 
-def test_resume01_source_binding_is_blank_or_atomically_bound():
+def test_resume01_source_binding_matches_project_phase():
     import re
-
-    with (RESEARCH / "05_experiments/EXPERIMENTS.csv").open(
-        newline="", encoding="utf-8-sig"
-    ) as handle:
+    with (RESEARCH / "05_experiments/EXPERIMENTS.csv").open(newline="", encoding="utf-8-sig") as handle:
         rows = list(csv.DictReader(handle))
     assert len(rows) == 6
-    assert all(row["status"] == "NOT_STARTED" for row in rows)
-    bindings = {row["source_commit"].strip() for row in rows}
-    assert bindings == {""} or (
-        len(bindings) == 1
-        and re.fullmatch(r"[0-9a-f]{40}", next(iter(bindings)))
-    )
+    statuses = {row["status"] for row in rows}
+    if statuses == {"NOT_STARTED"}:
+        bindings = {row["source_commit"].strip() for row in rows}
+        assert bindings == {""} or (
+            len(bindings) == 1
+            and re.fullmatch(r"[0-9a-f]{40}", next(iter(bindings)))
+        )
+    else:
+        assert statuses == {"COMPLETE"}
+        expected = {
+            "BASE-B-ORG-PT-S42": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+            "BASE-B-ORG-SCR-S42": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+            "BASE-A-AUG-PT-S42": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+            "BASE-A-AUG-SCR-S42": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+            "BASE-B-AUG-PT-S42": "18e75338ae116beccf3f5e4a0481efede601026b",
+            "BASE-B-AUG-SCR-S42": "18e75338ae116beccf3f5e4a0481efede601026b",
+        }
+        assert {r["experiment_id"]: r["source_commit"] for r in rows} == expected
+
 
 def test_experiment_matrix_is_frozen_except_atomic_source_binding():
     source = _read("research/runtime/baseline_runner.py")

@@ -1,0 +1,70 @@
+{
+  "schema_version": "BASELINE-FREEZE-01-experiment-record-v1.0",
+  "freeze_date": "2026-09-28",
+  "experiment_id": "BASE-A-AUG-PT-S42",
+  "status": "COMPLETE",
+  "scientific_role": "historical_reporting_comparator",
+  "split": "A",
+  "train_data": "augmented",
+  "initialization": "pretrained",
+  "seed": 42,
+  "provenance": {
+    "source_commit": "46f40838c1c24a8ced77a2b868dfa0f7f1037f9c",
+    "execution_commit": "9fe475175d3963a083d7afc29426f07d86c1887d",
+    "data_binding": "DATA01:A-AUG:v1",
+    "canonical_kaggle_ref": "vickyhit/base-a-aug-pt-s42-2",
+    "canonical_archive": "BASE-A-AUG-PT-S42-2.zip"
+  },
+  "completion": {
+    "epochs": 100,
+    "resume_sessions": 1,
+    "test_access": "NONE"
+  },
+  "selection_metrics": {
+    "source": "canonical results.csv maximum val mAP50-95",
+    "best_epoch": 49,
+    "precision": 0.6366,
+    "recall": 0.63661,
+    "f1": 0.6366049999607292,
+    "map50": 0.62635,
+    "map50_95": 0.41036,
+    "final_epoch_map50_95": 0.39914
+  },
+  "standardized_checkpoint_validation": {
+    "split": "val",
+    "device": 0,
+    "imgsz": 1024,
+    "batch": 16,
+    "half": false,
+    "precision": 0.6915202387571802,
+    "recall": 0.5741333657339796,
+    "f1": 0.627383101888204,
+    "map50": 0.61706944833229,
+    "map50_95": 0.4061682917324598,
+    "evaluation_class_count": 8,
+    "per_class_combined_sha256": "6610ee0d3381d643d30a532117ec1c58375b10f97f472956b3ece61ae2ee2ccb",
+    "summary_sha256": "5249ea5584b0890b88b71b35d29b8d552dabe3982941fd717f796dc125c6a053",
+    "per_class_csv_sha256": "43d798c2d29c5ba68425aac499619a13e8cfa8721ade7819280e484f987e3db2",
+    "artifact_manifest_sha256": "7db1eeda21a65cb77dc39ec94d661b12c1acafd23aa18e77b9aa37d5246e2db6"
+  },
+  "artifacts": {
+    "best_pt_sha256": "28e440680a024dfce52810933977b7cd69de209b71f9c5a48bae57cb8e307f7f",
+    "last_pt_sha256": "28c75cc569770b11421ddf3f9b2da9cd054463357716fb1f706c33c5d0377fa1",
+    "results_csv_sha256": "8959f126cf4e349f3d7e02fe2f057b28b1d92cab306dfae2ec1d8018be273a6c",
+    "args_yaml_sha256": "ab7d39ce11706352258c033c465f692c2bc2126076939c7aea745b445128c6fc",
+    "canonical_archive_sha256": "499d10102656162c8ef10dd6a886b32323c864e69bc4111ffa0ec6a1a3724cc8",
+    "full_file_manifest_sha256": "850a852415b6c2d0feb410fcac9c47ad172a6968f0706ddce1feb5fc05fb6b6e",
+    "standardized_full_output_zip_sha256": "15004b6c14219f654d7b4e8e34e62b1b483b5ba127a15f8d208826ebbefa2d14"
+  },
+  "convergence": {
+    "budget_review": "NO_EXTENSION_REQUIRED",
+    "followup": null
+  },
+  "governance": {
+    "split_a_firewall": "REPORTING_ONLY_DO_NOT_USE_FOR_SPLIT_B_SELECTION",
+    "test_access": "NONE",
+    "test_predictions": false,
+    "test_metrics": false
+  },
+  "decision": "COMPLETE_REPORTING_ONLY"
+}
