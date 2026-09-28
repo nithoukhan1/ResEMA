@@ -24,7 +24,7 @@ def _copy_native_state(native, target):
     result = target.load_state_dict(native.state_dict(), strict=False)
     assert not result.unexpected_keys
     assert result.missing_keys
-    assert all(".sc_adapters." in key for key in result.missing_keys)
+    assert all(key.startswith("sc_adapters.") or ".sc_adapters." in key for key in result.missing_keys)
     for key, value in native.state_dict().items():
         assert key in target.state_dict()
         assert target.state_dict()[key].shape == value.shape
