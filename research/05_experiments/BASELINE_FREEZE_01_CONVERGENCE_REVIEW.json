@@ -1,0 +1,68 @@
+{
+  "schema_version": "BASELINE-FREEZE-01-convergence-review-v1.0",
+  "review_date": "2026-09-28",
+  "source_artifacts": {
+    "CONVERGENCE_DIAGNOSTICS_csv": {
+      "bytes": 3556,
+      "sha256": "734a399d24731bf5b2162afa831cca76f076905e64124c31c56c3e811f4284d0"
+    },
+    "CANONICAL_EPOCH_METRICS_csv": {
+      "bytes": 72305,
+      "sha256": "bb54bf48544f6308cac143aeb04e84a25b7efdd975ef586b27a6b63b4bc28ce9",
+      "epoch_rows": 600
+    },
+    "BASELINE_FREEZE_01_CONVERGENCE_json": {
+      "bytes": 10509,
+      "sha256": "cad496e28c24f5d2ca978c473eab9cc13e9f4678872b77af157229cf19e9fc0a"
+    }
+  },
+  "training_started": false,
+  "validation_started": false,
+  "test_access": false,
+  "decisions": {
+    "BASE-B-ORG-SCR-S42": {
+      "canonical_100_epoch_run_remains_frozen": true,
+      "best_epoch": 100,
+      "best_map50_95": 0.4036,
+      "final_map50_95": 0.4036,
+      "last5_slope_per_epoch": 0.0008620000000000017,
+      "last10_slope_per_epoch": 0.00048230303030303087,
+      "last20_slope_per_epoch": 0.0003478496240601505,
+      "last30_slope_per_epoch": 0.0002088542825361514,
+      "last50_slope_per_epoch": 0.00022559135654261713,
+      "budget_review": "REGISTER_EXPLICIT_LONGER_BUDGET_DIAGNOSTIC",
+      "proposed_experiment_id": "BASE-B-ORG-SCR-S42-E200-CAL"
+    },
+    "BASE-B-ORG-PT-S42": {
+      "budget_review": "NO_EXTENSION_REQUIRED",
+      "best_epoch": 44,
+      "best_map50_95": 0.41704,
+      "final_map50_95": 0.40447
+    },
+    "BASE-A-AUG-PT-S42": {
+      "budget_review": "NO_EXTENSION_REQUIRED",
+      "best_epoch": 49,
+      "best_map50_95": 0.41036,
+      "final_map50_95": 0.39914
+    },
+    "BASE-A-AUG-SCR-S42": {
+      "budget_review": "NO_EXTENSION_REQUIRED",
+      "best_epoch": 64,
+      "best_map50_95": 0.39072,
+      "final_map50_95": 0.3873
+    },
+    "BASE-B-AUG-PT-S42": {
+      "budget_review": "NO_EXTENSION_REQUIRED",
+      "best_epoch": 33,
+      "best_map50_95": 0.43133,
+      "final_map50_95": 0.41558
+    },
+    "BASE-B-AUG-SCR-S42": {
+      "budget_review": "NO_EXTENSION_REQUIRED",
+      "best_epoch": 94,
+      "best_map50_95": 0.40492,
+      "final_map50_95": 0.40289
+    }
+  },
+  "next_requirement": "STANDARDIZED_VALIDATION_ONLY_PER_CLASS_FREEZE"
+}
