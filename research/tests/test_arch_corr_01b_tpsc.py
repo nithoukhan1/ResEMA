@@ -88,8 +88,8 @@ def test_candidate_yaml_placements_are_controlled():
     assert [g4["backbone"][i][2] for i in (2, 4, 6, 8)] == [
         "C3k2_TPSCG4", "C3k2_TPSCG4", "C3k2_TPSCG4", "C3k2_TPSCG4"
     ]
-    assert all(layer[2] == "C3k2" for layer in early["head"] if layer[2] == "C3k2")
-    assert all(layer[2] == "C3k2" for layer in g4["head"] if layer[2] == "C3k2")
+    assert all(layer[2] not in {"C3k2_TPSC", "C3k2_TPSCG4"} for layer in early["head"])
+    assert all(layer[2] not in {"C3k2_TPSC", "C3k2_TPSCG4"} for layer in g4["head"])
 
 
 def test_parser_registers_tpsc_as_native_c3k2_family():
