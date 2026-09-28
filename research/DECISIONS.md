@@ -361,3 +361,47 @@ transfer audit at that commit is not considered complete. The assertion is repai
 successor commit `9416a56795767ea13d215dfb705a87141bc76878`. No architecture
 training or test-split access occurred.
 
+## 2026-09-28 - ARCH-CORR-01 exact-head local verification accepted
+
+The architecture verification worktree reproduced the current architecture contracts at:
+
+- branch: `research/arch-corr-01b`;
+- verified implementation head: `a30df2165cb24a0796086a32b07445ea04b5c7bc`;
+- local Python: 3.11.9;
+- local PyTorch: 2.5.1+cu121;
+- local Ultralytics: 8.4.7 loaded from the architecture worktree.
+
+Locked initialization checkpoint:
+- `yolo11s.pt`;
+- bytes: 19,313,732;
+- SHA256: `85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5`.
+
+Local focused verification:
+- 16 tests passed;
+- TPSC audit PASS;
+- canonical EMA/TPEMA audit PASS;
+- DySample focused verification PASS;
+- clean worktree after verification;
+- training_started=false;
+- dataset_access=NONE;
+- test_access=NONE.
+
+Frozen local evidence:
+- TPSC audit SHA256:
+  `f8aed12d60a3e60937bf5c5917bf61ce657f50eb45a6a239273c645e602f918c`;
+- EMA audit SHA256:
+  `d2002175791c9035af0894de3c5e32823a786db8b7e763628c2b4d274858258d`;
+- master local verification SHA256:
+  `ac2d2076d7f936999349809b83141f63dd45a88ad4a8b3ae6ff45ef35bf54420`.
+
+Remote evidence on the same implementation head:
+- Research Integrity run #33 / run id `36430937501`: PASS;
+- ARCH-CORR Runtime Audit run #5 / run id `36430937722`: PASS;
+- CI audit artifact id `10973751936`;
+- CI artifact digest:
+  `sha256:50c23ceb9cf63f797bb926dfa10cbef74e705c959e9135699c878c82b4b3ca30`.
+
+This establishes implementation verification only. Corrected-module training remains
+locked until the repository closure candidate and final closure attestation are
+remotely accepted.
+

@@ -117,3 +117,16 @@ No architecture training is authorized by this commit.
 No Split-B test data may be accessed.
 
 The E200 calibration continues independently on `research/baseline-refresh`.
+
+## Verification closure candidate
+
+Verified implementation head:
+`a30df2165cb24a0796086a32b07445ea04b5c7bc`.
+
+The TPSC transfer/identity contract passed both remote and local exact-head
+verification. Local evidence is registered in
+`research/01_provenance/ARCH_CORR_01_VERIFICATION_LOCK.json`.
+
+This note does not authorize training; final ARCH-CORR-01 closure attestation remains
+required.
+

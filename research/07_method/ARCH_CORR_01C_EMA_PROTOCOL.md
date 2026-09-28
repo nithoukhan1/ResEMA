@@ -75,3 +75,16 @@ an expected target total of 9,435,423 versus the 9,431,275 baseline.
 
 DySample remains unchanged and is not combined with EMA or TPSC until the single-module
 contracts are independently closed.
+
+## Verification closure candidate
+
+Verified implementation head:
+`a30df2165cb24a0796086a32b07445ea04b5c7bc`.
+
+Canonical EMA/TPEMA passed both remote and local exact-head transfer/identity
+verification. Local evidence is registered in
+`research/01_provenance/ARCH_CORR_01_VERIFICATION_LOCK.json`.
+
+This note does not authorize training; final ARCH-CORR-01 closure attestation remains
+required.
+

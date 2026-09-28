@@ -1,0 +1,16 @@
+{
+  "schema_version": "ARCH-CORR-01-closure-candidate-v1.0",
+  "status": "CLOSURE_CANDIDATE_CI_PENDING",
+  "verified_implementation_commit": "a30df2165cb24a0796086a32b07445ea04b5c7bc",
+  "verification_lock": "research/01_provenance/ARCH_CORR_01_VERIFICATION_LOCK.json",
+  "local_verification": "PASS",
+  "remote_same_head_verification": "PASS",
+  "training_authorized": false,
+  "split_b_test": "SEALED",
+  "next_required_steps": [
+    "Research Integrity PASS on closure candidate commit",
+    "ARCH-CORR runtime audit PASS on closure candidate commit",
+    "final closure attestation commit with candidate run IDs",
+    "Research Integrity PASS on final attestation"
+  ]
+}

@@ -60,9 +60,19 @@ Purpose:
 - implement a canonical EMA candidate without shifting native YOLO layer indices;
 - verify native state, official checkpoint transfer, zero-gate identity, gradients and parameter counts before any architecture training.
 
-Architecture training remains **NOT AUTHORIZED** until:
-1. dedicated GitHub runtime audit passes on the current architecture head;
-2. exact-head local verification reproduces the same contracts;
-3. ARCH-CORR-01 verification evidence and tracker are frozen in Git.
+Architecture implementation verification has now passed on verified implementation head
+`a30df2165cb24a0796086a32b07445ea04b5c7bc`:
+
+- GitHub Research Integrity run #33: PASS;
+- GitHub ARCH-CORR runtime audit run #5: PASS;
+- local focused tests: 16/16 PASS;
+- local TPSC locked-checkpoint audit: PASS;
+- local canonical EMA locked-checkpoint audit: PASS;
+- local DySample focused verification: PASS;
+- local worktree remained clean;
+- training_started=false, dataset_access=NONE, test_access=NONE.
+
+Architecture training remains **NOT AUTHORIZED** until the documentation/evidence closure
+candidate is remotely CI-verified and a final closure attestation is recorded.
 
 The E200 calibration continues independently on `research/baseline-refresh`.
