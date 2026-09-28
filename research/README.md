@@ -17,8 +17,8 @@ Two parallel workstreams are active:
    - transfer-preserving TPSC candidates;
    - retained DySample;
    - canonical EMA / transfer-preserving TPEMA;
-   - implementation verification complete;
-   - corrected-module training remains locked until ARCH-CORR-01 closure attestation.
+   - ARCH-CORR-01 technical verification and record freeze complete;
+   - corrected-module training still requires separate experiment authorization.
 
 The final architecture and long-tail loss are not yet frozen.
 

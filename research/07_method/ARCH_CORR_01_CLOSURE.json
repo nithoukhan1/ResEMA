@@ -1,0 +1,56 @@
+{
+  "schema_version": "ARCH-CORR-01-closure-v1.0",
+  "status": "COMPLETE",
+  "verified_implementation_commit": "a30df2165cb24a0796086a32b07445ea04b5c7bc",
+  "closure_candidate_commit": "1801379e7cfdf4260e54d08b4e12391b795dc32f",
+  "local_verification": {
+    "focused_tests_passed": 16,
+    "tpsc_audit_sha256": "f8aed12d60a3e60937bf5c5917bf61ce657f50eb45a6a239273c645e602f918c",
+    "ema_audit_sha256": "d2002175791c9035af0894de3c5e32823a786db8b7e763628c2b4d274858258d",
+    "master_sha256": "ac2d2076d7f936999349809b83141f63dd45a88ad4a8b3ae6ff45ef35bf54420",
+    "checkpoint_sha256": "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5"
+  },
+  "remote_verification": {
+    "implementation_research_integrity": {
+      "run_number": 33,
+      "run_id": 36430937501,
+      "conclusion": "success"
+    },
+    "implementation_runtime_audit": {
+      "run_number": 5,
+      "run_id": 36430937722,
+      "conclusion": "success"
+    },
+    "closure_candidate_research_integrity": {
+      "run_number": 34,
+      "run_id": 36436122481,
+      "conclusion": "success"
+    },
+    "closure_candidate_runtime_audit": {
+      "run_number": 6,
+      "run_id": 36436122550,
+      "conclusion": "success"
+    },
+    "closure_candidate_artifact": {
+      "artifact_id": 10975698003,
+      "bytes": 1678,
+      "digest": "sha256:37495f012103bc6898bb7d1ba23d2f9a3623c203aeba45ff96e879affc51ea93"
+    }
+  },
+  "dispositions": {
+    "historical_c3k2_sc": "HISTORICAL_ONLY",
+    "tpsc_early": "TECHNICALLY_VERIFIED_CANDIDATE",
+    "tpsc_g4": "TECHNICALLY_VERIFIED_CANDIDATE",
+    "dysample": "RETAIN_TECHNICALLY_VERIFIED",
+    "historical_resema_v2": "RETIRED_FROM_NEW_DESIGN",
+    "canonical_ema": "TECHNICALLY_VERIFIED",
+    "c3k2_tpema": "TECHNICALLY_VERIFIED_CANDIDATE"
+  },
+  "firewall": {
+    "training_started": false,
+    "dataset_access": "NONE",
+    "test_access": "NONE"
+  },
+  "corrected_module_training_authorized": false,
+  "next_phase": "CONTROLLED_SINGLE_MODULE_EXPERIMENT_REGISTRATION_AND_AUTHORIZATION"
+}

@@ -72,7 +72,17 @@ Architecture implementation verification has now passed on verified implementati
 - local worktree remained clean;
 - training_started=false, dataset_access=NONE, test_access=NONE.
 
-Architecture training remains **NOT AUTHORIZED** until the documentation/evidence closure
-candidate is remotely CI-verified and a final closure attestation is recorded.
+ARCH-CORR-01 implementation verification and evidence closure are complete.
+
+Closure evidence:
+- verified implementation head: `a30df2165cb24a0796086a32b07445ea04b5c7bc`;
+- closure candidate: `1801379e7cfdf4260e54d08b4e12391b795dc32f`;
+- candidate Research Integrity run #34: PASS;
+- candidate ARCH-CORR runtime audit run #6: PASS;
+- local exact-head reproduction: PASS;
+- no architecture training, dataset access or test access occurred during verification.
+
+Corrected modules are now **eligible for a separately governed single-module experiment
+authorization**, but no corrected-module training has yet been authorized.
 
 The E200 calibration continues independently on `research/baseline-refresh`.

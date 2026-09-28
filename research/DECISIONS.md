@@ -405,3 +405,41 @@ This establishes implementation verification only. Corrected-module training rem
 locked until the repository closure candidate and final closure attestation are
 remotely accepted.
 
+## 2026-09-28 - ARCH-CORR-01 verification and record freeze closed
+
+ARCH-CORR-01 is accepted as technically closed.
+
+Verified implementation:
+- commit `a30df2165cb24a0796086a32b07445ea04b5c7bc`;
+- Research Integrity run #33: PASS;
+- ARCH-CORR Runtime Audit run #5: PASS;
+- local exact-head verification: PASS;
+- 16 focused local tests passed;
+- locked yolo11s.pt transfer audits for TPSC and canonical EMA/TPEMA passed;
+- DySample focused verification passed;
+- local evidence hashes are frozen in `ARCH_CORR_01_VERIFICATION_LOCK.json`.
+
+Closure candidate:
+- commit `1801379e7cfdf4260e54d08b4e12391b795dc32f`;
+- Research Integrity run #34 / `36436122481`: PASS;
+- ARCH-CORR Runtime Audit run #6 / `36436122550`: PASS;
+- audit artifact id `10975698003`;
+- artifact digest
+  `sha256:37495f012103bc6898bb7d1ba23d2f9a3623c203aeba45ff96e879affc51ea93`.
+
+No guarded architecture implementation changed between the locally verified
+implementation head and the closure candidate; the candidate changed only provenance,
+documentation, protocol-note and tracker records.
+
+Final dispositions:
+- historical C3k2_SC: historical only, not clean causal SC evidence;
+- SCConv core: retained only through transfer-preserving TPSC wrappers;
+- TPSC Early and TPSC G4: technically verified candidates;
+- DySample: retained and technically verified;
+- historical ResEMA-V2: retired from the new design;
+- CanonicalEMA / C3k2_TPEMA: technically verified candidates.
+
+Technical closure does not itself authorize GPU experiments. Corrected-module training
+requires a new governed experiment-registration/source-authorization step.
+Split-B test remains sealed.
+

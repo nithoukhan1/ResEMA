@@ -2,7 +2,7 @@
 
 ## Global status
 
-`LOCAL VERIFICATION COMPLETE — CLOSURE CANDIDATE CI PENDING — TRAINING NOT AUTHORIZED`
+`COMPLETE — TECHNICAL VERIFICATION AND RECORD FREEZE CLOSED`
 
 Parallel baseline work:
 - canonical branch: `research/baseline-refresh`;
@@ -14,59 +14,48 @@ Architecture branch:
 Verified implementation head:
 - `a30df2165cb24a0796086a32b07445ea04b5c7bc`.
 
+Closure candidate:
+- `1801379e7cfdf4260e54d08b4e12391b795dc32f`.
+
 ## Tracker
 
-| Work item | Implementation | CI/static | Runtime transfer audit | Local reproduction | Final record |
-|---|---|---|---|---|---|
-| Historical C3k2_SC forensic audit | complete | N/A | N/A | code reviewed | documented |
-| TPSC Early | complete | PASS | PASS | PASS | closure candidate |
-| TPSC G4 | complete | PASS | PASS | PASS | closure candidate |
-| DySample | retained | PASS | PASS focused tests | PASS | closure candidate |
-| Historical ResEMA-V2 | historical | N/A | N/A | code reviewed | retired/documented |
-| CanonicalEMA | complete | PASS | PASS | PASS | closure candidate |
-| C3k2_TPEMA | complete | PASS | PASS | PASS | closure candidate |
-| Architecture training | not started | — | — | — | BLOCKED |
-| Split-B test | sealed | — | — | — | SEALED |
+| Work item | Implementation | Remote runtime | Local reproduction | Final disposition |
+|---|---|---|---|---|
+| Historical C3k2_SC forensic audit | complete | N/A | code reviewed | historical only |
+| TPSC Early | complete | PASS | PASS | technically verified candidate |
+| TPSC G4 | complete | PASS | PASS | technically verified candidate |
+| DySample | retained | PASS | PASS | technically verified / retain |
+| Historical ResEMA-V2 | historical | N/A | code reviewed | retired from new design |
+| CanonicalEMA | complete | PASS | PASS | technically verified candidate |
+| C3k2_TPEMA | complete | PASS | PASS | technically verified candidate |
+| Architecture training | not started | — | — | requires separate authorization |
+| Split-B test | sealed | — | — | SEALED |
 
-## Verified implementation evidence
+## Evidence
 
-GitHub:
+Verified implementation head:
 - Research Integrity run #33 / `36430937501`: PASS.
 - ARCH-CORR runtime audit run #5 / `36430937722`: PASS.
-- Runtime audit artifact id: `10973751936`.
-- Runtime audit artifact digest:
-  `sha256:50c23ceb9cf63f797bb926dfa10cbef74e705c959e9135699c878c82b4b3ca30`.
+- local focused tests: 16/16 PASS.
+- local locked-checkpoint and identity audits: PASS.
 
-Local:
-- focused tests: 16/16 PASS;
-- locked yolo11s.pt SHA256:
-  `85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5`;
-- TPSC audit SHA256:
-  `f8aed12d60a3e60937bf5c5917bf61ce657f50eb45a6a239273c645e602f918c`;
-- EMA audit SHA256:
-  `d2002175791c9035af0894de3c5e32823a786db8b7e763628c2b4d274858258d`;
-- local verification master SHA256:
-  `ac2d2076d7f936999349809b83141f63dd45a88ad4a8b3ae6ff45ef35bf54420`;
-- local worktree clean after verification;
-- training_started=false;
-- dataset_access=NONE;
-- test_access=NONE.
+Local hashes:
+- TPSC: `f8aed12d60a3e60937bf5c5917bf61ce657f50eb45a6a239273c645e602f918c`;
+- EMA: `d2002175791c9035af0894de3c5e32823a786db8b7e763628c2b4d274858258d`;
+- master: `ac2d2076d7f936999349809b83141f63dd45a88ad4a8b3ae6ff45ef35bf54420`.
 
-## Known CI history
+Closure candidate:
+- Research Integrity run #34 / `36436122481`: PASS.
+- ARCH-CORR runtime audit run #6 / `36436122550`: PASS.
+- runtime audit artifact id: `10975698003`.
+- runtime audit artifact digest:
+  `sha256:37495f012103bc6898bb7d1ba23d2f9a3623c203aeba45ff96e879affc51ea93`.
 
-- `907d371efe2e9f1ca350d7a9c2e7da0fb6a5f285`: TPSC focused/runtime audit passed.
-- `9b2a8ff6cb67af0e7882c8a44122007af010cef2`: Research Integrity passed; dedicated runtime workflow stopped at a stale exact-string TPSC parser assertion after 11 tests passed.
-- `9416a56795767ea13d215dfb705a87141bc76878`: stale parser assertion repaired.
-- `a30df2165cb24a0796086a32b07445ea04b5c7bc`: Research Integrity PASS, dedicated runtime audit PASS, local exact-head reproduction PASS.
+## Next phase
 
-## Closure sequence
+Register controlled **single-module pretrained Split-B-original** experiments.
 
-1. commit documentation/evidence closure candidate;
-2. require Research Integrity PASS on the candidate;
-3. require dedicated architecture runtime audit PASS on the candidate;
-4. record those candidate run IDs in a final closure attestation;
-5. verify Research Integrity on the final attestation;
-6. declare ARCH-CORR-01 complete;
-7. only then authorize corrected single-module training.
+No combination experiment is authorized until single-module validation evidence is
+available. The E200 scratch calibration remains a separate baseline-budget diagnostic.
 
-Combination experiments remain forbidden until single-module results are available.
+Split-B test remains sealed.

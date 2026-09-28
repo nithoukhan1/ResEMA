@@ -1,6 +1,6 @@
 {
   "schema_version": "ARCH-CORR-01-verification-lock-v1.0",
-  "status": "LOCAL_VERIFIED_CLOSURE_CANDIDATE",
+  "status": "VERIFIED_CLOSED",
   "verified_implementation": {
     "branch": "research/arch-corr-01b",
     "commit": "a30df2165cb24a0796086a32b07445ea04b5c7bc"
@@ -99,5 +99,24 @@
     "dataset_access": "NONE",
     "test_access": "NONE"
   },
-  "next_gate": "REMOTE_CLOSURE_CANDIDATE_CI"
+  "next_gate": "CONTROLLED_SINGLE_MODULE_EXPERIMENT_AUTHORIZATION",
+  "closure_candidate": {
+    "commit": "1801379e7cfdf4260e54d08b4e12391b795dc32f",
+    "research_integrity": {
+      "run_number": 34,
+      "run_id": 36436122481,
+      "conclusion": "success"
+    },
+    "architecture_runtime_audit": {
+      "run_number": 6,
+      "run_id": 36436122550,
+      "conclusion": "success"
+    },
+    "audit_artifact": {
+      "artifact_id": 10975698003,
+      "name": "ARCH_CORR_01_AUDITS",
+      "bytes": 1678,
+      "digest": "sha256:37495f012103bc6898bb7d1ba23d2f9a3623c203aeba45ff96e879affc51ea93"
+    }
+  }
 }
