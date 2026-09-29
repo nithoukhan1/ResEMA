@@ -11,3 +11,5 @@ research/**/*.csv  text eol=lf
 research/**/*.md   text eol=lf
 research/**/*.sh   text eol=lf
 research/**/*.txt  text eol=lf
+
+ultralytics/cfg/models/**/*.yaml text eol=lf
