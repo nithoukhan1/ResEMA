@@ -74,6 +74,41 @@ def test_resume_fails_closed_while_registration_only_before_runtime(
         "membership": False,
     }
 
+    # Keep this hostile test independent of the live SMS
+    # authorization phase. It must explicitly simulate the
+    # registration-only condition both before and after the
+    # later authorization transaction.
+    registration_only_row = dict(
+        sms.load_row(
+            "BORG-PT-S42-DYSAMPLE-E100"
+        )
+    )
+
+    registration_only_row["status"] = (
+        "REGISTERED_NOT_AUTHORIZED"
+    )
+    registration_only_row["source_commit"] = ""
+    registration_only_row[
+        "authorization_commit"
+    ] = ""
+
+    def registration_only_load_row(
+        experiment_id,
+    ):
+        assert experiment_id == (
+            "BORG-PT-S42-DYSAMPLE-E100"
+        )
+
+        return dict(
+            registration_only_row
+        )
+
+    monkeypatch.setattr(
+        sms,
+        "load_row",
+        registration_only_load_row,
+    )
+
     def clean_git(*args, **kwargs):
         if args == (
             "branch",
