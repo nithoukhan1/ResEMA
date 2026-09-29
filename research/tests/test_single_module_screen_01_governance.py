@@ -86,6 +86,37 @@ def test_unregistered_execution_fails_before_runtime_or_dataset_access(
         _fake_clean_git,
     )
 
+    # Make this hostile test independent of the live registry
+    # authorization state. It must explicitly simulate the
+    # registration-only condition both before and after the
+    # later authorization transaction.
+    registration_only_row = copy.deepcopy(
+        sms.load_row(
+            "BORG-PT-S42-DYSAMPLE-E100"
+        )
+    )
+
+    registration_only_row["status"] = (
+        "REGISTERED_NOT_AUTHORIZED"
+    )
+    registration_only_row["source_commit"] = ""
+    registration_only_row["authorization_commit"] = ""
+
+    def registration_only_load_row(experiment_id):
+        assert experiment_id == (
+            "BORG-PT-S42-DYSAMPLE-E100"
+        )
+
+        return copy.deepcopy(
+            registration_only_row
+        )
+
+    monkeypatch.setattr(
+        sms,
+        "load_row",
+        registration_only_load_row,
+    )
+
     reached = {
         "runtime": False,
         "membership": False,
