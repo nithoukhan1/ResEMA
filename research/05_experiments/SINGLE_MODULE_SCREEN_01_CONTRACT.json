@@ -1,6 +1,6 @@
 {
     "schema_version":  "SMS01-contract-v1.0",
-    "status":  "REGISTERED_NOT_AUTHORIZED",
+    "status":  "AUTHORIZED",
     "experiment_family":  "SINGLE_MODULE_SCREEN_01",
     "branch":  "research/single-module-screen-01",
     "architecture_parent":  {
@@ -101,13 +101,13 @@
                               "final_proposed_model_six_condition_matrix":  "AFTER final architecture freeze, not during candidate screening"
                           },
     "firewall":  {
-                     "training_authorized":  false,
+                     "training_authorized":  true,
                      "gpu_training_started":  false,
                      "test_access":  "NONE",
                      "split_b_test_for_selection":  false
                  },
     "provenance":  {
-                       "source_commit":  null,
+                       "source_commit":  "def9df7e2ed987ef702c8fdf4c52cd6052dc6259",
                        "authorization_commit":  null,
                        "note":  "source_commit remains intentionally null until the runner, preflight, tests and experiment definitions are complete and source-frozen."
                    }
