@@ -1,0 +1,114 @@
+{
+    "schema_version":  "SMS01-contract-v1.0",
+    "status":  "REGISTERED_NOT_AUTHORIZED",
+    "experiment_family":  "SINGLE_MODULE_SCREEN_01",
+    "branch":  "research/single-module-screen-01",
+    "architecture_parent":  {
+                                "branch":  "research/arch-corr-01b",
+                                "closure_commit":  "dbeb2f7efdf080c0c15b72c0f89fe1f38b84e3b3",
+                                "verified_implementation_commit":  "a30df2165cb24a0796086a32b07445ea04b5c7bc"
+                            },
+    "scientific_question":  "Which individually corrected architecture modules improve the frozen pretrained YOLO11s reference under the controlled Split-B Original development condition?",
+    "development_condition":  {
+                                  "split":  "B",
+                                  "train_data":  "original",
+                                  "data_binding":  "DATA01:B-ORG:v1",
+                                  "initialization":  "pretrained",
+                                  "seed":  42,
+                                  "epochs":  100,
+                                  "imgsz":  1024,
+                                  "batch_global":  16,
+                                  "optimizer":  "SGD",
+                                  "primary_metric":  "validation_mAP50-95",
+                                  "selection_split":  "val",
+                                  "test_access":  "NONE"
+                              },
+    "baseline_reference":  {
+                               "experiment_id":  "BASE-B-ORG-PT-S42",
+                               "parameters":  9431275,
+                               "canonical_best_epoch":  44,
+                               "canonical_val_mAP50_95":  0.41704,
+                               "canonical_val_mAP50":  0.65301,
+                               "canonical_precision":  0.689,
+                               "canonical_recall":  0.61491,
+                               "canonical_f1":  0.64985005100045246,
+                               "note":  "Canonical training-time selection metrics are the architecture-screen reference; standardized revalidation remains a separate reporting record."
+                           },
+    "initialization":  {
+                           "checkpoint":  "yolo11s.pt",
+                           "sha256":  "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5",
+                           "official_checkpoint_transferable_items_to_native_9class_reference":  493
+                       },
+    "training_contract":  {
+                              "path":  "research/05_experiments/TRAINING.yaml",
+                              "sha256":  "862b7d76fa9052387c13ab63eb206d0c74d0a6fde876cf240def807b99e34b81",
+                              "status_required":  "FROZEN_BASELINE_RECIPE_V2"
+                          },
+    "candidates":  [
+                       {
+                           "experiment_id":  "BORG-PT-S42-SCCONV-EARLY-E100",
+                           "display_name":  "YOLO11s + SCConv-Early",
+                           "internal_module":  "C3k2_TPSC",
+                           "model_yaml":  "ultralytics/cfg/models/11/yolo11s-tpsc-early-v1.yaml",
+                           "model_yaml_sha256":  "0fc8050d3e654482fd58967244ecf45b5dfb48c9a3ba86a9584b93c9676a4d23",
+                           "expected_parameters":  9570093,
+                           "added_parameters":  138818,
+                           "verified_official_checkpoint_transferable_items":  493,
+                           "verified_native_state_items_matched":  499,
+                           "zero_gate_bitwise_exact":  true
+                       },
+                       {
+                           "experiment_id":  "BORG-PT-S42-SCCONV-4STAGE-E100",
+                           "display_name":  "YOLO11s + SCConv-4Stage",
+                           "internal_module":  "C3k2_TPSCG4",
+                           "model_yaml":  "ultralytics/cfg/models/11/yolo11s-tpsc-g4-v1.yaml",
+                           "model_yaml_sha256":  "df4f2f2d1b3aaf8aa9ce3448a97d968ecfea88f22b1c5b76aab576ee17a51267",
+                           "expected_parameters":  10021679,
+                           "added_parameters":  590404,
+                           "verified_official_checkpoint_transferable_items":  493,
+                           "verified_native_state_items_matched":  499,
+                           "zero_gate_bitwise_exact":  true
+                       },
+                       {
+                           "experiment_id":  "BORG-PT-S42-DYSAMPLE-E100",
+                           "display_name":  "YOLO11s + DySample",
+                           "internal_module":  "DySample",
+                           "model_yaml":  "ultralytics/cfg/models/11/yolo11s-dysample-v2.yaml",
+                           "model_yaml_sha256":  "f8dd2a989db782bfbbf3e2afeaafc619dde0e0de027901886c52d478c3a69027",
+                           "expected_parameters":  9455915,
+                           "added_parameters":  24640,
+                           "transfer_preflight_required_before_authorization":  true,
+                           "focused_verification_status":  "PASS"
+                       },
+                       {
+                           "experiment_id":  "BORG-PT-S42-CANONICAL-EMA-E100",
+                           "display_name":  "YOLO11s + Canonical EMA",
+                           "internal_module":  "C3k2_TPEMA",
+                           "model_yaml":  "ultralytics/cfg/models/11/yolo11s-tpema-head-v1.yaml",
+                           "model_yaml_sha256":  "7406275d61b8a0f232cb0e5d2f7f9117ce78da79d4e728194258595d36adce47",
+                           "expected_parameters":  9435423,
+                           "added_parameters":  4148,
+                           "verified_official_checkpoint_transferable_items":  493,
+                           "verified_native_state_items_matched":  499,
+                           "zero_gate_bitwise_exact":  true
+                       }
+                   ],
+    "advancement_rules":  {
+                              "single_module_screen_required_before_combinations":  true,
+                              "combination_training_authorized":  false,
+                              "architecture_selection_uses_split_b_original_validation":  true,
+                              "split_a_may_not_drive_architecture_selection":  true,
+                              "final_proposed_model_six_condition_matrix":  "AFTER final architecture freeze, not during candidate screening"
+                          },
+    "firewall":  {
+                     "training_authorized":  false,
+                     "gpu_training_started":  false,
+                     "test_access":  "NONE",
+                     "split_b_test_for_selection":  false
+                 },
+    "provenance":  {
+                       "source_commit":  null,
+                       "authorization_commit":  null,
+                       "note":  "source_commit remains intentionally null until the runner, preflight, tests and experiment definitions are complete and source-frozen."
+                   }
+}

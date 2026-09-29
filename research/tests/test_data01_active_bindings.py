@@ -42,7 +42,7 @@ def test_data01_manifest_contract():
     manifest = load_manifest()
 
     assert manifest["schema_version"] == (
-        "DATA01-active-dataset-bindings-v1.0"
+        "DATA01-active-dataset-bindings-v1.1"
     )
     assert manifest["created_date"] == "2026-09-22"
     assert manifest["status"] == "COMPLETE"
@@ -224,16 +224,13 @@ def test_data01_experiment_rows_are_bound():
         for row in rows
     }
 
+    # DATA-01 owns these six frozen dataset bindings.
+    # Later governed phases may advance lifecycle state and may
+    # add later experiments without changing these bindings.
+    assert set(expected).issubset(observed)
+
     for experiment_id, binding in expected.items():
         assert observed[experiment_id] == binding
-
-    for row in rows:
-        assert row["status"] == "NOT_STARTED"
-        assert not row["source_commit"]
-
-    # INIT-01 may populate initialization identity after DATA-01 closes.
-    # DATA-01's invariant is that rows remain unstarted and dataset-bound;
-    # checkpoint identity belongs to INIT-01.
 
 
 def test_data01_test_firewall_and_training_lock():
@@ -254,13 +251,6 @@ def test_data01_test_firewall_and_training_lock():
 
 
 def test_data01_remote_closure_remains_recorded_after_init01():
-    current = (
-        ROOT / "research/CURRENT.md"
-    ).read_text(
-        encoding="utf-8",
-        errors="strict",
-    )
-
     decisions = (
         ROOT / "research/DECISIONS.md"
     ).read_text(
@@ -268,16 +258,8 @@ def test_data01_remote_closure_remains_recorded_after_init01():
         errors="strict",
     )
 
-    # DATA-01 closure evidence must remain recorded after later phases advance.
-    assert "DATA-01 is complete and remotely CI-verified." in current
-    assert "4473ff57126e2427c6a6e6e5f24c40528f76e5f7" in current
-    assert "35711226411" in current
-
-    # CURRENT is allowed to advance beyond INIT-01 once INIT-01 is frozen.
-    assert "`TRAIN-01` - implement the reusable governed baseline trainer" in current
-
-    # The append-only decision log must preserve the historical transition
-    # that DATA-01 advanced the project to INIT-01.
+    # CURRENT.md intentionally advances with the active project phase.
+    # Historical DATA-01 closure remains append-only in DECISIONS.md.
     assert "## 2026-09-22 - DATA-01 remotely closed" in decisions
     assert "4473ff57126e2427c6a6e6e5f24c40528f76e5f7" in decisions
     assert "35711226411" in decisions

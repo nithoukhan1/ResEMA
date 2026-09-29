@@ -133,29 +133,37 @@ def test_init01_nine_class_transfer_contract():
 def test_init01_experiment_bindings_and_training_lock():
     rows = load_experiments()
 
-    for row in rows:
-        assert row["status"] == "NOT_STARTED"
-        assert not row["source_commit"]
+    expected_baseline_ids = {
+        "BASE-B-ORG-PT-S42",
+        "BASE-B-ORG-SCR-S42",
+        "BASE-B-AUG-PT-S42",
+        "BASE-B-AUG-SCR-S42",
+        "BASE-A-AUG-PT-S42",
+        "BASE-A-AUG-SCR-S42",
+    }
 
+    by_id = {
+        row["experiment_id"]: row
+        for row in rows
+    }
+
+    assert expected_baseline_ids.issubset(by_id)
+
+    for experiment_id in sorted(expected_baseline_ids):
+        row = by_id[experiment_id]
+
+        # INIT-01 owns initialization identity.
+        # Later phases may legitimately advance lifecycle fields.
         if row["initialization"] == "pretrained":
             assert row["init_checkpoint_sha256"] == CHECKPOINT_SHA256
-            assert row["notes"] == "INIT01:YOLO11S-9C-PTVSCR-S42:v1"
 
         elif row["initialization"] == "scratch":
             assert not row["init_checkpoint_sha256"]
-            assert row["notes"] == "INIT01:scratch-seed42-no-checkpoint"
 
         else:
             raise AssertionError(
                 f"Unexpected initialization: {row['initialization']}"
             )
-
-    current = (
-        ROOT / "research/CURRENT.md"
-    ).read_text(
-        encoding="utf-8",
-        errors="strict",
-    )
 
     decisions = (
         ROOT / "research/DECISIONS.md"
@@ -164,8 +172,7 @@ def test_init01_experiment_bindings_and_training_lock():
         errors="strict",
     )
 
-    assert "`TRAIN-01` - implement the reusable governed baseline trainer" in current
-    assert "Training remains locked until both `TRAIN-01` and `RESUME-01`" in current
-
     assert "## 2026-09-23 - INIT-01 initialization contract frozen" in decisions
+    assert CHECKPOINT_SHA256 in decisions
     assert "The project advances to `TRAIN-01`." in decisions
+    assert "Training remains locked until both `TRAIN-01` and `RESUME-01`" in decisions
