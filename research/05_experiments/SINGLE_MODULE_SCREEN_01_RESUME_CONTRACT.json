@@ -1,0 +1,29 @@
+{
+  "schema_version": "SMS01-resume-contract-v1.0",
+  "status": "IMPLEMENTED",
+  "experiment_family": "SINGLE_MODULE_SCREEN_01",
+  "branch": "research/single-module-screen-01",
+  "purpose": "Govern multi-session continuation of an already-started SMS-01 candidate without changing the frozen scientific recipe.",
+  "experiment_ids": [
+    "BORG-PT-S42-SCCONV-EARLY-E100",
+    "BORG-PT-S42-SCCONV-4STAGE-E100",
+    "BORG-PT-S42-DYSAMPLE-E100",
+    "BORG-PT-S42-CANONICAL-EMA-E100"
+  ],
+  "allowed_modes": [
+    "preflight-only",
+    "execute"
+  ],
+  "require_exact_original_execution_commit": true,
+  "require_full_run_copy_before_resume": true,
+  "multi_session_indexed_provenance": true,
+  "require_checkpoint_optimizer_state": true,
+  "require_checkpoint_scaler_state": true,
+  "require_results_checkpoint_consistency": true,
+  "require_candidate_parameter_state_identity": true,
+  "require_test_free_runtime_yaml": true,
+  "test_access": "NONE",
+  "scientific_overrides_allowed": false,
+  "combination_training_authorized": false,
+  "note": "This contract implements resume mechanics only. Fresh or resumed GPU execution remains controlled by the SMS-01 registry, source freeze, authorization record, and test firewall."
+}

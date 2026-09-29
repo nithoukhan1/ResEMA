@@ -414,15 +414,34 @@ class GovernedSingleModuleTrainer(GovernedDetectionTrainer):
         )
 
         if bool(getattr(self, "resume", False)):
+            session_index = int(
+                preflight[
+                    "resume_session_index"
+                ]
+            )
+
+            runtime_dir = (
+                governance_dir
+                / "resume_sessions"
+            )
+
+            runtime_dir.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
             filename = (
-                "SMS01_RESUME_MODEL_RUNTIME.json"
+                "SMS01_RESUME_MODEL_RUNTIME_"
+                f"{session_index:03d}.json"
             )
         else:
+            runtime_dir = governance_dir
+
             filename = (
                 "SMS01_MODEL_RUNTIME.json"
             )
 
-        path = governance_dir / filename
+        path = runtime_dir / filename
 
         if path.exists():
             raise RuntimeError(
@@ -446,6 +465,11 @@ class GovernedSingleModuleTrainer(GovernedDetectionTrainer):
                 self.train01_initialization_audit,
             "test_access": "NONE",
         }
+
+        if bool(getattr(self, "resume", False)):
+            payload["resume_session_index"] = (
+                session_index
+            )
 
         tmp = path.with_suffix(".json.tmp")
 

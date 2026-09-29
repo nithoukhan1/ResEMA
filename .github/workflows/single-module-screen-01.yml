@@ -8,6 +8,7 @@ on:
       - ".gitattributes"
       - "research/05_experiments/SINGLE_MODULE_SCREEN_01_*"
       - "research/runtime/single_module_runner.py"
+      - "research/runtime/single_module_resume_runner.py"
       - "research/tests/test_single_module_screen_01_*.py"
       - "research/tests/test_data01_active_bindings.py"
       - "research/tests/test_init01_initialization_lock.py"
