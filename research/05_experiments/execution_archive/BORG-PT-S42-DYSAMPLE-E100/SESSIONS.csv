@@ -1,2 +1,2 @@
 session_index,session_type,code_status,start_epoch_one_based,end_epoch_one_based,status,execution_commit,test_access,notes
-1,FRESH,PLANNED_NOT_EXECUTED,1,,NOT_STARTED,9d65b7adae3d488f1cb70856476fef0488e9749a,NONE,"Prepared before execution; intended Kaggle Save Version run."
+1,FRESH,EXACT_CAPTURE,1,,RUNNING,9d65b7adae3d488f1cb70856476fef0488e9749a,NONE,"Started successfully on Kaggle T4x2; governed gates passed. PyTorch warned that CUDA grid_sampler_2d_backward has no deterministic implementation; documented, no recipe change."
