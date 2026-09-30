@@ -1,0 +1,25 @@
+{
+  "schema_version": "execution-archive-v1.0",
+  "experiment_id": "BORG-PT-S42-DYSAMPLE-E100",
+  "archive_status": "PREPARED",
+  "code_status": "PLANNED_NOT_EXECUTED",
+  "platform": "Kaggle",
+  "scientific_branch": "research/single-module-screen-01",
+  "training_source_commit": "660475b3aa3614f58f21c98f760561c72e3f1436",
+  "execution_commit": "9d65b7adae3d488f1cb70856476fef0488e9749a",
+  "canonical_runner": "research/runtime/single_module_runner.py",
+  "canonical_resume_runner": "research/runtime/single_module_resume_runner.py",
+  "launch_archive": "kaggle/001_FRESH_LAUNCH.py",
+  "data_binding": "DATA01:B-ORG:v1",
+  "initialization": "pretrained",
+  "seed": 42,
+  "epochs": 100,
+  "test_access": "NONE",
+  "execution_status": "NOT_STARTED",
+  "output_preservation": {
+    "method": "KAGGLE_SAVE_VERSION",
+    "final_kaggle_ref": null,
+    "final_archive_sha256": null,
+    "status": "PENDING_EXECUTION"
+  }
+}
