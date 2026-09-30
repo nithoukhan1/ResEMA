@@ -14,5 +14,12 @@
   "initialization": "pretrained",
   "seed": 42,
   "epochs": 100,
-  "test_access": "NONE"
+  "test_access": "NONE",
+  "execution_status": "RUNNING",
+  "output_preservation": {
+    "method": "KAGGLE_SAVE_VERSION",
+    "final_kaggle_ref": null,
+    "final_archive_sha256": null,
+    "status": "PENDING_SESSION_STOP_AND_ARCHIVE_VERIFICATION"
+  }
 }
