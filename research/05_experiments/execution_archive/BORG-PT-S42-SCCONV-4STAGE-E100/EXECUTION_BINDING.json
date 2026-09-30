@@ -1,8 +1,8 @@
 {
   "schema_version": "execution-archive-v1.0",
   "experiment_id": "BORG-PT-S42-SCCONV-4STAGE-E100",
-  "archive_status": "PREPARED",
-  "code_status": "PLANNED_NOT_EXECUTED",
+  "archive_status": "ACTIVE",
+  "code_status": "EXACT_CAPTURE",
   "platform": "Kaggle",
   "scientific_branch": "research/single-module-screen-01",
   "training_source_commit": "660475b3aa3614f58f21c98f760561c72e3f1436",
@@ -14,5 +14,6 @@
   "initialization": "pretrained",
   "seed": 42,
   "epochs": 100,
-  "test_access": "NONE"
+  "test_access": "NONE",
+  "execution_status": "RUNNING"
 }
