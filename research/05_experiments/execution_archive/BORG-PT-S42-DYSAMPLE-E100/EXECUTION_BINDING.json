@@ -1,8 +1,8 @@
 {
   "schema_version": "execution-archive-v1.0",
   "experiment_id": "BORG-PT-S42-DYSAMPLE-E100",
-  "archive_status": "PREPARED",
-  "code_status": "PLANNED_NOT_EXECUTED",
+  "archive_status": "ACTIVE",
+  "code_status": "EXACT_CAPTURE",
   "platform": "Kaggle",
   "scientific_branch": "research/single-module-screen-01",
   "training_source_commit": "660475b3aa3614f58f21c98f760561c72e3f1436",
@@ -15,11 +15,18 @@
   "seed": 42,
   "epochs": 100,
   "test_access": "NONE",
-  "execution_status": "NOT_STARTED",
+  "execution_status": "RUNNING",
   "output_preservation": {
     "method": "KAGGLE_SAVE_VERSION",
     "final_kaggle_ref": null,
     "final_archive_sha256": null,
-    "status": "PENDING_EXECUTION"
+    "status": "PENDING_SESSION_STOP_AND_ARCHIVE_VERIFICATION"
+  },
+  "reproducibility_caveat": {
+    "observed": true,
+    "operation": "grid_sampler_2d_backward_cuda",
+    "context": "DySample uses torch.nn.functional.grid_sample on CUDA; PyTorch deterministic mode is warn-only in this runtime.",
+    "action": "DOCUMENT_AND_CONTINUE_FROZEN_RUN",
+    "scientific_recipe_changed": false
   }
 }
