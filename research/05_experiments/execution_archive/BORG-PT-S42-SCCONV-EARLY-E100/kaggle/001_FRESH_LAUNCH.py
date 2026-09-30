@@ -1,6 +1,6 @@
 # ======================================================================
 # SMS-01-T1
-# GOVERNED FRESH EXECUTION — CANDIDATE 1
+# GOVERNED FRESH EXECUTION — CANDIDATE 1 ONLY
 #
 # Candidate:
 #   BORG-PT-S42-SCCONV-EARLY-E100
@@ -17,7 +17,7 @@
 # IMPORTANT:
 #   - NO Split-B test access
 #   - NO manual hyperparameter overrides
-#   - NO other candidate in this run
+#   - NO Candidate 2/3/4
 #   - NO combinations
 # ======================================================================
 
@@ -83,7 +83,7 @@ def capture(cmd, *, cwd=None):
 
 
 print("=" * 100)
-print("SMS-01 — CANDIDATE 1 GOVERNED EXECUTION")
+print("SMS-01-T1 — CANDIDATE 1 GOVERNED EXECUTION")
 print("=" * 100)
 
 
@@ -129,10 +129,10 @@ print("RUN_DIR_EXISTS   =", RUN_DIR.exists())
 
 if RUN_DIR.exists():
     raise RuntimeError(
-        "\nCandidate run directory already exists:\n"
+        "\nCandidate-1 run directory already exists:\n"
         f"{RUN_DIR}\n\n"
         "DO NOT delete it and DO NOT launch fresh training over it.\n"
-        "If it contains an interrupted training run, use the "
+        "If it contains an interrupted training run, we must use the "
         "governed SMS resume workflow instead."
     )
 
@@ -173,6 +173,7 @@ run(
     cwd=REPO,
 )
 
+# Create the required branch name directly at the frozen authorization SHA.
 run(
     [
         "git",
@@ -305,7 +306,7 @@ print("POST_INSTALL_GIT_GATE = PASS")
 
 
 # ----------------------------------------------------------------------
-# 8. GOVERNED EXECUTION
+# 8. GOVERNED CANDIDATE-1 EXECUTION
 # ----------------------------------------------------------------------
 
 print("\n" + "=" * 100)
