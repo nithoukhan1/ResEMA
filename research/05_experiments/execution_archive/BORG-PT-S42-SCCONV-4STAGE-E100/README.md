@@ -4,9 +4,9 @@
 Single-module screen Candidate 2: YOLO11s + SCConv-4Stage.
 
 ## Archive status
-- Code status: `PLANNED_NOT_EXECUTED`
-- Scientific execution status: `NOT_STARTED`
-- The prepared Kaggle wrapper must be run without scientific modifications before it can be relabeled as an exact executed capture.
+- Code status: `EXACT_CAPTURE`
+- Scientific execution status: `RUNNING`
+- The archived Kaggle wrapper was executed without scientific modification and training started successfully on Kaggle T4x2.
 
 ## Frozen scientific binding
 - Branch: `research/single-module-screen-01`
