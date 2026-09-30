@@ -4,10 +4,10 @@
 Single-module screen Candidate 3: YOLO11s + DySample.
 
 ## Archive status
-- Code status: `PLANNED_NOT_EXECUTED`
-- Scientific execution status: `NOT_STARTED`
+- Code status: `EXACT_CAPTURE`
+- Scientific execution status: `RUNNING`
 - Kaggle preservation mode: `KAGGLE_SAVE_VERSION`
-- The prepared Kaggle wrapper must be executed without scientific modification before it can be relabeled as an exact executed capture.
+- The archived Kaggle wrapper was executed without scientific modification and training started successfully on Kaggle T4x2.
 
 ## Frozen scientific binding
 - Branch: `research/single-module-screen-01`
@@ -20,3 +20,8 @@ Single-module screen Candidate 3: YOLO11s + DySample.
 - Seed: 42
 - Epochs: 100
 - Test access: NONE
+
+## Reproducibility note
+- PyTorch emitted a warning that CUDA `grid_sampler_2d_backward` has no deterministic implementation under the active runtime.
+- This warning is expected from DySample because its implementation uses `torch.nn.functional.grid_sample`.
+- The frozen recipe remains unchanged; the run is retained and the warning is documented as a module-specific reproducibility caveat.
