@@ -1,0 +1,19 @@
+{
+  "schema_version": "execution-archive-resume-preflight-evidence-v1.0",
+  "experiment_id": "BORG-PT-S42-SCCONV-EARLY-E100",
+  "resume_session_index": 1,
+  "status": "PASS",
+  "execution_commit": "9d65b7adae3d488f1cb70856476fef0488e9749a",
+  "training_source_commit": "660475b3aa3614f58f21c98f760561c72e3f1436",
+  "parent_last_pt_sha256": "c9d1f06f123d1b7ab8083d7dbbcd536fc41d6aeb31693f81269783ea0df3d2d8",
+  "completed_epochs": 99,
+  "next_epoch_one_based": 100,
+  "total_epochs": 100,
+  "expected_parameters": 9570093,
+  "expected_state_items": 537,
+  "preview_sha256": "a6779a70e8cab631ff579cf73a11721934461b1bd8634c74ee18a279dd93e13d",
+  "destination_run_materialized": false,
+  "training_started": false,
+  "resume_executed": false,
+  "test_access": "NONE"
+}
