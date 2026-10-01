@@ -15,21 +15,30 @@
   "seed": 42,
   "epochs": 100,
   "test_access": "NONE",
-  "execution_status": "COMPLETE",
+  "execution_status": "COMPLETE_VERIFIED",
   "output_preservation": {
     "method": "KAGGLE_SAVE_VERSION",
     "final_kaggle_ref": "nithoukhan/borg-pt-s42-scconv-early-e100-2",
-    "status": "COMPLETED_PENDING_FINAL_HASH_AUDIT",
-    "results_csv_sha256": "71692809e6c93eb8d04b999184f728936b3ca2248570faded6d1bc204d680d6f",
-    "best_pt_sha256": "a9a21c44366a530485fb5379df758970e9e529bf7b1192f2d6062e815c6b0516",
-    "last_pt_sha256": "c9d1f06f123d1b7ab8083d7dbbcd536fc41d6aeb31693f81269783ea0df3d2d8"
+    "status": "VERIFIED_BY_SMS01_FINAL_ARTIFACT_CLOSURE_AUDIT",
+    "results_csv_sha256": "474533cc41f5531a1b78369c312f217c9ee7ec1f52c2942f8c1c519f834eee84",
+    "args_yaml_sha256": "09ff3678be480df67eeb71613b5e365b56b0818b0b90b806b6ecf55b4adae667",
+    "best_pt_sha256": "620594d3560310b5d24243e1b321ce4463b0795b295891c47f6ec177e5272ac1",
+    "last_pt_sha256": "c118eaaa37977153211f1d90d69355144f0efecb741c0423fe12a0fa2412530a",
+    "governance_file_count": 7,
+    "closure_audit_json_sha256": "5c9ab3c40272fdab20ab88710a43e92312f6c50261f1e54b73280d550b54fcce",
+    "closure_summary_csv_sha256": "8acf4efff6fb90d8fb4eafc88c542b0055ed37c7778080dcc5bea0a22bfa0a10"
   },
   "progress": {
     "completed_epochs": 100,
     "target_epochs": 100,
     "best_epoch_from_results_csv": 42,
+    "best_precision_from_results_csv": 0.8099,
+    "best_recall_from_results_csv": 0.61659,
+    "best_f1_from_results_csv": 0.700146851362435,
+    "best_map50_from_results_csv": 0.67258,
     "best_map50_95_from_results_csv": 0.4313,
-    "final_bestpt_revalidation_map50_95_rounded": 0.431
+    "final_map50_95_from_results_csv": 0.40408,
+    "delta_map50_95_vs_borg_pt_baseline": 0.01426
   },
   "resume_session_001": {
     "status": "COMPLETE",
