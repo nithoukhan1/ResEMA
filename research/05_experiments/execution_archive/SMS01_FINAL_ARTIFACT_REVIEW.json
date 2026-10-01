@@ -1,0 +1,93 @@
+{
+  "schema_version": "SMS01-final-artifact-review-v1.0",
+  "status": "TRAINING_AND_ARTIFACT_CLOSURE_COMPLETE",
+  "scientific_branch": "research/single-module-screen-01",
+  "scientific_execution_commit": "9d65b7adae3d488f1cb70856476fef0488e9749a",
+  "training_source_commit": "660475b3aa3614f58f21c98f760561c72e3f1436",
+  "data_binding": "DATA01:B-ORG:v1",
+  "initialization": "pretrained",
+  "seed": 42,
+  "epochs": 100,
+  "selection_split": "val",
+  "test_access": "NONE",
+  "combination_training_authorized": false,
+  "audit_json_sha256": "5c9ab3c40272fdab20ab88710a43e92312f6c50261f1e54b73280d550b54fcce",
+  "summary_csv_sha256": "8acf4efff6fb90d8fb4eafc88c542b0055ed37c7778080dcc5bea0a22bfa0a10",
+  "baseline": {
+    "experiment_id": "BASE-B-ORG-PT-S42",
+    "params": 9431275,
+    "best_epoch": 44,
+    "p": 0.689,
+    "r": 0.61491,
+    "f1": 0.6498500510004525,
+    "map50": 0.65301,
+    "map50_95": 0.41704,
+    "results_csv_sha256": "eb1d95da732c5beeff09b585b7be51216aed666de1ef8f97c8ea7e610045b758",
+    "best_pt_sha256": "65e3c59901e0429f70a7b368dc29ebb698c427a799cfcf66354a882ec48bc4c7"
+  },
+  "candidates": [
+    {
+      "experiment_id": "BORG-PT-S42-SCCONV-EARLY-E100",
+      "params": 9570093,
+      "best_epoch": 42,
+      "precision": 0.8099,
+      "recall": 0.61659,
+      "f1": 0.700146851362435,
+      "map50": 0.67258,
+      "map50_95": 0.4313,
+      "delta_map50_95_vs_baseline": 0.01426,
+      "final_kaggle_ref": "nithoukhan/borg-pt-s42-scconv-early-e100-2",
+      "best_pt_sha256": "620594d3560310b5d24243e1b321ce4463b0795b295891c47f6ec177e5272ac1",
+      "results_csv_sha256": "474533cc41f5531a1b78369c312f217c9ee7ec1f52c2942f8c1c519f834eee84"
+    },
+    {
+      "experiment_id": "BORG-PT-S42-SCCONV-4STAGE-E100",
+      "params": 10021679,
+      "best_epoch": 41,
+      "precision": 0.6432,
+      "recall": 0.66386,
+      "f1": 0.653366719201873,
+      "map50": 0.66506,
+      "map50_95": 0.42587,
+      "delta_map50_95_vs_baseline": 0.00883,
+      "final_kaggle_ref": "nithoukhan2/borg-pt-s42-scconv-4stage-e100-2",
+      "best_pt_sha256": "5485ec2fd9cc6421bdff7b4f0cd8b724db3ed8b540d4d11c77519cdbbcbfb7c4",
+      "results_csv_sha256": "8a1f406ad6346d9c10720c7ac0d00406e1102f97cdcde14eb1b3c70083037d51"
+    },
+    {
+      "experiment_id": "BORG-PT-S42-DYSAMPLE-E100",
+      "params": 9455915,
+      "best_epoch": 47,
+      "precision": 0.68413,
+      "recall": 0.60415,
+      "f1": 0.6416573097463285,
+      "map50": 0.64235,
+      "map50_95": 0.41525,
+      "delta_map50_95_vs_baseline": -0.00179,
+      "final_kaggle_ref": "hebut123/borg-pt-s42-dysample-e100-1",
+      "best_pt_sha256": "61f3a99e4d29f20fddddd103ef3af049861d0b2278f384a044897be93a5fd556",
+      "results_csv_sha256": "26176bd454e492a84a8a23864ef5fb6c2beed9fcf36f77852d609c06f4f8be8a"
+    },
+    {
+      "experiment_id": "BORG-PT-S42-CANONICAL-EMA-E100",
+      "params": 9435423,
+      "best_epoch": 46,
+      "precision": 0.7916,
+      "recall": 0.63703,
+      "f1": 0.7059531831194921,
+      "map50": 0.67204,
+      "map50_95": 0.42796,
+      "delta_map50_95_vs_baseline": 0.01092,
+      "final_kaggle_ref": "abasitive/borg-pt-s42-canonical-ema-e100-2",
+      "best_pt_sha256": "f9d262c22c2bcb075cafe8eac368c0d4083a99f765f64e8ed6781c337ff0b6ec",
+      "results_csv_sha256": "21dbd6f1074267b59534b78e1d2db3eb559fcdcbca77c7271d16f081feddb6b7"
+    }
+  ],
+  "evidence_interpretation": {
+    "scconv_early": "strongest primary validation mAP50-95 improvement; candidate for promotion",
+    "canonical_ema": "strong mAP50-95 gain with minimal parameter increase and highest F1; candidate for promotion",
+    "scconv_4stage": "improves baseline but is less parameter-efficient than SCConv-Early; hold for now",
+    "dysample": "did not improve primary metric over baseline in this screen; do not promote by default"
+  },
+  "next_state": "MIGRATION_FREEZE_BEFORE_COMBINATION_AUTHORIZATION"
+}
