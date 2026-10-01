@@ -1,0 +1,19 @@
+{
+  "schema_version": "execution-archive-resume-preflight-evidence-v1.0",
+  "experiment_id": "BORG-PT-S42-CANONICAL-EMA-E100",
+  "resume_session_index": 1,
+  "status": "PASS",
+  "execution_commit": "9d65b7adae3d488f1cb70856476fef0488e9749a",
+  "training_source_commit": "660475b3aa3614f58f21c98f760561c72e3f1436",
+  "parent_last_pt_sha256": "f2fcd6ba122e2fd520ae9f0049293dbcacfee760e5c9291e50b4d158977b2fb7",
+  "completed_epochs": 89,
+  "next_epoch_one_based": 90,
+  "total_epochs": 100,
+  "expected_parameters": 9435423,
+  "expected_state_items": 527,
+  "preview_sha256": "f41ff7bb140da9ef7aa56d18518c76b476f2624598f492dd167d963693e3deeb",
+  "destination_run_materialized": false,
+  "training_started": false,
+  "resume_executed": false,
+  "test_access": "NONE"
+}
