@@ -1,0 +1,120 @@
+{
+    "schema_version":  "COMB01-contract-v1.0",
+    "status":  "REGISTERED_NOT_AUTHORIZED",
+    "experiment_family":  "COMBINATION_SCREEN_01",
+    "branch":  "research/combination-screen-01",
+    "scientific_parent":  {
+                              "phase":  "SINGLE_MODULE_SCREEN_01",
+                              "branch":  "research/single-module-screen-01",
+                              "frozen_scientific_commit":  "9d65b7adae3d488f1cb70856476fef0488e9749a"
+                          },
+    "scientific_question":  "Does combining the independently beneficial SCConv-Early backbone refinement and Canonical EMA head refinement provide complementary validation improvement beyond the strongest single-module candidate under the frozen Split-B Original pretrained development condition?",
+    "rationale":  {
+                      "scconv_early":  "Promoted because it achieved the highest SMS-01 validation mAP50-95.",
+                      "canonical_ema":  "Promoted because it achieved a strong mAP50-95 gain, the highest SMS-01 F1, and minimal parameter overhead.",
+                      "composition":  "SCConv-Early and Canonical EMA operate at non-overlapping architecture locations.",
+                      "no_new_fused_python_module":  true,
+                      "dysample_excluded":  "DySample did not improve the SMS-01 primary validation metric.",
+                      "scconv_4stage_excluded":  "SCConv-4Stage improved baseline but was weaker and less parameter-efficient than SCConv-Early."
+                  },
+    "promoted_sms01_evidence":  {
+                                    "baseline":  {
+                                                     "experiment_id":  "BASE-B-ORG-PT-S42",
+                                                     "best_epoch":  44,
+                                                     "val_mAP50_95":  0.41704,
+                                                     "parameters":  9431275
+                                                 },
+                                    "scconv_early":  {
+                                                         "experiment_id":  "BORG-PT-S42-SCCONV-EARLY-E100",
+                                                         "best_epoch":  42,
+                                                         "val_mAP50_95":  0.4313,
+                                                         "source_yaml":  "ultralytics/cfg/models/11/yolo11s-tpsc-early-v1.yaml",
+                                                         "source_yaml_sha256":  "01caddd418e280684380c4629cb2b594a8ce628c37666216b37bef4226b11882",
+                                                         "added_parameters":  138818
+                                                     },
+                                    "canonical_ema":  {
+                                                          "experiment_id":  "BORG-PT-S42-CANONICAL-EMA-E100",
+                                                          "best_epoch":  46,
+                                                          "val_mAP50_95":  0.42796,
+                                                          "source_yaml":  "ultralytics/cfg/models/11/yolo11s-tpema-head-v1.yaml",
+                                                          "source_yaml_sha256":  "04b5085c03172b3c143a9d97e585c32f3dd19588c0ba812fbcab64a2269d33a9",
+                                                          "added_parameters":  4148
+                                                      }
+                                },
+    "candidate":  {
+                      "experiment_id":  "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100",
+                      "display_name":  "YOLO11s + SCConv-Early + Canonical EMA",
+                      "model_yaml":  "ultralytics/cfg/models/11/yolo11s-scconv-early-canonical-ema-v1.yaml",
+                      "model_yaml_sha256":  "6f9547db340b77b3947698fcd911a70d3cde63328e1190751bc135c11443df14",
+                      "architecture":  {
+                                           "backbone_scconv_early_layer_indices":  [
+                                                                                       2,
+                                                                                       4
+                                                                                   ],
+                                           "head_canonical_ema_layer_indices":  [
+                                                                                    13,
+                                                                                    16,
+                                                                                    19,
+                                                                                    22
+                                                                                ],
+                                           "detect_input_indices":  [
+                                                                        16,
+                                                                        19,
+                                                                        22
+                                                                    ],
+                                           "dysample":  false,
+                                           "scconv_4stage":  false
+                                       },
+                      "pre_audit_hypotheses":  {
+                                                   "expected_parameters":  9574241,
+                                                   "expected_added_parameters":  142966,
+                                                   "expected_state_items":  565,
+                                                   "expected_new_state_items":  66,
+                                                   "expected_native_baseline_state_items_preserved":  499,
+                                                   "expected_official_checkpoint_transferable_items":  493,
+                                                   "expected_zero_gate_native_equivalence":  true,
+                                                   "authority_status":  "HYPOTHESIS_ONLY_UNTIL_COMB01_STATIC_AND_TRANSFER_AUDIT"
+                                               }
+                  },
+    "development_condition":  {
+                                  "split":  "B",
+                                  "train_data":  "original",
+                                  "data_binding":  "DATA01:B-ORG:v1",
+                                  "initialization":  "pretrained",
+                                  "checkpoint":  "yolo11s.pt",
+                                  "checkpoint_sha256":  "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5",
+                                  "seed":  42,
+                                  "epochs":  100,
+                                  "imgsz":  1024,
+                                  "batch_global":  16,
+                                  "optimizer":  "SGD",
+                                  "training_contract":  "research/05_experiments/TRAINING.yaml",
+                                  "training_contract_sha256":  "862b7d76fa9052387c13ab63eb206d0c74d0a6fde876cf240def807b99e34b81",
+                                  "primary_metric":  "validation_mAP50-95",
+                                  "selection_split":  "val",
+                                  "test_access":  "NONE"
+                              },
+    "advancement_rule":  {
+                             "strongest_single_module_reference":  "BORG-PT-S42-SCCONV-EARLY-E100",
+                             "strongest_single_module_val_mAP50_95":  0.4313,
+                             "complementarity_rule":  "COMB-01 must achieve validation mAP50-95 strictly greater than 0.43130 to demonstrate additional primary-metric value beyond the strongest single-module candidate.",
+                             "beating_baseline_only_is_sufficient":  false,
+                             "architecture_selection_uses_split_b_original_validation":  true,
+                             "split_a_may_drive_architecture_selection":  false,
+                             "combination_result_may_access_test":  false
+                         },
+    "firewall":  {
+                     "training_authorized":  false,
+                     "gpu_training_started":  false,
+                     "test_access":  "NONE",
+                     "test_predictions":  false,
+                     "test_metrics":  false,
+                     "test_error_analysis":  false
+                 },
+    "provenance":  {
+                       "registration_parent_commit":  "9d65b7adae3d488f1cb70856476fef0488e9749a",
+                       "scientific_source_commit":  null,
+                       "authorization_commit":  null,
+                       "note":  "Scientific source commit remains null until structural audit, zero-gate audit, pretrained-transfer audit, governed execution support and tests are complete."
+                   }
+}

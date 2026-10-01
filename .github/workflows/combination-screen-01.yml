@@ -1,0 +1,59 @@
+name: COMB-01 Combination Screen Audit
+
+on:
+  push:
+    branches:
+      - research/combination-screen-01
+    paths:
+      - ".gitattributes"
+      - "research/05_experiments/COMBINATION_SCREEN_01_*"
+      - "research/05_experiments/TRAINING.yaml"
+      - "research/01_provenance/INIT01_INITIALIZATION_LOCK.json"
+      - "research/04_data/manifests/DATA01_ACTIVE_DATASET_BINDINGS.json"
+      - "research/runtime/baseline_runner.py"
+      - "research/runtime/resume_runner.py"
+      - "research/runtime/combination_screen_runner.py"
+      - "research/runtime/combination_screen_resume_runner.py"
+      - "research/tests/test_combination_screen_01_*.py"
+      - "research/tests/test_data01_active_bindings.py"
+      - "research/tests/test_init01_initialization_lock.py"
+      - "ultralytics/research/baseline_trainer.py"
+      - "ultralytics/research/combination_screen_trainer.py"
+      - "ultralytics/cfg/models/11/yolo11s-scconv-early-canonical-ema-v1.yaml"
+      - "ultralytics/nn/**"
+      - ".github/workflows/combination-screen-01.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comb01-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install project and test tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e . pytest
+
+      - name: Verify repository state
+        run: python research/tools/verify_repo_state.py
+
+      - name: Run complete research suite
+        run: >-
+          python -m pytest
+          -o addopts=''
+          research/tests
+          -q

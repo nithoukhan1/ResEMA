@@ -1,0 +1,154 @@
+{
+    "schema_version":  "COMB01-technical-verification-v1.0",
+    "created_date":  "2026-10-02",
+    "status":  "PASS",
+    "experiment_family":  "COMBINATION_SCREEN_01",
+    "experiment_id":  "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100",
+    "branch":  "research/combination-screen-01",
+    "registration_parent_commit":  "9d65b7adae3d488f1cb70856476fef0488e9749a",
+    "purpose":  "Freeze the read-only technical evidence establishing structural correctness, transfer-preserving zero-gate identity, and exact official YOLO11s pretrained transfer for the registered COMB-01 candidate before execution-layer implementation and before any GPU training authorization.",
+    "model_identity":  {
+                           "display_name":  "YOLO11s + SCConv-Early + Canonical EMA",
+                           "model_yaml":  "ultralytics/cfg/models/11/yolo11s-scconv-early-canonical-ema-v1.yaml",
+                           "model_yaml_sha256":  "6f9547db340b77b3947698fcd911a70d3cde63328e1190751bc135c11443df14",
+                           "parameters":  9574241,
+                           "added_parameters_over_native":  142966,
+                           "state_dict_items":  565,
+                           "native_state_items":  499,
+                           "new_state_items":  66,
+                           "scconv_new_state_items":  38,
+                           "canonical_ema_new_state_items":  28,
+                           "zero_gates":  6
+                       },
+    "architecture":  {
+                         "scconv_early_layer_indices":  [
+                                                            2,
+                                                            4
+                                                        ],
+                         "canonical_ema_layer_indices":  [
+                                                             13,
+                                                             16,
+                                                             19,
+                                                             22
+                                                         ],
+                         "detect_input_indices":  [
+                                                      16,
+                                                      19,
+                                                      22
+                                                  ],
+                         "stride":  [
+                                        8,
+                                        16,
+                                        32
+                                    ],
+                         "top_level_layers":  24,
+                         "graph_from_bindings_equal_native":  true,
+                         "unmodified_layer_types_equal_native":  true,
+                         "dysample_present":  false,
+                         "scconv_4stage_present":  false
+                     },
+    "structural_verification":  {
+                                    "audit_id":  "COMB-01A3-R2",
+                                    "status":  "PASS",
+                                    "parameter_count_verified":  true,
+                                    "parameter_additivity_verified":  true,
+                                    "state_item_count_verified":  true,
+                                    "native_state_preservation_verified":  true,
+                                    "missing_or_shape_changed_native_items":  0,
+                                    "new_state_union_verified":  true,
+                                    "sc_ema_new_keys_disjoint":  true,
+                                    "unexpected_new_state_items":  0,
+                                    "graph_connectivity_verified":  true,
+                                    "layer_placement_verified":  true,
+                                    "detect_binding_verified":  true,
+                                    "stride_contract_verified":  true,
+                                    "forward_structure_verified":  true
+                                },
+    "zero_gate_verification":  {
+                                   "diagnosis_audit_id":  "COMB-01A4-D1",
+                                   "functional_audit_id":  "COMB-01A4-R1",
+                                   "status":  "PASS",
+                                   "native_state_items_copied_bitwise":  499,
+                                   "adapter_state_items_preserved":  66,
+                                   "load_state_reported_missing_items":  60,
+                                   "silent_sc_batchnorm_tracking_items":  6,
+                                   "corrected_load_state_partition_verified":  true,
+                                   "sc_gate_count":  2,
+                                   "canonical_ema_gate_count":  4,
+                                   "total_gate_count":  6,
+                                   "all_gates_exact_zero_before_forward":  true,
+                                   "full_model_zero_gate_equivalence":  "BITWISE_EXACT",
+                                   "zero_gate_inputs_verified":  [
+                                                                     "ZEROS_256",
+                                                                     "RANDOM_256",
+                                                                     "RANDOM_RECT_256x320"
+                                                                 ],
+                                   "all_24_layer_outputs_bitwise_exact":  true,
+                                   "first_different_layer_at_zero_gate":  null,
+                                   "sc_adapter_liveness_verified":  true,
+                                   "sc_gate_perturbation":  0.25,
+                                   "sc_perturbation_max_abs_diff":  3.0517578125E-05,
+                                   "canonical_ema_adapter_liveness_verified":  true,
+                                   "canonical_ema_gate_perturbation":  0.25,
+                                   "canonical_ema_perturbation_max_abs_diff":  1.52587890625E-05,
+                                   "final_zero_restore_bitwise_exact":  true
+                               },
+    "official_pretrained_transfer":  {
+                                         "audit_id":  "COMB-01A5",
+                                         "status":  "PASS",
+                                         "official_checkpoint":  {
+                                                                     "asset_name":  "yolo11s.pt",
+                                                                     "release_tag":  "v8.4.0",
+                                                                     "bytes":  19313732,
+                                                                     "sha256":  "85a76fe86dd8afe384648546b56a7a78580c7cb7b404fc595f97969322d502d5"
+                                                                 },
+                                         "source_model":  {
+                                                              "class":  "DetectionModel",
+                                                              "classes":  80,
+                                                              "parameters":  9458752,
+                                                              "state_dict_items":  499,
+                                                              "state_dict_total_numel":  9488817,
+                                                              "stride":  [
+                                                                             8,
+                                                                             16,
+                                                                             32
+                                                                         ]
+                                                          },
+                                         "transferable_source_items":  493,
+                                         "transferable_keys_equal_native_9class_target":  true,
+                                         "source_nontransferable_items":  6,
+                                         "source_nontransferable_reason":  "COCO-80 classification outputs have incompatible shapes with the frozen 9-class Detect outputs.",
+                                         "native_9class_head_nontransfer_items":  6,
+                                         "new_adapter_nontransfer_items":  66,
+                                         "target_nontransfer_items":  72,
+                                         "all_493_transferred_tensors_exact":  true,
+                                         "all_72_nontransfer_target_items_preserved":  true,
+                                         "all_6_nine_class_head_items_preserved":  true,
+                                         "all_66_adapter_items_preserved":  true,
+                                         "all_6_adapter_gates_remain_exact_zero":  true,
+                                         "pretrained_forward_finite":  true
+                                     },
+    "technical_conclusion":  {
+                                 "architecture_definition_verified":  true,
+                                 "native_transfer_preserving_structure_verified":  true,
+                                 "zero_gate_native_identity_verified":  true,
+                                 "official_checkpoint_transfer_verified":  true,
+                                 "technical_architecture_validation_closed":  true,
+                                 "execution_layer_implementation_may_proceed":  true,
+                                 "gpu_training_authorized":  false,
+                                 "reason_training_remains_locked":  "Dedicated COMB-01 governed fresh-run/resume execution code, static and hostile tests, scientific source freeze, explicit authorization record, and Kaggle runtime preflight are still required."
+                             },
+    "firewall":  {
+                     "development_split":  "Split-B Original",
+                     "data_binding":  "DATA01:B-ORG:v1",
+                     "initialization":  "pretrained",
+                     "seed":  42,
+                     "epochs":  100,
+                     "test_access":  "NONE",
+                     "test_predictions":  false,
+                     "test_metrics":  false,
+                     "test_error_analysis":  false,
+                     "gpu_training_started":  false
+                 },
+    "provenance_note":  "This record preserves post-registration technical verification as a separate evidence layer. The original COMBINATION_SCREEN_01_CONTRACT.json pre_audit_hypotheses remain historical registration hypotheses and are not silently rewritten after verification."
+}

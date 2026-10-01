@@ -1,0 +1,30 @@
+{
+  "schema_version": "COMB01-resume-contract-v1.0",
+  "status": "IMPLEMENTED",
+  "experiment_family": "COMBINATION_SCREEN_01",
+  "branch": "research/combination-screen-01",
+  "purpose": "Govern multi-session continuation of an already-started COMB-01 candidate without changing the frozen scientific recipe, technical architecture identity, pretrained initialization contract, or test firewall.",
+  "experiment_ids": [
+    "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100"
+  ],
+  "allowed_modes": [
+    "preflight-only",
+    "execute"
+  ],
+  "require_exact_original_execution_commit": true,
+  "require_full_run_copy_before_resume": true,
+  "multi_session_indexed_provenance": true,
+  "require_checkpoint_optimizer_state": true,
+  "require_checkpoint_scaler_state": true,
+  "require_results_checkpoint_consistency": true,
+  "require_candidate_parameter_state_identity": true,
+  "require_test_free_runtime_yaml": true,
+  "technical_verification_sha256": "0295a6e90bbe6856517c5e723fbe58901f87d405743a8b6ecf334f335191fe29",
+  "expected_parameters": 9574241,
+  "expected_state_items": 565,
+  "expected_original_initialization": "pretrained",
+  "test_access": "NONE",
+  "scientific_overrides_allowed": false,
+  "training_authorization_delegated_to_registry_and_authorization_record": true,
+  "note": "This contract implements resume mechanics only. Fresh or resumed GPU execution remains locked until the COMB-01 scientific source is frozen and the separate registry/authorization transaction explicitly authorizes training."
+}
