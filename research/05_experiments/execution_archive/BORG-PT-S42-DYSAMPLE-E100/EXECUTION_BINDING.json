@@ -15,14 +15,18 @@
   "seed": 42,
   "epochs": 100,
   "test_access": "NONE",
-  "execution_status": "COMPLETE",
+  "execution_status": "COMPLETE_VERIFIED",
   "output_preservation": {
     "method": "KAGGLE_SAVE_VERSION",
     "final_kaggle_ref": "hebut123/borg-pt-s42-dysample-e100-1",
-    "status": "VERIFIED_AS_KAGGLE_INPUT",
+    "status": "VERIFIED_BY_SMS01_FINAL_ARTIFACT_CLOSURE_AUDIT",
     "results_csv_sha256": "26176bd454e492a84a8a23864ef5fb6c2beed9fcf36f77852d609c06f4f8be8a",
+    "args_yaml_sha256": "233af65dbae323b11ed6c5df0247a64342890056eda981420971f4e39dc3ca29",
     "best_pt_sha256": "61f3a99e4d29f20fddddd103ef3af049861d0b2278f384a044897be93a5fd556",
-    "last_pt_sha256": "eb565a95d745f2f42c6ea6134b66c7a86053c6f018f6a4a0f122929ce5d28782"
+    "last_pt_sha256": "eb565a95d745f2f42c6ea6134b66c7a86053c6f018f6a4a0f122929ce5d28782",
+    "governance_file_count": 3,
+    "closure_audit_json_sha256": "5c9ab3c40272fdab20ab88710a43e92312f6c50261f1e54b73280d550b54fcce",
+    "closure_summary_csv_sha256": "8acf4efff6fb90d8fb4eafc88c542b0055ed37c7778080dcc5bea0a22bfa0a10"
   },
   "reproducibility_caveat": {
     "observed": true,
@@ -35,6 +39,12 @@
     "completed_epochs": 100,
     "target_epochs": 100,
     "best_epoch_from_results_csv": 47,
-    "best_map50_95_from_results_csv": 0.41525
+    "best_precision_from_results_csv": 0.68413,
+    "best_recall_from_results_csv": 0.60415,
+    "best_f1_from_results_csv": 0.6416573097463285,
+    "best_map50_from_results_csv": 0.64235,
+    "best_map50_95_from_results_csv": 0.41525,
+    "final_map50_95_from_results_csv": 0.39765,
+    "delta_map50_95_vs_borg_pt_baseline": -0.00179
   }
 }
