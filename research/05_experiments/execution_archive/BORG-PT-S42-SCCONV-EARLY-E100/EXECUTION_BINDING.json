@@ -15,11 +15,19 @@
   "seed": 42,
   "epochs": 100,
   "test_access": "NONE",
-  "execution_status": "RUNNING",
+  "execution_status": "RESUME_REQUIRED",
   "output_preservation": {
     "method": "KAGGLE_SAVE_VERSION",
-    "final_kaggle_ref": null,
-    "final_archive_sha256": null,
-    "status": "PENDING_SESSION_STOP_AND_ARCHIVE_VERIFICATION"
+    "final_kaggle_ref": "nithoukhan/borg-pt-s42-scconv-early-e100-1",
+    "status": "VERIFIED_AS_KAGGLE_INPUT",
+    "results_csv_sha256": "71692809e6c93eb8d04b999184f728936b3ca2248570faded6d1bc204d680d6f",
+    "best_pt_sha256": "a9a21c44366a530485fb5379df758970e9e529bf7b1192f2d6062e815c6b0516",
+    "last_pt_sha256": "c9d1f06f123d1b7ab8083d7dbbcd536fc41d6aeb31693f81269783ea0df3d2d8"
+  },
+  "progress": {
+    "completed_epochs": 99,
+    "target_epochs": 100,
+    "best_epoch_from_results_csv": 42,
+    "best_map50_95_from_results_csv": 0.4313
   }
 }
