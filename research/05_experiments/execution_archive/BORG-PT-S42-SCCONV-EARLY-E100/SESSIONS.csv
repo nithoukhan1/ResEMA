@@ -1,2 +1,3 @@
 session_index,session_type,code_status,start_epoch_one_based,end_epoch_one_based,status,execution_commit,test_access,notes
-1,FRESH,EXACT_CAPTURE,1,99,INTERRUPTED_RESUME_REQUIRED,9d65b7adae3d488f1cb70856476fef0488e9749a,NONE,"Kaggle Save Version verified; 99/100 results rows; governed resume required for epoch 100."
+1,FRESH,EXACT_CAPTURE,1,99,INTERRUPTED_RESUMED,9d65b7adae3d488f1cb70856476fef0488e9749a,NONE,"Original Save Version preserved as nithoukhan/borg-pt-s42-scconv-early-e100-1."
+2,RESUME,EXACT_CAPTURE,100,100,COMPLETE,9d65b7adae3d488f1cb70856476fef0488e9749a,NONE,"Self-contained Save Version resume completed normally; final output nithoukhan/borg-pt-s42-scconv-early-e100-2."
