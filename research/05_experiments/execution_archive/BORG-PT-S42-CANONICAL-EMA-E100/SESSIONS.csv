@@ -1,2 +1,2 @@
 session_index,session_type,code_status,start_epoch_one_based,end_epoch_one_based,status,execution_commit,test_access,notes
-1,FRESH,PLANNED_NOT_EXECUTED,1,,NOT_STARTED,9d65b7adae3d488f1cb70856476fef0488e9749a,NONE,"Prepared before execution; intended Kaggle Save Version run."
+1,FRESH,PLANNED_NOT_EXECUTED,1,89,INTERRUPTED_RESUME_REQUIRED,9d65b7adae3d488f1cb70856476fef0488e9749a,NONE,"Scientific execution verified by saved governed artifacts; 89/100 results rows. Exact outer-wrapper capture status remains conservative pending explicit confirmation."
