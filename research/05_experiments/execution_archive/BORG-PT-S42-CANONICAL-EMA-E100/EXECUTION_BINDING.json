@@ -19,21 +19,30 @@
   "seed": 42,
   "epochs": 100,
   "test_access": "NONE",
-  "execution_status": "COMPLETE",
+  "execution_status": "COMPLETE_VERIFIED",
   "output_preservation": {
     "method": "KAGGLE_SAVE_VERSION",
     "final_kaggle_ref": "abasitive/borg-pt-s42-canonical-ema-e100-2",
-    "status": "COMPLETED_PENDING_FINAL_HASH_AUDIT",
-    "results_csv_sha256": "238fe45143f52d2107833f4cd399e8976df6f64a3300351ff1a4cdab2964c812",
-    "best_pt_sha256": "a4b0655db95fcd5c3fd1f7f601f8da63623cb3062579aec39959e40d0eba11ce",
-    "last_pt_sha256": "f2fcd6ba122e2fd520ae9f0049293dbcacfee760e5c9291e50b4d158977b2fb7"
+    "status": "VERIFIED_BY_SMS01_FINAL_ARTIFACT_CLOSURE_AUDIT",
+    "results_csv_sha256": "21dbd6f1074267b59534b78e1d2db3eb559fcdcbca77c7271d16f081feddb6b7",
+    "args_yaml_sha256": "f24add684540f72d012c369519acb4ff8a7589b72ec9f926defe39de789a7126",
+    "best_pt_sha256": "f9d262c22c2bcb075cafe8eac368c0d4083a99f765f64e8ed6781c337ff0b6ec",
+    "last_pt_sha256": "4a64caf2b89ff59a327fdfa05208c802721af3663c6fa9686c2649091c00ce51",
+    "governance_file_count": 7,
+    "closure_audit_json_sha256": "5c9ab3c40272fdab20ab88710a43e92312f6c50261f1e54b73280d550b54fcce",
+    "closure_summary_csv_sha256": "8acf4efff6fb90d8fb4eafc88c542b0055ed37c7778080dcc5bea0a22bfa0a10"
   },
   "progress": {
     "completed_epochs": 100,
     "target_epochs": 100,
     "best_epoch_from_results_csv": 46,
+    "best_precision_from_results_csv": 0.7916,
+    "best_recall_from_results_csv": 0.63703,
+    "best_f1_from_results_csv": 0.7059531831194921,
+    "best_map50_from_results_csv": 0.67204,
     "best_map50_95_from_results_csv": 0.42796,
-    "final_bestpt_revalidation_map50_95_rounded": 0.428
+    "final_map50_95_from_results_csv": 0.40459,
+    "delta_map50_95_vs_borg_pt_baseline": 0.01092
   },
   "resume_session_001": {
     "status": "COMPLETE",
