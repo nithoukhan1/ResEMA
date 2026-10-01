@@ -12,6 +12,12 @@
 # IMPORTANT:
 #   PREFLIGHT ONLY — MUST NOT START TRAINING.
 # ======================================================================
+# INVOCATION CORRECTION:
+#   Direct script execution fails before governance because the frozen
+#   resume runner does not bootstrap the repository root into sys.path.
+#   Invoke the exact same frozen runner with Python -m instead.
+#   Scientific source/configuration remains unchanged.
+# ======================================================================
 
 from pathlib import Path
 import hashlib
@@ -196,7 +202,8 @@ run(
     [
         sys.executable,
         "-u",
-        "research/runtime/single_module_resume_runner.py",
+        "-m",
+        "research.runtime.single_module_resume_runner",
         "--experiment-id",
         EXPERIMENT_ID,
         "--mode",
