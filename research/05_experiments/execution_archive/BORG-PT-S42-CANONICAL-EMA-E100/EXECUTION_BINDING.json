@@ -19,19 +19,32 @@
   "seed": 42,
   "epochs": 100,
   "test_access": "NONE",
-  "execution_status": "RESUME_REQUIRED",
+  "execution_status": "COMPLETE",
   "output_preservation": {
     "method": "KAGGLE_SAVE_VERSION",
-    "final_kaggle_ref": "abasitive/borg-pt-s42-canonical-ema-e100-1",
-    "status": "VERIFIED_AS_KAGGLE_INPUT",
+    "final_kaggle_ref": "abasitive/borg-pt-s42-canonical-ema-e100-2",
+    "status": "COMPLETED_PENDING_FINAL_HASH_AUDIT",
     "results_csv_sha256": "238fe45143f52d2107833f4cd399e8976df6f64a3300351ff1a4cdab2964c812",
     "best_pt_sha256": "a4b0655db95fcd5c3fd1f7f601f8da63623cb3062579aec39959e40d0eba11ce",
     "last_pt_sha256": "f2fcd6ba122e2fd520ae9f0049293dbcacfee760e5c9291e50b4d158977b2fb7"
   },
   "progress": {
-    "completed_epochs": 89,
+    "completed_epochs": 100,
     "target_epochs": 100,
     "best_epoch_from_results_csv": 46,
-    "best_map50_95_from_results_csv": 0.42796
+    "best_map50_95_from_results_csv": 0.42796,
+    "final_bestpt_revalidation_map50_95_rounded": 0.428
+  },
+  "resume_session_001": {
+    "status": "COMPLETE",
+    "test_access": "NONE",
+    "note": "Resume session 001 completed epochs 90-100 and returned normally; TEST_ACCESS=NONE. CUDA adaptive_avg_pool2d backward determinism warning observed and retained as reproducibility caveat."
+  },
+  "reproducibility_caveat": {
+    "observed": true,
+    "operation": "adaptive_avg_pool2d_backward_cuda",
+    "context": "PyTorch warned that CUDA backward for adaptive average pooling has no deterministic implementation under warn-only deterministic mode.",
+    "action": "DOCUMENT_AND_RETAIN_COMPLETED_FROZEN_RUN",
+    "scientific_recipe_changed": false
   }
 }
