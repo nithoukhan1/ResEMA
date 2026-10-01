@@ -15,12 +15,14 @@
   "seed": 42,
   "epochs": 100,
   "test_access": "NONE",
-  "execution_status": "RUNNING",
+  "execution_status": "COMPLETE",
   "output_preservation": {
     "method": "KAGGLE_SAVE_VERSION",
-    "final_kaggle_ref": null,
-    "final_archive_sha256": null,
-    "status": "PENDING_SESSION_STOP_AND_ARCHIVE_VERIFICATION"
+    "final_kaggle_ref": "hebut123/borg-pt-s42-dysample-e100-1",
+    "status": "VERIFIED_AS_KAGGLE_INPUT",
+    "results_csv_sha256": "26176bd454e492a84a8a23864ef5fb6c2beed9fcf36f77852d609c06f4f8be8a",
+    "best_pt_sha256": "61f3a99e4d29f20fddddd103ef3af049861d0b2278f384a044897be93a5fd556",
+    "last_pt_sha256": "eb565a95d745f2f42c6ea6134b66c7a86053c6f018f6a4a0f122929ce5d28782"
   },
   "reproducibility_caveat": {
     "observed": true,
@@ -28,5 +30,11 @@
     "context": "DySample uses torch.nn.functional.grid_sample on CUDA; PyTorch deterministic mode is warn-only in this runtime.",
     "action": "DOCUMENT_AND_CONTINUE_FROZEN_RUN",
     "scientific_recipe_changed": false
+  },
+  "progress": {
+    "completed_epochs": 100,
+    "target_epochs": 100,
+    "best_epoch_from_results_csv": 47,
+    "best_map50_95_from_results_csv": 0.41525
   }
 }
