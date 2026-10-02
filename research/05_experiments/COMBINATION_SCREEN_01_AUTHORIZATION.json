@@ -1,0 +1,10 @@
+{
+    "schema_version": "COMB01-authorization-v1.0",
+    "status": "AUTHORIZED",
+    "branch": "research/combination-screen-01",
+    "experiment_id": "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100",
+    "source_commit": "ab76873d98d040cbe8f06a77e2810a7c647b995b",
+    "training_authorized": true,
+    "test_access": "NONE",
+    "technical_verification_sha256": "0295a6e90bbe6856517c5e723fbe58901f87d405743a8b6ecf334f335191fe29"
+}

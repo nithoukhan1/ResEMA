@@ -1,6 +1,6 @@
 {
     "schema_version":  "COMB01-contract-v1.0",
-    "status":  "REGISTERED_NOT_AUTHORIZED",
+    "status":  "AUTHORIZED",
     "experiment_family":  "COMBINATION_SCREEN_01",
     "branch":  "research/combination-screen-01",
     "scientific_parent":  {
@@ -104,7 +104,7 @@
                              "combination_result_may_access_test":  false
                          },
     "firewall":  {
-                     "training_authorized":  false,
+                     "training_authorized":  true,
                      "gpu_training_started":  false,
                      "test_access":  "NONE",
                      "test_predictions":  false,
@@ -113,7 +113,7 @@
                  },
     "provenance":  {
                        "registration_parent_commit":  "9d65b7adae3d488f1cb70856476fef0488e9749a",
-                       "scientific_source_commit":  null,
+                       "scientific_source_commit":  "ab76873d98d040cbe8f06a77e2810a7c647b995b",
                        "authorization_commit":  null,
                        "note":  "Scientific source commit remains null until structural audit, zero-gate audit, pretrained-transfer audit, governed execution support and tests are complete."
                    }
