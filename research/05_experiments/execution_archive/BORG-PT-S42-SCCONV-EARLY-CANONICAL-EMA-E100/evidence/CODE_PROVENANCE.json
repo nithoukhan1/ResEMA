@@ -1,0 +1,28 @@
+{
+  "schema_version": "comb01-code-provenance-v1.0",
+  "experiment_id": "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100",
+  "scientific_code": {
+    "status": "EXACT_GIT_CAPTURE",
+    "branch": "research/combination-screen-01",
+    "scientific_source_commit": "ab76873d98d040cbe8f06a77e2810a7c647b995b",
+    "execution_commit": "22117d7334b53c7782a872a0114d0831fe41cb57",
+    "canonical_fresh_runner": "research/runtime/combination_screen_runner.py",
+    "canonical_resume_runner": "research/runtime/combination_screen_resume_runner.py",
+    "canonical_trainer": "ultralytics/research/combination_screen_trainer.py"
+  },
+  "kaggle_wrapper": {
+    "status": "VERIFIED_EXECUTION_TRANSCRIPT",
+    "original_notebook_bytes_preserved_in_output_zip": false,
+    "session_001_output_zip_contains_notebook": false,
+    "session_002_output_zip_contains_notebook": false,
+    "session_001_output_zip_python_source_note": "Only an Ultralytics-generated DDP temporary worker script is present; it is not the original launch wrapper.",
+    "claim": "The execution flow and launcher invocations are preserved from the executed conversation transcript and resulting Save-Version logs. The original Kaggle notebook source bytes are not claimed as preserved.",
+    "not_claimed": "EXACT_NOTEBOOK_BYTE_CAPTURE"
+  },
+  "scientific_interpretation": {
+    "repository_code_controls_model_architecture_and_training_behavior": true,
+    "wrapper_role": "repository checkout, provenance gates, runtime checks, editable installation, governed runner invocation, output audit",
+    "wrapper_not_a_separate_model_implementation": true
+  },
+  "test_access": "NONE"
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "comb01-final-result-audit-v1.0",
+  "status": "PASS",
+  "experiment_id": "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100",
+  "experiment_family": "COMBINATION_SCREEN_01",
+  "scientific_source_commit": "ab76873d98d040cbe8f06a77e2810a7c647b995b",
+  "execution_commit": "22117d7334b53c7782a872a0114d0831fe41cb57",
+  "data_binding": "DATA01:B-ORG:v1",
+  "initialization": "pretrained",
+  "seed": 42,
+  "target_epochs": 100,
+  "completed_epochs": 100,
+  "results_epoch_sequence": "1..100",
+  "best_validation": {
+    "epoch": 47,
+    "precision": 0.61407,
+    "recall": 0.63296,
+    "f1": 0.6233719272,
+    "map50": 0.64357,
+    "map50_95": 0.41839
+  },
+  "pre_resume_best": {
+    "epoch": 47,
+    "map50_95": 0.41839
+  },
+  "resume_period_best": {
+    "epoch": 88,
+    "map50_95": 0.40390
+  },
+  "final_epoch": {
+    "epoch": 100,
+    "precision": 0.61519,
+    "recall": 0.61331,
+    "f1": 0.6142485615,
+    "map50": 0.61872,
+    "map50_95": 0.40125
+  },
+  "references": {
+    "baseline_map50_95": 0.41704,
+    "scconv_early_map50_95": 0.43130,
+    "canonical_ema_map50_95": 0.42796,
+    "scconv_4stage_map50_95": 0.42587,
+    "dysample_map50_95": 0.41525
+  },
+  "deltas": {
+    "vs_baseline": 0.00135,
+    "vs_scconv_early": -0.01291,
+    "vs_canonical_ema": -0.00957,
+    "vs_scconv_4stage": -0.00748,
+    "vs_dysample": 0.00314
+  },
+  "strict_complementarity": false,
+  "scientific_decision": "DO_NOT_PROMOTE_COMBINATION_PRIMARY_METRIC",
+  "final_artifacts": {
+    "results_csv_sha256": "63258d1a04c4629d08725d9ef189aaa71f915c0c4e280d5a14c5fe55c207c1a4",
+    "best_pt_sha256": "531c9927592781e7e19b6af1a35ce910113758d7ad5842677a5b7065487c897d",
+    "last_pt_sha256": "a560a2a87fa577cb83b1dd63c461270153304c3e245df81d66e8f80b0037f3ee",
+    "final_kaggle_ref": "vickyhit/borg-pt-s42-scconv-early-canonical-ema-e100-2"
+  },
+  "test_access": "NONE"
+}

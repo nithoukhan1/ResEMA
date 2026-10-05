@@ -1,0 +1,2 @@
+experiment_id,best_epoch,precision,recall,f1,map50,map50_95,baseline_map50_95,delta_vs_baseline,scconv_early_map50_95,delta_vs_scconv_early,canonical_ema_map50_95,delta_vs_canonical_ema,strict_complementarity,scientific_decision,test_access
+BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100,47,0.6140700000,0.6329600000,0.6233719272,0.6435700000,0.4183900000,0.4170400000,0.0013500000,0.4313000000,-0.0129100000,0.4279600000,-0.0095700000,FALSE,DO_NOT_PROMOTE_COMBINATION_PRIMARY_METRIC,NONE

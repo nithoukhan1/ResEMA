@@ -1,0 +1,23 @@
+{
+  "schema_version": "comb01-local-raw-output-backups-v1.0",
+  "experiment_id": "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100",
+  "storage_policy": "LOCAL_RAW_BACKUP_NOT_COMMITTED_TO_GIT",
+  "session_001": {
+    "filename": "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100-1.zip",
+    "bytes": 72993700,
+    "sha256": "193bee16f162a36128d1ed0edef361c8a54bf694c6d83610ec66cf509b22c335",
+    "zip_entry_count": 18,
+    "kaggle_ref": "vickyhit/borg-pt-s42-scconv-early-canonical-ema-e100-1",
+    "core_artifacts_verified": true
+  },
+  "session_002": {
+    "filename": "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100-2.zip",
+    "bytes": 41571976,
+    "sha256": "d0de1f91d0a914c2b0b334fc622c17266fa65c310dd10d01e004d495dfa76f01",
+    "zip_entry_count": 34,
+    "kaggle_ref": "vickyhit/borg-pt-s42-scconv-early-canonical-ema-e100-2",
+    "core_artifacts_verified": true,
+    "session_summary_verified": true
+  },
+  "test_access": "NONE"
+}
