@@ -2,7 +2,7 @@
 
 ## Status
 
-`RUNTIME_PREFLIGHT_PASS_A12_D2_PENDING_AUTHORIZATION`
+`A12_D2_SOURCE_FROZEN_PENDING_EXECUTION_AUTHORIZATION`
 
 Source-frozen A12-D1 implementation:
 
@@ -28,6 +28,37 @@ Governed runtime preflight:
 
 The successful D1 preflight establishes readiness for a separately frozen and
 authorized A12-D2 validation execution. It does not itself authorize D2.
+
+A12-D2 source-level authorization hardening:
+
+- the D2 execution runner must refuse execution unless
+  `research/06_diagnostics/A12_D2_EXECUTION_AUTHORIZATION.json` exists in a
+  clean governed checkout;
+- that authorization record must bind the frozen D2 source commit and exact
+  D2 runner SHA256;
+- the authorized source commit must be an ancestor of the execution checkout;
+- after a separate authorization freeze, the protocol `## Status` field
+  must equal the authorized-state marker `A12_D2_EXECUTION_AUTHORIZED`;
+- authorization is checked before D2 creates its output root, discovers the
+  dataset, discovers or loads checkpoints, or begins validation inference.
+
+A12-D2 preservation hardening:
+
+- export a canonical validation image index with authoritative patient IDs;
+- export a canonical normalized ground-truth table with continuous area and
+  the frozen small/medium/large size bin;
+- preserve both raw Ultralytics `save_txt` prediction files and one derived
+  per-model `PREDICTIONS.csv`;
+- preserve a failure manifest if an authorized D2 execution stops after its
+  output root is created;
+- document native Ultralytics confusion matrices as visualization artifacts
+  using the fork's native effective confidence 0.25 and IoU threshold 0.45;
+  these native confusion matrices do not replace the later frozen offline
+  A12 matching/error taxonomy.
+
+A12-D2 execution authorization remains FALSE after source freeze. A separate
+authorization record must bind the exact source-freeze commit and frozen
+runner SHA256 before validation inference can execute.
 
 ## Purpose
 

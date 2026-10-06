@@ -107,17 +107,45 @@ Preserved runtime-preflight evidence:
 
 Next:
 
-`A12-D2_STANDARDIZED_VALIDATION_EXECUTION_IMPLEMENTATION_AND_FREEZE`
+`A12-D2_EXECUTION_AUTHORIZATION_FREEZE`
 
-The governance chronology correction is complete by a forward-only commit;
-no historical commit was amended or rewritten.
+A12-D2 standardized validation execution source is source-frozen in this
+governed commit, pending a separate execution-authorization transaction.
 
-Next, implement and source-freeze the A12-D2 standardized validation execution
-runner from the already frozen D1 protocol and preserved runtime-preflight
-contract.
+Frozen execution contract:
 
-A12-D2 execution remains unauthorized until that implementation is reviewed,
-source-frozen and explicitly authorized.
+- six frozen Split-B Original pretrained `best.pt` checkpoints;
+- one common source checkout and one common validation runtime;
+- Split-B validation only;
+- explicit source-bound authorization JSON required before any dataset access,
+  checkpoint loading or validation inference;
+- the runner parses the exact protocol `## Status` field; explanatory prose
+  cannot satisfy the execution-authorization gate;
+- `save_txt=True` and `save_conf=True`;
+- prediction export at the frozen Ultralytics validation floor (`0.001`);
+- derived per-model `PREDICTIONS.csv` in addition to raw TXT exports;
+- canonical validation image index with authoritative patient IDs;
+- canonical normalized ground-truth table with continuous area and frozen
+  small/medium/large size bin;
+- aggregate P/R/F1/mAP50/mAP75/mAP50-95;
+- per-class P/R/F1/AP50/AP75/AP50-95 with support;
+- native confusion-matrix and P/R/F1/PR curve artifacts;
+- native confusion matrices explicitly remain Ultralytics visualizations
+  (effective confidence 0.25, IoU 0.45), not the later offline error taxonomy;
+- combined six-model aggregate and per-class tables;
+- exact artifact manifests and failure-manifest preservation;
+- historical training-time selection metrics remain separate;
+- no offline threshold/error taxonomy analysis inside D2;
+- no training;
+- Split-B test access NONE.
+
+Frozen runner SHA256:
+
+`9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
+
+A12-D2 execution remains unauthorized. The next transaction must create and
+freeze the separate authorization record that binds this source-freeze commit
+and the frozen runner SHA256 before validation inference can execute.
 
 Required comparison:
 

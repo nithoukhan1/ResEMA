@@ -333,3 +333,188 @@ Scope and scientific impact:
 Next action:
 
 `A12-D2_STANDARDIZED_VALIDATION_EXECUTION_IMPLEMENTATION_AND_FREEZE`
+## 2026-10-06 - A12-D2 standardized validation execution candidate implemented
+
+Type: `DIAGNOSTIC DESIGN / IMPLEMENTATION`
+
+A12-D2 execution source was implemented locally after A12-D1 runtime-preflight
+closure and the governance chronology correction.
+
+The candidate runner is:
+
+`research/runtime/a12_d2_standardized_validation.py`
+
+The candidate static contract test is:
+
+`research/tests/test_a12_d2_standardized_validation_static.py`
+
+Frozen execution intent:
+
+- evaluate the same six canonical Split-B Original pretrained checkpoints;
+- use one current source-frozen checkout;
+- reuse the D1-governed Python/PyTorch/Ultralytics/T4 runtime;
+- use `DATA01:B-ORG:v1` validation only;
+- preserve native validation plots and confusion matrices;
+- export post-NMS predictions once with `save_txt=True`, `save_conf=True` at
+  the frozen validation confidence floor;
+- record aggregate P/R/F1/mAP50/mAP75/mAP50-95;
+- record per-class P/R/F1/AP50/AP75/AP50-95 and support;
+- preserve `foreignbody` as N/A because Split-B validation support is zero;
+- preserve historical training-time selection metrics separately;
+- defer all fixed-threshold error taxonomy, size, patient and transition
+  analysis to later offline diagnostics using the frozen prediction exports.
+
+Scientific safeguards:
+
+- no module is selected from D2 aggregate score alone;
+- no prediction threshold is tuned after seeing D2 outcomes;
+- no causal architectural-mechanism claim is inferred from outcome metrics;
+- no training is authorized;
+- Split-B test remains sealed.
+
+This implementation transaction itself performs no dataset access, checkpoint
+loading, validation inference, prediction or training.
+
+A12-D2 execution remains unauthorized pending source-freeze review.
+## 2026-10-06 - A12-D2 candidate review hardening
+
+Type: `DIAGNOSTIC DESIGN / GOVERNANCE HARDENING`
+
+Review of the first local A12-D2 implementation candidate identified that the
+execution runner should itself enforce the project's separate-authorization
+rule rather than relying only on operator procedure.
+
+The candidate was therefore hardened before source freeze.
+
+Hardening decisions:
+
+- require a separate source-bound
+  `A12_D2_EXECUTION_AUTHORIZATION.json` before dataset access, checkpoint
+  loading or validation inference;
+- bind authorization to the exact frozen D2 runner SHA256 and source commit;
+- verify D1 source-freeze, D1 closure and chronology commits are ancestors of
+  the execution checkout;
+- preserve a validation image index with authoritative patient IDs;
+- preserve normalized ground truth, continuous normalized area and the frozen
+  small/medium/large size bin;
+- preserve a per-model `PREDICTIONS.csv` in addition to raw Ultralytics TXT
+  prediction exports;
+- preserve an explicit failure manifest for interrupted authorized execution;
+- document native Ultralytics confusion matrices as native visualizations at
+  effective confidence 0.25 / IoU 0.45, separate from the later frozen offline
+  matching/error taxonomy;
+- keep AP75 extraction from the ten-threshold AP matrix at index 5;
+- keep all fixed confidence, IoU, size, patient and transition analyses outside
+  D2 so they are performed later on frozen outputs without rerunning models.
+
+This hardening transaction remains source-only:
+
+- dataset access: NONE;
+- checkpoint loading: NONE;
+- validation inference: NONE;
+- prediction: NONE;
+- training: NONE;
+- Split-B test access: NONE;
+- A12-D2 execution authorization: FALSE.
+## 2026-10-06 - A12-D2 authorization-status parser hardening after safe source-freeze stop
+
+Type: `DIAGNOSTIC DESIGN / SAFE RECOVERY / GOVERNANCE HARDENING`
+
+The first A12-D2 source-freeze attempt stopped safely before staging, commit or
+push.
+
+Cause:
+
+- the source-freeze script used a raw substring guard for
+  `A12-D2 execution authorization: TRUE`;
+- the protocol already contained that exact phrase only as explanatory text
+  describing a future authorization requirement;
+- the guard therefore produced a false positive even though A12-D2 execution
+  remained unauthorized.
+
+Review also identified the same ambiguity in the R2 execution runner, whose
+protocol authorization check used raw substring presence.
+
+Recovery/hardening:
+
+- restore the protocol status from the uncommitted partial source-freeze state
+  to `A12_D2_IMPLEMENTATION_CANDIDATE_PENDING_SOURCE_FREEZE`;
+- restore the candidate-stage FALSE authorization statement;
+- rewrite the explanatory future-authorization bullet so it does not contain
+  a machine authorization flag that can be confused with current state;
+- make the D2 runner parse the exact Markdown `## Status` field and require it
+  to equal `A12_D2_EXECUTION_AUTHORIZED`;
+- retain the separate authorization JSON, source-commit binding and runner
+  SHA256 checks;
+- add static tests proving explanatory prose cannot satisfy the authorization
+  gate.
+
+The failed source-freeze attempt performed:
+
+- staging: NONE;
+- commit: NONE;
+- push: NONE;
+- dataset access: NONE;
+- checkpoint loading: NONE;
+- validation inference: NONE;
+- prediction: NONE;
+- training: NONE;
+- Split-B test access: NONE.
+
+A12-D2 execution authorization remains FALSE.
+
+Next action:
+
+`A12-D2_SOURCE_FREEZE_REVIEW_R3`
+## 2026-10-06 - A12-D2 R3 standardized validation source freeze
+
+Type: `DIAGNOSTIC SOURCE FREEZE / GOVERNANCE`
+
+The R3 A12-D2 standardized validation execution candidate passed review after
+the safe R2 source-freeze stop and authorization-status parser hardening.
+
+Frozen runner:
+
+`research/runtime/a12_d2_standardized_validation.py`
+
+Frozen runner SHA256:
+
+`9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
+
+The source-freeze preserves these execution safeguards:
+
+- execution requires a separate authorization JSON;
+- authorization must bind the exact frozen source commit and runner SHA256;
+- the runner parses the exact protocol `## Status` field;
+- explanatory prose cannot satisfy the authorization gate;
+- authorization is checked before output-root creation, dataset access,
+  checkpoint discovery/loading and validation inference;
+- D1 source-freeze, D1 closure and chronology commits remain required
+  ancestors;
+- Ultralytics/model source must remain unchanged relative to the frozen D1
+  source;
+- the six canonical checkpoints remain SHA-bound;
+- validation remains `DATA01:B-ORG:v1` only;
+- normalized validation ground truth, authoritative patient mapping,
+  continuous box area, fixed size bins, raw prediction TXT, per-model
+  `PREDICTIONS.csv`, aggregate/per-class metrics and artifact manifests remain
+  part of the preservation contract;
+- native Ultralytics confusion matrices remain visualization artifacts and do
+  not replace the later frozen offline matching/error taxonomy;
+- no offline threshold/error taxonomy analysis occurs inside D2;
+- historical training-time selection metrics remain separate.
+
+This source-freeze transaction performs:
+
+- dataset access: NONE;
+- checkpoint loading: NONE;
+- validation inference: NONE;
+- prediction: NONE;
+- training: NONE;
+- Split-B test access: NONE.
+
+A12-D2 execution authorization remains FALSE.
+
+Next action:
+
+`A12-D2_EXECUTION_AUTHORIZATION_FREEZE`
