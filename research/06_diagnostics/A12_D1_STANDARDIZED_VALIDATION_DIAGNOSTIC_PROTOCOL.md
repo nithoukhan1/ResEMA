@@ -2,7 +2,32 @@
 
 ## Status
 
-`IMPLEMENTATION_CANDIDATE_PENDING_SOURCE_FREEZE`
+`RUNTIME_PREFLIGHT_PASS_A12_D2_PENDING_AUTHORIZATION`
+
+Source-frozen A12-D1 implementation:
+
+`e2367057e3a4ffabcb5cde1c2ff569df264625ef`
+
+Governed runtime preflight:
+
+- status: PASS
+- preflight manifest SHA256:
+  `d33ead0f712aa432e4afdd67aa89f6a4481acc543ae0486b8424a95761909de8`
+- train+validation-only runtime YAML SHA256:
+  `b2114397eefc1ac377352fb4e0429df0fe6fc954a307e4b0df89139b4bed82c4`
+- preservation manifest SHA256:
+  `217d67b401afbeca76033a7eef381649ef36e4f0f3b829c76b47216a8cc6039d`
+- preservation ZIP SHA256:
+  `f9f47b7816caec3556fd1700aee79f8e716a8efa866bb9030e571a947b4d9de8`
+- six canonical checkpoints structurally loaded and verified;
+- validation inference: NONE;
+- prediction: NONE;
+- training: NONE;
+- Split-B test access: NONE;
+- A12-D2 execution authorization: FALSE.
+
+The successful D1 preflight establishes readiness for a separately frozen and
+authorized A12-D2 validation execution. It does not itself authorize D2.
 
 ## Purpose
 

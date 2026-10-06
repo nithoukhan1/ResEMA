@@ -243,3 +243,54 @@ Split-B test access remains NONE.
 
 A12-D2 remains unauthorized pending D1 source freeze and runtime-preflight
 review.
+## 2026-10-06 - A12-D1 runtime preflight PASS and evidence preservation
+
+Type: DIAGNOSTIC / PROVENANCE
+
+The source-frozen A12-D1 standardized validation diagnostic preflight was
+executed on Kaggle against scientific source commit:
+
+`e2367057e3a4ffabcb5cde1c2ff569df264625ef`
+
+Runtime contract verified:
+
+- Python 3.12.13;
+- PyTorch 2.10.0+cu128;
+- Ultralytics 8.4.7 imported from the governed checkout;
+- Tesla T4 x2;
+- clean governed worktree.
+
+Dataset binding verified:
+
+- `DATA01:B-ORG:v1`;
+- frozen validation membership: 3,050 images;
+- operational readable validation images: 3,049;
+- validation patients: 914;
+- runtime YAML contains no test key.
+
+All six canonical `best.pt` checkpoints resolved exactly once and were loaded
+only for structural verification of class count, class names, parameter count
+and corrected-module signature.
+
+No validation inference, prediction, training or Split-B test analysis was
+performed.
+
+Preserved evidence:
+
+- `A12_D1_PREFLIGHT.json` SHA256:
+  `d33ead0f712aa432e4afdd67aa89f6a4481acc543ae0486b8424a95761909de8`;
+- `runtime_data_train_val_only.yaml` SHA256:
+  `b2114397eefc1ac377352fb4e0429df0fe6fc954a307e4b0df89139b4bed82c4`;
+- `A12_D1_RUNTIME_PREFLIGHT_PRESERVATION.json` SHA256:
+  `217d67b401afbeca76033a7eef381649ef36e4f0f3b829c76b47216a8cc6039d`;
+- `A12_D1_RUNTIME_PREFLIGHT_E2367057.zip` SHA256:
+  `f9f47b7816caec3556fd1700aee79f8e716a8efa866bb9030e571a947b4d9de8`.
+
+A12-D1 preflight status:
+
+`PASS`
+
+A12-D2 execution remains unauthorized pending a separate implementation,
+source-freeze and authorization transaction.
+
+Split-B test access remains NONE.

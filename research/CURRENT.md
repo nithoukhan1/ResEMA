@@ -73,40 +73,46 @@ negative interaction with SCConv-Early.
 
 ## Current task
 
-A12-D0 six-model diagnostic artifact inventory is complete.
+A12-D1 standardized validation diagnostic preflight is complete and preserved.
 
-All six canonical final artifacts are locally recoverable and hash-verified:
+Source-frozen D1 implementation:
 
-- frozen YOLO11s baseline;
-- SCConv-Early;
-- SCConv-4Stage;
-- DySample;
-- Canonical EMA;
-- SCConv-Early + Canonical EMA.
+`e2367057e3a4ffabcb5cde1c2ff569df264625ef`
 
-A12-D0A also consolidated both COMB session archives into the governed
-external-artifact store without modifying the scientific repository.
+Runtime preflight result:
+
+- status: PASS;
+- six canonical `best.pt` checkpoints resolved exactly once;
+- all six checkpoints loaded structurally without validation inference;
+- corrected-module signatures and parameter counts verified;
+- data binding: `DATA01:B-ORG:v1`;
+- frozen validation membership: 3,050 images / 914 patients;
+- operational readable validation images: 3,049;
+- runtime YAML contains train and val only;
+- validation inference: NONE;
+- prediction: NONE;
+- training: NONE;
+- Split-B test access: NONE.
+
+Preserved runtime-preflight evidence:
+
+- `A12_D1_PREFLIGHT.json` SHA256:
+  `d33ead0f712aa432e4afdd67aa89f6a4481acc543ae0486b8424a95761909de8`;
+- runtime YAML SHA256:
+  `b2114397eefc1ac377352fb4e0429df0fe6fc954a307e4b0df89139b4bed82c4`;
+- preservation manifest SHA256:
+  `217d67b401afbeca76033a7eef381649ef36e4f0f3b829c76b47216a8cc6039d`;
+- preservation ZIP SHA256:
+  `f9f47b7816caec3556fd1700aee79f8e716a8efa866bb9030e571a947b4d9de8`.
 
 Next:
 
-`A12-D1_STANDARDIZED_VALIDATION_DIAGNOSTIC_PREFLIGHT`
+`GOV_CHRONOLOGY_FORWARD_CORRECTION`
 
-A12-D1 protocol/source implementation is being frozen before runtime
-execution.
+After that governance correction, proceed to the separately implemented and
+source-frozen A12-D2 standardized validation execution gate.
 
-The design revalidates all six frozen `best.pt` checkpoints under one common
-current repository checkout and reuses the governed BASELINE-FREEZE-01
-validation runtime.
-
-A12-D1 itself is preflight-only:
-
-- no validation inference;
-- no prediction;
-- no training;
-- no Split-B test access.
-
-A12-D2 remains unauthorized until the D1 source and runtime preflight are
-reviewed.
+A12-D2 remains unauthorized at this state.
 
 Required comparison:
 
