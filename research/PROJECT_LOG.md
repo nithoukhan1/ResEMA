@@ -565,3 +565,50 @@ checkpoint loading, validation inference, prediction or training.
 Next action:
 
 `A12-D2_KAGGLE_EXECUTION_GATE`
+## 2026-10-06 - A12-D2D safe closure recovery and standardized validation closure
+
+Type: `SAFE RECOVERY / DIAGNOSTIC PRESERVATION / CLOSURE`
+
+The first A12-D2D closure attempt stopped safely before staging, commit or
+push because the raw marker `A12_D2_EXECUTION_AUTHORIZED` occurred twice in
+the protocol: once as the actual `## Status` and once in explanatory prose.
+
+Before the stop, the intended partial local actions were completed:
+
+- nine A12-D2 evidence rows were written to `ARTIFACTS.csv` (77 -> 86);
+- `A12_D2_STANDARDIZED_VALIDATION_CLOSURE.json` was written with SHA256
+  `aaecb31afc29fd36a53455e5cabaaf59b93fab6bb5dbb38e13eaa6b27ac9b034`.
+
+The protocol itself was not changed by the failed replacement. Recovery
+verified the exact two-file partial worktree state, verified remote HEAD
+`791566cb04c91258eadbbb8ee6120edac9cc4c0f`, verified the nine A12-D2 registry rows, verified the closure
+record and external evidence, then replaced only the exact Markdown `## Status`
+value.
+
+A12-D2 evidence:
+
+- execution checkout: `791566cb04c91258eadbbb8ee6120edac9cc4c0f`;
+- source commit: `758f0643e2bceb8d996d8e9603fb836d9319d8eb`;
+- runner SHA256: `9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`;
+- authorization SHA256: `8cbb1e999d3ffb2e7e4b2e30d9882c5510c076d116468609962cd06e36b3dcb1`;
+- preservation archive SHA256: `419ac71b1e42b791168a5ea24cf87d71b8a3d1eba9333d183a73009733056b93`;
+- preservation review SHA256: `9805009b0fb757bcd3e84ef7ec28b471cced7da0b9a700d3ad56cac6932a84bd`;
+- 18,407 / 18,407 artifact-manifest rows verified;
+- 3,050 frozen validation images / 3,049 operational readable images;
+- 914 validation patients;
+- 7,113 frozen GT boxes / 7,110 operational diagnostic GT boxes;
+- unreadable-image GT boxes: 3;
+- offline diagnostics: NOT YET EXECUTED;
+- new GPU training: NOT AUTHORIZED;
+- Split-B test access: NONE.
+
+The one governed D2 authorization is consumed by the completed execution.
+Any D2 rerun requires a new explicit authorization transaction.
+
+Next action:
+
+`PROJECT_MIGRATION_AFTER_A12_D2_CLOSURE`
+
+After migration:
+
+`A12-D3_OFFLINE_DIAGNOSTIC_IMPLEMENTATION_AND_FREEZE`

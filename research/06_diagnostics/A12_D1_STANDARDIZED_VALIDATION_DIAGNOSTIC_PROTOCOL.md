@@ -2,7 +2,7 @@
 
 ## Status
 
-`A12_D2_EXECUTION_AUTHORIZED`
+`A12_D2_EXECUTION_COMPLETE_PRESERVED_CLOSED`
 
 Source-frozen A12-D1 implementation:
 
@@ -56,23 +56,34 @@ A12-D2 preservation hardening:
   these native confusion matrices do not replace the later frozen offline
   A12 matching/error taxonomy.
 
-A12-D2 validation-only execution is authorized by the separate governed
-`A12_D2_EXECUTION_AUTHORIZATION.json` record.
+A12-D2 validation-only execution was authorized, completed, fully preserved,
+registered and closed.
 
-Authorization record SHA256:
+Historical authorization SHA256:
 
 `8cbb1e999d3ffb2e7e4b2e30d9882c5510c076d116468609962cd06e36b3dcb1`
 
-Authorized source commit:
+Execution checkout:
+
+`791566cb04c91258eadbbb8ee6120edac9cc4c0f`
+
+Frozen source commit:
 
 `758f0643e2bceb8d996d8e9603fb836d9319d8eb`
 
-Authorized runner SHA256:
+Frozen runner SHA256:
 
 `9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
 
-Authorization scope is validation-only. New GPU training remains
-unauthorized and Split-B test access remains NONE.
+Canonical preservation archive SHA256:
+
+`419ac71b1e42b791168a5ea24cf87d71b8a3d1eba9333d183a73009733056b93`
+
+The completed authorization is historical evidence only. The closed protocol
+state does not authorize a second validation run; any rerun requires a new
+explicit authorization transaction.
+
+New GPU training remains unauthorized and Split-B test access remains NONE.
 
 ## Purpose
 

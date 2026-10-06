@@ -21,6 +21,11 @@ AUTHORIZATION = (
     / "research/06_diagnostics/"
       "A12_D2_EXECUTION_AUTHORIZATION.json"
 )
+CLOSURE = (
+    ROOT
+    / "research/06_diagnostics/"
+      "A12_D2_STANDARDIZED_VALIDATION_CLOSURE.json"
+)
 
 
 def test_d2_runner_exists_and_parses():
@@ -200,26 +205,42 @@ def test_d2_does_not_run_offline_threshold_analysis():
     assert "duplicate_error" not in text
 
 
-def test_protocol_and_record_authorize_validation_only_execution():
+def test_protocol_marks_d2_closed_and_preserved():
     text = PROTOCOL.read_text(encoding="utf-8")
-    payload = json.loads(
-        AUTHORIZATION.read_text(encoding="utf-8")
-    )
+    authorization = json.loads(AUTHORIZATION.read_text(encoding="utf-8"))
+    closure = json.loads(CLOSURE.read_text(encoding="utf-8"))
 
-    assert "`A12_D2_EXECUTION_AUTHORIZED`" in text
-    assert "A12_D2_SOURCE_FROZEN_PENDING_EXECUTION_AUTHORIZATION" not in text
+    lines = text.splitlines()
+    status_index = lines.index("## Status")
+    state = next(line.strip() for line in lines[status_index + 1:] if line.strip())
+    assert state == "`A12_D2_EXECUTION_COMPLETE_PRESERVED_CLOSED`"
 
-    assert payload["schema_version"] == "A12-D2-execution-authorization-v1.0"
-    assert payload["status"] == "AUTHORIZED"
-    assert payload["source_commit"] == "758f0643e2bceb8d996d8e9603fb836d9319d8eb"
-    assert payload["runner_sha256"] == "9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250"
-    assert payload["d1_source_commit"] == "e2367057e3a4ffabcb5cde1c2ff569df264625ef"
-    assert payload["d1_preflight_sha256"] == "d33ead0f712aa432e4afdd67aa89f6a4481acc543ae0486b8424a95761909de8"
-    assert payload["data_binding"] == "DATA01:B-ORG:v1"
-    assert payload["model_count"] == 6
-    assert payload["validation_execution_authorized"] is True
-    assert payload["new_gpu_training_authorized"] is False
-    assert payload["test_access"] == "NONE"
+    assert authorization["status"] == "AUTHORIZED"
+    assert authorization["source_commit"] == "758f0643e2bceb8d996d8e9603fb836d9319d8eb"
+    assert authorization["runner_sha256"] == "9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250"
+    assert authorization["validation_execution_authorized"] is True
+    assert authorization["new_gpu_training_authorized"] is False
+    assert authorization["test_access"] == "NONE"
+
+    assert closure["schema_version"] == "A12-D2-standardized-validation-closure-v1.0"
+    assert closure["status"] == "CLOSED"
+    assert closure["execution_head"] == "791566cb04c91258eadbbb8ee6120edac9cc4c0f"
+    assert closure["d2_source_commit"] == "758f0643e2bceb8d996d8e9603fb836d9319d8eb"
+    assert closure["d2_runner_sha256"] == "9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250"
+    assert closure["authorization_sha256"] == "8cbb1e999d3ffb2e7e4b2e30d9882c5510c076d116468609962cd06e36b3dcb1"
+    assert closure["preservation_archive_sha256"] == "419ac71b1e42b791168a5ea24cf87d71b8a3d1eba9333d183a73009733056b93"
+    assert closure["global_artifact_manifest_rows"] == 18407
+    assert closure["frozen_validation_images"] == 3050
+    assert closure["operational_validation_images"] == 3049
+    assert closure["validation_patients"] == 914
+    assert closure["frozen_ground_truth_boxes"] == 7113
+    assert closure["operational_ground_truth_boxes"] == 7110
+    assert closure["unreadable_image_ground_truth_boxes"] == 3
+    assert closure["authorization_consumed_by_execution"] is True
+    assert closure["rerun_requires_new_authorization"] is True
+    assert closure["offline_diagnostics_executed"] is False
+    assert closure["new_gpu_training_authorized"] is False
+    assert closure["test_access"] == "NONE"
 
     assert "A12-D2 will preserve post-NMS validation detections" in text
     assert "save_txt=True" in text

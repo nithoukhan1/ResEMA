@@ -107,63 +107,52 @@ Preserved runtime-preflight evidence:
 
 Next:
 
-`A12-D2_KAGGLE_EXECUTION_GATE`
+`PROJECT_MIGRATION_AFTER_A12_D2_CLOSURE`
 
-A12-D2 standardized validation execution source is source-frozen in this
-governed commit, pending a separate execution-authorization transaction.
+A12-D2 standardized six-model validation is complete, fully preserved,
+registered and closed.
 
-Frozen execution contract:
+Governed evidence:
 
-- six frozen Split-B Original pretrained `best.pt` checkpoints;
-- one common source checkout and one common validation runtime;
-- Split-B validation only;
-- explicit source-bound authorization JSON required before any dataset access,
-  checkpoint loading or validation inference;
-- the runner parses the exact protocol `## Status` field; explanatory prose
-  cannot satisfy the execution-authorization gate;
-- `save_txt=True` and `save_conf=True`;
-- prediction export at the frozen Ultralytics validation floor (`0.001`);
-- derived per-model `PREDICTIONS.csv` in addition to raw TXT exports;
-- canonical validation image index with authoritative patient IDs;
-- canonical normalized ground-truth table with continuous area and frozen
-  small/medium/large size bin;
-- aggregate P/R/F1/mAP50/mAP75/mAP50-95;
-- per-class P/R/F1/AP50/AP75/AP50-95 with support;
-- native confusion-matrix and P/R/F1/PR curve artifacts;
-- native confusion matrices explicitly remain Ultralytics visualizations
-  (effective confidence 0.25, IoU 0.45), not the later offline error taxonomy;
-- combined six-model aggregate and per-class tables;
-- exact artifact manifests and failure-manifest preservation;
-- historical training-time selection metrics remain separate;
-- no offline threshold/error taxonomy analysis inside D2;
-- no training;
-- Split-B test access NONE.
+- execution checkout: `791566cb04c91258eadbbb8ee6120edac9cc4c0f`;
+- frozen source commit: `758f0643e2bceb8d996d8e9603fb836d9319d8eb`;
+- frozen runner SHA256: `9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`;
+- authorization SHA256: `8cbb1e999d3ffb2e7e4b2e30d9882c5510c076d116468609962cd06e36b3dcb1`;
+- canonical preservation archive SHA256:
+  `419ac71b1e42b791168a5ea24cf87d71b8a3d1eba9333d183a73009733056b93`;
+- preservation review SHA256:
+  `9805009b0fb757bcd3e84ef7ec28b471cced7da0b9a700d3ad56cac6932a84bd`;
+- global artifact manifest: 18,407 verified rows;
+- data binding: `DATA01:B-ORG:v1`;
+- frozen validation: 3,050 images / 914 patients;
+- operational validation: 3,049 readable images;
+- GT boxes: 7,113 frozen / 7,110 operational / 3 on unreadable image;
+- training: NONE;
+- Split-B test access: NONE.
 
-Frozen runner SHA256:
+Standardized diagnostic revalidation mAP50-95:
 
-`9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
+- Baseline: 0.41765881
+- SCConv-Early: 0.42588415
+- SCConv-4Stage: 0.42452888
+- DySample: 0.41427802
+- Canonical EMA: 0.42663323
+- SCConv-Early + Canonical EMA: 0.41308765
 
-A12-D2 validation-only execution is now explicitly authorized by the
-governed authorization record.
+This standardized diagnostic metric family does not replace the historical
+training-time selection metric family and does not by itself change the
+selected family candidate.
 
-Authorization record SHA256:
+The one governed D2 authorization is consumed by the completed execution.
+Any rerun requires a new explicit authorization transaction.
 
-`8cbb1e999d3ffb2e7e4b2e30d9882c5510c076d116468609962cd06e36b3dcb1`
+Offline diagnostics have not yet been executed.
+New GPU training remains unauthorized.
+Split-B test remains sealed.
 
-Authorized source commit:
+After the migration/archive handoff, the next scientific transaction is:
 
-`758f0643e2bceb8d996d8e9603fb836d9319d8eb`
-
-Authorized runner SHA256:
-
-`9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
-
-Authorization is limited to the frozen six-model Split-B validation-only
-execution. New GPU training remains unauthorized and Split-B test access
-remains NONE.
-
-Next, establish the Kaggle execution checkout/input/runtime gate at the
-authorization commit before starting D2 validation inference.
+`A12-D3_OFFLINE_DIAGNOSTIC_IMPLEMENTATION_AND_FREEZE`
 
 Required comparison:
 
