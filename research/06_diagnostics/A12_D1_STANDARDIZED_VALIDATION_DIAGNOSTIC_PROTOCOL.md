@@ -2,7 +2,7 @@
 
 ## Status
 
-`A12_D2_SOURCE_FROZEN_PENDING_EXECUTION_AUTHORIZATION`
+`A12_D2_EXECUTION_AUTHORIZED`
 
 Source-frozen A12-D1 implementation:
 
@@ -56,9 +56,23 @@ A12-D2 preservation hardening:
   these native confusion matrices do not replace the later frozen offline
   A12 matching/error taxonomy.
 
-A12-D2 execution authorization remains FALSE after source freeze. A separate
-authorization record must bind the exact source-freeze commit and frozen
-runner SHA256 before validation inference can execute.
+A12-D2 validation-only execution is authorized by the separate governed
+`A12_D2_EXECUTION_AUTHORIZATION.json` record.
+
+Authorization record SHA256:
+
+`8cbb1e999d3ffb2e7e4b2e30d9882c5510c076d116468609962cd06e36b3dcb1`
+
+Authorized source commit:
+
+`758f0643e2bceb8d996d8e9603fb836d9319d8eb`
+
+Authorized runner SHA256:
+
+`9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
+
+Authorization scope is validation-only. New GPU training remains
+unauthorized and Split-B test access remains NONE.
 
 ## Purpose
 

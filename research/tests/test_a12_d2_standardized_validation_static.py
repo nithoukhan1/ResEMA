@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import json
 from pathlib import Path
 
 
@@ -14,6 +15,11 @@ PROTOCOL = (
     ROOT
     / "research/06_diagnostics/"
       "A12_D1_STANDARDIZED_VALIDATION_DIAGNOSTIC_PROTOCOL.md"
+)
+AUTHORIZATION = (
+    ROOT
+    / "research/06_diagnostics/"
+      "A12_D2_EXECUTION_AUTHORIZATION.json"
 )
 
 
@@ -194,15 +200,27 @@ def test_d2_does_not_run_offline_threshold_analysis():
     assert "duplicate_error" not in text
 
 
-def test_protocol_status_marks_source_frozen_not_execution_authorized():
+def test_protocol_and_record_authorize_validation_only_execution():
     text = PROTOCOL.read_text(encoding="utf-8")
-
-    assert (
-        "A12_D2_SOURCE_FROZEN_PENDING_EXECUTION_AUTHORIZATION"
-        in text
+    payload = json.loads(
+        AUTHORIZATION.read_text(encoding="utf-8")
     )
-    assert "A12-D2 execution authorization: FALSE" in text
-    assert "A12-D2 execution authorization: TRUE" not in text
+
+    assert "`A12_D2_EXECUTION_AUTHORIZED`" in text
+    assert "A12_D2_SOURCE_FROZEN_PENDING_EXECUTION_AUTHORIZATION" not in text
+
+    assert payload["schema_version"] == "A12-D2-execution-authorization-v1.0"
+    assert payload["status"] == "AUTHORIZED"
+    assert payload["source_commit"] == "758f0643e2bceb8d996d8e9603fb836d9319d8eb"
+    assert payload["runner_sha256"] == "9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250"
+    assert payload["d1_source_commit"] == "e2367057e3a4ffabcb5cde1c2ff569df264625ef"
+    assert payload["d1_preflight_sha256"] == "d33ead0f712aa432e4afdd67aa89f6a4481acc543ae0486b8424a95761909de8"
+    assert payload["data_binding"] == "DATA01:B-ORG:v1"
+    assert payload["model_count"] == 6
+    assert payload["validation_execution_authorized"] is True
+    assert payload["new_gpu_training_authorized"] is False
+    assert payload["test_access"] == "NONE"
+
     assert "A12-D2 will preserve post-NMS validation detections" in text
     assert "save_txt=True" in text
     assert "save_conf=True" in text

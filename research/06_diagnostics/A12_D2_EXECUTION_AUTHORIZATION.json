@@ -1,0 +1,35 @@
+{
+  "schema_version": "A12-D2-execution-authorization-v1.0",
+  "status": "AUTHORIZED",
+  "authorized_date": "2026-10-06",
+  "purpose": "Authorize one governed standardized validation-only execution of the six frozen Split-B Original pretrained checkpoints.",
+  "source_commit": "758f0643e2bceb8d996d8e9603fb836d9319d8eb",
+  "runner_sha256": "9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250",
+  "d1_source_commit": "e2367057e3a4ffabcb5cde1c2ff569df264625ef",
+  "d1_preflight_sha256": "d33ead0f712aa432e4afdd67aa89f6a4481acc543ae0486b8424a95761909de8",
+  "data_binding": "DATA01:B-ORG:v1",
+  "evaluation_split": "val",
+  "model_count": 6,
+  "validation_execution_authorized": true,
+  "prediction_export_authorized": true,
+  "offline_diagnostics_authorized_in_d2": false,
+  "new_gpu_training_authorized": false,
+  "test_access": "NONE",
+  "selection_metrics_replaced": false,
+  "authorized_operations": [
+    "standardized_validation_inference",
+    "post_nms_validation_prediction_export",
+    "validation_metric_generation",
+    "validation_artifact_generation"
+  ],
+  "forbidden_operations": [
+    "training",
+    "weight_update",
+    "test_split_access",
+    "test_prediction",
+    "test_metric_generation",
+    "architecture_selection_from_d2_aggregate_score_alone",
+    "offline_diagnostic_threshold_tuning"
+  ],
+  "execution_rule": "The source_commit must be an ancestor of the execution checkout; the current D2 runner SHA256 must equal runner_sha256; the protocol Status must equal A12_D2_EXECUTION_AUTHORIZED."
+}

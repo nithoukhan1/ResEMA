@@ -107,7 +107,7 @@ Preserved runtime-preflight evidence:
 
 Next:
 
-`A12-D2_EXECUTION_AUTHORIZATION_FREEZE`
+`A12-D2_KAGGLE_EXECUTION_GATE`
 
 A12-D2 standardized validation execution source is source-frozen in this
 governed commit, pending a separate execution-authorization transaction.
@@ -143,9 +143,27 @@ Frozen runner SHA256:
 
 `9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
 
-A12-D2 execution remains unauthorized. The next transaction must create and
-freeze the separate authorization record that binds this source-freeze commit
-and the frozen runner SHA256 before validation inference can execute.
+A12-D2 validation-only execution is now explicitly authorized by the
+governed authorization record.
+
+Authorization record SHA256:
+
+`8cbb1e999d3ffb2e7e4b2e30d9882c5510c076d116468609962cd06e36b3dcb1`
+
+Authorized source commit:
+
+`758f0643e2bceb8d996d8e9603fb836d9319d8eb`
+
+Authorized runner SHA256:
+
+`9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
+
+Authorization is limited to the frozen six-model Split-B validation-only
+execution. New GPU training remains unauthorized and Split-B test access
+remains NONE.
+
+Next, establish the Kaggle execution checkout/input/runtime gate at the
+authorization commit before starting D2 validation inference.
 
 Required comparison:
 

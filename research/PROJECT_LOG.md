@@ -518,3 +518,50 @@ A12-D2 execution authorization remains FALSE.
 Next action:
 
 `A12-D2_EXECUTION_AUTHORIZATION_FREEZE`
+## 2026-10-06 - A12-D2 validation-only execution authorization freeze
+
+Type: `EXECUTION AUTHORIZATION / GOVERNANCE`
+
+The source-frozen A12-D2 R3 standardized validation runner was explicitly
+authorized for one governed validation-only execution.
+
+Authorization record:
+
+`research/06_diagnostics/A12_D2_EXECUTION_AUTHORIZATION.json`
+
+Authorization record SHA256:
+
+`8cbb1e999d3ffb2e7e4b2e30d9882c5510c076d116468609962cd06e36b3dcb1`
+
+Authorized source commit:
+
+`758f0643e2bceb8d996d8e9603fb836d9319d8eb`
+
+Authorized runner SHA256:
+
+`9f31b762374e5b195cd624cdf903791f08056a1282db0355c25aa71b768d3250`
+
+Authorized scope:
+
+- six frozen Split-B Original pretrained checkpoints;
+- `DATA01:B-ORG:v1`;
+- validation split only;
+- standardized validation inference;
+- low-confidence post-NMS validation prediction export;
+- validation metric/artifact generation.
+
+Still forbidden:
+
+- new training or weight updates;
+- Split-B test access, prediction or metrics;
+- architecture promotion from D2 aggregate score alone;
+- threshold tuning inside D2;
+- interpreting native confusion-matrix settings as the later offline error
+  taxonomy.
+
+This authorization-freeze transaction itself performs no dataset access,
+checkpoint loading, validation inference, prediction or training.
+
+Next action:
+
+`A12-D2_KAGGLE_EXECUTION_GATE`
