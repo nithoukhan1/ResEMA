@@ -37,6 +37,7 @@ def test_screen_registry_contract_is_fixed():
         assert row["status"] in {
             "REGISTERED_NOT_AUTHORIZED",
             "AUTHORIZED",
+            "COMPLETE",
         }
 
 

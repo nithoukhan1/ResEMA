@@ -2,87 +2,104 @@
 
 ## Active branch
 
-`research/baseline-refresh`
+`research/combination-screen-01`
 
 ## Active phase
 
-`BASELINE-FREEZE-01 COMPLETE -> EPOCH-CALIBRATION FOLLOW-UP`
+`CORRECTED MODULE FAMILY CLOSED -> RESIDUAL-ERROR + NOVELTY DECISION GATE`
 
-All six seed-42 YOLO11s baseline experiments are complete and frozen.
+## Frozen baseline reference
 
-| Experiment | Condition | Init | Best epoch | val mAP50-95 |
-|---|---|---|---:|---:|
-| BASE-B-ORG-PT-S42 | Split-B original | pretrained | 44 | 0.41704 |
-| BASE-B-ORG-SCR-S42 | Split-B original | scratch | 100 | 0.40360 |
-| BASE-B-AUG-PT-S42 | Split-B historical augmented | pretrained | 33 | 0.43133 |
-| BASE-B-AUG-SCR-S42 | Split-B historical augmented | scratch | 94 | 0.40492 |
-| BASE-A-AUG-PT-S42 | Split-A augmented | pretrained | 49 | 0.41036 |
-| BASE-A-AUG-SCR-S42 | Split-A augmented | scratch | 64 | 0.39072 |
+Primary controlled pretrained reference:
 
-These are training-time selection metrics. Standardized FP32 validation-only
-checkpoint metrics are stored separately.
+`BASE-B-ORG-PT-S42`
 
-Actual canonical execution lineages:
-- B-ORG and A-AUG: `S2=46f40838c1c24a8ced77a2b868dfa0f7f1037f9c` -> `A2=9fe475175d3963a083d7afc29426f07d86c1887d`
-- B-AUG: `S3=18e75338ae116beccf3f5e4a0481efede601026b` -> `A3=fe95e2d51c4d545111ae2fa7be70c8e1c8e77487`
+- validation mAP50-95: 0.41704
+- test access: NONE
 
-BASELINE-FREEZE-01 evidence:
-- 11/11 execution archives;
-- 6/6 canonical finals;
-- 600 convergence rows;
-- 6/6 standardized validation-only passes;
-- 54 per-class rows;
-- zero-support `foreignbody` reported as N/A;
-- heavy checkpoints/plots retained outside Git;
-- Split-B test access: NONE.
+## Corrected module-family results
+
+| Candidate | validation mAP50-95 | Delta vs baseline |
+|---|---:|---:|
+| SCConv-Early | 0.43130 | +0.01426 |
+| SCConv-4Stage | 0.42587 | +0.00883 |
+| DySample | 0.41525 | -0.00179 |
+| Canonical EMA | 0.42796 | +0.01092 |
+
+Family winner:
+
+`YOLO11s + SCConv-Early`
+
+## Combination result
+
+`YOLO11s + SCConv-Early + Canonical EMA`
+
+- best epoch: 47
+- precision: 0.61407
+- recall: 0.63296
+- F1: 0.6233719272
+- mAP50: 0.64357
+- mAP50-95: 0.41839
+- delta vs baseline: +0.00135
+- delta vs SCConv-Early: -0.01291
+- strict complementarity: FALSE
+- decision: DO_NOT_PROMOTE_COMBINATION_PRIMARY_METRIC
+
+Execution archive:
+
+`research/experiment-execution-archive`
+
+Archive HEAD:
+
+`3acd95ea046b9027c857f9068bb276ef4b2aa0ee`
+
+## Controlling scientific decision
+
+`CORRECTED_MODULE_FAMILY_SCREEN_CLOSED=TRUE`
+
+`SELECTED_FAMILY_CANDIDATE=YOLO11s + SCConv-Early`
+
+`GLOBAL_FINAL_PAPER_ARCHITECTURE_FROZEN=FALSE`
+
+`REPLACEMENT_RESEARCH_PENDING_RESIDUAL_DIAGNOSIS=TRUE`
+
+`NEW_GPU_TRAINING_AUTHORIZED=FALSE`
+
+`TEST_ACCESS=NONE`
+
+Canonical EMA remains an individually positive corrected ablation.
+The combination result does not establish a causal explanation for its
+negative interaction with SCConv-Early.
 
 ## Current task
 
-Register and execute `BASE-B-ORG-SCR-S42-E200-CAL` as a separate longer-budget
-scratch calibration. The frozen 100-epoch baseline is not overwritten or resumed.
+Run the Residual-Error + Novelty Decision Gate using existing validation
+artifacts only.
 
-After calibration, return to the C3k2 + DySample + ResEMA line with a
-transfer-preserving corrected C3k2/SC design, then controlled Split-B pretrained module
-ablations and multi-seed finalist confirmation.
+Required comparison:
 
-Split-A remains reporting-only. Split-B test remains sealed.
+- frozen YOLO11s baseline;
+- SCConv-Early;
+- SCConv-4Stage as a placement/intensity control;
+- DySample;
+- Canonical EMA;
+- SCConv-Early + Canonical EMA.
 
-## Parallel architecture-correction workstream
+Required questions:
 
-A separate non-training branch is active:
+- what errors does SCConv-Early fix?
+- why does SCConv-4Stage change the precision-recall behavior?
+- why does DySample underperform the baseline in this frozen condition?
+- does DySample fail by class, object size, confidence, localization,
+  cross-scale alignment, or because upsampling is not the bottleneck?
+- what errors does Canonical EMA fix?
+- which fixes disappear in the SCConv-Early + Canonical EMA combination?
+- what residual errors remain after SCConv-Early?
+- should the next mechanism target upsampling, feature refinement,
+  localization, rare-class behavior, or another demonstrated bottleneck?
 
-`research/arch-corr-01b`
+Do not choose a replacement module before this diagnostic.
 
-Purpose:
-- forensically audit the historical C3k2_SC / ResEMA implementations;
-- preserve the validated DySample operator;
-- implement transfer-preserving Self-Calibrated C3k2 candidates;
-- implement a canonical EMA candidate without shifting native YOLO layer indices;
-- verify native state, official checkpoint transfer, zero-gate identity, gradients and parameter counts before any architecture training.
+Do not start new GPU training.
 
-Architecture implementation verification has now passed on verified implementation head
-`a30df2165cb24a0796086a32b07445ea04b5c7bc`:
-
-- GitHub Research Integrity run #33: PASS;
-- GitHub ARCH-CORR runtime audit run #5: PASS;
-- local focused tests: 16/16 PASS;
-- local TPSC locked-checkpoint audit: PASS;
-- local canonical EMA locked-checkpoint audit: PASS;
-- local DySample focused verification: PASS;
-- local worktree remained clean;
-- training_started=false, dataset_access=NONE, test_access=NONE.
-
-ARCH-CORR-01 implementation verification and evidence closure are complete.
-
-Closure evidence:
-- verified implementation head: `a30df2165cb24a0796086a32b07445ea04b5c7bc`;
-- closure candidate: `1801379e7cfdf4260e54d08b4e12391b795dc32f`;
-- candidate Research Integrity run #34: PASS;
-- candidate ARCH-CORR runtime audit run #6: PASS;
-- local exact-head reproduction: PASS;
-- no architecture training, dataset access or test access occurred during verification.
-
-Corrected modules are now **eligible for a separately governed single-module experiment
-authorization**, but no corrected-module training has yet been authorized.
-
-The E200 calibration continues independently on `research/baseline-refresh`.
+Split-B test remains sealed.

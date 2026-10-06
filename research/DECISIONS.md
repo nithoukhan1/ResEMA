@@ -443,3 +443,68 @@ Technical closure does not itself authorize GPU experiments. Corrected-module tr
 requires a new governed experiment-registration/source-authorization step.
 Split-B test remains sealed.
 
+## 2026-10-06 - Corrected module family closed; global architecture remains open
+
+The corrected SCConv/DySample/Canonical-EMA validation screen and the
+controlled SCConv-Early + Canonical EMA combination screen are formally
+closed.
+
+Frozen validation references under Split-B Original / pretrained / seed42 /
+E100 are:
+
+- baseline YOLO11s: mAP50-95 0.41704;
+- SCConv-Early: 0.43130;
+- SCConv-4Stage: 0.42587;
+- DySample: 0.41525;
+- Canonical EMA: 0.42796;
+- SCConv-Early + Canonical EMA: 0.41839.
+
+SCConv-Early is the strongest corrected candidate and is selected only as
+the corrected-family reference.
+
+The combination failed its predeclared complementarity requirement because
+0.41839 is below the SCConv-Early reference 0.43130.
+
+Therefore:
+
+- `CORRECTED_MODULE_FAMILY_SCREEN_CLOSED=TRUE`;
+- `SELECTED_FAMILY_CANDIDATE=YOLO11s + SCConv-Early`;
+- `GLOBAL_FINAL_PAPER_ARCHITECTURE_FROZEN=FALSE`;
+- `REPLACEMENT_RESEARCH_PENDING_RESIDUAL_DIAGNOSIS=TRUE`;
+- `NEW_GPU_TRAINING_AUTHORIZED=FALSE`;
+- `TEST_ACCESS=NONE`.
+
+Canonical EMA remains an individually positive corrected ablation.
+The failed combination must not be interpreted as evidence that EMA is
+intrinsically ineffective.
+
+No causal explanation for the failed interaction is accepted yet.
+Feature redundancy, over-recalibration, confidence redistribution,
+localization degradation, or other mechanisms remain hypotheses.
+
+Before selecting or designing any replacement mechanism, the project must
+perform a prediction-level Residual-Error + Novelty Decision Gate using
+existing validation artifacts from baseline, SCConv-Early, SCConv-4Stage,
+DySample, Canonical EMA, and the failed SCConv-Early + Canonical EMA
+combination.
+
+DySample is explicitly included in this gate. Its seed-42 result is
+slightly below baseline across the available aggregate metrics, but this
+is not accepted as proof of an intrinsically harmful upsampler.
+
+The gate must determine whether DySample's behavior is associated with
+class or object-size effects, false-negative / false-positive behavior,
+confidence ranking, localization, cross-scale alignment, dynamic sampling,
+or the absence of a meaningful upsampling bottleneck.
+
+If an upsampling/reconstruction failure is demonstrated, an alternative
+upsampler or guided feature-reconstruction mechanism may be considered.
+Attention is not the default substitute for an upsampling failure because
+the mechanisms solve different problems.
+
+If the evidence shows that upsampling is not the limiting factor, the
+upsampling branch may be retired rather than forcing another module.
+
+The replacement phase must remain problem-driven rather than a broad
+attention/module/upsampler search.
+

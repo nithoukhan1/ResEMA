@@ -1,0 +1,213 @@
+{
+  "schema_version": "corrected-module-family-closure-v1.0",
+  "closure_id": "CORRECTED-MODULE-FAMILY-CLOSURE-01",
+  "date": "2026-10-06",
+  "status": "CLOSED",
+  "scientific_branch": "research/combination-screen-01",
+  "preclosure_scientific_head": "22117d7334b53c7782a872a0114d0831fe41cb57",
+  "combination_scientific_source": "ab76873d98d040cbe8f06a77e2810a7c647b995b",
+  "single_module_authorization_commit": "9d65b7adae3d488f1cb70856476fef0488e9749a",
+  "execution_archive": {
+    "branch": "research/experiment-execution-archive",
+    "head": "3acd95ea046b9027c857f9068bb276ef4b2aa0ee",
+    "status": "COMPLETE_VERIFIED"
+  },
+  "development_condition": {
+    "data_binding": "DATA01:B-ORG:v1",
+    "split": "B",
+    "train_data": "original",
+    "initialization": "pretrained",
+    "seed": 42,
+    "epochs": 100,
+    "imgsz": 1024,
+    "batch_global": 16,
+    "optimizer": "SGD",
+    "primary_metric": "validation_mAP50-95",
+    "test_access": "NONE"
+  },
+  "baseline_reference": {
+    "experiment_id": "BASE-B-ORG-PT-S42",
+    "map50_95": 0.41704,
+    "best_epoch": 44,
+    "precision": 0.689,
+    "recall": 0.61491,
+    "f1": 0.649850051,
+    "map50": 0.65301
+  },
+  "single_module_results": [
+    {
+      "experiment_id": "BORG-PT-S42-SCCONV-EARLY-E100",
+      "paper_facing_name": "YOLO11s + SCConv-Early",
+      "map50_95": 0.4313,
+      "delta_vs_baseline": 0.01426,
+      "parameters": 9570093,
+      "decision": "SELECTED_FAMILY_CANDIDATE",
+      "best_epoch": 42,
+      "precision": 0.8099,
+      "recall": 0.61659,
+      "f1": 0.700146851,
+      "map50": 0.67258
+    },
+    {
+      "experiment_id": "BORG-PT-S42-SCCONV-4STAGE-E100",
+      "paper_facing_name": "YOLO11s + SCConv-4Stage",
+      "map50_95": 0.42587,
+      "delta_vs_baseline": 0.00883,
+      "parameters": 10021679,
+      "decision": "POSITIVE_NOT_SELECTED",
+      "best_epoch": 41,
+      "precision": 0.6432,
+      "recall": 0.66386,
+      "f1": 0.653366719,
+      "map50": 0.66506
+    },
+    {
+      "experiment_id": "BORG-PT-S42-DYSAMPLE-E100",
+      "paper_facing_name": "YOLO11s + DySample",
+      "map50_95": 0.41525,
+      "delta_vs_baseline": -0.00179,
+      "parameters": 9455915,
+      "decision": "DO_NOT_PROMOTE",
+      "best_epoch": 47,
+      "precision": 0.68413,
+      "recall": 0.60415,
+      "f1": 0.64165731,
+      "map50": 0.64235
+    },
+    {
+      "experiment_id": "BORG-PT-S42-CANONICAL-EMA-E100",
+      "paper_facing_name": "YOLO11s + Canonical EMA",
+      "map50_95": 0.42796,
+      "delta_vs_baseline": 0.01092,
+      "parameters": 9435423,
+      "decision": "POSITIVE_SINGLE_NOT_FAMILY_WINNER",
+      "best_epoch": 46,
+      "precision": 0.7916,
+      "recall": 0.63703,
+      "f1": 0.705953183,
+      "map50": 0.67204
+    }
+  ],
+  "combination_result": {
+    "experiment_id": "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100",
+    "paper_facing_name": "YOLO11s + SCConv-Early + Canonical EMA",
+    "best_epoch": 47,
+    "precision": 0.61407,
+    "recall": 0.63296,
+    "f1": 0.6233719272,
+    "map50": 0.64357,
+    "map50_95": 0.41839,
+    "delta_vs_baseline": 0.00135,
+    "delta_vs_scconv_early": -0.01291,
+    "delta_vs_canonical_ema": -0.00957,
+    "strict_complementarity": false,
+    "decision": "DO_NOT_PROMOTE_COMBINATION_PRIMARY_METRIC",
+    "results_csv_sha256": "63258d1a04c4629d08725d9ef189aaa71f915c0c4e280d5a14c5fe55c207c1a4",
+    "best_pt_sha256": "531c9927592781e7e19b6af1a35ce910113758d7ad5842677a5b7065487c897d",
+    "last_pt_sha256": "a560a2a87fa577cb83b1dd63c461270153304c3e245df81d66e8f80b0037f3ee"
+  },
+  "controlling_decision": {
+    "corrected_module_family_screen_closed": true,
+    "selected_family_candidate": "YOLO11s + SCConv-Early",
+    "global_final_paper_architecture_frozen": false,
+    "replacement_research_pending_residual_diagnosis": true,
+    "new_gpu_training_authorized": false,
+    "split_b_test_access": "NONE"
+  },
+  "interpretation_guardrails": [
+    "Canonical EMA is individually positive under the frozen single-module condition; the failed combination does not establish that EMA is intrinsically ineffective.",
+    "SCConv-Early plus Canonical EMA failed the predeclared strict complementarity rule.",
+    "No causal explanation for the interaction failure is frozen before prediction-level residual and interaction analysis.",
+    "No replacement module may be promoted merely because it is a known attention mechanism; replacement must be tied to a demonstrated residual problem."
+  ],
+  "next_phase": {
+    "name": "RESIDUAL_ERROR_AND_NOVELTY_DECISION_GATE",
+    "purpose": "Determine what SCConv-Early fixes, how SCConv placement changes precision-recall behavior, why DySample does not improve the frozen condition, what Canonical EMA fixes, what the SCConv-Early plus Canonical-EMA combination loses, and what residual problem remains before selecting or designing any replacement mechanism.",
+    "training_authorized": false,
+    "test_access": "NONE"
+  },
+  "diagnostic_scope": {
+    "status": "REQUIRED_BEFORE_REPLACEMENT_SELECTION",
+    "models": [
+      {
+        "experiment_id": "BASE-B-ORG-PT-S42",
+        "role": "NATIVE_BASELINE_REFERENCE"
+      },
+      {
+        "experiment_id": "BORG-PT-S42-SCCONV-EARLY-E100",
+        "role": "SUCCESSFUL_BACKBONE_FAMILY_REFERENCE"
+      },
+      {
+        "experiment_id": "BORG-PT-S42-SCCONV-4STAGE-E100",
+        "role": "SCCONV_PLACEMENT_INTENSITY_CONTROL"
+      },
+      {
+        "experiment_id": "BORG-PT-S42-DYSAMPLE-E100",
+        "role": "UPSAMPLING_FAILURE_DIAGNOSTIC"
+      },
+      {
+        "experiment_id": "BORG-PT-S42-CANONICAL-EMA-E100",
+        "role": "POSITIVE_ATTENTION_ABLATION"
+      },
+      {
+        "experiment_id": "BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100",
+        "role": "FAILED_COMPLEMENTARITY_INTERACTION"
+      }
+    ],
+    "required_questions": [
+      "Which baseline errors are corrected by SCConv-Early?",
+      "Why does SCConv-4Stage shift the precision-recall behavior relative to SCConv-Early?",
+      "Why does DySample fail to improve the frozen YOLO11s condition, including class, object-size, confidence, localization and cross-scale behavior?",
+      "Which errors are corrected by Canonical EMA when used alone?",
+      "Which SCConv-Early and Canonical-EMA gains disappear when the two modules are combined?",
+      "What residual errors remain after SCConv-Early and which mechanism class directly targets them?"
+    ],
+    "dysample_observation": {
+      "baseline": {
+        "precision": 0.689,
+        "recall": 0.61491,
+        "f1": 0.649850051,
+        "map50": 0.65301,
+        "map50_95": 0.41704
+      },
+      "dysample": {
+        "precision": 0.68413,
+        "recall": 0.60415,
+        "f1": 0.64165731,
+        "map50": 0.64235,
+        "map50_95": 0.41525
+      },
+      "delta": {
+        "precision": -0.00487,
+        "recall": -0.01076,
+        "f1": -0.008192741,
+        "map50": -0.01066,
+        "map50_95": -0.00179
+      },
+      "interpretation": "DySample is not promoted under seed42. The small negative primary-metric delta is not accepted as proof that DySample is intrinsically harmful; prediction-level diagnosis is required."
+    },
+    "historical_combination_policy": {
+      "corrected_scconv_plus_dysample_run_exists": false,
+      "corrected_three_way_scconv_dysample_ema_run_exists": false,
+      "historical_v1_v2_v3_evidence": "HYPOTHESIS_GENERATION_ONLY_NOT_CLEAN_CAUSAL_EVIDENCE"
+    }
+  },
+  "replacement_policy": {
+    "general_rule": "No module is replaced by broad trial-and-error. The replacement mechanism class must follow the demonstrated residual or interaction failure.",
+    "dysample_branch": {
+      "default_replacement_class": "UPSAMPLER_OR_GUIDED_FEATURE_RECONSTRUCTION",
+      "attention_is_default_replacement": false,
+      "post_diagnostic_reference_candidates": [
+        "CARAFE",
+        "FADE-style encoder-decoder guided upsampling",
+        "SAPA"
+      ],
+      "paper_method_preference": "If missing high-resolution guidance or cross-scale alignment is demonstrated, prefer a problem-driven guided residual upsampling design over a stock upsampler swap."
+    },
+    "ema_branch": {
+      "default_replacement_class": "GATED_OR_COMPLEMENTARY_FEATURE_REFINEMENT",
+      "broad_attention_module_sweep_allowed": false,
+      "paper_method_preference": "If destructive re-recalibration is demonstrated, prefer identity-preserving gated refinement over another unconditional attention stack."
+    }
+  }
+}
