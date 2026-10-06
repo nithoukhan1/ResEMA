@@ -109,3 +109,100 @@ Recovery:
 - verify the publication objective semantically rather than by one fragile
   contiguous string;
 - continue with the same two canonical governance files only.
+
+## 2026-10-06 - A12-D0 diagnostic artifact inventory
+
+Type: DIAGNOSTIC / PROVENANCE
+
+Read-only A12-D0 inspected the six required residual-diagnostic models.
+
+Result:
+
+- expected models: 6;
+- canonical model artifacts found: 6;
+- repository files modified by D0: none;
+- training: none;
+- dataset access: none;
+- Split-B test access: none;
+- new GPU training remains unauthorized.
+
+The canonical final archives are:
+
+- BASE-B-ORG-PT-S42-2.zip;
+- BORG-PT-S42-SCCONV-EARLY-E100-2.zip;
+- BORG-PT-S42-SCCONV-4STAGE-E100-2.zip;
+- BORG-PT-S42-DYSAMPLE-E100-1.zip;
+- BORG-PT-S42-CANONICAL-EMA-E100-2.zip;
+- BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100-2.zip.
+
+Each canonical archive was identified by frozen member hashes rather than
+filename alone.
+
+A12-D0A then copied both COMB session ZIPs into the governed external
+artifact store.
+
+COMB canonical final archive:
+
+`BORG-PT-S42-SCCONV-EARLY-CANONICAL-EMA-E100-2.zip`
+
+SHA256:
+
+`d0de1f91d0a914c2b0b334fc622c17266fa65c310dd10d01e004d495dfa76f01`
+
+D0A local archive manifest SHA256:
+
+`0144fb6096d7c3044a218566445159b9b06929570ff03be1a91c1ab52bbc4b53`
+
+A12-D0B records the previously missing corrected single-module and COMB
+artifacts in the existing canonical `research/01_provenance/ARTIFACTS.csv`
+rather than creating a parallel registry.
+
+The exact executed A12-D0 inventory script is preserved at:
+
+`research/tools/a12_d0_diagnostic_artifact_inventory.py`
+
+Exact script SHA256:
+
+`5e71f41e90281a4912a41784bbc64bd74c2e6a6519e8b516787901185e2e3c88`
+
+Next action:
+
+`A12-D1_STANDARDIZED_VALIDATION_DIAGNOSTIC_PREFLIGHT`
+
+## 2026-10-06 - A12-D0B status-parser failure and forward recovery
+
+Type: FAILURE / RECOVERY
+
+The first A12-D0B recording transaction successfully:
+
+- captured the exact executed A12-D0 inventory tool;
+- verified all five corrected-model/combination final archives and members;
+- verified the COMB local archive manifest;
+- added exactly 21 intended rows to the canonical artifact registry;
+- updated CURRENT.md;
+- appended the A12-D0 project-log event.
+
+It then stopped before tests, staging, commit, or push because its
+`git status --porcelain` helper stripped the leading status-space before
+path parsing. This caused the displayed path
+`research/01_provenance/ARTIFACTS.csv` to appear as
+`esearch/01_provenance/ARTIFACTS.csv`.
+
+Scientific impact:
+
+- none;
+- no training occurred;
+- no dataset was accessed;
+- Split-B test remained sealed;
+- no file was staged;
+- no commit was created;
+- no push occurred.
+
+Recovery:
+
+- preserve the four already-written intended files;
+- verify tracked and untracked memberships separately without porcelain
+  substring parsing;
+- verify the artifact-registry delta against the pre-D0B Git parent;
+- run governance tests;
+- freeze exactly the same four-file A12-D0B transaction.

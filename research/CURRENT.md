@@ -73,8 +73,26 @@ negative interaction with SCConv-Early.
 
 ## Current task
 
-Run the Residual-Error + Novelty Decision Gate using existing validation
-artifacts only.
+A12-D0 six-model diagnostic artifact inventory is complete.
+
+All six canonical final artifacts are locally recoverable and hash-verified:
+
+- frozen YOLO11s baseline;
+- SCConv-Early;
+- SCConv-4Stage;
+- DySample;
+- Canonical EMA;
+- SCConv-Early + Canonical EMA.
+
+A12-D0A also consolidated both COMB session archives into the governed
+external-artifact store without modifying the scientific repository.
+
+Next:
+
+`A12-D1_STANDARDIZED_VALIDATION_DIAGNOSTIC_PREFLIGHT`
+
+The next phase remains validation-only. It must establish one common
+evaluation and prediction-export protocol before any diagnostic inference.
 
 Required comparison:
 
