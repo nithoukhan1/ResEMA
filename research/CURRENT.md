@@ -107,12 +107,17 @@ Preserved runtime-preflight evidence:
 
 Next:
 
-`GOV_CHRONOLOGY_FORWARD_CORRECTION`
+`A12-D2_STANDARDIZED_VALIDATION_EXECUTION_IMPLEMENTATION_AND_FREEZE`
 
-After that governance correction, proceed to the separately implemented and
-source-frozen A12-D2 standardized validation execution gate.
+The governance chronology correction is complete by a forward-only commit;
+no historical commit was amended or rewritten.
 
-A12-D2 remains unauthorized at this state.
+Next, implement and source-freeze the A12-D2 standardized validation execution
+runner from the already frozen D1 protocol and preserved runtime-preflight
+contract.
+
+A12-D2 execution remains unauthorized until that implementation is reviewed,
+source-frozen and explicitly authorized.
 
 Required comparison:
 

@@ -2,7 +2,7 @@
 
 ## Authority
 
-These rules govern the Detection Project from 2026-10-06 onward unless
+These rules govern the Detection Project from 2026-10-05 onward unless
 the user explicitly changes them.
 
 They apply across chats, branches, experiments, diagnostics, manuscript

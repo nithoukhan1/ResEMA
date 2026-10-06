@@ -12,10 +12,10 @@ It complements:
 The log may contain proposals, hypotheses, failures and recoveries.
 Those entries are not automatically accepted scientific conclusions.
 
-For history before 2026-10-06, use the frozen migration/handoff packages,
+For history before 2026-10-05, use the frozen migration/handoff packages,
 historical registries and decision records.
 
-## 2026-10-06 ? A12 corrected-module-family closure
+## 2026-10-05 - A12 corrected-module-family closure
 
 Type: `DECISION / GOVERNANCE`
 
@@ -39,7 +39,7 @@ Next scientific task remains:
 
 `A12-D0_DIAGNOSTIC_ARTIFACT_INVENTORY`
 
-## 2026-10-06 ? Permanent operating rules requested
+## 2026-10-05 - Permanent operating rules requested
 
 Type: `GOVERNANCE`
 
@@ -58,7 +58,7 @@ These requirements are codified in:
 
 `research/00_governance/PROJECT_OPERATING_RULES.md`
 
-## 2026-10-06 - Repository simplicity and naming discipline
+## 2026-10-05 - Repository simplicity and naming discipline
 
 Type: GOVERNANCE
 
@@ -82,7 +82,7 @@ Canonical authority:
 
 research/00_governance/PROJECT_OPERATING_RULES.md
 
-## 2026-10-06 - Rule-4 freeze verification stopped and forward-recovered
+## 2026-10-05 - Rule-4 freeze verification stopped and forward-recovered
 
 Type: FAILURE / RECOVERY
 
@@ -294,3 +294,42 @@ A12-D2 execution remains unauthorized pending a separate implementation,
 source-freeze and authorization transaction.
 
 Split-B test access remains NONE.
+## 2026-10-06 - Governance chronology forward correction
+
+Type: `PROVENANCE CORRECTION / GOVERNANCE`
+
+A chronology audit identified that four governance events which occurred on
+2026-10-05 had been recorded one calendar day late as 2026-10-06.
+
+Corrected historical event dates:
+
+- A12 corrected-module-family closure: 2026-10-06 -> 2026-10-05;
+- permanent operating rules requested: 2026-10-06 -> 2026-10-05;
+- repository simplicity and naming discipline: 2026-10-06 -> 2026-10-05;
+- Rule-4 freeze verification stopped and forward-recovered:
+  2026-10-06 -> 2026-10-05.
+
+The operating-rules authority date was corrected consistently from
+2026-10-06 to 2026-10-05.
+
+The project-log historical cutoff was corrected from "before 2026-10-06" to
+"before 2026-10-05" so the now-recorded 2026-10-05 events remain inside the
+canonical log chronology.
+
+Scope and scientific impact:
+
+- this is a forward-only provenance correction;
+- no existing Git commit was amended, reset or force-pushed;
+- no experiment ID, architecture, metric, result or artifact identity changed;
+- A12-D0 and A12-D1 events dated 2026-10-06 remain unchanged because they
+  occurred on 2026-10-06;
+- no dataset was accessed;
+- no checkpoint was loaded;
+- no validation inference or prediction occurred;
+- no training occurred;
+- Split-B test access remained NONE;
+- A12-D2 remained unauthorized during this correction.
+
+Next action:
+
+`A12-D2_STANDARDIZED_VALIDATION_EXECUTION_IMPLEMENTATION_AND_FREEZE`
