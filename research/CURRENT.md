@@ -91,8 +91,22 @@ Next:
 
 `A12-D1_STANDARDIZED_VALIDATION_DIAGNOSTIC_PREFLIGHT`
 
-The next phase remains validation-only. It must establish one common
-evaluation and prediction-export protocol before any diagnostic inference.
+A12-D1 protocol/source implementation is being frozen before runtime
+execution.
+
+The design revalidates all six frozen `best.pt` checkpoints under one common
+current repository checkout and reuses the governed BASELINE-FREEZE-01
+validation runtime.
+
+A12-D1 itself is preflight-only:
+
+- no validation inference;
+- no prediction;
+- no training;
+- no Split-B test access.
+
+A12-D2 remains unauthorized until the D1 source and runtime preflight are
+reviewed.
 
 Required comparison:
 

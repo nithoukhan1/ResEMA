@@ -206,3 +206,40 @@ Recovery:
 - verify the artifact-registry delta against the pre-D0B Git parent;
 - run governance tests;
 - freeze exactly the same four-file A12-D0B transaction.
+
+## 2026-10-06 - A12-D1 standardized validation diagnostic protocol candidate
+
+Type: DIAGNOSTIC DESIGN / IMPLEMENTATION
+
+After A12-D0/D0B established six canonical diagnostic checkpoints, the next
+phase was defined as a common validation-only diagnostic rather than a new
+training experiment.
+
+The D1 design decision is:
+
+- revalidate all six frozen `best.pt` checkpoints;
+- use one current source-frozen evaluation checkout for all six;
+- preserve historical training-time selection metrics separately;
+- reuse the governed BASELINE-FREEZE-01 standardized validation runtime;
+- export low-confidence post-NMS predictions in A12-D2 so all later
+  diagnostic thresholds can be applied offline without rerunning models;
+- use authoritative Split-B validation metadata for patient linkage;
+- freeze class, confidence, localization, size, patient and error-transition
+  diagnostic rules before seeing D2 outcomes.
+
+Scientific restraint:
+
+- outcome-level DySample evidence may identify scale/localization-associated
+  failure but cannot prove internal cross-scale-alignment causality;
+- the SCConv-Early + Canonical EMA result must not be labeled causal module
+  interference without a separate mechanism-level test;
+- no replacement module is selected before the residual diagnostic is
+  complete.
+
+A12-D1 implementation transaction itself performs no dataset access,
+checkpoint loading, validation inference, prediction, or training.
+
+Split-B test access remains NONE.
+
+A12-D2 remains unauthorized pending D1 source freeze and runtime-preflight
+review.
