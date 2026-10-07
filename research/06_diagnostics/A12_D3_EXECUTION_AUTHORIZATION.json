@@ -1,0 +1,41 @@
+{
+  "architecture_selection_inside_execution_authorized": false,
+  "authorization_consumption_rule": "one governed offline execution attempt; failure or completion requires preservation/closure before any new authorization",
+  "authorized_scope": {
+    "confidence_thresholds": [
+      0.05,
+      0.1,
+      0.25,
+      0.5
+    ],
+    "frozen_comparisons": 8,
+    "models": 6,
+    "operation": "offline_diagnostic_from_preserved_d2_csv_evidence",
+    "patient_bootstrap_replicates": 10000,
+    "patient_bootstrap_seed": 42,
+    "primary_match_iou": 0.5,
+    "primary_matcher": "global_same_class_pair_iou_descending"
+  },
+  "branch": "research/combination-screen-01",
+  "checkpoint_loading_authorized": false,
+  "d2_preservation_archive_bytes": 43856067,
+  "d2_preservation_archive_sha256": "419ac71b1e42b791168a5ea24cf87d71b8a3d1eba9333d183a73009733056b93",
+  "date": "2026-10-07",
+  "execution_gate_path": "research/06_diagnostics/A12_D3_AUTHORIZED_EXECUTION_GATE.py",
+  "execution_gate_sha256": "5d8ccfc5fb1c967f36d32b7f673f3bfd48c569938a90aac3534010335bd6ebb8",
+  "next_action": "A12_D3_AUTHORIZATION_CLOSURE_AND_PREFLIGHT",
+  "output_requirement": "external_directory_outside_scientific_git_worktree",
+  "repository": "nithoukhan1/ResEMA",
+  "runner_path": "research/06_diagnostics/A12_D3_OFFLINE_DIAGNOSTIC_RUNNER.py",
+  "runner_sha256": "7edae668a571f31274ca02be8f73d97ef49a1c0b4266c5f2a7a4464ece4116c4",
+  "schema": "A12_D3_EXECUTION_AUTHORIZATION_V1",
+  "source_freeze_closure_commit": "ca221f0f45db014802fb7d1768826254aae4c857",
+  "source_freeze_commit": "8d3cfee47bb4de37b98eb78964f58a953ba4fd36",
+  "source_freeze_record_path": "research/06_diagnostics/A12_D3_SOURCE_FREEZE.json",
+  "source_freeze_record_sha256": "24b34050764342d0ac2c2398ffdb80aedc59a4c151206765b203d01361ba4e19",
+  "split_b_test_access": "NONE",
+  "status": "AUTHORIZED_FOR_ONE_OFFLINE_DIAGNOSTIC_EXECUTION",
+  "threshold_tuning_authorized": false,
+  "training_authorized": false,
+  "validation_rerun_authorized": false
+}
