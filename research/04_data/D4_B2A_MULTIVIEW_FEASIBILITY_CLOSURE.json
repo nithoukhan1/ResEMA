@@ -1,0 +1,34 @@
+{
+  "architecture_decision_made": false,
+  "attention_authorized": false,
+  "branch": "research/lpq-method-01",
+  "date": "2026-10-07",
+  "implementation_authorized": false,
+  "multi_view_feasibility_tier": "STRONG",
+  "next_action": "D4-B2B_MULTIVIEW_OBJECT_LEVEL_COMPLEMENTARITY_AND_ERROR_FEASIBILITY",
+  "package_sha256": "755d7d0cae382caec95495e1e8e2bad262b1e55a52277ca681aed87d1cc747b6",
+  "schema": "D4_B2A_MULTIVIEW_FEASIBILITY_CLOSURE_V1",
+  "scope": "SPLIT_B_TRAIN_AND_VAL_METADATA_ONLY",
+  "source_head": "78b90280e9e4a889cf32e3709d21a40ce22dd66f",
+  "status": "COMPLETE_PRESERVED_STRONG_FEASIBILITY",
+  "test_access": "NONE",
+  "train": {
+    "ap_lat_pair_capable_group_fraction": 0.8566534914361001,
+    "ap_lat_pair_capable_groups": 6502,
+    "clean_exact_pairs": 6496,
+    "images": 14227,
+    "patient_pair_fraction": 0.9376172607879925,
+    "patients": 4264,
+    "patients_with_pair": 3998
+  },
+  "training_authorized": false,
+  "val": {
+    "ap_lat_pair_capable_group_fraction": 0.8643649815043156,
+    "ap_lat_pair_capable_groups": 1402,
+    "clean_exact_pairs": 1402,
+    "images": 3050,
+    "patient_pair_fraction": 0.937636761487965,
+    "patients": 914,
+    "patients_with_pair": 857
+  }
+}

@@ -109,3 +109,22 @@ Read next:
 
 Next transaction:
 `D4-B2_REVISED_METHOD_HYPOTHESIS_PRIOR_ART_AND_MATHEMATICAL_FREEZE`
+
+## D4-B2A multi-view feasibility result
+
+A read-only Split-B TRAIN/VAL metadata audit found STRONG multi-view coverage.
+
+TRAIN:
+- AP/LAT-capable side-specific study groups: 6502 (85.6653%)
+- patients with >=1 pair: 3998 (93.7617%)
+
+VAL:
+- AP/LAT-capable side-specific study groups: 1402 (86.4365%)
+- patients with >=1 pair: 857 (93.7637%)
+
+This establishes data-structure feasibility only.
+
+No architecture is selected and no implementation/training is authorized.
+
+Next:
+`D4-B2B_MULTIVIEW_OBJECT_LEVEL_COMPLEMENTARITY_AND_ERROR_FEASIBILITY`

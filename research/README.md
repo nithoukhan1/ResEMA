@@ -74,3 +74,14 @@ screen, combination screen, D2 standardized validation and D3 residual diagnosti
 remain preserved as historical scientific evidence.
 
 `07_method/METHOD_BLUEPRINT_V7.md` is historical/paused and is not the active architecture specification.
+
+## D4 current checkpoint — multi-view feasibility
+
+D4-B2A found STRONG AP/LAT pair coverage in Split-B TRAIN and VAL.
+
+Multi-view is now a serious candidate but remains unimplemented.
+
+Next canonical gate:
+`D4-B2B_MULTIVIEW_OBJECT_LEVEL_COMPLEMENTARITY_AND_ERROR_FEASIBILITY`
+
+Split-B TEST remains sealed.

@@ -560,3 +560,16 @@ The D3 residual problem remains authoritative.
 
 A revised mechanism must pass the exclusion rules in
 `research/07_method/D4_LPQ_REDESIGN_CONSTRAINTS.md` before implementation.
+
+## 2026-10-07 - D4-B2A promotes multi-view to serious candidate
+
+The predeclared metadata feasibility gate is STRONG.
+
+Multi-view is therefore promoted from a speculative direction to a serious candidate
+for deeper D4 analysis.
+
+This is not an architecture promotion.
+
+Before any dual-view network is designed, D4-B2B must demonstrate that paired views
+provide complementary class/object/model-error evidence rather than merely coexisting
+in the same study.

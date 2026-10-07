@@ -383,3 +383,27 @@ Therefore:
 
 Next:
 `D4-B2_REVISED_METHOD_HYPOTHESIS_PRIOR_ART_AND_MATHEMATICAL_FREEZE`
+
+## D4-B2A multi-view feasibility — STRONG — 2026-10-07
+
+Read-only TRAIN/VAL metadata audit completed and preserved.
+
+- TRAIN pair-capable group fraction: 0.85665349
+- TRAIN patient pair fraction: 0.93761726
+- VAL pair-capable group fraction: 0.86436498
+- VAL patient pair fraction: 0.93763676
+
+Disposition:
+`MULTIVIEW_FEASIBILITY_TIER=STRONG`
+
+This does not yet prove annotation/model-error complementarity.
+Architecture decision remains FALSE.
+
+Next:
+`D4-B2B_MULTIVIEW_OBJECT_LEVEL_COMPLEMENTARITY_AND_ERROR_FEASIBILITY`
+
+Firewalls:
+- model code changed: FALSE;
+- training authorized: FALSE;
+- attention authorized: FALSE;
+- B-test access: NONE.
