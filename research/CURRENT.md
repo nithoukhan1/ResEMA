@@ -267,3 +267,51 @@ No D2 archive was opened during this authorization transaction.
 
 Next:
 `A12_D3_AUTHORIZATION_PREFLIGHT_THEN_ONE_OFFLINE_EXECUTION`
+
+## A12-D3 offline diagnostic execution closure — 2026-10-07
+
+Status:
+
+`EXECUTION_COMPLETE_PRESERVED_AUTHORIZATION_CONSUMED`
+
+Execution checkout:
+
+`d696330f2b2a8cbe0dfe0b6f3d7c9fe512f1a9ea`
+
+Scientific source-freeze commit:
+
+`8d3cfee47bb4de37b98eb78964f58a953ba4fd36`
+
+Authorization commit:
+
+`fe342dd9da4c1a79746d43c3628fe4f628c97013`
+
+Governed preservation:
+- execution manifest SHA256: `0c078833b0f3675d41cccce7bb09545267947064fa986fe756d51d8c7689ba9b`;
+- output-tree digest SHA256: `701d0cd105f86525bb24e2847c6a6e907eaf2dca6923ad8e54f42d014e504ff7`;
+- preservation archive SHA256: `8c3545fd772b56984d87090819ba265bc98dbfdf15c456b4abb6f0a02fd513af`;
+- preservation review SHA256: `7fb6038dbf6c3f6b0b82d06c5631a9fb3b0b96e1410bf338b0e758c63298a3c1`;
+- output files verified: 58/58;
+- summary tables verified: 9/9;
+- object-event files verified: 48/48;
+- patients: 914;
+- comparisons: 8;
+- patient-bootstrap rows: 128.
+
+Execution firewalls:
+- checkpoint loading: NONE;
+- validation rerun: NONE;
+- training: NONE;
+- Split-B test access: NONE.
+
+The one governed A12-D3 execution authorization is consumed.
+`D3_RERUN_AUTHORIZED=FALSE`.
+
+No scientific model-selection interpretation was performed during execution or preservation.
+
+New GPU training remains unauthorized.
+Split-B test remains sealed.
+
+Next scientific transaction:
+
+`A12_D3_E_SCIENTIFIC_INTERPRETATION_AND_RESIDUAL_NOVELTY_DECISION`

@@ -1,0 +1,50 @@
+{
+  "authorization_closure_consumed_sha256": "2f00fb57a92a24c4035ff6286cc7cccdb08abdbe988db00df5ff89cec46007b2",
+  "authorization_closure_preconsumption_sha256": "a0bac9cd54fd945e7472054ede3eba27ca7b9a5ae47aac070a3bec6551104baf",
+  "authorization_commit": "fe342dd9da4c1a79746d43c3628fe4f628c97013",
+  "authorization_consumed": true,
+  "authorization_json_sha256": "c537450066515940fc3a49e10bea870bb3cfb9395ca144250efd411dac8ba600",
+  "branch": "research/combination-screen-01",
+  "checkpoint_loading": "NONE",
+  "date": "2026-10-07",
+  "execution_gate_sha256": "5d8ccfc5fb1c967f36d32b7f673f3bfd48c569938a90aac3534010335bd6ebb8",
+  "execution_head": "d696330f2b2a8cbe0dfe0b6f3d7c9fe512f1a9ea",
+  "execution_manifest_sha256": "0c078833b0f3675d41cccce7bb09545267947064fa986fe756d51d8c7689ba9b",
+  "input_d2_preservation_archive_sha256": "419ac71b1e42b791168a5ea24cf87d71b8a3d1eba9333d183a73009733056b93",
+  "new_gpu_training_authorized": false,
+  "next_action": "A12_D3_E_SCIENTIFIC_INTERPRETATION_AND_RESIDUAL_NOVELTY_DECISION",
+  "output_tree_digest_sha256": "701d0cd105f86525bb24e2847c6a6e907eaf2dca6923ad8e54f42d014e504ff7",
+  "preservation_archive": {
+    "bytes": 14214176,
+    "logical_name": "A12_D3_OFFLINE_DIAGNOSTIC_D696330F_PRESERVED.zip",
+    "members": 58,
+    "sha256": "8c3545fd772b56984d87090819ba265bc98dbfdf15c456b4abb6f0a02fd513af"
+  },
+  "preservation_review": {
+    "logical_name": "A12_D3_PRESERVATION_REVIEW_D696330F.json",
+    "sha256": "7fb6038dbf6c3f6b0b82d06c5631a9fb3b0b96e1410bf338b0e758c63298a3c1",
+    "status": "PASS"
+  },
+  "repository": "nithoukhan1/ResEMA",
+  "rerun_authorized": false,
+  "runner_sha256": "7edae668a571f31274ca02be8f73d97ef49a1c0b4266c5f2a7a4464ece4116c4",
+  "schema": "A12_D3_EXECUTION_CLOSURE_V1",
+  "scientific_interpretation_performed_during_execution_or_preservation": false,
+  "source_freeze_commit": "8d3cfee47bb4de37b98eb78964f58a953ba4fd36",
+  "status": "EXECUTION_COMPLETE_PRESERVED_AUTHORIZATION_CONSUMED",
+  "test_access": "NONE",
+  "training": "NONE",
+  "validation_rerun": "NONE",
+  "verified_scope": {
+    "bootstrap_rows": 128,
+    "comparison_count": 8,
+    "confidence_threshold_count": 4,
+    "event_files": 48,
+    "model_count": 6,
+    "operational_gt_boxes": 7110,
+    "operational_images": 3049,
+    "output_files": 58,
+    "patients": 914,
+    "summary_tables": 9
+  }
+}

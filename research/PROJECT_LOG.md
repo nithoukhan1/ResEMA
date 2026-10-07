@@ -700,3 +700,51 @@ A separate authorization-preflight must PASS before the one execution attempt.
 
 Next action:
 `A12_D3_AUTHORIZATION_PREFLIGHT_THEN_ONE_OFFLINE_EXECUTION`
+
+## 2026-10-07 - A12-D3 offline diagnostic execution preserved and closed
+
+Type: `DIAGNOSTIC PRESERVATION / AUTHORIZATION CONSUMPTION / CLOSURE`
+
+The source-frozen and separately authorized A12-D3 offline diagnostic executed successfully against the canonical preserved A12-D2 CSV evidence.
+
+Execution checkout:
+`d696330f2b2a8cbe0dfe0b6f3d7c9fe512f1a9ea`
+
+Scientific source-freeze commit:
+`8d3cfee47bb4de37b98eb78964f58a953ba4fd36`
+
+Authorization commit:
+`fe342dd9da4c1a79746d43c3628fe4f628c97013`
+
+Independent post-execution audit verified:
+- 58/58 output files;
+- 9/9 summary tables;
+- 48/48 object-event files;
+- full TP/FP/FN and event-link conservation;
+- 914-patient metric lattice;
+- 8 predefined comparison lattice;
+- 128 patient-bootstrap rows with seed 42 / 10,000 replicates;
+- no checkpoint loading;
+- no validation rerun;
+- no training;
+- Split-B test access NONE.
+
+Canonical preservation archive SHA256:
+`8c3545fd772b56984d87090819ba265bc98dbfdf15c456b4abb6f0a02fd513af`
+
+Independent preservation review SHA256:
+`7fb6038dbf6c3f6b0b82d06c5631a9fb3b0b96e1410bf338b0e758c63298a3c1`
+
+Execution manifest SHA256:
+`0c078833b0f3675d41cccce7bb09545267947064fa986fe756d51d8c7689ba9b`
+
+Output-tree digest SHA256:
+`701d0cd105f86525bb24e2847c6a6e907eaf2dca6923ad8e54f42d014e504ff7`
+
+The one-use A12-D3 execution authorization is consumed by the successful execution.
+Any rerun requires a new explicit authorization transaction.
+
+No scientific interpretation or architecture-promotion decision was made inside execution/preservation.
+
+Next action:
+`A12_D3_E_SCIENTIFIC_INTERPRETATION_AND_RESIDUAL_NOVELTY_DECISION`
