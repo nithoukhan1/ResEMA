@@ -315,3 +315,43 @@ Split-B test remains sealed.
 Next scientific transaction:
 
 `A12_D3_E_SCIENTIFIC_INTERPRETATION_AND_RESIDUAL_NOVELTY_DECISION`
+
+## D4 LPQ method-development transition — 2026-10-07
+
+Status:
+
+`PATH_B_SELECTED_LPQ_CONCEPT_PHASE`
+
+Authoritative D4 branch:
+
+`research/lpq-method-01`
+
+D4 branch parent:
+
+`227918fa1c2a496023e39a992bfaedd953bcc8f9`
+
+D3-E2 decision:
+- SCConv-Early remains a useful corrected-family reference but is not frozen as the final paper architecture;
+- broad SCConv/DySample/EMA module-combination search is closed;
+- the next method is problem-driven around true-positive preservation, score/reliability consistency and duplicate control.
+
+Working concept:
+- LPQ = Lesion-Preserving Quality;
+- DAR = Distribution-Aware Reliability;
+- GDS = Groupwise Duplicate Separation.
+
+Current firewalls:
+- LPQ implemented: FALSE;
+- LPQ training authorized: FALSE;
+- attention authorized: FALSE;
+- final architecture frozen: FALSE;
+- B-VAL: development/selection;
+- B-TEST access: NONE.
+
+D4 canonical starting document:
+
+`research/07_method/D4_LPQ_CONTEXT_INDEX.md`
+
+Next:
+
+`D4-B_LPQ_MATHEMATICAL_SPECIFICATION_NOVELTY_AND_PROMOTION_FREEZE`

@@ -508,3 +508,38 @@ upsampling branch may be retired rather than forcing another module.
 The replacement phase must remain problem-driven rather than a broad
 attention/module/upsampler search.
 
+
+## 2026-10-07 - D3-E2 selects Path B; D4 LPQ concept phase opened
+
+The residual-error decision gate is closed with `PATH_B_SELECTED`.
+
+SCConv-Early is retained as a useful corrected-family reference because it suppresses
+several false-positive modes, but it is not accepted as the final paper architecture.
+D3 showed no robust net lesion-recovery advantage and identified confidence-sensitive
+TP loss and increased duplicate predictions as important residual behavior.
+
+The project will not resume broad module shopping.
+
+The working D4 hypothesis is `LPQ (Lesion-Preserving Quality)` with two concept-level
+components:
+- DAR: Distribution-Aware Reliability;
+- GDS: Groupwise Duplicate Separation.
+
+These names and mechanisms are not yet mathematically or scientifically frozen.
+
+Development policy:
+- use full Split-B TRAIN for candidate fitting;
+- use Split-B VAL for architecture development/selection;
+- no B-inner split is planned;
+- Split-B TEST remains sealed until the full architecture/comparator suite is frozen.
+
+Attention is not pre-authorized. It may be considered later only if post-LPQ evidence
+demonstrates a separate feature-representation residual and a novelty review supports
+one targeted mechanism.
+
+Current state:
+- `LPQ_IMPLEMENTED=FALSE`;
+- `LPQ_TRAINING_AUTHORIZED=FALSE`;
+- `ATTENTION_AUTHORIZED=FALSE`;
+- `GLOBAL_FINAL_PAPER_ARCHITECTURE_FROZEN=FALSE`;
+- `TEST_ACCESS=NONE`.

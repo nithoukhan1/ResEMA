@@ -748,3 +748,34 @@ No scientific interpretation or architecture-promotion decision was made inside 
 
 Next action:
 `A12_D3_E_SCIENTIFIC_INTERPRETATION_AND_RESIDUAL_NOVELTY_DECISION`
+
+## 2026-10-07 - D4 LPQ clean method-development phase opened
+
+Type: `SCIENTIFIC TRANSITION / CONTEXT FREEZE / PROVENANCE`
+
+The governed D3 residual-error analysis has been carried forward into a new,
+clean method-development phase.
+
+Source:
+- branch `research/combination-screen-01`;
+- HEAD `227918fa1c2a496023e39a992bfaedd953bcc8f9`.
+
+New branch:
+`research/lpq-method-01`
+
+D3-E1 evidence package was preserved under the external artifact store and registered:
+- package SHA256 `d75afd61c0549c6ae805a57b364e926bc7750bfb46fec520e69002976b147cb9`;
+- manifest SHA256 `34d79b264f7a26e051ab78947d59a3680afdf03356cd76ac47cf4d36460dd36e`;
+- scientific report SHA256 `02abfeb20c59aa16e3a2251d2dd48d55ab3b2a914146adad7ea98d3003bc84db`.
+
+Path B is selected.
+SCConv-Early is a reference component, not the final architecture.
+LPQ/DAR/GDS remain concepts only.
+
+No model code changed.
+No training occurred.
+No validation inference occurred.
+No Split-B test access occurred.
+
+Next action:
+`D4-B_LPQ_MATHEMATICAL_SPECIFICATION_NOVELTY_AND_PROMOTION_FREEZE`

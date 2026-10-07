@@ -1,0 +1,37 @@
+{
+  "attention_authorized": false,
+  "d3_e2_decision": "PATH_B_SELECTED",
+  "d3_execution_status": "COMPLETE_PRESERVED_CLOSED",
+  "d3_rerun_authorized": false,
+  "date": "2026-10-07",
+  "development_protocol": {
+    "inner_split": "NOT_PLANNED",
+    "test": "SEALED_FINAL_EVALUATION_ONLY",
+    "train": "Split-B TRAIN",
+    "validation": "Split-B VAL"
+  },
+  "evidence": {
+    "a12_d3_e1_manifest_sha256": "34d79b264f7a26e051ab78947d59a3680afdf03356cd76ac47cf4d36460dd36e",
+    "a12_d3_e1_package_sha256": "d75afd61c0549c6ae805a57b364e926bc7750bfb46fec520e69002976b147cb9",
+    "a12_d3_e1_report_sha256": "02abfeb20c59aa16e3a2251d2dd48d55ab3b2a914146adad7ea98d3003bc84db",
+    "a12_d3_preservation_archive_sha256": "8c3545fd772b56984d87090819ba265bc98dbfdf15c456b4abb6f0a02fd513af"
+  },
+  "global_final_architecture_frozen": false,
+  "lpq_implemented": false,
+  "lpq_source_frozen": false,
+  "lpq_training_authorized": false,
+  "method_status": "CONCEPT_ONLY",
+  "next_action": "D4-B_LPQ_MATHEMATICAL_SPECIFICATION_NOVELTY_AND_PROMOTION_FREEZE",
+  "schema": "D4_LPQ_TRANSITION_RECORD_V1",
+  "selected_family_reference": "YOLO11s + SCConv-Early",
+  "selected_family_reference_is_final_architecture": false,
+  "source_branch": "research/combination-screen-01",
+  "source_head": "227918fa1c2a496023e39a992bfaedd953bcc8f9",
+  "target_branch": "research/lpq-method-01",
+  "test_access": "NONE",
+  "working_components": {
+    "DAR": "Distribution-Aware Reliability",
+    "GDS": "Groupwise Duplicate Separation"
+  },
+  "working_method_name": "LPQ"
+}

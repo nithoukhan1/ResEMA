@@ -4,32 +4,61 @@ This directory is the authoritative research record for the publication-oriented
 
 ## Current state
 
-The fresh six-run YOLO11s baseline matrix and BASELINE-FREEZE-01 are complete.
+D3 residual diagnostics are complete, preserved and closed.
 
-Two parallel workstreams are active:
+Current active method-development branch:
 
-1. `research/baseline-refresh`
-   - governed scratch E200 epoch-budget calibration;
-   - Split-B test remains sealed.
+`research/lpq-method-01`
 
-2. `research/arch-corr-01b`
-   - historical C3k2_SC / ResEMA forensic closure;
-   - transfer-preserving TPSC candidates;
-   - retained DySample;
-   - canonical EMA / transfer-preserving TPEMA;
-   - ARCH-CORR-01 technical verification and record freeze complete;
-   - corrected-module training still requires separate experiment authorization.
+D3-E2 scientific decision:
 
-The final architecture and long-tail loss are not yet frozen.
+`PATH_B_SELECTED`
 
-Start here:
-1. `CURRENT.md`
-2. `DECISIONS.md`
-3. `07_method/ARCH_CORR_01_MASTER_TRACKER.md`
-4. `07_method/ARCH_CORR_01_MODULE_DISPOSITION.md`
-5. `05_experiments/BASELINE_FREEZE_01_CLOSURE.md`
-6. `05_experiments/EXPERIMENTS.csv`
-7. `01_provenance/ARTIFACTS.csv`
+Working method concept:
+
+`LPQ = Lesion-Preserving Quality`
+
+Current method status:
+
+`CONCEPT_ONLY`
+
+No new GPU training is authorized.
+Split-B test remains sealed.
+
+## Start here
+
+1. `07_method/D4_LPQ_CONTEXT_INDEX.md`
+2. `07_method/D4_LPQ_MASTER_TRACKER.md`
+3. `07_method/D4_LPQ_MASTER_PLAN.md`
+4. `07_method/D4_LPQ_SCIENTIFIC_RATIONALE.md`
+5. `CURRENT.md`
+6. `DECISIONS.md`
+7. `PROJECT_LOG.md`
+8. `05_experiments/EXPERIMENTS.csv`
+9. `01_provenance/ARTIFACTS.csv`
+
+## Active D4 workflow
+
+D4-A transition/context freeze
+-> D4-B mathematical specification + novelty + promotion freeze
+-> D4-C implementation
+-> D4-D structural/synthetic verification
+-> D4-E source freeze + experiment contract
+-> D4-F first LPQ training
+-> D4-G diagnostics
+-> D4-H ablations
+-> optional D4-I attention gate
+-> D4-J final architecture freeze
+-> robustness/comparators
+-> sealed final test.
+
+## Dataset roles
+
+- Split-B TRAIN: candidate training
+- Split-B VAL: architecture development and selection
+- Split-B TEST: sealed final evaluation only
+
+No inner development split is planned.
 
 ## Workflow
 
@@ -37,8 +66,10 @@ Local VS Code -> Git -> GitHub immutable commit -> governed Kaggle exact commit 
 Save Version / resume if needed -> external checkpoint storage -> compact result
 registration in Git -> documented scientific decision.
 
-## Existing history
+## Historical work
 
-The V7/V8 governance documents and `02_history/` are preserved as historical
-evidence. `07_method/METHOD_BLUEPRINT_V7.md` is explicitly paused and is not the
-active architecture specification.
+The baseline refresh, corrected SCConv/DySample/EMA architecture audit, module-family
+screen, combination screen, D2 standardized validation and D3 residual diagnostics
+remain preserved as historical scientific evidence.
+
+`07_method/METHOD_BLUEPRINT_V7.md` is historical/paused and is not the active architecture specification.
