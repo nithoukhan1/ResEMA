@@ -18,17 +18,17 @@ SCConv-Early behavior.
 Documentation and provenance only.
 No model-code changes and no training.
 
-### D4-B — mathematical specification + novelty gate
-Freeze:
-- DAR inputs, targets and reliability formulation;
-- GDS grouping, primary-candidate definition and score-separation formulation;
-- how DAR/GDS interact with standard YOLO11 classification/box/DFL paths;
-- loss terms and coefficients;
-- inference behavior;
-- exact ablation matrix;
-- promotion criteria;
-- novelty relationship to GFL, VarifocalNet, TOOD, one-to-one/end-to-end YOLO,
-  uncertainty-aware localization, and recent wrist-X-ray detectors.
+### D4-B1 — prior-art collision gate
+Audit the concept before equations or code.
+The original DAR and GDS sketches are rejected as novelty cores because of direct
+or near-direct overlap with GFLV2/quality-aware scoring and hybrid/dual-assignment
+duplicate-ranking literature.
+
+### D4-B2 — revised hypothesis + mathematical/novelty freeze
+Search and freeze a revised mechanism that survives the prior-art exclusions recorded
+in `D4_LPQ_REDESIGN_CONSTRAINTS.md`.
+Freeze equations, loss terms, inference behavior, ablations and promotion criteria only
+after the revised concept passes its own novelty review.
 
 ### D4-C — implementation
 Implement LPQ additively.

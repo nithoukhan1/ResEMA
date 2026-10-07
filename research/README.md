@@ -20,7 +20,7 @@ Working method concept:
 
 Current method status:
 
-`CONCEPT_ONLY`
+`CONCEPT_REDESIGN_REQUIRED_AFTER_D4_B1_PRIOR_ART_GATE`
 
 No new GPU training is authorized.
 Split-B test remains sealed.
@@ -40,7 +40,8 @@ Split-B test remains sealed.
 ## Active D4 workflow
 
 D4-A transition/context freeze
--> D4-B mathematical specification + novelty + promotion freeze
+-> D4-B1 prior-art collision gate
+-> D4-B2 revised hypothesis + mathematical/novelty freeze
 -> D4-C implementation
 -> D4-D structural/synthetic verification
 -> D4-E source freeze + experiment contract

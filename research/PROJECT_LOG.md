@@ -779,3 +779,22 @@ No Split-B test access occurred.
 
 Next action:
 `D4-B_LPQ_MATHEMATICAL_SPECIFICATION_NOVELTY_AND_PROMOTION_FREEZE`
+
+## 2026-10-07 - D4-B1 prior-art collision gate opened redesign
+
+Type: `NOVELTY GATE / SAFE REDESIGN`
+
+A literature/code review was completed before LPQ implementation.
+
+The original DAR/GDS sketch was found too close to established quality-estimation and
+duplicate-ranking methods and is not promoted to implementation.
+
+No model code changed.
+No dataset access occurred.
+No checkpoint loading occurred.
+No validation inference occurred.
+No training occurred.
+Split-B test access remained NONE.
+
+Next action:
+`D4-B2_REVISED_METHOD_HYPOTHESIS_PRIOR_ART_AND_MATHEMATICAL_FREEZE`

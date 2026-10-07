@@ -355,3 +355,31 @@ D4 canonical starting document:
 Next:
 
 `D4-B_LPQ_MATHEMATICAL_SPECIFICATION_NOVELTY_AND_PROMOTION_FREEZE`
+
+## D4-B1 prior-art collision gate — 2026-10-07
+
+Status:
+
+`PRIOR_ART_COLLISION_FOUND_REDESIGN_REQUIRED`
+
+D4-A is complete and remote-verified.
+
+Novelty review found:
+- original DAR overlaps materially with GFLV2 distribution-guided quality prediction;
+- generic localization-aware score fusion overlaps with GFL/VFNet/TOOD/TAL;
+- original GDS best-vs-secondary score-gap concept overlaps materially with
+  hybrid/dual-assignment and ranking-based duplicate suppression.
+
+Therefore:
+- D3 residual problem: RETAINED;
+- LPQ working name: temporary only;
+- original DAR novelty core: REJECTED;
+- original GDS novelty core: REJECTED;
+- implementation authorized: FALSE;
+- training authorized: FALSE;
+- attention authorized: FALSE;
+- final architecture frozen: FALSE;
+- B-test access: NONE.
+
+Next:
+`D4-B2_REVISED_METHOD_HYPOTHESIS_PRIOR_ART_AND_MATHEMATICAL_FREEZE`

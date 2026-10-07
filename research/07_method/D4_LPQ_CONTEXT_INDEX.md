@@ -89,3 +89,23 @@ A12-D3-E1 scientific evidence report:
 `D4-B_LPQ_MATHEMATICAL_SPECIFICATION_NOVELTY_AND_PROMOTION_FREEZE`
 
 D4-B must occur before LPQ implementation or training.
+
+## D4-B1 novelty correction
+
+The first LPQ solution sketch did not survive prior-art review.
+
+- Original DAR: rejected as novelty core because GFLV2 already derives localization
+  quality from learned box distributions.
+- Generic class/localization-quality fusion: already covered by GFL, VFNet, TOOD/TAL
+  and the repository's TaskAlignedAssigner.
+- Original GDS score-gap concept: rejected as novelty core because hybrid/dual
+  assignment and duplicate ranking/score-gap mechanisms already exist.
+
+The D3 residual problem remains valid.
+
+Read next:
+- `D4_B1_PRIOR_ART_COLLISION_LEDGER.md`
+- `D4_LPQ_REDESIGN_CONSTRAINTS.md`
+
+Next transaction:
+`D4-B2_REVISED_METHOD_HYPOTHESIS_PRIOR_ART_AND_MATHEMATICAL_FREEZE`

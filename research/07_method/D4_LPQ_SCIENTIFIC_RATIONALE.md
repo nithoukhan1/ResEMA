@@ -75,3 +75,13 @@ Therefore D4 begins at the demonstrated residual rather than at a module catalog
 
 An attention mechanism may be reconsidered only after LPQ diagnostics demonstrate a
 separate residual feature-representation problem.
+
+## D4-B1 correction to the original LPQ hypothesis
+
+A formal prior-art review found that the original DAR/GDS solution sketch is not
+sufficiently distinct to serve as the novelty core.
+
+This does not invalidate the D3 residual diagnosis.
+
+The project therefore retains the problem statement but reopens the solution mechanism.
+Implementation remains prohibited until a revised formulation survives D4-B2.

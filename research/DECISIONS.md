@@ -543,3 +543,20 @@ Current state:
 - `ATTENTION_AUTHORIZED=FALSE`;
 - `GLOBAL_FINAL_PAPER_ARCHITECTURE_FROZEN=FALSE`;
 - `TEST_ACCESS=NONE`.
+
+## 2026-10-07 - D4-B1 rejects original DAR/GDS as novelty cores
+
+The project will not implement the first LPQ sketch as proposed.
+
+Reason:
+- DFL-distribution-derived localization quality is directly represented by GFLV2;
+- quality-aware class/localization alignment is established prior art and is already
+  partly embodied in the repository's TaskAlignedAssigner;
+- score-gap ranking among duplicate candidates overlaps existing hybrid/dual-assignment
+  and ranking-loss methods.
+
+This is a novelty correction, not a reversal of Path B.
+The D3 residual problem remains authoritative.
+
+A revised mechanism must pass the exclusion rules in
+`research/07_method/D4_LPQ_REDESIGN_CONSTRAINTS.md` before implementation.

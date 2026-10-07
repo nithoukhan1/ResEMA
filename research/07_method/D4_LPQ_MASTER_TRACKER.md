@@ -8,9 +8,9 @@
 | D3-E1 evidence extraction | COMPLETE |
 | D3-E2 scientific decision | PATH B SELECTED |
 | D4 branch | CREATED BY D4-A |
-| LPQ status | CONCEPT ONLY |
-| DAR formulation | NOT FROZEN |
-| GDS formulation | NOT FROZEN |
+| LPQ status | CONCEPT REDESIGN REQUIRED |
+| Original DAR formulation | REJECTED AS NOVELTY CORE |
+| Original GDS formulation | REJECTED AS NOVELTY CORE |
 | LPQ implemented | FALSE |
 | LPQ source frozen | FALSE |
 | LPQ training authorized | FALSE |
@@ -23,9 +23,10 @@
 
 | Phase | Status | Exit condition |
 |---|---|---|
-| D4-A Transition/context freeze | IN PROGRESS | branch + docs + provenance + remote verification |
-| D4-B Math/novelty/promotion freeze | LOCKED | D4-A complete |
-| D4-C Implementation | LOCKED | D4-B complete |
+| D4-A Transition/context freeze | COMPLETE | remote-verified commit 3cb2745119d7920192654d86d259876d763aecd5 |
+| D4-B1 Prior-art collision gate | IN PROGRESS | record collisions and redesign constraints |
+| D4-B2 Revised hypothesis/math freeze | LOCKED | D4-B1 complete |
+| D4-C Implementation | LOCKED | D4-B2 complete |
 | D4-D Structural verification | LOCKED | D4-C complete |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
 | D4-F Primary LPQ training | LOCKED | separate training authorization |
@@ -41,7 +42,7 @@
 
 ## Current next action
 
-`D4-B_LPQ_MATHEMATICAL_SPECIFICATION_NOVELTY_AND_PROMOTION_FREEZE`
+`D4-B2_REVISED_METHOD_HYPOTHESIS_PRIOR_ART_AND_MATHEMATICAL_FREEZE`
 
 ## Do not do yet
 

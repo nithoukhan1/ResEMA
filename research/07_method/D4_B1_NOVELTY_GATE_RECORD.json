@@ -1,0 +1,27 @@
+{
+  "attention_authorized": false,
+  "branch": "research/lpq-method-01",
+  "d4_a_status": "COMPLETE_REMOTE_VERIFIED",
+  "date": "2026-10-07",
+  "final_architecture_frozen": false,
+  "implementation_authorized": false,
+  "next_action": "D4-B2_REVISED_METHOD_HYPOTHESIS_PRIOR_ART_AND_MATHEMATICAL_FREEZE",
+  "original_DAR": {
+    "reason": "Direct conceptual overlap with GFLV2 distribution-guided localization quality estimation and existing quality-aware scoring literature.",
+    "status": "REJECT_AS_NOVELTY_CORE"
+  },
+  "original_GDS": {
+    "reason": "Direct/near-direct overlap with dual/hybrid assignment and duplicate score-gap ranking methods including YOLOv10 and DHLA.",
+    "status": "REJECT_AS_NOVELTY_CORE"
+  },
+  "pre_gate_head": "3cb2745119d7920192654d86d259876d763aecd5",
+  "quality_alignment_existing_in_repo": true,
+  "quality_alignment_note": "TaskAlignedAssigner already combines classification score and IoU and uses normalized alignment as soft classification target.",
+  "residual_problem_status": "RETAINED",
+  "schema": "D4_B1_NOVELTY_GATE_RECORD_V1",
+  "status": "PRIOR_ART_COLLISION_FOUND_REDESIGN_REQUIRED",
+  "test_access": "NONE",
+  "training_authorized": false,
+  "working_method_name": "LPQ",
+  "working_method_name_status": "TEMPORARY_CONTAINER_ONLY"
+}
