@@ -220,3 +220,50 @@ Execution is **not authorized** by this source freeze.
 Next governed transaction:
 
 `A12_D3_OFFLINE_DIAGNOSTIC_EXECUTION_AUTHORIZATION`
+
+## A12-D3 offline diagnostic execution authorization — 2026-10-07
+
+Status:
+
+`AUTHORIZED_PENDING_ONE_OFFLINE_EXECUTION`
+
+Scientific source-freeze commit:
+
+`8d3cfee47bb4de37b98eb78964f58a953ba4fd36`
+
+Authorization commit:
+
+`fe342dd9da4c1a79746d43c3628fe4f628c97013`
+
+Frozen runner SHA256:
+
+`7edae668a571f31274ca02be8f73d97ef49a1c0b4266c5f2a7a4464ece4116c4`
+
+Execution gate SHA256:
+
+`5d8ccfc5fb1c967f36d32b7f673f3bfd48c569938a90aac3534010335bd6ebb8`
+
+Authorization JSON SHA256:
+
+`c537450066515940fc3a49e10bea870bb3cfb9395ca144250efd411dac8ba600`
+
+Authorized scope:
+- one governed offline diagnostic execution from the preserved A12-D2 CSV evidence;
+- six frozen models;
+- four frozen confidence thresholds;
+- global same-class candidate-pair IoU-descending matcher;
+- eight predefined comparisons;
+- paired patient bootstrap already source-frozen.
+
+Still forbidden:
+- checkpoint loading;
+- validation rerun/inference;
+- training;
+- threshold tuning;
+- architecture selection during execution;
+- Split-B test access.
+
+No D2 archive was opened during this authorization transaction.
+
+Next:
+`A12_D3_AUTHORIZATION_PREFLIGHT_THEN_ONE_OFFLINE_EXECUTION`

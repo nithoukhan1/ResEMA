@@ -656,3 +656,47 @@ Source-freeze record SHA256:
 
 Next action:
 `A12_D3_OFFLINE_DIAGNOSTIC_EXECUTION_AUTHORIZATION`
+
+## 2026-10-07 - A12-D3 one offline diagnostic execution authorized
+
+Type: `EXECUTION AUTHORIZATION / GOVERNANCE`
+
+A12-D3 scientific source was already frozen at:
+
+`8d3cfee47bb4de37b98eb78964f58a953ba4fd36`
+
+One governed offline diagnostic execution is now authorized from the canonical preserved A12-D2 CSV evidence.
+
+Authorization commit:
+
+`fe342dd9da4c1a79746d43c3628fe4f628c97013`
+
+Authorization record:
+`research/06_diagnostics/A12_D3_EXECUTION_AUTHORIZATION.json`
+
+Authorization JSON SHA256:
+`c537450066515940fc3a49e10bea870bb3cfb9395ca144250efd411dac8ba600`
+
+Execution gate:
+`research/06_diagnostics/A12_D3_AUTHORIZED_EXECUTION_GATE.py`
+
+Execution gate SHA256:
+`5d8ccfc5fb1c967f36d32b7f673f3bfd48c569938a90aac3534010335bd6ebb8`
+
+Frozen runner SHA256:
+`7edae668a571f31274ca02be8f73d97ef49a1c0b4266c5f2a7a4464ece4116c4`
+
+The authorization is limited to the predeclared offline diagnostic scope and does not authorize:
+- checkpoint loading;
+- model validation/inference;
+- training;
+- threshold tuning;
+- Split-B test access;
+- architecture promotion during execution.
+
+The authorization transaction itself opened no D2 archive and produced no diagnostic result.
+
+A separate authorization-preflight must PASS before the one execution attempt.
+
+Next action:
+`A12_D3_AUTHORIZATION_PREFLIGHT_THEN_ONE_OFFLINE_EXECUTION`
