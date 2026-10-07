@@ -8,12 +8,12 @@
 | D3-E1 evidence extraction | COMPLETE |
 | D3-E2 scientific decision | PATH B SELECTED |
 | D4 branch | CREATED BY D4-A |
-| LPQ status | CONCEPT REDESIGN REQUIRED |
+| Active D4 method | VGRA CANDIDATE V1 SPEC FROZEN |
 | Original DAR formulation | REJECTED AS NOVELTY CORE |
 | Original GDS formulation | REJECTED AS NOVELTY CORE |
-| LPQ implemented | FALSE |
-| LPQ source frozen | FALSE |
-| LPQ training authorized | FALSE |
+| VGRA implemented | FALSE |
+| VGRA source frozen | FALSE |
+| VGRA training authorized | FALSE |
 | attention authorized | FALSE |
 | final architecture frozen | FALSE |
 | B-VAL role | DEVELOPMENT / SELECTION |
@@ -28,8 +28,8 @@
 | D4-B2A Multi-view feasibility audit | COMPLETE / STRONG | 85%+ paired study groups and ~94% patients with pair |
 | D4-B2B Object/error complementarity gate | COMPLETE / MODERATE | annotation nonredundancy + asymmetric TP evidence, strongest for fracture |
 | D4-B2C1 Novelty landscape/candidate shortlist | COMPLETE | crowded fusion/distillation paths rejected; VGRA working candidate promoted |
-| D4-B2C2 VGRA architecture/math/promotion freeze | NEXT | exact equations + ablation + final targeted novelty gate |
-| D4-C Implementation | LOCKED | D4-B2 complete |
+| D4-B2C2 VGRA architecture/math/promotion freeze | COMPLETE | candidate V1 spec frozen; implementation authorized, training locked |
+| D4-C VGRA implementation | NEXT | additive implementation + paired data plumbing + unit tests |
 | D4-D Structural verification | LOCKED | D4-C complete |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
 | D4-F Primary LPQ training | LOCKED | separate training authorization |
@@ -45,7 +45,7 @@
 
 ## Current next action
 
-`D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`
+`D4-C_VGRA_IMPLEMENTATION_SCAFFOLD_AND_UNIT_TESTS`
 
 ## Do not do yet
 

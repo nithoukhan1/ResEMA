@@ -459,3 +459,31 @@ Current firewalls:
 
 Next:
 `D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`
+
+## D4-B2C2 VGRA candidate V1 frozen — 2026-10-07
+
+Status:
+
+`VGRA_CANDIDATE_V1_SPEC_FROZEN_FOR_IMPLEMENTATION`
+
+Working novelty status:
+`PLAUSIBLE_CANDIDATE_NOT_EMPIRICALLY_VALIDATED`
+
+Frozen candidate constants:
+- visibility states: 00 / AP-only / LAT-only / both;
+- r_d=32;
+- pair hidden=128;
+- cross-view rank=16;
+- beta_max=2.0;
+- rho init=0;
+- lambda_vis=0.25;
+- added parameter cap=300,000.
+
+Implementation authorized: TRUE.
+GPU training authorized: FALSE.
+Attention authorized: FALSE.
+Global final architecture frozen: FALSE.
+B-test access: NONE.
+
+Next:
+`D4-C_VGRA_IMPLEMENTATION_SCAFFOLD_AND_UNIT_TESTS`

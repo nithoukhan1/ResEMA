@@ -607,3 +607,23 @@ geometry across orthogonal views.
 
 This is a candidate-selection decision only.
 Implementation and training remain unauthorized.
+
+## 2026-10-07 - D4-B2C2 freezes VGRA V1 for implementation
+
+VGRA V1 is selected as the first implementable multi-view candidate.
+
+The key distinction is not generic multi-view fusion or view-specific labels.
+It is the use of ground-truth-derived four-state projection visibility to control a
+bounded target-specific cross-view classification residual while leaving localization
+strictly view-specific.
+
+The candidate is intentionally conservative:
+- no cross-view box transfer;
+- no forced AP/LAT agreement;
+- 00 state neutral in V1;
+- view-exclusive states protect the valid target view and may suppress the invalid target;
+- zero-initialized residual preserves the Early base at initialization;
+- missing-view fallback is exact base behavior.
+
+This authorizes implementation only.
+It does not authorize GPU training and does not freeze the final paper architecture.

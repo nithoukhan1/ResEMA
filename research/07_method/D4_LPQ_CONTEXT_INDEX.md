@@ -171,3 +171,24 @@ box regression view-specific.
 
 Next:
 `D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`
+
+## D4-B2C2 VGRA V1 candidate freeze
+
+VGRA candidate V1 is mathematically frozen for implementation.
+
+Core:
+- shared Early detector for AP/LAT;
+- four-state per-class visibility supervision;
+- target-specific gate:
+  - AP: q11 - q01;
+  - LAT: q11 - q10;
+- low-rank target-local/companion-semantic compatibility;
+- bounded zero-initialized classification-logit residual;
+- box/DFL branches remain strictly view-specific;
+- exact single-view fallback.
+
+Candidate implementation is now authorized.
+GPU training is still forbidden.
+
+Next:
+`D4-C_VGRA_IMPLEMENTATION_SCAFFOLD_AND_UNIT_TESTS`

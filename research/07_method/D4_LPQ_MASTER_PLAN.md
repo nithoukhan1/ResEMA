@@ -111,3 +111,14 @@ Same-test fair comparison + separate cross-paper contextual comparison.
 - no claim of LPQ novelty until D4-B novelty review closes;
 - no training before source freeze + explicit authorization;
 - no promotion from one aggregate metric alone.
+
+## D4-B2C2 candidate-method replacement note
+
+The earlier LPQ/DAR/GDS concept family was superseded during D4-B1/B2.
+
+The active candidate method is now:
+
+`VGRA = Visibility-State-Gated Cross-View Residual Assistance`
+
+D4-B2C2 freezes VGRA candidate V1 for implementation only.
+The global final architecture remains unfrozen.

@@ -860,3 +860,17 @@ Split-B test remained sealed.
 
 Next action:
 `D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`
+
+## 2026-10-07 - D4-B2C2 VGRA mathematical candidate freeze
+
+Type: `METHOD SPECIFICATION / NOVELTY BOUNDARY / PROMOTION CONTRACT`
+
+VGRA candidate V1 equations, parameter budget, initialization, missing-view behavior,
+ablation plan and first-screen promotion criteria were frozen before code implementation.
+
+No model code changed in this transaction.
+No inference or training occurred.
+Split-B test remained sealed.
+
+Next action:
+`D4-C_VGRA_IMPLEMENTATION_SCAFFOLD_AND_UNIT_TESTS`

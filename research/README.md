@@ -114,3 +114,16 @@ Next:
 `D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`
 
 No implementation/training/test access is authorized.
+
+## Active D4 method candidate
+
+`VGRA = Visibility-State-Gated Cross-View Residual Assistance`
+
+Status:
+`CANDIDATE V1 SPEC FROZEN FOR IMPLEMENTATION`
+
+Implementation is authorized.
+Training is not.
+
+Start with:
+`07_method/D4_B2C2_VGRA_MATHEMATICAL_SPEC.md`

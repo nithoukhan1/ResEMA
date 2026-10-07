@@ -1,0 +1,42 @@
+{
+  "architecture": {
+    "base": "YOLO11s + C3k2_TPSC Early",
+    "beta_max": 2.0,
+    "box_regression_cross_view": false,
+    "cross_view_rank": 16,
+    "descriptor_rank_per_level": 32,
+    "lambda_vis": 0.25,
+    "missing_view_fallback_exact_base_path": true,
+    "pair_hidden_dim": 128,
+    "rho_initialization": 0.0,
+    "view_descriptor_dim": 96,
+    "visibility_gate_stop_gradient": true,
+    "visibility_states": [
+      "00",
+      "10_AP_ONLY",
+      "01_LAT_ONLY",
+      "11"
+    ]
+  },
+  "attention_authorized": false,
+  "branch": "research/lpq-method-01",
+  "candidate": "VGRA",
+  "candidate_full_name": "Visibility-State-Gated Cross-View Residual Assistance",
+  "candidate_spec_frozen": true,
+  "date": "2026-10-07",
+  "global_final_architecture_frozen": false,
+  "gpu_training_authorized": false,
+  "implementation_authorized": true,
+  "next_action": "D4-C_VGRA_IMPLEMENTATION_SCAFFOLD_AND_UNIT_TESTS",
+  "parameter_cap_added": 300000,
+  "parameter_cap_total": 9870093,
+  "pre_head": "beb9608decb8153368b746f99a17913a4b8ce20e",
+  "schema": "D4_B2C2_VGRA_CANDIDATE_FREEZE_V1",
+  "target_coefficients": {
+    "AP": "q11 - q01",
+    "LAT": "q11 - q10",
+    "state_00": "neutral"
+  },
+  "test_access": "NONE",
+  "working_novelty_status": "PLAUSIBLE_CANDIDATE_NOT_EMPIRICALLY_VALIDATED"
+}
