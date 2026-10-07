@@ -1,0 +1,106 @@
+{
+  "bootstrap": {
+    "interval": "two-sided 95% percentile",
+    "numpy_source_freeze_version": "2.2.6",
+    "paired": true,
+    "replicates": 10000,
+    "seed": 42,
+    "unit": "patient"
+  },
+  "branch": "research/combination-screen-01",
+  "confidence_thresholds": [
+    0.05,
+    0.1,
+    0.25,
+    0.5
+  ],
+  "controlling_protocol_path": "research/06_diagnostics/A12_D1_STANDARDIZED_VALIDATION_DIAGNOSTIC_PROTOCOL.md",
+  "controlling_protocol_sha256": "4f3db23942dbcfc33b2b98338189aa2714bee454b24678a96daef0a38ddeffe7",
+  "d2_preservation_archive_sha256": "419ac71b1e42b791168a5ea24cf87d71b8a3d1eba9333d183a73009733056b93",
+  "data_scope": {
+    "binding": "DATA01:B-ORG:v1",
+    "frozen_gt_boxes": 7113,
+    "frozen_validation_images": 3050,
+    "known_unreadable_gt_boxes": 3,
+    "operational_gt_boxes": 7110,
+    "operational_readable_images": 3049,
+    "validation_patients": 914
+  },
+  "date": "2026-10-07",
+  "firewalls": {
+    "checkpoint_loading": false,
+    "d2_archive_read_during_source_freeze": false,
+    "execution_authorized": false,
+    "split_b_test_access": "NONE",
+    "training": false,
+    "validation_rerun": false
+  },
+  "frozen_comparison_count": 8,
+  "gt_size_bins": {
+    "large": ">=0.05",
+    "medium": "[0.01,0.05)",
+    "small": "<0.01"
+  },
+  "localization_thresholds": [
+    0.1,
+    0.5,
+    0.75
+  ],
+  "next_action": "A12_D3_OFFLINE_DIAGNOSTIC_EXECUTION_AUTHORIZATION",
+  "primary_matcher": {
+    "confidence_primary_match_order": false,
+    "iou75_reporting_only": true,
+    "match_iou_threshold": 0.5,
+    "ordering": "global_candidate_pair_iou_descending",
+    "scope": "within_image_and_same_class"
+  },
+  "repository": "nithoukhan1/ResEMA",
+  "schema": "A12_D3_SOURCE_FREEZE_V1",
+  "scientific_source_files": [
+    {
+      "bytes": 5665,
+      "path": "research/06_diagnostics/A12_D3_MATCHING_TAXONOMY_CONTRACT.md",
+      "sha256": "ebd8c059692f54842250e37e8a85f1e629ef0e35bc00a90cf6810977f008d9a1"
+    },
+    {
+      "bytes": 17789,
+      "path": "research/06_diagnostics/A12_D3_OFFLINE_DIAGNOSTIC_ENGINE.py",
+      "sha256": "dc8931c630f3d072af6b03b5f497833efc6f24a97ca68348e410114b2c1bb2f4"
+    },
+    {
+      "bytes": 6753,
+      "path": "research/06_diagnostics/test_A12_D3_OFFLINE_DIAGNOSTIC_ENGINE.py",
+      "sha256": "2807eac959506e8eb0af4789d254c277942a840edc7dbf818449040b7302ba6d"
+    },
+    {
+      "bytes": 7024,
+      "path": "research/06_diagnostics/A12_D3_OUTPUT_SCHEMA_AND_UNCERTAINTY_CONTRACT.md",
+      "sha256": "6e8e9c4d494921d51234e5f84451dd61039a7bfff86a3b8f6ef55d7071b2fd0a"
+    },
+    {
+      "bytes": 41540,
+      "path": "research/06_diagnostics/A12_D3_OFFLINE_DIAGNOSTIC_RUNNER.py",
+      "sha256": "7edae668a571f31274ca02be8f73d97ef49a1c0b4266c5f2a7a4464ece4116c4"
+    },
+    {
+      "bytes": 12831,
+      "path": "research/06_diagnostics/test_A12_D3_OFFLINE_DIAGNOSTIC_RUNNER.py",
+      "sha256": "3c5447a2438c9fc6fabca15806a3aaa092e90b411ed5350b6bc4f223a5fe63ec"
+    }
+  ],
+  "source_freeze_commit": "8d3cfee47bb4de37b98eb78964f58a953ba4fd36",
+  "source_parent_commit": "4a7a6b925cf074969cabbe06f1bdd6ea3e164207",
+  "status": "SOURCE_FROZEN_PENDING_EXECUTION_AUTHORIZATION",
+  "test_review": {
+    "engine_tests": 13,
+    "runner_tests": 20,
+    "status": "PASS"
+  },
+  "unmatched_prediction_taxonomy_priority": [
+    "duplicate",
+    "class_confusion",
+    "localization",
+    "background",
+    "other_overlap"
+  ]
+}

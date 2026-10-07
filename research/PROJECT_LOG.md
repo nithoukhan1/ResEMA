@@ -612,3 +612,47 @@ Next action:
 After migration:
 
 `A12-D3_OFFLINE_DIAGNOSTIC_IMPLEMENTATION_AND_FREEZE`
+
+## 2026-10-07 - A12-D3 offline diagnostic implementation source freeze
+
+Type: `DIAGNOSTIC SOURCE FREEZE / GOVERNANCE`
+
+A12-D3 offline diagnostic implementation was reviewed and source-frozen before any real D2 diagnostic execution.
+
+Scientific source-freeze commit:
+
+`8d3cfee47bb4de37b98eb78964f58a953ba4fd36`
+
+Frozen implementation:
+- global same-class candidate-pair matching ordered by descending IoU;
+- one-to-one primary match threshold IoU >= 0.50;
+- fixed confidence thresholds 0.05 / 0.10 / 0.25 / 0.50;
+- fixed unmatched-prediction taxonomy priority;
+- GT-size and FP-prediction-size analyses kept separate;
+- confidence-distribution outputs frozen;
+- eight predefined model-comparison contrasts frozen;
+- paired patient-level changes frozen;
+- patient bootstrap fixed at seed 42, 10,000 replicates and two-sided 95% percentile intervals.
+
+Final pre-freeze synthetic review:
+- engine: 13/13 PASS;
+- runner: 20/20 PASS.
+
+Firewalls during implementation/source freeze:
+- preserved D2 archive read: NONE;
+- checkpoint loading: NONE;
+- validation inference/rerun: NONE;
+- training: NONE;
+- Split-B test access: NONE.
+
+The source freeze does not authorize D3 execution.
+A separate source-bound execution authorization is required before the runner may open the preserved D2 archive.
+
+Source-freeze record:
+`research/06_diagnostics/A12_D3_SOURCE_FREEZE.json`
+
+Source-freeze record SHA256:
+`24b34050764342d0ac2c2398ffdb80aedc59a4c151206765b203d01361ba4e19`
+
+Next action:
+`A12_D3_OFFLINE_DIAGNOSTIC_EXECUTION_AUTHORIZATION`

@@ -181,3 +181,42 @@ Do not choose a replacement module before this diagnostic.
 Do not start new GPU training.
 
 Split-B test remains sealed.
+
+## A12-D3 offline diagnostic source freeze — 2026-10-07
+
+Status:
+
+`SOURCE_FROZEN_PENDING_EXECUTION_AUTHORIZATION`
+
+Scientific source-freeze commit:
+
+`8d3cfee47bb4de37b98eb78964f58a953ba4fd36`
+
+Frozen D3 implementation:
+- primary matcher: global same-class prediction/GT candidate pairs ordered by descending IoU;
+- primary match threshold: IoU >= 0.50;
+- frozen confidence thresholds: 0.05 / 0.10 / 0.25 / 0.50;
+- frozen unmatched-prediction taxonomy: duplicate -> class_confusion -> localization -> background -> other_overlap;
+- frozen comparison lattice: 8 predefined contrasts;
+- patient bootstrap: seed 42 / 10,000 replicates / two-sided 95% percentile interval;
+- engine synthetic regressions: 13/13 PASS;
+- runner synthetic regressions: 20/20 PASS;
+- D2 preservation archive read during implementation/source freeze: NONE;
+- checkpoint loading: NONE;
+- validation rerun: NONE;
+- training: NONE;
+- Split-B test access: NONE.
+
+Source-freeze record:
+
+`research/06_diagnostics/A12_D3_SOURCE_FREEZE.json`
+
+SHA256:
+
+`24b34050764342d0ac2c2398ffdb80aedc59a4c151206765b203d01361ba4e19`
+
+Execution is **not authorized** by this source freeze.
+
+Next governed transaction:
+
+`A12_D3_OFFLINE_DIAGNOSTIC_EXECUTION_AUTHORIZATION`
