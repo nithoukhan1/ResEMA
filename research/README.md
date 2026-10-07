@@ -85,3 +85,15 @@ Next canonical gate:
 `D4-B2B_MULTIVIEW_OBJECT_LEVEL_COMPLEMENTARITY_AND_ERROR_FEASIBILITY`
 
 Split-B TEST remains sealed.
+
+## D4 current checkpoint — multi-view complementarity
+
+D4-B2A: STRONG pair availability.
+D4-B2B: MODERATE annotation/model-error complementarity.
+
+Multi-view remains a serious candidate but no architecture is selected.
+
+Next canonical gate:
+`D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN`
+
+Split-B TEST remains sealed.

@@ -128,3 +128,25 @@ No architecture is selected and no implementation/training is authorized.
 
 Next:
 `D4-B2B_MULTIVIEW_OBJECT_LEVEL_COMPLEMENTARITY_AND_ERROR_FEASIBILITY`
+
+## D4-B2B complementarity result
+
+The preserved paired-view audit returned:
+
+`COMPLEMENTARITY_EVIDENCE_TIER=MODERATE`
+
+Key values:
+- annotation view-exclusive fraction: 11.4813%
+- mean AP/LAT class-set Jaccard: 0.914408
+- baseline one-view-only TP fraction @0.25: 3.7280%
+- Early one-view-only TP fraction @0.25: 4.3425%
+- fracture baseline one-view-only TP fraction @0.25: 5.9293%
+- fracture Early one-view-only TP fraction @0.25: 7.4116%
+
+Interpretation:
+paired views are mostly similar but not redundant. Complementary detection behavior is
+modest overall and stronger for fracture. This supports studying selective/conditional
+cross-view assistance rather than assuming unconditional heavy fusion.
+
+Next:
+`D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN`

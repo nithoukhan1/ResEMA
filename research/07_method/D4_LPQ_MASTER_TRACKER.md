@@ -26,8 +26,8 @@
 | D4-A Transition/context freeze | COMPLETE | remote-verified commit 3cb2745119d7920192654d86d259876d763aecd5 |
 | D4-B1 Prior-art collision gate | COMPLETE | original DAR/GDS rejected as novelty cores |
 | D4-B2A Multi-view feasibility audit | COMPLETE / STRONG | 85%+ paired study groups and ~94% patients with pair |
-| D4-B2B Object/error complementarity gate | NEXT | annotation + preserved prediction evidence, TRAIN/VAL only |
-| D4-B2C Multi-view method novelty/math freeze | LOCKED | D4-B2B must support complementarity |
+| D4-B2B Object/error complementarity gate | COMPLETE / MODERATE | annotation nonredundancy + asymmetric TP evidence, strongest for fracture |
+| D4-B2C Multi-view method novelty/math freeze | NEXT | selective/conditional multi-view design + prior-art gate |
 | D4-C Implementation | LOCKED | D4-B2 complete |
 | D4-D Structural verification | LOCKED | D4-C complete |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
@@ -44,7 +44,7 @@
 
 ## Current next action
 
-`D4-B2B_MULTIVIEW_OBJECT_LEVEL_COMPLEMENTARITY_AND_ERROR_FEASIBILITY`
+`D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN`
 
 ## Do not do yet
 

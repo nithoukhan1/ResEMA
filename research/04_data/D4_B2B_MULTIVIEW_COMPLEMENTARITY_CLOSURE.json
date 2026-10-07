@@ -1,0 +1,33 @@
+{
+  "annotation_view_exclusive_fraction": 0.11481347337921043,
+  "architecture_decision_made": false,
+  "attention_authorized": false,
+  "baseline_conf025_one_view_only_tp_fraction": 0.03727980335927898,
+  "baseline_conf025_one_view_only_tp_units": 91,
+  "branch": "research/lpq-method-01",
+  "complementarity_evidence_tier": "MODERATE",
+  "date": "2026-10-07",
+  "early_conf025_one_view_only_tp_fraction": 0.043424825891028265,
+  "early_conf025_one_view_only_tp_units": 106,
+  "exact_pairs": 1402,
+  "fracture_baseline_conf025_one_view_only_tp_fraction": 0.059293044469783354,
+  "fracture_early_conf025_one_view_only_tp_fraction": 0.07411630558722919,
+  "fully_readable_pairs": 1401,
+  "implementation_authorized": false,
+  "mean_pair_class_set_jaccard": 0.9144079885877316,
+  "multi_view_status": "SERIOUS_CANDIDATE_FOR_SELECTIVE_CONDITIONAL_DESIGN",
+  "next_action": "D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN",
+  "package_sha256": "21d738e9b269c791fcc953eeab6fb2c2e1252ca42255d1bd9c4b4e340c49e9aa",
+  "r1_closure_safe_stop": {
+    "cause": "Verifier inferred unsupported hidden precision for mean_pair_class_set_jaccard.",
+    "package_changed": false,
+    "repository_changed": false,
+    "scientific_evidence_changed": false,
+    "status": "SAFE_STOP_BEFORE_MUTATION"
+  },
+  "schema": "D4_B2B_MULTIVIEW_COMPLEMENTARITY_CLOSURE_V1",
+  "source_head": "4963f8e81264cb42d2ef81c06aefe65e4ffe7fe2",
+  "status": "COMPLETE_PRESERVED_MODERATE_COMPLEMENTARITY",
+  "test_access": "NONE",
+  "training_authorized": false
+}

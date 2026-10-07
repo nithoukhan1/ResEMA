@@ -407,3 +407,29 @@ Firewalls:
 - training authorized: FALSE;
 - attention authorized: FALSE;
 - B-test access: NONE.
+
+## D4-B2B complementarity — MODERATE — 2026-10-07
+
+Read-only paired-view annotation/model-error audit completed and preserved.
+
+- annotation view-exclusive fraction: 0.11481347
+- baseline one-view-only TP fraction @0.25: 0.03727980
+- Early one-view-only TP fraction @0.25: 0.04342483
+- fracture baseline one-view-only TP fraction @0.25: 0.05929304
+- fracture Early one-view-only TP fraction @0.25: 0.07411631
+
+Disposition:
+`COMPLEMENTARITY_EVIDENCE_TIER=MODERATE`
+
+Multi-view remains a serious candidate, but architecture selection remains FALSE.
+The next design should focus on selective/conditional assistance and must pass a fresh
+prior-art review.
+
+Next:
+`D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN`
+
+Firewalls:
+- model code changed: FALSE;
+- new inference: NONE;
+- training authorized: FALSE;
+- B-test access: NONE.

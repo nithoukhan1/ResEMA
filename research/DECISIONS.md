@@ -573,3 +573,18 @@ This is not an architecture promotion.
 Before any dual-view network is designed, D4-B2B must demonstrate that paired views
 provide complementary class/object/model-error evidence rather than merely coexisting
 in the same study.
+
+## 2026-10-07 - D4-B2B retains multi-view with MODERATE complementarity
+
+Paired AP/LAT views are not redundant, but overall model-error asymmetry is modest.
+
+The fracture class shows stronger one-view-only TP behavior than the all-class average.
+
+Decision:
+- keep multi-view as a serious candidate;
+- do not select a generic dual-stream/cross-attention architecture yet;
+- do not assume every pair benefits from fusion;
+- prioritize a selective/conditional cross-view mechanism in D4-B2C;
+- require a fresh novelty review because generic multi-view fusion is established prior art.
+
+Implementation and training remain unauthorized.

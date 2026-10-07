@@ -818,3 +818,29 @@ No architecture decision was made.
 
 Next action:
 `D4-B2B_MULTIVIEW_OBJECT_LEVEL_COMPLEMENTARITY_AND_ERROR_FEASIBILITY`
+
+## 2026-10-07 - D4-B2B complementarity audit preserved
+
+Type: `READ-ONLY MULTI-VIEW COMPLEMENTARITY / PRESERVATION`
+
+Source HEAD:
+`4963f8e81264cb42d2ef81c06aefe65e4ffe7fe2`
+
+Package SHA256:
+`21d738e9b269c791fcc953eeab6fb2c2e1252ca42255d1bd9c4b4e340c49e9aa`
+
+Result:
+`MODERATE`
+
+Closure helper history:
+- R1 safe-stopped during pre-mutation package verification because of an over-strict
+  inferred floating-point precision check;
+- R2 corrected verifier precision policy only;
+- evidence package and scientific results were unchanged.
+
+The audit used preserved validation GT/predictions and performed no new inference.
+No raw images or raw label files were opened.
+Split-B test remained sealed.
+
+Next action:
+`D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN`
