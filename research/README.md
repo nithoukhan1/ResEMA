@@ -97,3 +97,20 @@ Next canonical gate:
 `D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN`
 
 Split-B TEST remains sealed.
+
+## D4 current checkpoint — VGRA working candidate
+
+After D4-B2A/B2B established strong pair availability and moderate complementarity,
+D4-B2C1 narrowed the prior-art landscape.
+
+Working design candidate:
+
+`VGRA = Visibility-State-Gated Cross-View Residual Assistance`
+
+Status:
+`WORKING CANDIDATE ONLY`
+
+Next:
+`D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`
+
+No implementation/training/test access is authorized.

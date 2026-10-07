@@ -844,3 +844,19 @@ Split-B test remained sealed.
 
 Next action:
 `D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN`
+
+## 2026-10-07 - D4-B2C1 novelty landscape and candidate shortlist
+
+Type: `METHOD DESIGN / PRIOR-ART NARROWING`
+
+Generic dual-view fusion, uncertainty/conflict gating and mutual-distillation approaches
+were reviewed and rejected as novelty cores.
+
+VGRA was promoted to the next mathematical-design gate.
+
+No model code changed.
+No inference or training occurred.
+Split-B test remained sealed.
+
+Next action:
+`D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`

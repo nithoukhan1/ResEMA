@@ -588,3 +588,22 @@ Decision:
 - require a fresh novelty review because generic multi-view fusion is established prior art.
 
 Implementation and training remain unauthorized.
+
+## 2026-10-07 - D4-B2C1 promotes VGRA as the working multi-view candidate
+
+The project will not use always-on AP/LAT fusion, generic uncertainty/conflict gating,
+or generic mutual distillation as the novelty core because these directions are already
+well represented in prior work.
+
+The working candidate for the next design gate is:
+
+`VGRA = Visibility-State-Gated Cross-View Residual Assistance`
+
+The motivation is the measured view-exclusive annotation population and moderate,
+fracture-enriched model-error complementarity.
+
+VGRA must explicitly protect AP-only/LAT-only findings and must not transfer bounding-box
+geometry across orthogonal views.
+
+This is a candidate-selection decision only.
+Implementation and training remain unauthorized.

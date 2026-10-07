@@ -433,3 +433,29 @@ Firewalls:
 - new inference: NONE;
 - training authorized: FALSE;
 - B-test access: NONE.
+
+## D4-B2C1 multi-view novelty landscape — 2026-10-07
+
+Status:
+
+`VGRA_WORKING_CANDIDATE_SELECTED_FOR_MATHEMATICAL_DESIGN`
+
+The following are rejected as D4 novelty cores:
+- generic dual-view fusion;
+- generic uncertainty/conflict gating;
+- generic multi-view distillation.
+
+Working candidate:
+`Visibility-State-Gated Cross-View Residual Assistance (VGRA)`
+
+VGRA is not frozen and no novelty claim is made yet.
+
+Current firewalls:
+- architecture frozen: FALSE;
+- implementation authorized: FALSE;
+- GPU training authorized: FALSE;
+- attention authorized: FALSE;
+- B-test access: NONE.
+
+Next:
+`D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`

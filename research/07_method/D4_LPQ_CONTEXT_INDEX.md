@@ -150,3 +150,24 @@ cross-view assistance rather than assuming unconditional heavy fusion.
 
 Next:
 `D4-B2C_MULTIVIEW_METHOD_NOVELTY_AND_MATHEMATICAL_DESIGN`
+
+## D4-B2C1 novelty landscape
+
+The multi-view design space was narrowed before implementation.
+
+Rejected as novelty cores:
+- generic always-on dual-view feature fusion;
+- generic uncertainty/conflict-gated fusion;
+- generic cross-view mutual distillation.
+
+Working candidate promoted to mathematical design:
+
+`VGRA = Visibility-State-Gated Cross-View Residual Assistance`
+
+VGRA remains a hypothesis only.
+It explicitly models per-class projection visibility states (absent, AP-only, LAT-only,
+both) and uses them to control residual cross-view semantic assistance while keeping
+box regression view-specific.
+
+Next:
+`D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE`

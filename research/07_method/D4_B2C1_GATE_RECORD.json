@@ -1,0 +1,29 @@
+{
+  "b2a_pair_feasibility": "STRONG",
+  "b2b_complementarity": "MODERATE",
+  "branch": "research/lpq-method-01",
+  "core_hypothesis": "Explicit class-wise AP-only/LAT-only/both/absent visibility supervision can safely control residual cross-view semantic assistance without forcing consensus or cross-view box alignment.",
+  "date": "2026-10-07",
+  "next_action": "D4-B2C2_VGRA_MATHEMATICAL_ARCHITECTURE_AND_PROMOTION_FREEZE",
+  "out_of_scope_first_candidate": [
+    "explicit_cross_view_box_correspondence",
+    "synthetic_projection_correspondence_pretraining"
+  ],
+  "pre_head": "ff61a317ee678c7fe88bd8c0d2be175f82eb3fe0",
+  "promoted_working_candidate": {
+    "architecture_frozen": false,
+    "implementation_authorized": false,
+    "name": "Visibility-State-Gated Cross-View Residual Assistance",
+    "novelty_claimed": false,
+    "short_name": "VGRA",
+    "status": "WORKING_CANDIDATE_ONLY",
+    "training_authorized": false
+  },
+  "rejected_as_novelty_core": [
+    "generic_dual_stream_or_always_on_fusion",
+    "uncertainty_or_conflict_gating_alone",
+    "generic_multiview_distillation"
+  ],
+  "schema": "D4_B2C1_MULTIVIEW_NOVELTY_LANDSCAPE_V1",
+  "test_access": "NONE"
+}
