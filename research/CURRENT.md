@@ -519,3 +519,28 @@ GPU training remains unauthorized.
 
 Next:
 `D4-C3_VGRA_HEAD_MODEL_INTEGRATION`
+
+## D4-C3 VGRA head/model integration — 2026-10-08
+
+Status: `COMPLETE / CPU-VERIFIED`
+
+VGRA-specific head:
+`VGRADetect`
+
+Full candidate parameter count:
+`9672660`
+
+Box/DFL cross-view modification:
+`FALSE`
+
+Pair-aware data/trainer integration:
+`FALSE`
+
+GPU training:
+`NOT AUTHORIZED`
+
+B-test:
+`NONE`
+
+Next:
+`D4-C4_VGRA_PAIR_AWARE_DATA_AND_BATCHING`

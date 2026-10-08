@@ -907,3 +907,16 @@ No raw images, YOLO labels, inference, training or B-test content was accessed.
 
 Next:
 `D4-C3_VGRA_HEAD_MODEL_INTEGRATION`
+
+## 2026-10-08 - D4-C3 VGRA head/model integration
+
+Type: `MODEL INTEGRATION / CPU VERIFICATION`
+
+Added VGRADetect, parser registration and VGRA candidate YAML.
+Focused tests verify native single-view fallback, zero-residual identity, active-residual
+classification change, exact box invariance, full YAML parsing and parameter budget.
+
+No data loader, training, inference experiment or B-test access occurred.
+
+Next:
+`D4-C4_VGRA_PAIR_AWARE_DATA_AND_BATCHING`

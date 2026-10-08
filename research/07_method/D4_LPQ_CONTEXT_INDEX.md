@@ -224,3 +224,16 @@ They must come from B-TRAIN YOLO labels only when criterion integration is imple
 
 Next:
 `D4-C3_VGRA_HEAD_MODEL_INTEGRATION`
+
+## D4-C3 VGRA head integration
+
+Dedicated `VGRADetect(Detect)` is integrated and parsable from the VGRA V1 YAML.
+
+Early parameters: `9570093`
+Early+VGRA parameters: `9672660`
+
+Stock Detect and stock loss remain unchanged.
+Paired VGRA modifies class logits only; box tensors remain native.
+
+Next:
+`D4-C4_VGRA_PAIR_AWARE_DATA_AND_BATCHING`

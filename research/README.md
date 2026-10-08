@@ -154,3 +154,14 @@ Actual training visibility states:
 
 Next:
 `D4-C3_VGRA_HEAD_MODEL_INTEGRATION`
+
+## VGRA implementation status — D4-C3
+
+VGRA head/model integration:
+`IMPLEMENTED / CPU-VERIFIED`
+
+Candidate parameters:
+`9672660`
+
+Next:
+`D4-C4_VGRA_PAIR_AWARE_DATA_AND_BATCHING`

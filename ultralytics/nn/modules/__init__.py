@@ -97,6 +97,7 @@ from .head import (
     YOLOESegment26,
     v10Detect,
 )
+from .vgra_head import VGRADetect
 from .transformer import (
     AIFI,
     MLP,
@@ -197,5 +198,6 @@ __all__ = (
     "DySample",
     "CanonicalEMA",
     "ResEMA",
-    "C3k2_SC"
+    "C3k2_SC",
+    "VGRADetect",
 )

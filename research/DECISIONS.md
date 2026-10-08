@@ -648,3 +648,14 @@ detection labels. Four-state VGRA targets will be generated later from B-TRAIN Y
 labels only.
 
 This prevents both pairing ambiguity and target leakage.
+
+## 2026-10-08 - D4-C3 use dedicated VGRADetect subclass
+
+VGRA is integrated through a dedicated Detect subclass rather than by changing stock
+Detect behavior.
+
+The inherited single-view path is native Detect. Paired execution is explicit and
+applies the VGRA residual only to class logits. Box/DFL computation is identical to
+the native path.
+
+This isolates VGRA behavior and protects all non-VGRA models.
