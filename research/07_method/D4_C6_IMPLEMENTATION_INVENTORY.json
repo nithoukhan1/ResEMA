@@ -1,0 +1,271 @@
+{
+  "actual_train_state_counts_computed_by_this_audit": false,
+  "audit_parent": "fc991546d6d360905b9b1af33e736612d0379e31",
+  "b_test_access": "NONE",
+  "candidate_v1_source_frozen": false,
+  "design_authority": "a5d260ca83236c774e1920ce729e08eaacfcf5d4",
+  "documented_safe_stops": {
+    "D4-C1_R1": "documentation tracker mismatch; 17 tests passed; clean rollback",
+    "D4-C4_R1": "audit import path; 38 tests passed; clean rollback",
+    "D4-C5C_R1": "2 failed, 66 passed; clean rollback"
+  },
+  "exact_train_pairs": 6496,
+  "global_final_architecture_frozen": false,
+  "gpu_training_authorized": false,
+  "implementation_branch": "research/vgra-impl-01",
+  "implementation_complete": true,
+  "model_trainable_parameters": 9672660,
+  "next_action": "D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION",
+  "parameter_cap": 9870093,
+  "real_images_or_labels_opened_by_this_audit": false,
+  "schema": "D4_C6_VGRA_IMPLEMENTATION_INVENTORY_V1",
+  "source_and_evidence_file_count": 44,
+  "source_and_evidence_hashes": {
+    "research/04_data/manifests/D4_C2_VGRA_IMAGE_ASSIGNMENTS.csv": {
+      "bytes": 2326948,
+      "sha256": "87aa5e9089c6282df14ae32917946d70d9f56eaa9a5d63443985877ab9dd1ef4"
+    },
+    "research/04_data/manifests/D4_C2_VGRA_PAIRING_SUMMARY.json": {
+      "bytes": 1849,
+      "sha256": "86ff14ab3f68adc7fd44b4c1eb15fd0d7c901028f97abcb2bceb771f302ae4ca"
+    },
+    "research/04_data/manifests/D4_C2_VGRA_PAIR_MANIFEST.csv": {
+      "bytes": 1156596,
+      "sha256": "1959550d9520a6389f8277830e918566a5104241b0c3f7d0e3bdf3030e14dd4e"
+    },
+    "research/04_data/manifests/D4_C2_VGRA_VISIBILITY_SCHEMA.json": {
+      "bytes": 1421,
+      "sha256": "0842af6072470cfcdda750c2f05722ecded62f6254964b5b35efdc10c468bed9"
+    },
+    "research/04_data/manifests/D4_C4_VGRA_BATCHING_AUDIT.json": {
+      "bytes": 1418,
+      "sha256": "3d45fcc59d3930a54edde61698b4a3bf55e33dd9861efa7f0c39b061360a65ce"
+    },
+    "research/07_method/D4_B2C2_VGRA_MATHEMATICAL_SPEC.md": {
+      "bytes": 7926,
+      "sha256": "207b03a747a264bf1047f997aa9b387cbc3e8f2b8d43e08e651eee5f847fde41"
+    },
+    "research/07_method/D4_C0_GATE_RECORD.json": {
+      "bytes": 777,
+      "sha256": "4bb22fba4949f93e85b2588ee16f51db9c0f279b5908782970a43de3a54e3f1e"
+    },
+    "research/07_method/D4_C0_VGRA_EXECUTION_TRACKER.md": {
+      "bytes": 1615,
+      "sha256": "b4bc959070272b112c7d1e07aef5cdcad895718f9fcccbebe659f957bcc03811"
+    },
+    "research/07_method/D4_C0_VGRA_IMPLEMENTATION_MASTER_PLAN.md": {
+      "bytes": 3667,
+      "sha256": "03c14dcd5e70c1a1a01340dafdcb4ba14f990a296bc0750c2be5fd330f794a49"
+    },
+    "research/07_method/D4_C1_GATE_RECORD.json": {
+      "bytes": 1020,
+      "sha256": "b90f5fa74c97773530f27b8d00fe29bd9660a8bf773e3b39b5ca6fbb0a62a6b4"
+    },
+    "research/07_method/D4_C1_VGRA_CORE_IMPLEMENTATION.md": {
+      "bytes": 1952,
+      "sha256": "91e264f1a143bb01b875d1332a4b31557327777ee1b2b21024f1a4898f702fa6"
+    },
+    "research/07_method/D4_C2_GATE_RECORD.json": {
+      "bytes": 1380,
+      "sha256": "c3411c45645455b63f0baa32fa4330b8622c92e53dc16d4de8efb9bffa6a87b9"
+    },
+    "research/07_method/D4_C2_VGRA_PAIRING_MANIFEST_RECORD.md": {
+      "bytes": 2191,
+      "sha256": "82a7ecb4c5927bcf1cfa632ad12f0878e54a5e5665c01862af41c33292a1e6b5"
+    },
+    "research/07_method/D4_C3_GATE_RECORD.json": {
+      "bytes": 918,
+      "sha256": "12776de615af7db67686fd3cd2dd0d2b460d578ca2881c643760905754953b47"
+    },
+    "research/07_method/D4_C3_VGRA_HEAD_INTEGRATION.md": {
+      "bytes": 1713,
+      "sha256": "9f75b3480f04afdbb8092372eb643eb4bf74df21a7f32dad6b6ca124606039ae"
+    },
+    "research/07_method/D4_C4_GATE_RECORD.json": {
+      "bytes": 1585,
+      "sha256": "58d43efb1c0942f52b94e21bee1423f2ef5aa085b372a407e4a4c00bfc4dc8b2"
+    },
+    "research/07_method/D4_C4_VGRA_DATA_BATCHING.md": {
+      "bytes": 3595,
+      "sha256": "85197a29fed39c3010c5e291e8cdc987fa7e12b7a7c44b37f4d8abb2f84908f6"
+    },
+    "research/07_method/D4_C5A_GATE_RECORD.json": {
+      "bytes": 996,
+      "sha256": "ade370c43747d63bb6628413d6ab24ca7146479113fdcafb2bfa1d10e8a860cf"
+    },
+    "research/07_method/D4_C5A_VISIBILITY_SUPERVISION_CONTRACT.md": {
+      "bytes": 3743,
+      "sha256": "c4759f4b468d76858de8fb7de0695975d96397aa4d30fd844e6eb5122b7780da"
+    },
+    "research/07_method/D4_C5B_GATE_RECORD.json": {
+      "bytes": 1142,
+      "sha256": "62aaf842d216720bb1fb4ead71ceb5ce5894dd4108c9227958ba58b52e1628ba"
+    },
+    "research/07_method/D4_C5B_RUNTIME_NATIVE_LOSS_CONTRACT.md": {
+      "bytes": 4221,
+      "sha256": "7f1bb42831ecba22140cf25adda9ed09cefafcc4d47e22f9d050e50c7c7af8fd"
+    },
+    "research/07_method/D4_C5C_GATE_RECORD.json": {
+      "bytes": 1615,
+      "sha256": "3de35395a8bb4c6c45da89c1efc7f0c260b8184984acf5cf2642b218d4c639db"
+    },
+    "research/07_method/D4_C5C_TRAINER_VALIDATOR_IMPLEMENTATION.md": {
+      "bytes": 5027,
+      "sha256": "9aa478e18870cb9f700de402c19a96c3a60a147f5af47885cb05c77538c6ca7c"
+    },
+    "research/07_method/D4_LPQ_MASTER_TRACKER.md": {
+      "bytes": 3549,
+      "sha256": "9586c1fea96931118c0d5208d2dec9c9d74e5252ff370adff8ff156aec6f3ec5"
+    },
+    "research/tests/test_arch_corr_01b_tpsc.py": {
+      "bytes": 3740,
+      "sha256": "f56f5d8a9e65dbc62ebff5cb092ff533038a91e3121cc2fefd80e41761d128cd"
+    },
+    "research/tests/test_d4_c1_vgra_core.py": {
+      "bytes": 6478,
+      "sha256": "952f0c66be89bde6fe55b9939e75c707ba75a504f79d12e738fe06a249f3f700"
+    },
+    "research/tests/test_d4_c2_vgra_pairing.py": {
+      "bytes": 3294,
+      "sha256": "7aaf7468aa68a465a0bbd53fce4de5923f26d7c0fb623fb8a0eabe671e2a6e2a"
+    },
+    "research/tests/test_d4_c3_vgra_head.py": {
+      "bytes": 4715,
+      "sha256": "339c35aea35dc42a92e2e3f16091e420751bf5527d8189a9fc4045e5b4183f2c"
+    },
+    "research/tests/test_d4_c4_vgra_batching.py": {
+      "bytes": 5106,
+      "sha256": "f6acb31d8eb9038e5f763119f894603b33ff144fd184e4582ae96e307382b89d"
+    },
+    "research/tests/test_d4_c5a_vgra_targets.py": {
+      "bytes": 6151,
+      "sha256": "960c83ef66e52e75d7a0b86e0cc97c3f11022b03de318a4f7f21f90d1fff8da0"
+    },
+    "research/tests/test_d4_c5b_vgra_runtime_loss.py": {
+      "bytes": 6779,
+      "sha256": "95ed5871468758ba9bf95136ccef15ebe03223e749ff06ecfa56998faac78b23"
+    },
+    "research/tests/test_d4_c5c_vgra_trainer_validator.py": {
+      "bytes": 8293,
+      "sha256": "165f81fa0bd6a6918a3bcd7ba3ca96562c9882be00800634fda88676cbfb85a4"
+    },
+    "research/tools/d4_vgra_batching_audit.py": {
+      "bytes": 3631,
+      "sha256": "f0d2f3d11616251654eeb93b2bd6a1ccfde8f5021f748b823c27080d0f766aed"
+    },
+    "research/tools/d4_vgra_pair_manifest.py": {
+      "bytes": 14997,
+      "sha256": "d2fa215a60073e876c3e017033eb91576a81192ae65c97b538354c89dc4eb0e1"
+    },
+    "ultralytics/cfg/models/11/yolo11s-tpsc-early-vgra-v1.yaml": {
+      "bytes": 1306,
+      "sha256": "cee2646cca95d337e36f3ad1a92914da2610e184e136e23596a5013b4566faed"
+    },
+    "ultralytics/data/vgra.py": {
+      "bytes": 15353,
+      "sha256": "66b7a0c52417d902b8db4f3b7f490deee442ca7cc4d32ba111dbc5832b19d35d"
+    },
+    "ultralytics/models/yolo/detect/vgra_runtime.py": {
+      "bytes": 10944,
+      "sha256": "a75622ecf97599613b246436f66f61f0f3a57c5639d51f892c106eca404b3ba4"
+    },
+    "ultralytics/models/yolo/detect/vgra_targets.py": {
+      "bytes": 9992,
+      "sha256": "e86893b29f08979873d5f235a969b72137084857c2257f1730c44c1541c3bb95"
+    },
+    "ultralytics/models/yolo/detect/vgra_trainer.py": {
+      "bytes": 6516,
+      "sha256": "139e712e09a6be364bd3c20231590ead612176877c05ab04393e66fe092d9c2e"
+    },
+    "ultralytics/models/yolo/detect/vgra_validator.py": {
+      "bytes": 5053,
+      "sha256": "1a2a0c7998a8a4721d0c03e6e701fa31b54ae9065344eff72f45fcb8cf20202e"
+    },
+    "ultralytics/nn/modules/__init__.py": {
+      "bytes": 3603,
+      "sha256": "44dbac8ee4ffb9a2996be981a22ed1331bd57c36be742d93df83ab7be050f5be"
+    },
+    "ultralytics/nn/modules/vgra.py": {
+      "bytes": 12929,
+      "sha256": "2d10b79fb2ab6f0062c372b7636aadfd79be9d04f8791088df1e2ff951486b8a"
+    },
+    "ultralytics/nn/modules/vgra_head.py": {
+      "bytes": 4160,
+      "sha256": "a871bc937077d092ff94f83318390cab3ea35cd58c5532483c3b5c2e11596ea9"
+    },
+    "ultralytics/nn/tasks.py": {
+      "bytes": 73082,
+      "sha256": "b15cf87a2bc97b7a34f243251b9f9762ffb84fd045b3146b52db754cb0a39edb"
+    }
+  },
+  "stage_gate_evidence": {
+    "D4-C0": {
+      "gate_record_sha256": "4bb22fba4949f93e85b2588ee16f51db9c0f279b5908782970a43de3a54e3f1e",
+      "status": "GOVERNANCE_AUTHORIZED_NO_TRAINING"
+    },
+    "D4-C1": {
+      "gate_record_sha256": "b90f5fa74c97773530f27b8d00fe29bd9660a8bf773e3b39b5ca6fbb0a62a6b4",
+      "status": "COMPLETE_CPU_UNIT_VERIFIED"
+    },
+    "D4-C2": {
+      "gate_record_sha256": "c3411c45645455b63f0baa32fa4330b8622c92e53dc16d4de8efb9bffa6a87b9",
+      "status": "COMPLETE_DETERMINISTIC_METADATA_ONLY"
+    },
+    "D4-C3": {
+      "gate_record_sha256": "12776de615af7db67686fd3cd2dd0d2b460d578ca2881c643760905754953b47",
+      "status": "COMPLETE_CPU_VERIFIED"
+    },
+    "D4-C4": {
+      "gate_record_sha256": "58d43efb1c0942f52b94e21bee1423f2ef5aa085b372a407e4a4c00bfc4dc8b2",
+      "status": "COMPLETE_CPU_VERIFIED_MANIFEST_AUDITED"
+    },
+    "D4-C5A": {
+      "gate_record_sha256": "ade370c43747d63bb6628413d6ab24ca7146479113fdcafb2bfa1d10e8a860cf",
+      "status": "COMPLETE_SYNTHETIC_CPU_VERIFIED"
+    },
+    "D4-C5B": {
+      "gate_record_sha256": "62aaf842d216720bb1fb4ead71ceb5ce5894dd4108c9227958ba58b52e1628ba",
+      "status": "COMPLETE_CPU_SYNTHETIC_VERIFIED"
+    },
+    "D4-C5C": {
+      "gate_record_sha256": "3de35395a8bb4c6c45da89c1efc7f0c260b8184984acf5cf2642b218d4c639db",
+      "status": "COMPLETE_SYNTHETIC_CPU_VERIFIED"
+    }
+  },
+  "stock_ultralytics_protected_file_changes_since_design": [],
+  "unresolved_gates": [
+    {
+      "detail": "beta=2*tanh(rho) can invert the intended assist/suppress narrative",
+      "id": "VGRA_SIGNED_BETA_POLARITY",
+      "resolution_gate": "D4-D mathematical/polarity review before D4-E",
+      "status": "OPEN"
+    },
+    {
+      "detail": "C5C R1 all-zero synthetic pixels yielded non-finite gradient for an unidentified parameter",
+      "id": "VGRA_ALL_ZERO_INPUT_GRADIENT",
+      "resolution_gate": "D4-D3 full numerical diagnosis",
+      "status": "OPEN"
+    },
+    {
+      "id": "VGRA_PRETRAINED_CHECKPOINT_TRANSFER",
+      "resolution_gate": "D4-D2 exact Early weights/EMA transfer and zero-rho identity",
+      "status": "UNVERIFIED"
+    },
+    {
+      "id": "VGRA_REAL_BTRAIN_CLASS_STATE_COUNTS",
+      "resolution_gate": "governed TRAIN label binding; never from VAL/TEST",
+      "status": "NOT_COMPUTED"
+    },
+    {
+      "id": "VGRA_FULL_TRAINER_VALIDATOR_EPOCH",
+      "resolution_gate": "D4-D3 synthetic epoch, persistent loader/EMA/save-load behavior",
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "id": "VGRA_STANDALONE_PAIR_AWARE_FINAL_EVAL",
+      "resolution_gate": "separately governed D7/D8 B-TEST final-evaluation interface",
+      "status": "UNAUTHORIZED"
+    }
+  ],
+  "usable_val_pairs": 1401
+}

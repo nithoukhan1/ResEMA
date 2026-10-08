@@ -710,3 +710,14 @@ regression accesses the raw dictionary at index 1 rather than treating the
 tuple itself as a dictionary.
 A standalone final-test validation endpoint remains unauthorized pending
 a separate governed contract.
+
+## 2026-10-08 - D4-C6 implementation closure does not authorize training
+
+The eight C0-C5C implementation gate records, all sources/tests and
+important failures have been audited and indexed.
+
+`VGRA_IMPLEMENTED=TRUE` signifies engineering delivery only.
+It does not imply code source freeze, successful real-data training,
+positive B-VAL results, resolved signed-beta polarity or resolved
+zero-input nonfinite gradients.
+D4-D1/D2/D3 verification is compulsory before D4-E.

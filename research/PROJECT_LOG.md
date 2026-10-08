@@ -986,3 +986,14 @@ paired validation inference/metrics, four losses and fail-closed guards.
 
 No real images, YOLO label files, GPU experiment or B-TEST access.
 Next: `D4-C6_VGRA_IMPLEMENTATION_CLOSURE`
+
+## 2026-10-08 - D4-C6 VGRA implementation closure
+
+Type: `SOURCE / GATE / FAILURE-HISTORY INVENTORY`
+
+Created reproducible C0-C5C audit, full SHA256 inventory, formal closure,
+D4-D gate checklist, gate record, and updated trackers.
+Re-ran full focused synthetic CPU regression suite.
+No raw data, YOLO labels, GPU training, or B-TEST access.
+
+Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`

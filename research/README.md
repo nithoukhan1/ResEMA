@@ -202,3 +202,11 @@ Dedicated pair-aware trainer and validator:
 
 Next: `D4-C6_VGRA_IMPLEMENTATION_CLOSURE`.
 No GPU training permitted.
+
+## VGRA implementation status — D4-C6
+
+`IMPLEMENTED / SOURCE INVENTORIED / CPU REGRESSION PASS`
+
+Independent D4-D verification not yet complete.
+GPU training and B-TEST remain unauthorized.
+Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`.

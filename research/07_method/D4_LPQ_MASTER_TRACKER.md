@@ -11,7 +11,7 @@
 | Active D4 method | VGRA CANDIDATE V1 SPEC FROZEN |
 | Original DAR formulation | REJECTED AS NOVELTY CORE |
 | Original GDS formulation | REJECTED AS NOVELTY CORE |
-| VGRA implemented | FALSE |
+| VGRA implemented | TRUE / C0-C6 ENGINEERING ONLY; D4-D UNVERIFIED |
 | VGRA source frozen | FALSE |
 | VGRA training authorized | FALSE |
 | attention authorized | FALSE |
@@ -37,8 +37,8 @@
 | D4-C5A VGRA visibility targets/loss | COMPLETE | class-level GT targets + TRAIN-only weights utilities CPU-tested |
 | D4-C5B VGRA paired runtime/native loss | COMPLETE | shared full-batch forward, native vector loss + visibility, CPU-tested |
 | D4-C5C VGRA trainer/validator | COMPLETE | dedicated trainer, pair-aware validator and CPU synthetic tests |
-| D4-C6 VGRA implementation closure | NEXT | implementation inventory and documentation closure |
-| D4-D Structural verification | LOCKED | D4-C complete |
+| D4-C6 VGRA implementation closure | COMPLETE | SHA256 source inventory, risk matrix and CPU regression suite |
+| D4-D Structural verification | NEXT / D4-D1 ONLY | independent verification; D2/D3 remain locked |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
 | D4-F Primary LPQ training | LOCKED | separate training authorization |
 | D4-G Residual diagnostics | LOCKED | D4-F preserved |
@@ -53,7 +53,7 @@
 
 ## Current next action
 
-`D4-C6_VGRA_IMPLEMENTATION_CLOSURE`
+`D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`
 
 ## Do not do yet
 

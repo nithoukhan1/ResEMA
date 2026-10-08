@@ -42,3 +42,13 @@ D4-C5 is subdivided to avoid combining three independent high-risk subsystems.
 
 C5 is not complete until all three parts are remote-verified.
 A signed-beta semantic gate must be resolved via a governed decision before training.
+
+## D4-C6 implementation closure and D4-D handoff
+
+C0-C5C engineering source and regression suite are complete. C6 creates a
+SHA256 inventory and risk register, but does not freeze final source or
+authorize GPU training.
+
+Independent D4-D1/D2/D3 verification must resolve transfer identity,
+signed-beta interpretation, all-zero numerical edge, persistent loader
+epoch semantics, checkpoint/EMA behavior and exact pair-aware validation.

@@ -297,3 +297,12 @@ then preserves native decoding/NMS/metrics and all four VAL loss components.
 
 No real dataset run occurred. D4-D integration and source freeze remain locked.
 Next: `D4-C6_VGRA_IMPLEMENTATION_CLOSURE`
+
+## D4-C6 VGRA implementation closure
+
+Engineering implementation completed and SHA256-audited at C5C parent.
+C0-C5C CPU and metadata evidence is preserved in `D4_C6_IMPLEMENTATION_INVENTORY.json`.
+Protected native stock files are unchanged; no source freeze or training authorization.
+
+Signed-beta and all-zero gradient numerical issues remain OPEN.
+Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`
