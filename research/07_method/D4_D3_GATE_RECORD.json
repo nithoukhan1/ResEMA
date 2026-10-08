@@ -1,0 +1,62 @@
+{
+  "authorization_state": {
+    "attention_authorized": false,
+    "b_test_access": "NONE",
+    "d4_d3_acceptance_effective_only_after_remote_verification": true,
+    "d4_d3_git_acceptance_state": "CONDITIONAL_ON_EXACT_REMOTE_VERIFICATION",
+    "d4_e_source_frozen": false,
+    "global_final_architecture_frozen": false,
+    "gpu_training_authorized": false,
+    "real_data_training_authorized": false,
+    "vgra_source_frozen": false
+  },
+  "candidate_acceptance_scope": "COMPLETE_CONDITIONAL_CPU_SYNTHETIC_VERIFICATION",
+  "date": "2026-10-08",
+  "effective_only_after": "INDEPENDENT_REVIEW_AND_EXACT_REMOTE_HEAD_VERIFICATION_OF_FOUR_DOC_COMMIT",
+  "evidence_manifest_path": "research/07_method/D4_D3_INDEPENDENT_REPLAY_MANIFEST.json",
+  "later_contract_requirements": {
+    "actual_btrain_visibility_weights": "NOT_YET_COMPUTED",
+    "finite_loss_gradient_parameter_and_optimizer_ema_guards": "REQUIRED_IN_D4_E_AND_MUST_BE_VERIFIED",
+    "full_mv00_mv01_recipe_parity": "OPEN_D4_E",
+    "full_production_trainer_run": "NOT_VERIFIED",
+    "signed_beta_formulation_unchanged": true,
+    "train_initialization": "PINNED_PRETRAINED_ONLY_FOR_INITIAL_MV01_SCREEN"
+  },
+  "next_actions": [
+    "STAGE_ONLY_FOUR_APPROVED_DOCUMENTS",
+    "REVIEW_EXACT_STAGED_CONTENT_AND_DIFF",
+    "SEPARATE_AUTHORIZED_COMMIT_PUSH",
+    "INDEPENDENT_REMOTE_HEAD_VERIFICATION",
+    "CHAT_MIGRATION_BEFORE_D4_E"
+  ],
+  "parent_branch": "research/vgra-impl-01",
+  "parent_git_head": "aecaaadbc60c075c8a0965e5d80fd27650093196",
+  "pretrained_source": {
+    "archive_sha256": "4e3a811be5b8126e788ca4b7854e2df2b070a08e2ab8f0c6bbde8b6e1abef396",
+    "best_pt_sha256": "620594d3560310b5d24243e1b321ce4463b0795b295891c47f6ec177e5272ac1",
+    "full_early_state_transfer_count": 537
+  },
+  "proposal_status": "DOCUMENTATION_ONLY_CONDITIONAL_ACCEPTANCE_RECORD",
+  "schema": "D4_D3_CONDITIONAL_CPU_SYNTHETIC_ACCEPTANCE_CANDIDATE_V1",
+  "sciences": {
+    "A1_signed_beta": "APPROVED_RETAIN_SIGNED_WITH_EXPLICIT_POLARITY_REVERSAL",
+    "B1_fresh_zero_gradient_risk": "CONDITIONALLY_APPROVED_PRETRAINED_PATH_ONLY_GUARDS_MANDATORY",
+    "fresh_initialized_all_zero_gradient_failure": "CONFIRMED_NOT_REPAIRED",
+    "unconditional_numerical_safety_claim": false
+  },
+  "technical_evidence": {
+    "all_replay_step_worktrees_clean": true,
+    "d3a5_pretrained": "EIGHT_CONTROL_CASES_FINITE",
+    "d3a_fresh_init": "NONFINITE_GRADIENT_REPRODUCED_AND_PRESERVED",
+    "d3b1_through_c3": "SYNTHETIC_CPU_VERIFIED_WITH_SCOPE_LIMITS",
+    "d3b2_r1": "HARNESS_BUG_EXCLUDED_CORRECTED_R2_PINNED",
+    "internal_sha256_verified_member_count": 22,
+    "native_pretrained_state_tensors_verified": 537,
+    "replayed_script_count": 10,
+    "replayed_script_success_count": 10,
+    "synthetic_ema_updates": 6,
+    "synthetic_optimizer_steps": 6,
+    "zip_name": "D4_D3D1_ACCEPTANCE_EVIDENCE_R1.zip",
+    "zip_sha256": "23558c8bf26e76e861b27c7d90aea279f7d5b4d2e30f2ac4896e8e088cad497f"
+  }
+}

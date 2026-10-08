@@ -1,0 +1,193 @@
+{
+  "schema": "D4_D3D1_CPU_SYNTHETIC_EVIDENCE_REPLAY_V1",
+  "generated_at_utc": "2026-10-08T09:21:44.703869+00:00",
+  "git_branch": "research/vgra-impl-01",
+  "git_head": "aecaaadbc60c075c8a0965e5d80fd27650093196",
+  "canonical_early_archive_sha256": "4e3a811be5b8126e788ca4b7854e2df2b070a08e2ab8f0c6bbde8b6e1abef396",
+  "source_repo": "E:\\PhD\\Admitted\\Research\\Project 1\\ResEMA-Github Repo\\ResEMA-VGRA",
+  "script_directory": "C:\\Users\\ik_pa\\Downloads\\D4_D3D1_FORMAL_REVIEW_PACKET_R1\\scripts",
+  "scope": "SYNTHETIC_CPU_ONLY_NO_REAL_IMAGES_OR_LABELS",
+  "previous_d3b2_r1_harness_blocker": "EXCLUDED; R2 PINNED",
+  "signed_beta_scientific_disposition": "PENDING_FORMAL_AUTHORITY",
+  "fresh_zero_gradient_risk_disposition": "PENDING_FORMAL_AUTHORITY",
+  "mv00_mv01_full_recipe": "UNFROZEN_D4_E",
+  "d4_d3_complete": false,
+  "source_frozen": false,
+  "gpu_training_authorized": false,
+  "b_test_access": "NONE",
+  "technical_replay_all_passed": true,
+  "runs": [
+    {
+      "step": "D3A1",
+      "script_name": "D4_D3A_ZERO_INPUT_GRADIENT_ISOLATION_READONLY_R1.py",
+      "script_sha256": "11e85038a6b2cafeaaf4ea88bd7a9e98089004feb4460854a08dc83ac9179dec",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3A_ALL_CASES_EXECUTED=PASS",
+        "D3A_NONCONSTANT_CONTROL_FINITE=PASS"
+      ],
+      "missing_markers": [],
+      "stdout_file": "01_D3A1.stdout.txt",
+      "stdout_sha256": "766291c964af35646d878defde13a2aea1f28b9e2c88c5c192e4d6b333c2b3c9",
+      "stderr_file": "01_D3A1.stderr.txt",
+      "stderr_sha256": "5007e34df5924e3108370209ec983b79f561e6e3b80f0d94ed51fe923fa998f1",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3A2",
+      "script_name": "D4_D3A2_ZERO_INPUT_LOSS_BOUNDARY_READONLY_R1.py",
+      "script_sha256": "5ad1c2782faae9bc4279eec87d47f8124e79b678dda0e637344978d1d3cda952",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3A2_LOSS_WISE_CASES_EXECUTED=13",
+        "D3A2_NONCONSTANT_CONTROL=FINITE"
+      ],
+      "missing_markers": [],
+      "stdout_file": "02_D3A2.stdout.txt",
+      "stdout_sha256": "dd393a1a011e3e8b8d7c4a4b8c60768dfa7a0657c0b496154d77aaec9f0c36f9",
+      "stderr_file": "02_D3A2.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3A3",
+      "script_name": "D4_D3A3_ZERO_INPUT_BACKWARD_BOUNDARY_READONLY_R1.py",
+      "script_sha256": "3550fa2a08d2bcd12929ab26dba4cec8d0dda47a88bb3aba006e8560d96419ad",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3A3_BOUNDARY_DIAGNOSTIC_CASES=10",
+        "D3A3_NONCONSTANT_NATIVE_AND_VIS_CONTROLS=FINITE"
+      ],
+      "missing_markers": [],
+      "stdout_file": "03_D3A3.stdout.txt",
+      "stdout_sha256": "f104aa29afdf6af67d989128abfc52b0498dd4d74d1de2f5db63fa5eec67e17a",
+      "stderr_file": "03_D3A3.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3A4",
+      "script_name": "D4_D3A4_BN_FP64_INTERNAL_BACKWARD_READONLY_R1.py",
+      "script_sha256": "2d4deeef0c90b138deb8e922417911830b933ffe94715d74e2e495c665e5bc3a",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3A4_NATIVE_BATCHNORM_FP32_FP64_ISOLATED=COMPLETED",
+        "D3A4_TWO_REPRODUCIBLE_ZERO_INPUT_CASES=PASS"
+      ],
+      "missing_markers": [],
+      "stdout_file": "04_D3A4.stdout.txt",
+      "stdout_sha256": "b537ce649d73e9f71e81e33f416cda07ad1aa226b0e4c9cbebea6527dd58ac98",
+      "stderr_file": "04_D3A4.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3A5",
+      "script_name": "D4_D3A5_PRETRAINED_ZERO_GRADIENT_RISK_READONLY_R1.py",
+      "script_sha256": "38cd8c71b0180853f447caecfa31db551601a200b52d186e1b709506d829af68",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3A5_PRETRAINED_CASES_EXECUTED=8",
+        "D3A5_PRETRAINED_ZERO_GRADIENT_EDGE_REPRODUCED=FALSE"
+      ],
+      "missing_markers": [],
+      "stdout_file": "05_D3A5.stdout.txt",
+      "stdout_sha256": "2b3b8f718cc12d8dd9a1e224641f9b6944b7f289eb1f740afd0214cf51275285",
+      "stderr_file": "05_D3A5.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3B1",
+      "script_name": "D4_D3B1_PRETRAINED_SYNTHETIC_CPU_EPOCH_SAMPLER_EMA_R1.py",
+      "script_sha256": "ac55a3448a4b5422f1f8fd1b1d4ebe727f5825ddea785ee0ff6c75f5539d9f3c",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3B1_PRETRAINED_SYNTHETIC_TWO_EPOCHS=PASS",
+        "D3B1_POST_UPDATE_ALL_ZERO_AND_EMPTY_LABEL_GRADIENTS=FINITE",
+        "SYNTHETIC_CPU_OPTIMIZER_STEPS=6"
+      ],
+      "missing_markers": [],
+      "stdout_file": "06_D3B1.stdout.txt",
+      "stdout_sha256": "cda3c879a4864f5eb2410bc56aefb6d17f8bd0a3ce132f2488e8e4c3731ddd4a",
+      "stderr_file": "06_D3B1.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3B2_R2",
+      "script_name": "D4_D3B2_PAIR_AWARE_NMS_METRIC_ISOLATION_READONLY_R2.py",
+      "script_sha256": "daad8ecd2fe592f24ec208120037282c9b4d5b13c97203bbcc4c26ad7d949a8f",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3B2_PAIRAWARE_NATIVE_DECODE_NMS_METRIC_PARITY=PASS",
+        "D3B2_BIDIRECTIONAL_UNRELATED_SINGLE_ISOLATION=PASS"
+      ],
+      "missing_markers": [],
+      "stdout_file": "07_D3B2_R2.stdout.txt",
+      "stdout_sha256": "2eb1df7529b37ed30e55c634d08596f143b3eea7451d760fb90ef78a07a86e6d",
+      "stderr_file": "07_D3B2_R2.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3C1",
+      "script_name": "D4_D3C1_SIGNED_BETA_SEMANTIC_CPU_READONLY_R1.py",
+      "script_sha256": "3e5f2c02b9f001467dfabc3d0e26c7da26be5b1c04b9e09f3ad8e62722c41d70",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3C1_IMPLEMENTED_SIGNED_BETA_EQUATIONS=VERIFIED",
+        "D3C1_NEGATIVE_BETA_POLARITY_REVERSAL=CONFIRMED",
+        "D3C1_SIGNED_BETA_SCIENTIFIC_GATE=OPEN_REQUIRES_DOCUMENTED_METHOD_DECISION"
+      ],
+      "missing_markers": [],
+      "stdout_file": "08_D3C1.stdout.txt",
+      "stdout_sha256": "fb4554a0659157aff36a6b9600dc7b41bd034199b84e71b5552a9a7af1dd8fdd",
+      "stderr_file": "08_D3C1.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3C2",
+      "script_name": "D4_D3C2_MV00_MV01_PAIR_SAFE_PREFLIGHT_READONLY_R1.py",
+      "script_sha256": "27b3737f6c93e3bfdf7716920ed35ac703bac53db091e259e558f748a6237959",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3C2_SHARED_PAIR_SAFE_PIPELINE_MECHANICS=PASS",
+        "D3C2_FULL_MV00_MV01_RUN_RECIPE_PARITY=NOT_YET_FROZEN_OR_CERTIFIED"
+      ],
+      "missing_markers": [],
+      "stdout_file": "09_D3C2.stdout.txt",
+      "stdout_sha256": "77706233d8b678726c89a7306c778f99f5395b43136be743da5313202af0b81d",
+      "stderr_file": "09_D3C2.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    },
+    {
+      "step": "D3C3",
+      "script_name": "D4_D3C3_REAL_VALIDATOR_INTEGRATION_SYNTHETIC_CPU_R1.py",
+      "script_sha256": "0e87f207437b3d6f74cb7f2340766286eb0a5430f39396cfc7d6a3877594217b",
+      "exit_code": 0,
+      "expected_markers": [
+        "D3C3_END_TO_END_SYNTHETIC_PAIR_AWARE_VALIDATION=PASS",
+        "D3C3_REAL_BTRAIN_OR_BVAL_DATA_READ=FALSE"
+      ],
+      "missing_markers": [],
+      "stdout_file": "10_D3C3.stdout.txt",
+      "stdout_sha256": "7425a62245f250ee5dd19bd4f0ae64296ae8a87561e6251eca59f996c8aa53ce",
+      "stderr_file": "10_D3C3.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "repo_worktree_clean_after_step": true,
+      "replay_status": "PASS"
+    }
+  ]
+}
