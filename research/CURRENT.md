@@ -623,3 +623,8 @@ Frozen source and real training: NO.
 Last full focused CPU suite: PASS.
 Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`.
 B-TEST: SEALED.
+
+## D4-D1R guarded remediation — 2026-10-08
+
+Two confirmed blockers remediated and CPU-tested, but D4-D1 independent exit not yet granted.
+Signed-beta and all-zero-input risks remain OPEN. GPU/B-TEST forbidden.

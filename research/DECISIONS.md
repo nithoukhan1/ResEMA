@@ -721,3 +721,9 @@ It does not imply code source freeze, successful real-data training,
 positive B-VAL results, resolved signed-beta polarity or resolved
 zero-input nonfinite gradients.
 D4-D1/D2/D3 verification is compulsory before D4-E.
+
+## 2026-10-08 - D4-D1R repair without changing VGRA mathematical freeze
+
+Do not accept native-only final evaluation, sealed TEST fallback or unfiltered unreadable VAL.
+Repair in VGRA-specific code; preserve original C2 pair membership and C1 beta math.
+Independent re-verification is mandatory before D4-D2.

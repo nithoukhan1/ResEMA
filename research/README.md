@@ -210,3 +210,8 @@ No GPU training permitted.
 Independent D4-D verification not yet complete.
 GPU training and B-TEST remain unauthorized.
 Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`.
+
+## VGRA D4-D1R remediation state
+
+Read-only audit revealed final-eval and VAL-exclusion blockers. Corrective patch complete;
+D4-D1 independent re-verification NEXT. Training and test remain sealed.

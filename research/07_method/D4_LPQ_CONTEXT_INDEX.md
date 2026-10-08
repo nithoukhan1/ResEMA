@@ -306,3 +306,8 @@ Protected native stock files are unchanged; no source freeze or training authori
 
 Signed-beta and all-zero gradient numerical issues remain OPEN.
 Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`
+
+## D4-D1R blocker remediation
+
+Read-only D1R1 independently reproduced final-eval API conflict and frozen VAL exclusion drift.
+D1R repairs are tested and inventoried, pending D1B independent re-verification.

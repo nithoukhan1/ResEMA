@@ -1,0 +1,48 @@
+{
+  "all_zero_input_gradient_edge": "OPEN_D4_D3",
+  "attention_authorized": false,
+  "b_test_access": "NONE",
+  "bind_rejects_excluded_images": true,
+  "branch": "research/vgra-impl-01",
+  "cpu_world_size_zero_validator_supported": true,
+  "d4_d1_independent_verification_complete": false,
+  "d4_d2_authorized": false,
+  "development_val_test_fallback_forbidden": true,
+  "final_eval_uses_best_checkpoint_pair_metadata": true,
+  "frozen_assignment_sha256": "87aa5e9089c6282df14ae32917946d70d9f56eaa9a5d63443985877ab9dd1ef4",
+  "frozen_val_exclusion_pre_label_scan": true,
+  "gpu_training_authorized": false,
+  "next_action": "D4-D1B_VGRA_INDEPENDENT_REVERIFICATION",
+  "parent": "c9370aa730977e462cad721a8b1f058a2a4fa85d",
+  "r1_readonly_audit_excluded_val_image_blocker": "CONFIRMED",
+  "r1_readonly_audit_final_eval_blocker": "CONFIRMED",
+  "r1_safe_stop": {
+    "focused_cpu_tests_passed": 75,
+    "no_commit_or_push": true,
+    "precommit_rollback_clean": true,
+    "reason": "MASTER_TRACKER_NEXT_ACTION_FORMAT_MISMATCH",
+    "vgra_implementation_unchanged_in_r2": true
+  },
+  "r2_safe_stop": {
+    "commit_or_push_performed": false,
+    "focused_tests_executed": false,
+    "reason": "RAW_CHECKOUT_SHA256_MISMATCH_IN_PREFLIGHT",
+    "script_sha256": "987346565a7e54b76669bf16886771460dcf313444cf9b382a620d0dcdebed8e",
+    "source_mutated": false
+  },
+  "r3_safe_stop": {
+    "commit_or_push_performed": false,
+    "failure_stage": "DOCUMENTATION_TRACKER_UPDATE_AFTER_ALL_CPU_TESTS",
+    "focused_cpu_tests_passed": 75,
+    "precommit_rollback_clean": true,
+    "reason": "INVALID_LITERAL_BACKSLASH_N_NEWLINE_ARGUMENT",
+    "script_sha256": "3286bd30b265a72aa1bff3774008ebbbe2d1847ec4de1163bac710a95024db37",
+    "source_compile_passed": true,
+    "vgra_replacement_sources_changed_in_r4": false
+  },
+  "raw_images_opened": false,
+  "raw_yolo_labels_opened": false,
+  "schema": "D4_D1R_REMEDIATION_V1",
+  "signed_beta_interpretation": "OPEN_D4_D",
+  "status": "REPAIRS_CPU_VERIFIED_PENDING_INDEPENDENT_REVERIFY"
+}

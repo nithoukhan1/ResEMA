@@ -35,7 +35,8 @@ class VGRADetectionValidator(DetectionValidator):
                 "VGRA standalone validation not authorized in C5C; "
                 "supply the governed trainer for B-VAL development evaluation"
             )
-        if trainer.world_size != 1 or RANK not in {-1, 0}:
+        # Stock BaseTrainer reports world_size=0 in non-distributed CPU mode.
+        if trainer.world_size not in {0, 1} or RANK not in {-1, 0}:
             raise NotImplementedError("VGRA V1 DDP validation not supported")
         if bool(trainer.args.compile):
             raise RuntimeError("VGRA V1 compiled validation not supported")
@@ -46,7 +47,8 @@ class VGRADetectionValidator(DetectionValidator):
         self.device = trainer.device
         self.data = trainer.data
         self.args.half = self.device.type != "cpu" and bool(trainer.amp)
-        model = trainer.ema.ema if trainer.ema is not None and trainer.ema.ema is not None else trainer.model
+        if model is None:
+            model = trainer.ema.ema if trainer.ema is not None and trainer.ema.ema is not None else trainer.model
         model = unwrap_model(model)
         if not isinstance(model, VGRADetectionModel):
             raise TypeError("VGRA validator requires VGRADetectionModel or its EMA copy")

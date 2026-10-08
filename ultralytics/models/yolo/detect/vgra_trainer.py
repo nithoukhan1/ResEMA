@@ -61,6 +61,14 @@ def _fail_closed_config(cfg: Any) -> None:
         raise ValueError("VGRA V1 nine-class visibility supervision forbids single_cls=True")
 
 
+def _require_explicit_development_val(data: dict[str, Any]) -> None:
+    """Never fall back from missing development VAL to the sealed TEST split."""
+    if not data.get("train") or not data.get("val"):
+        raise ValueError("VGRA training requires explicit B-TRAIN and B-VAL paths; TEST fallback is prohibited")
+    if data.get("test") and data["val"] == data["test"]:
+        raise ValueError("VGRA B-VAL path must differ from the sealed B-TEST path")
+
+
 class VGRADetectionTrainer(DetectionTrainer):
     """Specialized trainer preserving standard YOLO training loop with pair-safe inputs."""
 
@@ -79,6 +87,7 @@ class VGRADetectionTrainer(DetectionTrainer):
             raise ValueError("VGRA V1 requires the same frozen C2 combined assignment manifest for both splits")
         super().__init__(cfg=cfg, overrides=overrides, _callbacks=_callbacks)
         _fail_closed_config(self.args)
+        _require_explicit_development_val(self.data)
         if self.world_size > 1:
             raise NotImplementedError("VGRA V1 distributed training is not authorized")
 
@@ -148,5 +157,33 @@ class VGRADetectionTrainer(DetectionTrainer):
             _callbacks=self.callbacks,
         )
 
+    def final_eval(self):
+        """Validate the selected BEST checkpoint with the governed pair-aware loader.
 
-__all__ = ("VGRADetectionTrainer",)
+        BaseTrainer.final_eval calls validator(model=path) without a trainer,
+        which cannot carry AP/LAT metadata. Preserve best-checkpoint selection,
+        but explicitly provide both the trainer's paired B-VAL context and
+        the loaded best model. Never fall back to native image-only validation.
+        """
+        from ultralytics.nn.tasks import load_checkpoint
+
+        _require_explicit_development_val(self.data)
+        best = Path(self.best)
+        if not best.is_file():
+            raise FileNotFoundError(f"VGRA selected-best checkpoint missing: {best}")
+        selected, _ = load_checkpoint(best, device=self.device)
+        if not isinstance(selected, VGRADetectionModel):
+            raise TypeError("VGRA best checkpoint did not restore a VGRADetectionModel")
+        if not bool(selected.vgra_train_weights_ready.item()):
+            raise RuntimeError("VGRA best checkpoint lost B-TRAIN visibility weight binding")
+        self.validator.args.plots = self.args.plots
+        self.validator.args.compile = False
+        metrics = self.validator(trainer=self, model=selected)
+        if not isinstance(metrics, dict):
+            raise TypeError("VGRA final paired validation did not return a metrics dictionary")
+        self.metrics = dict(metrics)
+        self.metrics.pop("fitness", None)
+        self.run_callbacks("on_fit_epoch_end")
+
+
+__all__ = ("VGRADetectionTrainer", "_require_explicit_development_val")

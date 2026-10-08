@@ -106,6 +106,8 @@ def bind_vgra_assignments(
 
     for index, stem in enumerate(stems):
         row = row_by_stem[stem]
+        if row["operational_role"].strip().upper() == "EXCLUDED_UNREADABLE":
+            raise ValueError(f"frozen unreadable image must not be batched: {stem}")
         valid = _runtime_pair_valid(row, split)
         pair_id = row["pair_id"].strip()
         view_code = row["view_code"].strip().upper()
@@ -254,12 +256,43 @@ class VGRAYOLODataset(YOLODataset):
         self.vgra_split = str(vgra_split).strip().lower()
         if self.vgra_split not in {"train", "val"}:
             raise ValueError("vgra_split must be 'train' or 'val'")
+        # Pre-bind before BaseDataset.get_img_files/get_labels can read or cache images.
+        self.vgra_assignment_rows = load_assignment_rows(self.vgra_assignment_manifest, self.vgra_split)
+        self.vgra_expected_stems = {
+            row["filestem"].strip()
+            for row in self.vgra_assignment_rows
+            if row["operational_role"].strip().upper() != "EXCLUDED_UNREADABLE"
+        }
         super().__init__(*args, **kwargs)
-
-        rows = load_assignment_rows(self.vgra_assignment_manifest, self.vgra_split)
+        # get_labels() is allowed to skip corrupt inputs in stock YOLO. The governed
+        # VGRA dataset must instead fail closed if any expected study is lost.
+        actual = {Path(name).stem for name in self.im_files}
+        if len(self.im_files) != len(self.vgra_expected_stems) or actual != self.vgra_expected_stems:
+            raise ValueError("VGRA post-label-scan inventory mismatch: expected full operational split")
         self.vgra_metadata, self.vgra_units = bind_vgra_assignments(
-            self.im_files, rows, self.vgra_split
+            self.im_files, self.vgra_assignment_rows, self.vgra_split
         )
+
+    def get_img_files(self, img_path: str | list[str]) -> list[str]:
+        """Exclude frozen unreadable VAL entries before YOLO image/label verification.
+
+        The whole operational split is required. No missing, duplicated or
+        unrecognized filestems are accepted. This filter is applied before
+        BaseDataset gets labels, image caches or transforms.
+        """
+        files = super().get_img_files(img_path)
+        stems = [Path(name).stem for name in files]
+        if len(set(stems)) != len(stems):
+            raise ValueError("VGRA dataset contains duplicated image filestems")
+        all_frozen = {row["filestem"].strip() for row in self.vgra_assignment_rows}
+        if set(stems) - all_frozen:
+            raise ValueError("VGRA dataset has images outside the frozen C2 split")
+        if self.vgra_expected_stems - set(stems):
+            raise ValueError("VGRA dataset is missing operational frozen split images")
+        filtered = [name for name in files if Path(name).stem in self.vgra_expected_stems]
+        if len(filtered) != len(self.vgra_expected_stems):
+            raise ValueError("VGRA image filtering did not preserve full operational split")
+        return filtered
 
     def build_transforms(self, hyp: Any = None):
         """Build ordinary YOLO transforms with cross-study composition disabled."""

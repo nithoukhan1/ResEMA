@@ -53,7 +53,7 @@
 
 ## Current next action
 
-`D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`
+`D4-D1B_VGRA_INDEPENDENT_REVERIFICATION`
 
 ## Do not do yet
 
@@ -63,3 +63,9 @@
 - do not access Split-B test;
 - do not call LPQ the final architecture;
 - do not claim novelty before D4-B.
+
+## D4-D1R repairs — independent verification still open
+
+Repaired best-checkpoint paired final-eval and early VAL unreadable exclusion;
+added development-VAL firewall and CPU world-size guard.
+D4-D1B independent re-verification required; D4-D2 locked.

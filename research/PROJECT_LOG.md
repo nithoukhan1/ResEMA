@@ -997,3 +997,9 @@ Re-ran full focused synthetic CPU regression suite.
 No raw data, YOLO labels, GPU training, or B-TEST access.
 
 Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`
+
+## 2026-10-08 - D4-D1R confirmed findings and patch
+
+Independent audit confirmed two production-path integration issues.
+Corrected under strict source allowlist, ran full focused CPU regression and documented both.
+No patient images, YOLO labels, GPU training or B-TEST read.

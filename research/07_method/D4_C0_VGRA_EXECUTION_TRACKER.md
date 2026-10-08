@@ -22,6 +22,12 @@ Implementation branch: `research/vgra-impl-01`
 | D4-F MV-00/MV-01 | LOCKED | separate auth | both preserved |
 | D4-G/H/I/J | LOCKED | governed | diagnostics/ablations/final freeze |
 
-Current next action: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`
+Current next action: `D4-D1B_VGRA_INDEPENDENT_REVERIFICATION`
 
 Permanent firewalls: B-test NONE; GPU training unauthorized; attention unauthorized; hyperparameter search unauthorized; additional modules unauthorized.
+
+## D4-D1R confirmed blockers and guarded remediation
+
+Two D4-D1 R1 blockers were confirmed and repaired in dedicated VGRA code.
+D4-D1 exit remains OPEN until D4-D1B independent re-verification.
+No D4-D2, GPU training or B-TEST authorization.
