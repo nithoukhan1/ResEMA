@@ -35,8 +35,8 @@
 | D4-C3 VGRA head/model integration | COMPLETE | VGRADetect + YAML + parser; box/DFL firewall CPU-verified |
 | D4-C4 VGRA pair-aware data/batching | COMPLETE | pair-safe augmentation + indivisible AP/LAT batching + metadata audit |
 | D4-C5A VGRA visibility targets/loss | COMPLETE | class-level GT targets + TRAIN-only weights utilities CPU-tested |
-| D4-C5B VGRA paired runtime/native loss | NEXT | paired/single model execution and detection-loss normalization |
-| D4-C5C VGRA trainer/validator | LOCKED | deterministic pair-aware trainer/validator synthetic tests |
+| D4-C5B VGRA paired runtime/native loss | COMPLETE | shared full-batch forward, native vector loss + visibility, CPU-tested |
+| D4-C5C VGRA trainer/validator | NEXT | synthetic paired train/validation end-to-end tests |
 | D4-C6 VGRA implementation closure | LOCKED | freeze complete implementation after C5 |
 | D4-D Structural verification | LOCKED | D4-C complete |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
@@ -53,7 +53,7 @@
 
 ## Current next action
 
-`D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`
+`D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION`
 
 ## Do not do yet
 

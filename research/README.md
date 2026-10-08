@@ -184,3 +184,13 @@ Target/visibility loss utility: `IMPLEMENTED / SYNTHETIC CPU TESTED`.
 Next: `D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`.
 
 C5C trainer/validator, D4-D verification, source freeze and training remain locked.
+
+## VGRA status — D4-C5B
+
+VGRA mixed paired/single runtime and native detection loss:
+`IMPLEMENTED / SYNTHETIC CPU VERIFIED`
+
+Trainer and validator integration:
+`NEXT / D4-C5C`
+
+Training is still locked.

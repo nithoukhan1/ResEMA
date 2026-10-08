@@ -1,0 +1,37 @@
+{
+  "actual_train_state_weights_computed": false,
+  "attention_authorized": false,
+  "b_test_access": "NONE",
+  "branch": "research/vgra-impl-01",
+  "full_batch_shared_feature_forward": true,
+  "gpu_training_authorized": false,
+  "native_box_tensor_untouched": true,
+  "native_detection_loss_vector": [
+    "box",
+    "cls",
+    "dfl"
+  ],
+  "native_loss_preserved": true,
+  "native_ultralytics_files_modified": [],
+  "next_action": "D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION",
+  "parent": "b7edfcc35697b2b29bd5d98fb9bd087abb4de2b4",
+  "real_images_accessed": false,
+  "real_yolo_labels_accessed": false,
+  "schema": "D4_C5B_RUNTIME_AND_NATIVE_LOSS_V1",
+  "signed_beta_gate": "OPEN",
+  "single_logits_native_exact": true,
+  "status": "COMPLETE_CPU_SYNTHETIC_VERIFIED",
+  "train_weights_required_for_paired_batches": true,
+  "trainer_integrated": false,
+  "validator_integrated": false,
+  "vgra_loss_vector": [
+    "box",
+    "cls",
+    "dfl",
+    "visibility"
+  ],
+  "visibility_lambda": 0.25,
+  "visibility_multiplier": "2 * number_of_valid_pairs",
+  "visibility_state_weights_persistent_buffers": true,
+  "zero_rho_native_identity": true
+}

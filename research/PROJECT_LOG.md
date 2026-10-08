@@ -956,3 +956,15 @@ Recorded the signed-beta semantic-inversion limitation as an OPEN pre-training g
 
 Next:
 `D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`
+
+## 2026-10-08 - D4-C5B paired runtime/native loss
+
+Type: `VGRA RUNTIME / SYNTHETIC CPU LOSS INTEGRATION`
+
+Added a dedicated mixed-batch VGRA DetectionModel subclass and additive criterion.
+Reused untouched native YOLO box/DFL and detection loss.
+Confirmed fork-specific four-component loss behavior and exact singles fallback.
+
+No stock source changes, real data access, GPU training or B-TEST access.
+
+Next: `D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION`

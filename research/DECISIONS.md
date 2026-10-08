@@ -683,3 +683,17 @@ The V1 beta=2*tanh(rho) parameter is sign-indefinite. This means conceptual
 assist/suppress directions are NOT guaranteed after optimization. No silent math
 change is permitted; test, document, and resolve the semantic choice before
 source freeze and GPU training.
+
+## 2026-10-08 - D4-C5B shared full-batch forward and native vector-loss preservation
+
+Avoid computing separate AP/LAT Detect heads on subsets during training because
+per-subset BatchNorm can change native logits even when VGRA rho=0.
+
+Run the backbone/native Detect once on the complete batch, then add paired-index
+VGRA classification corrections. Preserve native boxes exactly and native singles.
+
+The current Ultralytics fork returns three detection-loss components multiplied
+by batch size; BaseTrainer sums them. Add VGRA as a fourth component, weighted
+as `0.25*(2*number_of_pairs)*mean_weighted_visibility_CE`.
+
+TRAIN-only visibility weights must be bound before any paired loss.

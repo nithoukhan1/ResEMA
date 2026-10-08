@@ -271,3 +271,17 @@ The signed-beta semantic-inversion risk is recorded as an open pre-training gate
 
 Next:
 `D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`
+
+## D4-C5B mixed-batch native loss
+
+VGRADetectionModel and VGRADetectionCriterion provide mixed paired/single
+raw forward and four-component native+visibility loss.
+
+The entire batch shares one YOLO backbone/native Detect-head pass.
+VGRA residuals modify only class scores of paired images.
+Singles and native box tensors are preserved exactly.
+
+The signed-beta interpretation gate remains OPEN.
+Actual B-TRAIN weights have not yet been computed.
+
+Next: `D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION`

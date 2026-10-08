@@ -583,3 +583,19 @@ GPU training remains unauthorized. B-TEST remains sealed.
 
 Next:
 `D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`
+
+## D4-C5B mixed runtime/loss — 2026-10-08
+
+Status: `COMPLETE / SYNTHETIC_CPU_VERIFIED`
+
+Paired/single dispatch: implemented.
+Native box/DFL: untouched.
+Native loss vector: preserved.
+Visibility: fourth loss component weighted by 2 * valid pairs.
+Trainer and validator: NOT integrated.
+Actual TRAIN visibility counts/weights: NOT computed.
+Signed-beta interpretation gate: OPEN.
+GPU training: NOT AUTHORIZED.
+B-TEST: SEALED.
+
+Next: `D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION`
