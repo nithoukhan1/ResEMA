@@ -569,3 +569,17 @@ B-test:
 
 Next:
 `D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`
+
+## D4-C5A visibility objective — 2026-10-08
+
+Status: `COMPLETE / SYNTHETIC_CPU_VERIFIED`
+
+Target source: collated nine-class YOLO GT.
+State weighting source: B-TRAIN exact-pair labels only, when bound.
+Actual TRAIN state counts: not yet computed.
+Signed-beta interpretation issue: OPEN pre-training gate.
+
+GPU training remains unauthorized. B-TEST remains sealed.
+
+Next:
+`D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`

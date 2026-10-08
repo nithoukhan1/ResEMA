@@ -943,3 +943,16 @@ No image, YOLO label, training, inference experiment or B-test access occurred.
 
 Next:
 `D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`
+
+## 2026-10-08 - D4-C5A VGRA visibility supervision
+
+Type: `METHOD INTEGRATION / SYNTHETIC OBJECTIVE TESTS`
+
+Implemented target mapping, strict companion validation, TRAIN-only visibility
+counting/weight utility, and weighted CE. No real images or label files opened.
+No GPU training, B-TEST access, stock loss or trainer/validator modifications.
+
+Recorded the signed-beta semantic-inversion limitation as an OPEN pre-training gate.
+
+Next:
+`D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`

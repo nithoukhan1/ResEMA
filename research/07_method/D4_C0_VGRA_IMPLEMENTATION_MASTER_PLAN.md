@@ -31,3 +31,14 @@ No hyperparameter sweep before both are complete and preserved.
 
 ## D4-G/H/I/J onward
 G: D3-compatible diagnostics + VGRA-specific visibility/rescue analysis. H: attribution ablations only if PROMOTE/HOLD. I: optional extra support module only for an evidenced residual weakness. J: final architecture freeze. Then D5 multiseed/efficiency/robustness, D6 fair comparator reproduction, D7 final-test contract, D8 one sealed B-test transaction, D9 manuscript evidence.
+
+## D4-C5A/B/C implementation subdivision
+
+D4-C5 is subdivided to avoid combining three independent high-risk subsystems.
+
+- C5A: synthetic-tested visibility class-target and objective semantics; never uses real images or labels.
+- C5B: paired feature/head dispatch and correct native loss normalization for mixed pair/single batches.
+- C5C: pair-aware trainer and validator with controlled synthetic end-to-end tests.
+
+C5 is not complete until all three parts are remote-verified.
+A signed-beta semantic gate must be resolved via a governed decision before training.

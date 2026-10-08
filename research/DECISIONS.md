@@ -672,3 +672,14 @@ Pair-aware validation uses square/non-rectangular preprocessing. The exact same 
 pipeline will be used by D4-MV-00 and D4-MV-01 so pipeline effects are controlled.
 
 VGRA V1 is single-process only; DDP is fail-closed unless separately governed later.
+
+## 2026-10-08 - Subdivide D4-C5 and preserve signed-beta design gate
+
+The C5 integration phase is split into C5A visibility supervision, C5B paired
+runtime/native loss, and C5C trainer/validator to keep transactions independently
+auditable.
+
+The V1 beta=2*tanh(rho) parameter is sign-indefinite. This means conceptual
+assist/suppress directions are NOT guaranteed after optimization. No silent math
+change is permitted; test, document, and resolve the semantic choice before
+source freeze and GPU training.

@@ -258,3 +258,16 @@ DDP is unsupported/fail-closed in VGRA V1.
 
 Next:
 `D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`
+
+## D4-C5A visibility objective
+
+A deterministic, synthetic-verified four-state visibility target/loss utility is
+implemented. It derives class presence from YOLO annotations and excludes singles
+from the auxiliary objective.
+
+TRAIN-only state-frequency derivation is implemented but has not read real data yet.
+
+The signed-beta semantic-inversion risk is recorded as an open pre-training gate.
+
+Next:
+`D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`

@@ -1,0 +1,29 @@
+{
+  "actual_train_state_counts_generated": false,
+  "actual_train_yolo_labels_opened": false,
+  "attention_authorized": false,
+  "b_test_access": "NONE",
+  "branch": "research/vgra-impl-01",
+  "candidate_v1_math_modified": false,
+  "gpu_training_authorized": false,
+  "lambda_vis": 0.25,
+  "model_dispatch_integrated": false,
+  "native_detection_loss_modified": false,
+  "next_action": "D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION",
+  "parent": "a79f53ae5e332b7dbe2036114f8edde02a64a198",
+  "schema": "D4_C5A_VISIBILITY_SUPERVISION_V1",
+  "signed_beta_semantic_inversion_gate": "OPEN_REQUIRES_GOVERNED_D4_D_DECISION_BEFORE_TRAINING",
+  "single_view_visibility_loss": false,
+  "status": "COMPLETE_SYNTHETIC_CPU_VERIFIED",
+  "target_source": "collated_YOLO_GT_cls_batch_idx",
+  "train_weight_source": "B-TRAIN exact pairs only",
+  "trainer_integrated": false,
+  "validator_integrated": false,
+  "visibility_class_count": 9,
+  "visibility_states": [
+    "00",
+    "10",
+    "01",
+    "11"
+  ]
+}

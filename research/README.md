@@ -176,3 +176,11 @@ Cross-study composition:
 
 Next:
 `D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`
+
+## VGRA implementation status — D4-C5A
+
+Target/visibility loss utility: `IMPLEMENTED / SYNTHETIC CPU TESTED`.
+
+Next: `D4-C5B_VGRA_PAIRED_RUNTIME_AND_LOSS_INTEGRATION`.
+
+C5C trainer/validator, D4-D verification, source freeze and training remain locked.
