@@ -11,7 +11,7 @@
 | Active D4 method | VGRA CANDIDATE V1 SPEC FROZEN |
 | Original DAR formulation | REJECTED AS NOVELTY CORE |
 | Original GDS formulation | REJECTED AS NOVELTY CORE |
-| VGRA implemented | TRUE / C0-C6; D4-D1 VERIFIED; D4-D2/D3 PENDING |
+| VGRA implemented | TRUE / C0-C6; D4-D1/D2 VERIFIED; D4-D3 OPEN |
 | VGRA source frozen | FALSE |
 | VGRA training authorized | FALSE |
 | attention authorized | FALSE |
@@ -38,7 +38,7 @@
 | D4-C5B VGRA paired runtime/native loss | COMPLETE | shared full-batch forward, native vector loss + visibility, CPU-tested |
 | D4-C5C VGRA trainer/validator | COMPLETE | dedicated trainer, pair-aware validator and CPU synthetic tests |
 | D4-C6 VGRA implementation closure | COMPLETE | SHA256 source inventory, risk matrix and CPU regression suite |
-| D4-D Structural verification | IN PROGRESS / D1 COMPLETE; D2 NEXT | independent D1 PASS; D2/D3 outstanding |
+| D4-D Structural verification | IN PROGRESS / D1+D2 COMPLETE; D3 NEXT | independent D1 PASS; pretrained transfer/identity D2 PASS; numerical D3 OPEN |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
 | D4-F Primary LPQ training | LOCKED | separate training authorization |
 | D4-G Residual diagnostics | LOCKED | D4-F preserved |
@@ -53,7 +53,7 @@
 
 ## Current next action
 
-`D4-D2_VGRA_PRETRAINED_TRANSFER_AND_ZERO_GATE_IDENTITY`
+`D4-D3_VGRA_INTEGRATED_SYNTHETIC_NUMERICAL_VERIFICATION`
 
 ## Do not do yet
 

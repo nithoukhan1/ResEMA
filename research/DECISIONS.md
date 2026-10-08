@@ -735,3 +735,12 @@ closure only. Do not treat synthetic zero mAP as a real dataset result.
 Retain beta polarity, all-zero-input gradients, pretrained transfer,
 full-epoch/EMA, MV-00/MV-01 parity as mandatory later gates.
 This decision does not authorize GPU training, B-TEST or source freeze.
+
+## D4-D2 formal pretrained-transfer acceptance — 2026-10-08
+
+Accept D4-D2 scope as exact SCConv-Early checkpoint transfer, zero-rho
+TRAIN/EVAL inference identity and synthetic CPU gradient/EMA/checkpoint
+persistence only. D4-D3 must independently investigate the all-zero-input
+gradient failure; signed-beta polarity remains OPEN. Neither D4-E source
+freeze nor any GPU experiment/B-TEST access follows from D4-D2 closure.
+Next: `D4-D3_VGRA_INTEGRATED_SYNTHETIC_NUMERICAL_VERIFICATION`

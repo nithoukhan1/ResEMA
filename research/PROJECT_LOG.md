@@ -1016,3 +1016,19 @@ No raw images/labels, GPU experiments or sealed TEST accessed.
 D4-D2 transfer verification is next; D4-D3 remains gated.
 
 Next: `D4-D2_VGRA_PRETRAINED_TRANSFER_AND_ZERO_GATE_IDENTITY`
+
+## D4-D2 formal pretrained-transfer acceptance — 2026-10-08
+
+D4-D2A/B/C rerun as immutable SHA-pinned independent synthetic CPU checks.
+Canonical pretrained SCConv-Early checkpoint matched its frozen archive;
+537/537 Early tensors transferred unchanged; zero-rho class/box/DFL identity
+passed in TRAIN and EVAL, and synthetic TRAIN buffers/EMA/best-checkpoint
+restoration plus gradient reachability passed.
+
+- Evidence: `research/07_method/D4_D2_INDEPENDENT_REPLAY_EVIDENCE.txt` (SHA256 `ee23f2f7ae0bcb9775bf9b7e36aef8b77b911a926ea324233cca7c8988b2ee83`).
+- Formal decision: `research/07_method/D4_D2_FORMAL_ACCEPTANCE.md`; gate: `research/07_method/D4_D2_GATE_RECORD.json`.
+- D4-D3 all-zero gradient numerical issue, persistent dataloader/complete
+  synthetic epoch, signed-beta interpretation and MV00/MV01 recipe parity: OPEN.
+- No GPU training, source freeze, model architecture change or B-TEST access.
+
+Next: `D4-D3_VGRA_INTEGRATED_SYNTHETIC_NUMERICAL_VERIFICATION`
