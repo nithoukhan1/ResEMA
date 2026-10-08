@@ -33,8 +33,9 @@
 | D4-C1 VGRA core math implementation | COMPLETE | standalone mathematical primitives + CPU unit tests PASS |
 | D4-C2 VGRA pair/visibility manifest | COMPLETE | deterministic TRAIN/VAL pairing + visibility schema; no test access |
 | D4-C3 VGRA head/model integration | COMPLETE | VGRADetect + YAML + parser; box/DFL firewall CPU-verified |
-| D4-C4 VGRA pair-aware data/batching | NEXT | pair-preserving dataset/batch contract |
-| D4-C5/C6 VGRA integration | LOCKED | criterion/trainer/validator then closure |
+| D4-C4 VGRA pair-aware data/batching | COMPLETE | pair-safe augmentation + indivisible AP/LAT batching + metadata audit |
+| D4-C5 VGRA criterion/trainer/validator | NEXT | runtime paired dispatch + visibility loss + synthetic stack |
+| D4-C6 VGRA implementation closure | LOCKED | freeze complete implementation after C5 |
 | D4-D Structural verification | LOCKED | D4-C complete |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
 | D4-F Primary LPQ training | LOCKED | separate training authorization |
@@ -50,7 +51,7 @@
 
 ## Current next action
 
-`D4-C3_VGRA_HEAD_MODEL_INTEGRATION`
+`D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`
 
 ## Do not do yet
 

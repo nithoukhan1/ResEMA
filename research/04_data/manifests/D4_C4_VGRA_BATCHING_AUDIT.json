@@ -1,0 +1,42 @@
+{
+  "cross_study_composition_enabled": false,
+  "ddp_supported_v1": false,
+  "raw_images_opened": false,
+  "raw_yolo_labels_opened": false,
+  "rectangular_pair_validation_enabled": false,
+  "schema": "D4_C4_VGRA_BATCHING_AUDIT_V1",
+  "source_assignment_manifest": "research\\04_data\\manifests\\D4_C2_VGRA_IMAGE_ASSIGNMENTS.csv",
+  "test_access": "NONE",
+  "train": {
+    "all_images_accounted_once": true,
+    "all_pairs_cobatched": true,
+    "batch_size": 16,
+    "epoch0_batches": 890,
+    "epoch0_max_batch": 16,
+    "epoch0_min_batch": 3,
+    "epoch0_order_sha256": "e0b39bbc5683f594cbc73ab0e46c9536175375a4f9ab717c6ee3c2eb1ea79a03",
+    "epoch1_batches": 890,
+    "epoch1_order_sha256": "f402a8240912c6a8314141a4b82cf8622d4b8f038cb29071b12142244c6b5048",
+    "epochs_differ": true,
+    "images": 14227,
+    "pair_units": 6496,
+    "single_units": 1235,
+    "total_units": 7731
+  },
+  "val": {
+    "all_images_accounted_once": true,
+    "all_pairs_cobatched": true,
+    "batch_size": 16,
+    "epoch0_batches": 191,
+    "epoch0_max_batch": 16,
+    "epoch0_min_batch": 9,
+    "epoch0_order_sha256": "4ae37d6f0c3bf84e6aaacb485f0d42e06b8b28a2ad1be07549a52c923253bdf1",
+    "epoch1_batches": 191,
+    "epoch1_order_sha256": "9d99ea2fb9310df4c0f6766d52375789b5ed2687ed68b48e2fcebfac8cb427b9",
+    "epochs_differ": true,
+    "images": 3049,
+    "pair_units": 1401,
+    "single_units": 247,
+    "total_units": 1648
+  }
+}

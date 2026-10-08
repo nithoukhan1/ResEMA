@@ -4,7 +4,7 @@
 Implement `ultralytics/nn/modules/vgra.py`: descriptors, four-state visibility predictor, AP/LAT target coefficients, low-rank compatibility, bounded zero-initialized residual. Unit-test shapes, state mapping, gate signs, stop-gradient, rho=0 identity, bounds, finite backward. No data/trainer edits.
 
 ## D4-C2 — deterministic pair/visibility contract
-Build exact TRAIN/VAL pair manifests from frozen metadata. Account for every valid image exactly once, preserve singles, verify patient isolation, derive TRAIN visibility-state counts/weights, and prove test access NONE.
+Build exact TRAIN/VAL pair manifests from frozen metadata. Account for every valid image exactly once, preserve singles, verify patient isolation, freeze the four-state target schema, and prove test access NONE. Actual state targets/counts/weights are deferred to D4-C5 and must come from B-TRAIN YOLO labels only.
 
 ## D4-C3 — detector/head integration
 Connect VGRA to P3/P4/P5 classification logits only. Native box/DFL stays unchanged. Prefer a VGRA-specific Detect subclass/adapter with minimal parser registration. Prove VGRA-off/rho=0 identity and box invariance.

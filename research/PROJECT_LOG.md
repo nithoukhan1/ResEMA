@@ -920,3 +920,26 @@ No data loader, training, inference experiment or B-test access occurred.
 
 Next:
 `D4-C4_VGRA_PAIR_AWARE_DATA_AND_BATCHING`
+
+## 2026-10-08 - D4-C4 VGRA pair-aware data/batching
+
+Type:
+`DATA PIPELINE IMPLEMENTATION / METADATA-ONLY AUDIT`
+
+Implemented VGRA-specific dataset, pair sampler, collate metadata and pair-safe loader
+builder without changing stock dataset/build code.
+
+R1 compiled and passed all 38 focused CPU tests but safely stopped before
+commit because direct launching of the independent audit script did not resolve
+the local `ultralytics.data.vgra` import. Pre-commit rollback was clean.
+
+R2 changes only audit launch/import-path verification and documents the R1 failure;
+the VGRA module, tests and audit implementation are unchanged.
+
+Full frozen assignment manifest was audited for pair co-batching and exact image
+accounting.
+
+No image, YOLO label, training, inference experiment or B-test access occurred.
+
+Next:
+`D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`

@@ -544,3 +544,28 @@ B-test:
 
 Next:
 `D4-C4_VGRA_PAIR_AWARE_DATA_AND_BATCHING`
+
+## D4-C4 VGRA pair-aware data/batching — 2026-10-08
+
+Status:
+`COMPLETE / CPU-VERIFIED / METADATA-AUDITED`
+
+Train pair units: `6496`
+Train singles: `1235`
+Val usable pair units: `1401`
+Val singles/fallbacks: `247`
+
+Mosaic/MixUp/CutMix/Copy-Paste:
+`DISABLED FOR PAIR-AWARE PIPELINE`
+
+Pair-aware rect validation:
+`FALSE`
+
+GPU training:
+`NOT AUTHORIZED`
+
+B-test:
+`NONE`
+
+Next:
+`D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`

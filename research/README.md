@@ -165,3 +165,14 @@ Candidate parameters:
 
 Next:
 `D4-C4_VGRA_PAIR_AWARE_DATA_AND_BATCHING`
+
+## VGRA implementation status — D4-C4
+
+Pair-aware dataset/batching:
+`IMPLEMENTED / CPU-VERIFIED / MANIFEST-AUDITED`
+
+Cross-study composition:
+`DISABLED`
+
+Next:
+`D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`

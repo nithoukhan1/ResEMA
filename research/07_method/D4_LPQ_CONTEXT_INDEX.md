@@ -237,3 +237,24 @@ Paired VGRA modifies class logits only; box tensors remain native.
 
 Next:
 `D4-C4_VGRA_PAIR_AWARE_DATA_AND_BATCHING`
+
+## D4-C4 pair-aware data and batching
+
+Pair-safe VGRA data plumbing is implemented without changing stock dataset/build files.
+
+TRAIN audit:
+- images: `14227`
+- pair units: `6496`
+- singles: `1235`
+
+VAL operational audit:
+- images: `3049`
+- pair units: `1401`
+- singles/fallbacks: `247`
+
+Cross-study composition augmentation is disabled.
+Pair-aware rectangular validation is disabled.
+DDP is unsupported/fail-closed in VGRA V1.
+
+Next:
+`D4-C5_VGRA_CRITERION_TRAINER_VALIDATOR_INTEGRATION`

@@ -659,3 +659,16 @@ applies the VGRA residual only to class logits. Box/DFL computation is identical
 the native path.
 
 This isolates VGRA behavior and protects all non-VGRA models.
+
+## 2026-10-08 - D4-C4 pair-preserving batching and pair-safe augmentation
+
+VGRA V1 treats each valid AP/LAT pair as an indivisible batch unit and retains all
+single-view samples.
+
+Cross-study composition transforms are disabled because they would invalidate the
+study-level AP/LAT semantic relationship.
+
+Pair-aware validation uses square/non-rectangular preprocessing. The exact same data
+pipeline will be used by D4-MV-00 and D4-MV-01 so pipeline effects are controlled.
+
+VGRA V1 is single-process only; DDP is fail-closed unless separately governed later.
