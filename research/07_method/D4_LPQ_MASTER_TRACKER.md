@@ -29,7 +29,9 @@
 | D4-B2B Object/error complementarity gate | COMPLETE / MODERATE | annotation nonredundancy + asymmetric TP evidence, strongest for fracture |
 | D4-B2C1 Novelty landscape/candidate shortlist | COMPLETE | crowded fusion/distillation paths rejected; VGRA working candidate promoted |
 | D4-B2C2 VGRA architecture/math/promotion freeze | COMPLETE | candidate V1 spec frozen; implementation authorized, training locked |
-| D4-C VGRA implementation | NEXT | additive implementation + paired data plumbing + unit tests |
+| D4-C0 VGRA implementation plan/worktree | COMPLETE | dedicated implementation branch/worktree + execution plan frozen |
+| D4-C1 VGRA core math implementation | NEXT | standalone mathematical primitives + unit tests |
+| D4-C2/C3/C4/C5/C6 VGRA integration | LOCKED | sequential governed implementation transactions |
 | D4-D Structural verification | LOCKED | D4-C complete |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
 | D4-F Primary LPQ training | LOCKED | separate training authorization |
@@ -45,7 +47,7 @@
 
 ## Current next action
 
-`D4-C_VGRA_IMPLEMENTATION_SCAFFOLD_AND_UNIT_TESTS`
+`D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`
 
 ## Do not do yet
 

@@ -192,3 +192,6 @@ GPU training is still forbidden.
 
 Next:
 `D4-C_VGRA_IMPLEMENTATION_SCAFFOLD_AND_UNIT_TESTS`
+
+## D4-C0 implementation worktree opened
+Design remains `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`. VGRA code development occurs only on `research/vgra-impl-01` in `E:\PhD\Admitted\Research\Project 1\ResEMA-Github Repo\ResEMA-VGRA`. Next: `D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`. No model code changed in D4-C0.

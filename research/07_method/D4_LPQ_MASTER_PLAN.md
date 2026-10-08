@@ -122,3 +122,6 @@ The active candidate method is now:
 
 D4-B2C2 freezes VGRA candidate V1 for implementation only.
 The global final architecture remains unfrozen.
+
+## D4-C0 implementation governance
+VGRA implementation is isolated on `research/vgra-impl-01`, created from `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`. GPU training remains unauthorized.

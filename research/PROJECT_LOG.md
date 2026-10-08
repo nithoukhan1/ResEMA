@@ -874,3 +874,6 @@ Split-B test remained sealed.
 
 Next action:
 `D4-C_VGRA_IMPLEMENTATION_SCAFFOLD_AND_UNIT_TESTS`
+
+## 2026-10-08 - D4-C0 VGRA implementation execution plan
+Type: `IMPLEMENTATION GOVERNANCE / WORKTREE ISOLATION`. Source design `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`. Implementation branch `research/vgra-impl-01`. Documentation/repository isolation only; no model/data/training code changed. Next: `D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`.

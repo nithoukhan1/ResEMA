@@ -1,0 +1,25 @@
+# D4-C0 VGRA Execution Tracker
+
+Design authority: `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`
+
+Implementation branch: `research/vgra-impl-01`
+
+| Phase | Status | Training? | Exit |
+|---|---|---:|---|
+| D4-C0 plan/worktree | COMPLETE | NO | branch/worktree + plan frozen |
+| D4-C1 core math | NEXT | NO | standalone tests PASS |
+| D4-C2 pair manifest | LOCKED | NO | deterministic membership/visibility PASS |
+| D4-C3 head integration | LOCKED | NO | zero-gate/box firewall PASS |
+| D4-C4 data/batching | LOCKED | NO | pair-preserving batch tests PASS |
+| D4-C5 trainer/validator | LOCKED | NO | synthetic stack PASS |
+| D4-C6 implementation closure | LOCKED | NO | source complete |
+| D4-D1 unit/static | LOCKED | NO | suite PASS |
+| D4-D2 transfer/identity | LOCKED | NO | transfer/identity/params PASS |
+| D4-D3 integrated synthetic | LOCKED | NO | pipeline PASS |
+| D4-E source freeze | LOCKED | NO | experiment contract frozen |
+| D4-F MV-00/MV-01 | LOCKED | separate auth | both preserved |
+| D4-G/H/I/J | LOCKED | governed | diagnostics/ablations/final freeze |
+
+Current next action: `D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`
+
+Permanent firewalls: B-test NONE; GPU training unauthorized; attention unauthorized; hyperparameter search unauthorized; additional modules unauthorized.

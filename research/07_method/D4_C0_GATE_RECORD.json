@@ -1,0 +1,19 @@
+{
+  "attention_authorized": false,
+  "candidate_spec_frozen": true,
+  "cross_study_composition_augmentation_forbidden": true,
+  "date": "2026-10-08",
+  "design_branch": "research/lpq-method-01",
+  "design_commit": "a5d260ca83236c774e1920ce729e08eaacfcf5d4",
+  "global_final_architecture_frozen": false,
+  "gpu_training_authorized": false,
+  "hyperparameter_search_authorized": false,
+  "implementation_authorized": true,
+  "implementation_branch": "research/vgra-impl-01",
+  "implementation_worktree": "E:\\PhD\\Admitted\\Research\\Project 1\\ResEMA-Github Repo\\ResEMA-VGRA",
+  "method": "VGRA",
+  "next_action": "D4-C1_VGRA_CORE_MATH_IMPLEMENTATION",
+  "pair_safe_augmentation_required": true,
+  "schema": "D4_C0_VGRA_IMPLEMENTATION_GOVERNANCE_V1",
+  "test_access": "NONE"
+}

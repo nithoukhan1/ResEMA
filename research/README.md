@@ -127,3 +127,6 @@ Training is not.
 
 Start with:
 `07_method/D4_B2C2_VGRA_MATHEMATICAL_SPEC.md`
+
+## VGRA implementation workflow
+Frozen design: `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`. Active implementation: `research/vgra-impl-01`. Start with D4-C0 governance/master plan/tracker. Training remains locked.
