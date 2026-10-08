@@ -895,3 +895,15 @@ No data, inference, GPU training or B-test access occurred.
 
 Next:
 `D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`
+
+## 2026-10-08 - D4-C2 VGRA pair/visibility manifest
+
+Type: `DATA CONTRACT / METADATA-ONLY`
+
+Generated reproducible TRAIN/VAL pair and image-accounting manifests.
+Frozen the four-state detection-label target schema without reading labels.
+
+No raw images, YOLO labels, inference, training or B-test content was accessed.
+
+Next:
+`D4-C3_VGRA_HEAD_MODEL_INTEGRATION`

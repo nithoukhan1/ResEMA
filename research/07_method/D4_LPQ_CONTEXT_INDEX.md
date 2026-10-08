@@ -207,3 +207,20 @@ No generic Ultralytics files changed; no data/trainer/head integration occurred.
 
 Next:
 `D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`
+
+## D4-C2 deterministic pair manifest
+
+TRAIN/VAL pairing is now frozen from metadata only.
+
+TRAIN exact pairs: `6496`
+TRAIN structural singles: `1235`
+
+VAL exact pairs: `1402`
+VAL operational paired images: `2802`
+VAL known unreadable exclusions: `1`
+
+Actual four-state detection targets were NOT generated in C2.
+They must come from B-TRAIN YOLO labels only when criterion integration is implemented.
+
+Next:
+`D4-C3_VGRA_HEAD_MODEL_INTEGRATION`

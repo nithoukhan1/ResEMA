@@ -140,3 +140,17 @@ Not yet integrated with Detect, pair-aware data loading or trainer/validator.
 
 Next:
 `D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`
+
+## VGRA implementation status — D4-C2
+
+Pairing universe:
+`FROZEN / DETERMINISTIC`
+
+Visibility target schema:
+`FROZEN`
+
+Actual training visibility states:
+`NOT YET GENERATED`
+
+Next:
+`D4-C3_VGRA_HEAD_MODEL_INTEGRATION`

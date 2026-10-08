@@ -503,3 +503,19 @@ B-test access: NONE.
 
 Next:
 `D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`
+
+## D4-C2 VGRA pairing manifest — 2026-10-08
+
+Status: `COMPLETE / DETERMINISTIC / METADATA-ONLY`
+
+TRAIN exact AP/LAT pairs: `6496`
+VAL exact AP/LAT pairs: `1402`
+
+Visibility state schema is frozen, but actual state values remain deferred to B-TRAIN
+YOLO-label processing in D4-C5.
+
+No images, YOLO labels or B-test files were opened.
+GPU training remains unauthorized.
+
+Next:
+`D4-C3_VGRA_HEAD_MODEL_INTEGRATION`

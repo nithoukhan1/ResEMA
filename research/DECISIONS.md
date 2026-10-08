@@ -636,3 +636,15 @@ Create `research/vgra-impl-01` and dedicated worktree. Keep `research/lpq-method
 VGRA V1 mathematics is implemented in a dedicated new module without altering generic
 Ultralytics behavior. Detect/data/trainer integration remains deferred to later governed
 transactions.
+
+## 2026-10-08 - D4-C2 freeze exact AP/LAT pairing before loader code
+
+Only exact two-image AP/LAT side-specific study groups are treated as VGRA pairs.
+Non-exact AP/LAT-capable groups remain single-view samples to avoid ambiguous companion
+selection.
+
+Metadata fields such as `fracture_visible` are not substitutes for the nine-class YOLO
+detection labels. Four-state VGRA targets will be generated later from B-TRAIN YOLO
+labels only.
+
+This prevents both pairing ambiguity and target leakage.

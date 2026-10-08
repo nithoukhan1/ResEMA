@@ -31,8 +31,9 @@
 | D4-B2C2 VGRA architecture/math/promotion freeze | COMPLETE | candidate V1 spec frozen; implementation authorized, training locked |
 | D4-C0 VGRA implementation plan/worktree | COMPLETE | dedicated implementation branch/worktree + execution plan frozen |
 | D4-C1 VGRA core math implementation | COMPLETE | standalone mathematical primitives + CPU unit tests PASS |
-| D4-C2 VGRA pair/visibility manifest | NEXT | deterministic TRAIN/VAL pairing contract; no test access |
-| D4-C3/C4/C5/C6 VGRA integration | LOCKED | sequential governed implementation transactions |
+| D4-C2 VGRA pair/visibility manifest | COMPLETE | deterministic TRAIN/VAL pairing + visibility schema; no test access |
+| D4-C3 VGRA head/model integration | NEXT | classification residual integration; box/DFL firewall |
+| D4-C4/C5/C6 VGRA integration | LOCKED | sequential governed implementation transactions |
 | D4-D Structural verification | LOCKED | D4-C complete |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
 | D4-F Primary LPQ training | LOCKED | separate training authorization |
@@ -48,11 +49,11 @@
 
 ## Current next action
 
-`D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`
+`D4-C3_VGRA_HEAD_MODEL_INTEGRATION`
 
 ## Do not do yet
 
-- do not edit model/loss code;
+- do not edit stock loss/trainer/validator behavior before the governed C3/C5 transactions;
 - do not run GPU training;
 - do not add attention;
 - do not access Split-B test;

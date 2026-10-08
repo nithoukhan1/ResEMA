@@ -1,0 +1,43 @@
+{
+  "actual_label_read_in_d4_c2": false,
+  "actual_state_frequency_generation": "DEFERRED_TO_D4-C5_USING_B-TRAIN_LABELS_ONLY",
+  "actual_state_values_generated_in_d4_c2": false,
+  "classes": {
+    "0": "boneanomaly",
+    "1": "bonelesion",
+    "2": "foreignbody",
+    "3": "fracture",
+    "4": "metal",
+    "5": "periostealreaction",
+    "6": "pronatorsign",
+    "7": "softtissue",
+    "8": "text"
+  },
+  "metadata_columns_are_not_detection_targets": true,
+  "presence_definition": "1 iff the image has at least one YOLO GT object of that class",
+  "schema": "VGRA_VISIBILITY_TARGET_SCHEMA_V1",
+  "states": {
+    "0": {
+      "code": "00",
+      "meaning": "absent in AP and LAT"
+    },
+    "1": {
+      "code": "10",
+      "meaning": "AP only"
+    },
+    "2": {
+      "code": "01",
+      "meaning": "LAT only"
+    },
+    "3": {
+      "code": "11",
+      "meaning": "present in AP and LAT"
+    }
+  },
+  "target_formula": "state = ap_present + 2 * lat_present",
+  "test_policy": "B-TEST labels/visibility states remain forbidden before the final sealed-test transaction",
+  "training_state_weight_formula": "raw=1/sqrt(n+1); normalize four weights per class to mean 1",
+  "training_state_weight_source": "B-TRAIN exact-pair targets only",
+  "training_target_source": "B-TRAIN YOLO label files only",
+  "validation_policy": "VAL targets may be used for validation loss/diagnostics only; never to derive training weights"
+}
