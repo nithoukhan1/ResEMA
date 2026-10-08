@@ -311,3 +311,18 @@ Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`
 
 Read-only D1R1 independently reproduced final-eval API conflict and frozen VAL exclusion drift.
 D1R repairs are tested and inventoried, pending D1B independent re-verification.
+
+## D4-D1 formal independent acceptance — 2026-10-08
+
+D4-D1R final-eval/VAL-exclusion corrections independently accepted after
+fresh D4-D1B replay and 75 passing CPU regressions.
+
+Evidence:
+- `research/07_method/D4_D1B_INDEPENDENT_REVERIFY_EVIDENCE.txt`
+- `research/07_method/D4_D1_FORMAL_ACCEPTANCE.md`
+- `research/07_method/D4_D1_GATE_RECORD.json`
+
+The beta-polarity, all-zero gradient, checkpoint transfer, MV-00/MV-01
+recipe-equivalence and full-epoch gates remain OPEN. NO GPU training/B-TEST.
+
+Next: `D4-D2_VGRA_PRETRAINED_TRANSFER_AND_ZERO_GATE_IDENTITY`

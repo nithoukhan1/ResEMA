@@ -1003,3 +1003,16 @@ Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`
 Independent audit confirmed two production-path integration issues.
 Corrected under strict source allowlist, ran full focused CPU regression and documented both.
 No patient images, YOLO labels, GPU training or B-TEST read.
+
+## D4-D1 formal independent acceptance — 2026-10-08
+
+Type: `INDEPENDENT EVIDENCE REPLAY / STATIC CLOSURE`
+
+Independent D1B replay: PASS; original two D1 blockers verified repaired.
+75 focused CPU tests: PASS. Frozen VAL: 3,049 images,
+1,401 pairs and 247 singles; 191 pair-preserving batches at size 16.
+Full read-only audit output and SHA256 preserved in the D1 acceptance record.
+No raw images/labels, GPU experiments or sealed TEST accessed.
+D4-D2 transfer verification is next; D4-D3 remains gated.
+
+Next: `D4-D2_VGRA_PRETRAINED_TRANSFER_AND_ZERO_GATE_IDENTITY`

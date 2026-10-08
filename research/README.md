@@ -215,3 +215,12 @@ Next: `D4-D1_VGRA_INDEPENDENT_STATIC_UNIT_VERIFICATION`.
 
 Read-only audit revealed final-eval and VAL-exclusion blockers. Corrective patch complete;
 D4-D1 independent re-verification NEXT. Training and test remain sealed.
+
+## D4-D1 formal independent acceptance — 2026-10-08
+
+Independent D4-D1 static/structural verification: `COMPLETE / CPU VERIFIED`.
+D4-D2 checkpoint transfer/identity: NEXT; D4-D3 integrated numerical
+verification: LOCKED. Signed-beta/all-zero-gradient gates are OPEN.
+GPU training and B-TEST remain forbidden.
+
+Next: `D4-D2_VGRA_PRETRAINED_TRANSFER_AND_ZERO_GATE_IDENTITY`

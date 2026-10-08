@@ -727,3 +727,11 @@ D4-D1/D2/D3 verification is compulsory before D4-E.
 Do not accept native-only final evaluation, sealed TEST fallback or unfiltered unreadable VAL.
 Repair in VGRA-specific code; preserve original C2 pair membership and C1 beta math.
 Independent re-verification is mandatory before D4-D2.
+
+## D4-D1 formal independent acceptance — 2026-10-08
+
+Accept the independently rerun D1B evidence as D4-D1 static/structural
+closure only. Do not treat synthetic zero mAP as a real dataset result.
+Retain beta polarity, all-zero-input gradients, pretrained transfer,
+full-epoch/EMA, MV-00/MV-01 parity as mandatory later gates.
+This decision does not authorize GPU training, B-TEST or source freeze.

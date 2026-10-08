@@ -15,14 +15,14 @@ Implementation branch: `research/vgra-impl-01`
 | D4-C5B runtime + native loss | COMPLETE | NO | mixed paired/single + 4-component native loss CPU tests PASS |
 | D4-C5C trainer/validator | COMPLETE | NO | synthetic paired trainer/validator stack CPU PASS |
 | D4-C6 implementation closure | COMPLETE | NO | audited source/evidence inventory + CPU regressions PASS |
-| D4-D1 unit/static | NEXT | NO | independent static/numerical verification suite PASS |
-| D4-D2 transfer/identity | LOCKED | NO | transfer/identity/params PASS |
+| D4-D1 unit/static | COMPLETE | NO | D1R repair + D1B independent 75-test CPU verification PASS |
+| D4-D2 transfer/identity | NEXT | NO | pretrained transfer/identity/checkpoint tests required |
 | D4-D3 integrated synthetic | LOCKED | NO | pipeline PASS |
 | D4-E source freeze | LOCKED | NO | experiment contract frozen |
 | D4-F MV-00/MV-01 | LOCKED | separate auth | both preserved |
 | D4-G/H/I/J | LOCKED | governed | diagnostics/ablations/final freeze |
 
-Current next action: `D4-D1B_VGRA_INDEPENDENT_REVERIFICATION`
+Current next action: `D4-D2_VGRA_PRETRAINED_TRANSFER_AND_ZERO_GATE_IDENTITY`
 
 Permanent firewalls: B-test NONE; GPU training unauthorized; attention unauthorized; hyperparameter search unauthorized; additional modules unauthorized.
 

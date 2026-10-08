@@ -628,3 +628,15 @@ B-TEST: SEALED.
 
 Two confirmed blockers remediated and CPU-tested, but D4-D1 independent exit not yet granted.
 Signed-beta and all-zero-input risks remain OPEN. GPU/B-TEST forbidden.
+
+## D4-D1 formal independent acceptance — 2026-10-08
+
+D4-D1: `COMPLETE / INDEPENDENT SYNTHETIC CPU VERIFIED`.
+Best-checkpoint pair-aware final evaluation and frozen unreadable VAL member
+exclusion independently verified and captured in repository evidence.
+75 CPU regressions passed.
+
+D4-D2 transfer verification: NEXT, not yet complete.
+Signed-beta and all-zero-input numerical gates: OPEN.
+D4-E source freeze, GPU training, and B-TEST: NOT AUTHORIZED.
+Next: `D4-D2_VGRA_PRETRAINED_TRANSFER_AND_ZERO_GATE_IDENTITY`

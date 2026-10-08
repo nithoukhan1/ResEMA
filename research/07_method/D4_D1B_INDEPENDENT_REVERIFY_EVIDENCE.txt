@@ -1,0 +1,88 @@
+D4-D1B — FRESH INDEPENDENT READ-ONLY REPLAY UNDER D4-D1 ACCEPTANCE
+PARENT=9499fe88bd8d6724aada58f8dd2c62b5274f6add
+AUDIT_SCRIPT_SHA256=f3612dce4519457835ae2ebb1c27fdf1e4d8209831262195337c95016ee92868
+EVIDENCE_KIND=SYNTHETIC_CPU_AND_FROZEN_TRAIN_VAL_METADATA_ONLY
+NO_B_TEST_OR_GPU_TRAINING
+D1B_INDEPENDENT_PYTEST_SUMMARY=75 passed in 10.38s
+
+=== STANDARD OUTPUT ===
+=======================================================================================================================
+D4-D1B — INDEPENDENT READ-ONLY VERIFICATION OF D4-D1R REPAIRS
+SYNTHETIC CPU + FROZEN TRAIN/VAL METADATA ONLY — NO SOURCE EDITS, DATA IMAGES, B-TEST OR GPU
+=======================================================================================================================
+SOURCE_AND_FIREWALL_AUTHORITY=PASS
+
+--- 1. PINNED REPAIR SOURCE INTEGRITY ---
+REPAIRED_CANONICAL_SHA256_AND_GIT_BLOB=PASS
+
+--- 2. INDEPENDENT STRUCTURAL CHECKS ---
+FINAL_EVAL_PAIR_MODEL_AND_VAL_DATASET_STATIC=PASS
+
+--- 3. INDEPENDENT SYNTHETIC RUNTIME & COMPLETE VAL MANIFEST ---
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 15.8it/s 0.1s
+                   all          3          3          0          0          0          0
+INDEPENDENT_REAL_VALIDATOR_VIA_FINAL_EVAL_SYNTHETIC=PASS
+INDEPENDENT_VAL_MANIFEST_3050_1_EXCLUDED_3049_OPERATIONAL=PASS
+INDEPENDENT_VAL_PAIRS=1401
+INDEPENDENT_VAL_SINGLES=247
+INDEPENDENT_VAL_BATCHES_16=191
+INDEPENDENT_FINAL_EVAL_BEST_CHECKPOINT_ROUTING=PASS
+INDEPENDENT_VAL_TEST_FALLBACK_FIREWALL=PASS
+
+--- 4. C0-C6 / D1R FOCUSED CPU REGRESSION ---
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m.[0m[32m [ 96%]
+[0m[32m.[0m[32m.[0m[32m.[0m[32m                                                                      [100%][0m
+============================ slowest 30 durations =============================
+0.62s call     research/tests/test_d4_c5c_vgra_trainer_validator.py::test_training_batch_dispatch_and_one_optimizer_update_is_finite
+0.43s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_weight_buffers_checkpoint_roundtrip_and_no_trainable_parameter_growth
+0.40s call     research/tests/test_d4_c5c_vgra_trainer_validator.py::test_validator_pair_aware_forward_not_single_view
+0.37s call     research/tests/test_d4_c5c_vgra_trainer_validator.py::test_validator_synthetic_end_to_end_metrics_and_four_losses
+0.34s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_active_vgra_modifies_only_pairs_and_preserves_single_and_boxes
+0.34s call     research/tests/test_d4_c5c_vgra_trainer_validator.py::test_validation_rejects_missing_train_weight_binding
+0.33s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_gradient_reaches_native_heads_visibility_head_and_residual_gate
+0.33s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_no_pair_batch_is_exact_native_and_empty_visibility
+0.32s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_rho_zero_mixed_raw_is_exact_native_identity_and_box_firewall
+0.32s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_single_batch_native_detection_loss_no_visibility_weights_needed
+0.30s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_visibility_weights_fail_closed_without_train_binding
+0.29s call     research/tests/test_d4_c5c_vgra_trainer_validator.py::test_validator_refuses_standalone_uncertified_path
+0.28s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_native_single_image_predict_forward_is_inherited
+0.28s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_mixed_native_detection_loss_and_visibility_scaling
+0.23s call     research/tests/test_d4_c3_vgra_head.py::test_vgra_yaml_single_view_forward_smoke
+0.22s call     research/tests/test_d4_c5c_vgra_trainer_validator.py::test_trainer_get_model_builds_correct_model_and_parameters
+0.22s call     research/tests/test_d4_c5b_vgra_runtime_loss.py::test_bad_companion_map_fails_before_model_forward
+0.20s call     research/tests/test_d4_c3_vgra_head.py::test_early_yaml_remains_stock_detect_and_parameter_count_unchanged
+0.19s call     research/tests/test_d4_c3_vgra_head.py::test_vgra_yaml_parses_to_vgra_detect_and_expected_parameter_count
+0.19s call     research/tests/test_d4_d1r_remediation.py::test_final_eval_uses_selected_best_and_paired_trainer_context
+0.10s call     research/tests/test_d4_c3_vgra_head.py::test_zero_rho_paired_path_is_exact_native_identity_for_boxes_and_scores
+0.09s call     research/tests/test_d4_c3_vgra_head.py::test_active_vgra_changes_scores_but_never_boxes
+0.07s call     research/tests/test_arch_corr_01b_tpsc.py::test_tpsc_g4_zero_gate_is_native_identity_for_c3k_mode
+0.07s call     research/tests/test_d4_c3_vgra_head.py::test_vgra_pair_path_preserves_native_output_shapes
+0.05s call     research/tests/test_arch_corr_01b_tpsc.py::test_tpsc_zero_gate_is_native_identity_for_bottleneck_mode
+0.05s call     research/tests/test_d4_c3_vgra_head.py::test_vgra_detect_is_detect_subclass_and_single_view_fallback_is_native
+0.04s call     research/tests/test_d4_c3_vgra_head.py::test_vgra_head_rejects_end2end_paired_path
+0.02s call     research/tests/test_d4_c1_vgra_core.py::test_full_vgra_shapes_identity_and_finite_backward
+0.02s call     research/tests/test_arch_corr_01b_tpsc.py::test_tpsc_gate_can_receive_gradient_at_identity_initialization
+0.02s call     research/tests/test_arch_corr_01b_tpsc.py::test_candidate_yaml_placements_are_controlled
+[32m[32m[1m75 passed[0m[32m in 10.38s[0m[0m
+FULL_75_CPU_REGRESSIONS=PASS
+
+=======================================================================================================================
+D4-D1B FINAL RESULT
+=======================================================================================================================
+D4_D1B_READONLY_REVERIFY=PASS
+ORIGINAL_FINAL_EVAL_BLOCKER=INDEPENDENTLY_REVERIFIED_FIXED
+ORIGINAL_UNREADABLE_VAL_BLOCKER=INDEPENDENTLY_REVERIFIED_FIXED
+D4_D1_COMPLETE=FALSE
+NEXT_ACTION=D4_D1_FORMAL_ACCEPTANCE_AND_CLOSURE
+D4_D2_AUTHORIZED=FALSE
+SIGNED_BETA_GATE=OPEN
+ALL_ZERO_GRADIENT_EDGE_GATE=OPEN
+GPU_TRAINING_AUTHORIZED=FALSE
+B_TEST_ACCESS=NONE
+WORKTREE_CLEAN=TRUE
+=======================================================================================================================
+
+=== STANDARD ERROR ===
+
+=== END ===
