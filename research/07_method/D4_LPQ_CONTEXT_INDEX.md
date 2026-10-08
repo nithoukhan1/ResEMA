@@ -195,3 +195,15 @@ Next:
 
 ## D4-C0 implementation worktree opened
 Design remains `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`. VGRA code development occurs only on `research/vgra-impl-01` in `E:\PhD\Admitted\Research\Project 1\ResEMA-Github Repo\ResEMA-VGRA`. Next: `D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`. No model code changed in D4-C0.
+
+## D4-C1 VGRA core implementation
+
+Standalone VGRA V1 mathematics implemented on `research/vgra-impl-01`.
+
+Reference core trainable parameters (128/256/512, nc=9):
+`102567`
+
+No generic Ultralytics files changed; no data/trainer/head integration occurred.
+
+Next:
+`D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`

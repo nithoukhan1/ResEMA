@@ -130,3 +130,13 @@ Start with:
 
 ## VGRA implementation workflow
 Frozen design: `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`. Active implementation: `research/vgra-impl-01`. Start with D4-C0 governance/master plan/tracker. Training remains locked.
+
+## VGRA implementation status — D4-C1
+
+Standalone VGRA mathematical primitives:
+`IMPLEMENTED / CPU-UNIT-VERIFIED`
+
+Not yet integrated with Detect, pair-aware data loading or trainer/validator.
+
+Next:
+`D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`

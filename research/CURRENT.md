@@ -490,3 +490,16 @@ Next:
 
 ## D4-C0 authoritative implementation state — 2026-10-08
 Active implementation branch: `research/vgra-impl-01`. Parent design authority: `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`. VGRA V1 is frozen; implementation authorized; GPU training not authorized; B-test NONE. Next: `D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`.
+
+## D4-C1 VGRA core implementation — 2026-10-08
+
+Status: `COMPLETE / CPU-UNIT-VERIFIED`
+Core source: `ultralytics/nn/modules/vgra.py`
+Reference core parameters: `102567`
+
+Head/data/trainer integration: FALSE.
+GPU training authorized: FALSE.
+B-test access: NONE.
+
+Next:
+`D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`

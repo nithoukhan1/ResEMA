@@ -877,3 +877,21 @@ Next action:
 
 ## 2026-10-08 - D4-C0 VGRA implementation execution plan
 Type: `IMPLEMENTATION GOVERNANCE / WORKTREE ISOLATION`. Source design `research/lpq-method-01 @ a5d260ca83236c774e1920ce729e08eaacfcf5d4`. Implementation branch `research/vgra-impl-01`. Documentation/repository isolation only; no model/data/training code changed. Next: `D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`.
+
+## 2026-10-08 - D4-C1 VGRA mathematical core
+
+Type: `IMPLEMENTATION / CPU UNIT VERIFICATION`
+
+Added standalone VGRA core and focused tests; re-ran existing TPSC tests.
+
+R1 history:
+- source compilation PASS;
+- 17 focused CPU tests PASS;
+- safe stop during documentation tracker update due to exact wording mismatch;
+- pre-commit rollback clean;
+- R2 corrects tracker matching only.
+
+No data, inference, GPU training or B-test access occurred.
+
+Next:
+`D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`

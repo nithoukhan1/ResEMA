@@ -630,3 +630,9 @@ It does not authorize GPU training and does not freeze the final paper architect
 
 ## 2026-10-08 - Isolate VGRA implementation from design history
 Create `research/vgra-impl-01` and dedicated worktree. Keep `research/lpq-method-01` as frozen scientific design source. Implement in small governed transactions. Pair-mode cross-study composition augmentation is forbidden unless later explicitly redesigned. No training is authorized.
+
+## 2026-10-08 - D4-C1 standalone VGRA mathematics implemented
+
+VGRA V1 mathematics is implemented in a dedicated new module without altering generic
+Ultralytics behavior. Detect/data/trainer integration remains deferred to later governed
+transactions.

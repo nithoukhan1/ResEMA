@@ -1,0 +1,32 @@
+{
+  "attention_authorized": false,
+  "branch": "research/vgra-impl-01",
+  "data_accessed": false,
+  "generic_ultralytics_files_modified": [],
+  "gpu_training_authorized": false,
+  "model_head_integrated": false,
+  "nc": 9,
+  "next_action": "D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST",
+  "pair_dataloader_integrated": false,
+  "parent": "e309d1c99d1e20677b08d342619c3c8ce1b168f0",
+  "r1_safe_stop": {
+    "cause": "Exact tracker wording mismatch after all focused CPU tests passed.",
+    "focused_cpu_tests_passed": 17,
+    "repository_mutated": false,
+    "rollback_clean": true,
+    "stage": "DOCUMENTATION_TRACKER_UPDATE",
+    "status": "SAFE_STOP_BEFORE_COMMIT"
+  },
+  "reference_channels": [
+    128,
+    256,
+    512
+  ],
+  "reference_core_trainable_parameters": 102567,
+  "schema": "D4_C1_VGRA_CORE_IMPLEMENTATION_V1",
+  "source": "ultralytics/nn/modules/vgra.py",
+  "status": "COMPLETE_CPU_UNIT_VERIFIED",
+  "test": "research/tests/test_d4_c1_vgra_core.py",
+  "test_access": "NONE",
+  "trainer_integrated": false
+}

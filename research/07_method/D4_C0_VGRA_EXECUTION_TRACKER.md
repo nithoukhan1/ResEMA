@@ -7,8 +7,8 @@ Implementation branch: `research/vgra-impl-01`
 | Phase | Status | Training? | Exit |
 |---|---|---:|---|
 | D4-C0 plan/worktree | COMPLETE | NO | branch/worktree + plan frozen |
-| D4-C1 core math | NEXT | NO | standalone tests PASS |
-| D4-C2 pair manifest | LOCKED | NO | deterministic membership/visibility PASS |
+| D4-C1 core math | COMPLETE | NO | standalone tests PASS |
+| D4-C2 pair manifest | NEXT | NO | deterministic membership/visibility PASS |
 | D4-C3 head integration | LOCKED | NO | zero-gate/box firewall PASS |
 | D4-C4 data/batching | LOCKED | NO | pair-preserving batch tests PASS |
 | D4-C5 trainer/validator | LOCKED | NO | synthetic stack PASS |
@@ -20,6 +20,6 @@ Implementation branch: `research/vgra-impl-01`
 | D4-F MV-00/MV-01 | LOCKED | separate auth | both preserved |
 | D4-G/H/I/J | LOCKED | governed | diagnostics/ablations/final freeze |
 
-Current next action: `D4-C1_VGRA_CORE_MATH_IMPLEMENTATION`
+Current next action: `D4-C2_VGRA_PAIR_AND_VISIBILITY_MANIFEST`
 
 Permanent firewalls: B-test NONE; GPU training unauthorized; attention unauthorized; hyperparameter search unauthorized; additional modules unauthorized.
