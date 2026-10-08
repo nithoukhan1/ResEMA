@@ -697,3 +697,16 @@ by batch size; BaseTrainer sums them. Add VGRA as a fourth component, weighted
 as `0.25*(2*number_of_pairs)*mean_weighted_visibility_CE`.
 
 TRAIN-only visibility weights must be bound before any paired loss.
+
+## 2026-10-08 - Dedicated pair-aware VGRA validator
+
+Ordinary YOLO validation is forbidden for a paired VGRA experiment because it
+calls `model(images)` and thereby discards AP/LAT companion metadata.
+
+VGRA validation uses `model.forward_vgra_batch(batch)` and then the unchanged
+native Detect decoding, NMS and per-image detection metrics.
+The native Detect **eval** call returns `(decoded, raw)`; the corrected R2
+regression accesses the raw dictionary at index 1 rather than treating the
+tuple itself as a dictionary.
+A standalone final-test validation endpoint remains unauthorized pending
+a separate governed contract.

@@ -36,8 +36,8 @@
 | D4-C4 VGRA pair-aware data/batching | COMPLETE | pair-safe augmentation + indivisible AP/LAT batching + metadata audit |
 | D4-C5A VGRA visibility targets/loss | COMPLETE | class-level GT targets + TRAIN-only weights utilities CPU-tested |
 | D4-C5B VGRA paired runtime/native loss | COMPLETE | shared full-batch forward, native vector loss + visibility, CPU-tested |
-| D4-C5C VGRA trainer/validator | NEXT | synthetic paired train/validation end-to-end tests |
-| D4-C6 VGRA implementation closure | LOCKED | freeze complete implementation after C5 |
+| D4-C5C VGRA trainer/validator | COMPLETE | dedicated trainer, pair-aware validator and CPU synthetic tests |
+| D4-C6 VGRA implementation closure | NEXT | implementation inventory and documentation closure |
 | D4-D Structural verification | LOCKED | D4-C complete |
 | D4-E Source freeze/experiment contract | LOCKED | D4-D PASS |
 | D4-F Primary LPQ training | LOCKED | separate training authorization |
@@ -53,7 +53,7 @@
 
 ## Current next action
 
-`D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION`
+`D4-C6_VGRA_IMPLEMENTATION_CLOSURE`
 
 ## Do not do yet
 

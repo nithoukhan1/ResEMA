@@ -1,0 +1,41 @@
+{
+  "actual_patient_images_accessed": false,
+  "actual_train_state_counts_computed": false,
+  "actual_yolo_labels_accessed": false,
+  "all_zero_input_gradient_edge_gate": "OPEN_D4_D3_DIAGNOSIS_REQUIRED",
+  "attention_authorized": false,
+  "b_test_access": "NONE",
+  "branch": "research/vgra-impl-01",
+  "compilation_authorized": false,
+  "four_component_val_loss": true,
+  "gpu_training_authorized": false,
+  "native_detection_decode_nms_metrics_reused": true,
+  "native_ultralytics_sources_modified": [],
+  "next_action": "D4-C6_VGRA_IMPLEMENTATION_CLOSURE",
+  "parent": "81d44f4c6d6fdea101c6feaf3f42141ed52b99ae",
+  "r1_safe_stop": {
+    "commit_created": false,
+    "failed": 2,
+    "failed_tests": [
+      "test_training_batch_dispatch_and_one_optimizer_update_is_finite",
+      "test_validator_pair_aware_forward_not_single_view"
+    ],
+    "passed": 66,
+    "precommit_rollback_clean": true,
+    "stage": "FOCUSED_CPU_TESTS_BEFORE_COMMIT"
+  },
+  "r2_model_trainer_validator_code_unchanged_from_r1": true,
+  "r2_nonfinite_gradient_assertion_enforced": true,
+  "r2_test_fixture": "seeded_nonconstant_synthetic_pixels",
+  "schema": "D4_C5C_VGRA_TRAINER_VALIDATOR_V1",
+  "signed_beta_interpretation_gate": "OPEN",
+  "single_process_only": true,
+  "source_frozen": false,
+  "standalone_validation_authorized": false,
+  "status": "COMPLETE_SYNTHETIC_CPU_VERIFIED",
+  "synthetic_paired_validation_verified": true,
+  "synthetic_train_optimizer_step_verified": true,
+  "trainer_subclass": "VGRADetectionTrainer",
+  "validates_from_vgra_paired_raw_predictions": true,
+  "validator_subclass": "VGRADetectionValidator"
+}

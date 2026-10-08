@@ -194,3 +194,11 @@ Trainer and validator integration:
 `NEXT / D4-C5C`
 
 Training is still locked.
+
+## VGRA status — D4-C5C
+
+Dedicated pair-aware trainer and validator:
+`IMPLEMENTED / SYNTHETIC CPU VERIFIED`.
+
+Next: `D4-C6_VGRA_IMPLEMENTATION_CLOSURE`.
+No GPU training permitted.

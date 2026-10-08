@@ -599,3 +599,18 @@ GPU training: NOT AUTHORIZED.
 B-TEST: SEALED.
 
 Next: `D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION`
+
+## D4-C5C paired trainer and validator — 2026-10-08
+
+Status: `COMPLETE / SYNTHETIC CPU VERIFIED`
+
+Trainer: `VGRADetectionTrainer`
+Validator: `VGRADetectionValidator`
+
+Pair-aware VAL predicted scores and native YOLO NMS/metrics: synthetic-verified.
+B-TRAIN real weights not yet bound/generated in an actual dataset run.
+Signed-beta semantic gate: OPEN.
+GPU training: NOT AUTHORIZED.
+B-TEST access: NONE.
+
+Next: `D4-C6_VGRA_IMPLEMENTATION_CLOSURE`

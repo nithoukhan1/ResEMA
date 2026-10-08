@@ -968,3 +968,21 @@ Confirmed fork-specific four-component loss behavior and exact singles fallback.
 No stock source changes, real data access, GPU training or B-TEST access.
 
 Next: `D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION`
+
+## 2026-10-08 - D4-C5C trainer validator CPU verification
+
+Type: `PAIR-AWARE TRAINER / VALIDATOR / SYNTHETIC CPU TESTS`
+
+Implemented dedicated VGRA trainer and validator without stock source changes.
+R1 safe-stop: 66 tests passed, two failed (all-zero-input non-finite
+backward gradient and incorrect indexing of the eval-mode native tuple).
+Pre-commit rollback clean and no commit created. R2 changes test input to
+fixed-seed nonconstant synthetic pixels, corrects eval raw-output indexing,
+and preserves strict gradient- and parameter-finiteness requirements.
+The all-zero-input gradient case remains open for D4-D3 diagnosis.
+
+Verifies synthetic mixed-view optimizer step, native box firewall,
+paired validation inference/metrics, four losses and fail-closed guards.
+
+No real images, YOLO label files, GPU experiment or B-TEST access.
+Next: `D4-C6_VGRA_IMPLEMENTATION_CLOSURE`

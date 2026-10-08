@@ -285,3 +285,15 @@ The signed-beta interpretation gate remains OPEN.
 Actual B-TRAIN weights have not yet been computed.
 
 Next: `D4-C5C_VGRA_TRAINER_VALIDATOR_INTEGRATION`
+
+## D4-C5C trainer and validator implementation
+
+Dedicated `VGRADetectionTrainer` and `VGRADetectionValidator` implemented.
+Pair-safe TRAIN/VAL loader builds from frozen C2 assignments; 9-class TRAIN
+state weights must be bound before paired detection loss.
+
+B-VAL validator now invokes `forward_vgra_batch(batch)` explicitly,
+then preserves native decoding/NMS/metrics and all four VAL loss components.
+
+No real dataset run occurred. D4-D integration and source freeze remain locked.
+Next: `D4-C6_VGRA_IMPLEMENTATION_CLOSURE`
