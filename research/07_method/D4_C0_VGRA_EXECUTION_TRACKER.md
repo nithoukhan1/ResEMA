@@ -44,3 +44,7 @@ Approved source scope: pre-update EMA finite assertion only. Windows synthetic E
 ## R3-05A read-only Windows source verification and local vault seal (2026-10-09)
 
 10/10 static checks PASS: pinned scientific HEAD, six-path status/no staging, five source hashes, three native Git blobs, guard+EMA source ordering and source-level MV00/MV01 inheritance. R1 failed evidence-log UTF-16 BOM decoding; R2 preserved both R1 logs and reported 16-member, 34000-byte ZIP SHA256 `da8fc99357c0aaa3317ec641d51f545d288d73b019026894f837ae3b6e0ef4e1`. `R3_05A_STATIC_SOURCE=COMPLETE_LOCAL_VERIFIED`; `SCIENTIFIC_GATE=HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`. R3-05B/05C native runtime proof remains pending; no model-source freeze, training or B-TEST.
+
+## R3-05B bounded CPU AMP components and R3-05C handoff (2026-10-09)
+
+`R3_05B_CPU_COMPONENTS=PASS_9_OF_9_INDEPENDENT_ARCHIVE_VERIFIED`; original evidence 13 members, 57,318 bytes, SHA256 `d85587a4d263ea82ca5b2e3aa7b10bca0890c339a91aab35b5aa4f42dcfa82df`. Real CPU GradScaler/SGD, pinned AST-isolated guard and native ModelEMA, synthetic only. R3-05C **NOT EXECUTED**: native `BaseTrainer` setup/dispatch, MV-00/MV-01 accumulation, production optimizer selection, CUDA AMP and EMA lifecycle still require separate verification. `D4_E_SOURCE_FREEZE=LOCKED`; `D4_F=LOCKED`; B-TEST sealed. `SCIENTIFIC_GATE=HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`.
