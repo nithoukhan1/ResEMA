@@ -756,3 +756,9 @@ The Windows tiny CPU/stub probe reported `13/13 OK`, exit 0, yet deliberately co
 ## 2026-10-09 - Evidence-vault R2 collector recovery and archival closure
 
 R1 was an archive-harness error, not a research test failure. R2 preserved 25 files with full SHA256 binding. R3-04 numerical-safety disposition remains **HOLD**, not acceptance. Repository records are prepared on a separate documentation-only branch so the pinned scientific HEAD remains unchanged. The documentation branch is not a training or source-freeze authority.
+
+## 2026-10-09 - Accept R3-04B synthetic correction only; retain native-integration HOLD
+
+Accept the scoped local two-line pre-update EMA finiteness check for **synthetic coverage**, not native training safety. The Windows corrected suite 17/17 and original guarded suite 17/17 both passed with exit 0. The R3-04 negative control remains independently preserved; it must not be relabeled as a passing safety test. Native ModelEMA, AMP/GradScaler and real trainer-hook ordering remain OPEN. No source freeze, research commit/push, GPU/real-data training or B-TEST access is authorized by this decision.
+
+The R3-04B R1 evidence sealer failed safely because it required native Python stdout markers in PowerShell's preserved transcript. The R2 sealer explicitly recorded only four of six markers, independently verified the host-stage chronology, source snapshots, raw test logs and prepatch backups, and created a 24-member ZIP with SHA256 `0cdb58ffec2f55bbe58064b5fe1d6739bdc748f23eaea670ab1469a141da629a`. Register this off-repo evidence in the existing artifact registry; preserve the failure history.

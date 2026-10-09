@@ -672,3 +672,13 @@ Evidence: see external/local `DETECTION_PROJECT_D4_E2_R3_04_DURABLE_RECORD_PACKE
 ## D4-E2 R3-04 evidence vault capture verified — 2026-10-09
 
 External/local ZIP: `E:\PhD\Admitted\Research\Project 1\Detection_Evidence_Vault\D4_E2_R3_04_EVIDENCE_20261009_012330.zip`; bytes: `77695`; SHA256: `f621cd797aea1684887e8667eac1fa3420ee45e596ea5e97f11c892611a15ee0`. Captured 25 evidence files with no missing optional logs. The R1 collector incorrectly searched stderr for the R3-04 summary; R2 corrected the routing to stdout and successfully captured the original evidence without rerunning tests. The post-accumulation correction passed 17/17 synthetic unit tests, while R3-04 EMA pre-update timing remains scientific **HOLD**. The original five-file candidate remains uncommitted in the pinned scientific worktree; this documentation-only worktree is not the source freeze.
+
+## D4-E2 R3-04B sealed local synthetic correction — 2026-10-09
+
+**Local scientific candidate only:** one-file pre-update EMA finiteness guard applied to `ultralytics/models/yolo/detect/vgra_fail_closed.py`, source LF-normalized SHA256 `e1947b645202f3d73f6db035ffa673350837bd162ddd2822cc5ee6cd5bde082f`. The scientific checkout remains `research/vgra-impl-01 @ 48cc059cfa133ae5fbfcec607f15daeda843d3ba` with five candidate files uncommitted; historical `ultralytics/settings.json` remains untracked.
+
+**Two Windows CPU synthetic suites PASS:** 17/17 targeted EMA regressions (real SGD, stub EMA/scaler), and 17/17 pre-existing guarded-unit tests, each exit 0. Pre-existing nonfinite EMA is now rejected before the optimizer step **in this synthetic path**. Original R3-04 negative control remains preserved, not rewritten. No native ModelEMA/AMP/trainer acceptance is claimed.
+
+**Evidence sealed locally:** `D4_E2_R3_04B_EVIDENCE_20261009_120417.zip`; 56195 bytes; SHA256 `0cdb58ffec2f55bbe58064b5fe1d6739bdc748f23eaea670ab1469a141da629a`; 24 ZIP members; archive path `E:\PhD\Admitted\Research\Project 1\Detection_Evidence_Vault\D4_E2_R3_04B_EVIDENCE_20261009_120417.zip`. R1 sealer stopped on transcript capture semantics; R2 verified four of six native markers plus complete six-step host chronology, separately hashed raw test logs/source and backup. The original failed R1 sealer and recovery record are archived.
+
+**Scientific gate:** `HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`. Next allowed stage: `D4_E2_R3_05_NATIVE_INTEGRATION_READONLY_AUDIT` without training or B-TEST. D4-E source freeze and D4-F remain locked.
