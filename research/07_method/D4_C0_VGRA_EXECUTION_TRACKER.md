@@ -40,3 +40,7 @@ Evidence ZIP SHA256 `f621cd797aea1684887e8667eac1fa3420ee45e596ea5e97f11c892611a
 ## R3-04B local synthetic pass; native integration HOLD (2026-10-09)
 
 Approved source scope: pre-update EMA finite assertion only. Windows synthetic EMA checks 17/17 PASS; prior guarded units 17/17 PASS; no native trainer/AMP proof. Evidence `D4_E2_R3_04B_EVIDENCE_20261009_120417.zip`, SHA256 `0cdb58ffec2f55bbe58064b5fe1d6739bdc748f23eaea670ab1469a141da629a`, 56195 bytes, 24 members. Registry and `research/07_method/D4_E2_R3_04B_SYNTHETIC_PASS_NATIVE_HOLD.md` carry exact evidence bindings. No scientific commit, source freeze, training or B-TEST access.
+
+## R3-05A read-only Windows source verification and local vault seal (2026-10-09)
+
+10/10 static checks PASS: pinned scientific HEAD, six-path status/no staging, five source hashes, three native Git blobs, guard+EMA source ordering and source-level MV00/MV01 inheritance. R1 failed evidence-log UTF-16 BOM decoding; R2 preserved both R1 logs and reported 16-member, 34000-byte ZIP SHA256 `da8fc99357c0aaa3317ec641d51f545d288d73b019026894f837ae3b6e0ef4e1`. `R3_05A_STATIC_SOURCE=COMPLETE_LOCAL_VERIFIED`; `SCIENTIFIC_GATE=HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`. R3-05B/05C native runtime proof remains pending; no model-source freeze, training or B-TEST.

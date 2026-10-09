@@ -682,3 +682,9 @@ External/local ZIP: `E:\PhD\Admitted\Research\Project 1\Detection_Evidence_Vault
 **Evidence sealed locally:** `D4_E2_R3_04B_EVIDENCE_20261009_120417.zip`; 56195 bytes; SHA256 `0cdb58ffec2f55bbe58064b5fe1d6739bdc748f23eaea670ab1469a141da629a`; 24 ZIP members; archive path `E:\PhD\Admitted\Research\Project 1\Detection_Evidence_Vault\D4_E2_R3_04B_EVIDENCE_20261009_120417.zip`. R1 sealer stopped on transcript capture semantics; R2 verified four of six native markers plus complete six-step host chronology, separately hashed raw test logs/source and backup. The original failed R1 sealer and recovery record are archived.
 
 **Scientific gate:** `HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`. Next allowed stage: `D4_E2_R3_05_NATIVE_INTEGRATION_READONLY_AUDIT` without training or B-TEST. D4-E source freeze and D4-F remain locked.
+
+## D4-E2 R3-05A static source audit and local vault seal — 2026-10-09
+
+Windows exact-source read-only audit: 10/10 static checks PASS; `research/vgra-impl-01 @ 48cc059cfa133ae5fbfcec607f15daeda843d3ba`, five normalized LF candidate hashes exact, pinned three native Git blobs exact, no staging and expected six-path worktree status. R1 evidence sealer failed on UTF-16-BOM audit log decoding; corrected R2 reported exit 0, preserved both R1 logs, and sealed `D4_E2_R3_05A_EVIDENCE_20261009T091906Z.zip` (34,000 bytes; 16 members; SHA256 `da8fc99357c0aaa3317ec641d51f545d288d73b019026894f837ae3b6e0ef4e1`) outside Git. ZIP identity is Windows-reported; member bytes have not been independently retrieved here.
+
+Source audit verified ModelEMA and optimizer/EMA control ordering only; native ModelEMA/GradScaler and actual production trainer calls have not run. `SCIENTIFIC_GATE=HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`. Next R3-05B requires separate scoped authorization. No source freeze, scientific commit, training, or B-TEST.
