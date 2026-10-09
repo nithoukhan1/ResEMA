@@ -744,3 +744,15 @@ persistence only. D4-D3 must independently investigate the all-zero-input
 gradient failure; signed-beta polarity remains OPEN. Neither D4-E source
 freeze nor any GPU experiment/B-TEST access follows from D4-D2 closure.
 Next: `D4-D3_VGRA_INTEGRATED_SYNTHETIC_NUMERICAL_VERIFICATION`
+
+## 2026-10-09 - Enforce durable repository and external-evidence continuity
+
+The user's project-record requirement is reaffirmed and made operational: place versionable code and small scientific/governance records in the existing canonical repository paths; preserve raw logs, local backups, uncommitted source snapshots, complete run archives and large artifacts in an immutable SHA256-indexed local/external evidence vault. No active tracker duplication. No gate is accepted solely because a chat response says it passed; retain complete executable evidence and scientific disposition. Documentation must be saved at each meaningful milestone and integrated via a governed repository transaction when pinned source HEAD permits.
+
+## 2026-10-09 - D4-E2 R3-04 pre-update EMA safety gap
+
+The Windows tiny CPU/stub probe reported `13/13 OK`, exit 0, yet deliberately confirmed that a preexisting nonfinite EMA can survive the pre-update validation, permit `optimizer.step` and only then abort at post-update EMA check. This is **not an accepted numerical-safety gate**. Decision: `R3_04_HOLD`, recommend review of a narrowly scoped pre-update EMA guard, preserving optimizer/EMA semantics and frozen VGRA science. No source patch, commit, push, real data or training is authorized by this decision.
+
+## 2026-10-09 - Evidence-vault R2 collector recovery and archival closure
+
+R1 was an archive-harness error, not a research test failure. R2 preserved 25 files with full SHA256 binding. R3-04 numerical-safety disposition remains **HOLD**, not acceptance. Repository records are prepared on a separate documentation-only branch so the pinned scientific HEAD remains unchanged. The documentation branch is not a training or source-freeze authority.

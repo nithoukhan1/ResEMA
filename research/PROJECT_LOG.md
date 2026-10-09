@@ -1032,3 +1032,19 @@ restoration plus gradient reachability passed.
 - No GPU training, source freeze, model architecture change or B-TEST access.
 
 Next: `D4-D3_VGRA_INTEGRATED_SYNTHETIC_NUMERICAL_VERIFICATION`
+
+## 2026-10-09 - D4-E2 R3-01 through R3-03C local verification and recovery
+
+Type: `SYNTHETIC VERIFICATION / FAILURE / RECOVERY / PROVENANCE`
+
+R3-01 five-file source hash/AST and Git preflight PASS. R3-02 first `unittest` piped output was interrupted by Windows PowerShell's stderr handling; controlled separate-stream retry passed 13/13, exit 0. R3-03 detected a deliberate finite+finite -> nonfinite accumulated-gradient counterexample not trapped immediately by original incoming gradient hooks. R3-03B confirmed PyTorch 2.5.1's post-accumulation hook catches that overflow during backward (7/7 PASS). R3-03C two-file correction patch reviewed; original Windows scratch guard rejected CRLF-vs-LF raw SHA mismatch and modified no source. Scratch diagnostic proved EOL-only cause (`core.autocrlf=true`, both normalized output SHA exact). CRLF-aware wrapper then applied the approved two-file correction locally, created external backups, and passed post-apply source verification; corrected unit test suite passed 17/17. No Git commit/push, real dataset or training was performed. An untracked Ultralytics settings artifact created by the initial test import is still retained for explicit later cleanup.
+
+## 2026-10-09 - D4-E2 R3-04 state/EMA synthetic finding
+
+Type: `SYNTHETIC VERIFICATION / NEGATIVE SCIENTIFIC FINDING`
+
+The user's Windows R3-04 command completed with exit code 0 and all 13 deliberate CPU probes passing. Probe 13 demonstrated that a preexisting poisoned EMA state was not checked before `optimizer.step`, causing the optimizer to update before post-update EMA rejection. This was deliberately an **observation** test, not a safety acceptance. Scientific gate is `HOLD`. The experiment used tiny CPU synthetic state, real SGD, stub AMP scaler/EMA; no dataset, checkpoint, native trainer training, real GPU training or B-TEST access reported. Source hashes and Git HEAD remain unchanged. Further EMA pre-update guard review is required.
+
+## D4-E2 R3-04 evidence vault capture verified — 2026-10-09
+
+External/local ZIP: `E:\PhD\Admitted\Research\Project 1\Detection_Evidence_Vault\D4_E2_R3_04_EVIDENCE_20261009_012330.zip`; bytes: `77695`; SHA256: `f621cd797aea1684887e8667eac1fa3420ee45e596ea5e97f11c892611a15ee0`. Captured 25 evidence files with no missing optional logs. The R1 collector incorrectly searched stderr for the R3-04 summary; R2 corrected the routing to stdout and successfully captured the original evidence without rerunning tests. The post-accumulation correction passed 17/17 synthetic unit tests, while R3-04 EMA pre-update timing remains scientific **HOLD**. The original five-file candidate remains uncommitted in the pinned scientific worktree; this documentation-only worktree is not the source freeze.

@@ -281,3 +281,21 @@ before acting.
 
 Do not silently reconstruct scientific facts from memory when exact
 repository or artifact evidence is available.
+
+## Rule 5 - Durable evidence at every governed milestone (2026-10-09)
+
+**The chat transcript is never the only archive of a substantive project action.**
+Before marking a gate complete or moving to the next consequential phase, persist:
+
+1. The canonical repo-side facts in the existing `research/CURRENT.md`, `research/DECISIONS.md`, `research/PROJECT_LOG.md`, and relevant stage tracker/experiment registry **only where needed** (do not introduce duplicate trackers).
+2. The exact reviewed and executed code, scripts, test definitions, failures, correction patches and scientific rationale in their existing purpose-matched repository locations where Git-sized and safe.
+3. Full stdout/stderr, environment, workstation/Kaggle session logs, source snapshots while uncommitted, backup copies, large outputs, checkpoints and proof artifacts in a governed persistent external/local evidence vault, not just `Temp` or `Downloads`.
+4. SHA256, byte size, path/storage binding, source branch/commit and candidate-file hashes for all off-repo evidence, registered in the existing provenance records where applicable.
+5. A clear distinction between a successfully executed *test* and an independently accepted *scientific gate*; preserve expected negative controls and unresolved failure modes explicitly.
+6. A cross-chat handoff that reconciles repository state, local uncommitted/staged changes, evidence manifest and hashes, authorizations used/unused, pending scientific questions, and the precise next allowed step.
+
+For every incomplete operation, record where execution stopped, which files may have changed, what remains to verify and whether a rerun is authorized. Never silently erase, overwrite or relabel earlier failures.
+
+**Provenance firewall:** When a tightly pinned implementation/test transaction requires an unchanged Git HEAD or exact worktree status, preserve evidence **immediately in the external vault** and prepare append-ready repository records; incorporate them into the canonical tracked files in a separately verified and governed documentation commit after the pinned test gate allows it. Do not mutate HEAD merely to improve recordkeeping and thereby invalidate the scientific preflight.
+
+Repository commits, remote pushes, evaluation/training, source edits and documentation updates remain separately governed actions. Keeping a pending record in a chat or uncommitted local file is not equivalent to preserving it in the remote repository.

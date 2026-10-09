@@ -656,3 +656,19 @@ restoration plus gradient reachability passed.
 - No GPU training, source freeze, model architecture change or B-TEST access.
 
 Next: `D4-D3_VGRA_INTEGRATED_SYNTHETIC_NUMERICAL_VERIFICATION`
+
+## D4-E2 R3 state and R3-04 scientific HOLD — 2026-10-09
+
+VGRA branch: `research/vgra-impl-01`; accepted pinned HEAD `48cc059cfa133ae5fbfcec607f15daeda843d3ba` (not yet updated by the R3 local candidate).
+
+D4-E2 R2 five-file source candidate remains **local and uncommitted**. R3-01 static source preflight PASS; R3-02 original 13/13 synthetic units PASS; R3-03 initial gradient-accumulation counterexample reproduced; R3-03B post-accumulation hooks 7/7 diagnostic PASS; R3-03C two-file correction applied locally, corrected suite 17/17 PASS. R3-04 13/13 tiny synthetic CPU tests passed, but **preexisting EMA corruption survived pre-update and optimizer.step happened before post-update EMA rejection** in the tested synthetic EMA stub.
+
+**Current scientific gate:** `D4_E2_R3_04_SCIENTIFIC_HOLD_PREUPDATE_EMA`.
+
+Next permitted scope: review the pre-update EMA guard gap and propose/source-review a narrow correction; no automatic patch application, full native AMP training, real dataset access, Git commit/push, or R4 freeze. D4-F remains locked; B-TEST sealed.
+
+Evidence: see external/local `DETECTION_PROJECT_D4_E2_R3_04_DURABLE_RECORD_PACKET_2026-10-09.zip`. The captured Windows log vault's exact ZIP path, byte size and SHA256 are recorded in the next section and in `research/01_provenance/ARTIFACTS.csv`. This evidence remains local, not independently downloaded from the user's workstation.
+
+## D4-E2 R3-04 evidence vault capture verified — 2026-10-09
+
+External/local ZIP: `E:\PhD\Admitted\Research\Project 1\Detection_Evidence_Vault\D4_E2_R3_04_EVIDENCE_20261009_012330.zip`; bytes: `77695`; SHA256: `f621cd797aea1684887e8667eac1fa3420ee45e596ea5e97f11c892611a15ee0`. Captured 25 evidence files with no missing optional logs. The R1 collector incorrectly searched stderr for the R3-04 summary; R2 corrected the routing to stdout and successfully captured the original evidence without rerunning tests. The post-accumulation correction passed 17/17 synthetic unit tests, while R3-04 EMA pre-update timing remains scientific **HOLD**. The original five-file candidate remains uncommitted in the pinned scientific worktree; this documentation-only worktree is not the source freeze.
