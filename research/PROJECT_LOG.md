@@ -1074,3 +1074,52 @@ R3-05A audit script SHA `8626f6b067ea7adbd0f4d37909506f629aa6760791cddfb39a8858e
 Type: `BOUNDED_SYNTHETIC_CPU_NATIVE_COMPONENT_TEST / INDEPENDENT_BYTE_AUDIT / SCIENTIFIC_HOLD`
 
 Windows R3-05B script SHA256 `43fcff66d8f6e0cfeac491ed25704a9e2862e39232642a0e038633415c25dfa3` returned exit 0, nine unique tests PASS, no failed cases, pinned scientific branch `research/vgra-impl-01 @ 48cc059cfa133ae5fbfcec607f15daeda843d3ba` with no reported source edits. Raw stdout SHA256 `b5c0b1683a63d523600692869cd565ee3cd2f33f71f30bac81fd9845f308dfa9`; empty stderr SHA256 `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`; these streams were retained in the external Windows vault but **not** embedded in the uploaded original evidence ZIP. Uploaded ZIP: `D4_E2_R3_05B_CPU_NATIVE_AMP_R1_20261009T111650Z.zip`, 57,318 bytes, 13 members, SHA256 `d85587a4d263ea82ca5b2e3aa7b10bca0890c339a91aab35b5aa4f42dcfa82df`; CRC and 12/12 member hashes independently passed. Independent audit record: `D4_E2_R3_05B_INDEPENDENT_AUDIT_AND_R3_05C_HANDOFF_2026-10-09.zip` (generated in Chat 15, not a Windows test artifact). AMP-00..08 include native CPU scaler/SGD finite/overflow, AST-extracted guard/EMA, negative controls, native ModelEMA floating-buffer behavior, and inspected optimizer policy. Full production trainer, CUDA AMP, chosen optimizer and real accumulation remain untested. `HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`. No dataset, training, B-TEST, scientific source commit or push.
+
+## 2026-10-10 - R3-05C eleven-archive independent reconciliation and Chat16 storage/source preflight
+
+Type: `INDEPENDENT_EVIDENCE_RECONCILIATION / SOURCE_IDENTITY_CHECK / DOCUMENTATION_ONLY_RULE5_CLOSURE_DRAFT / SCIENTIFIC_HOLD`
+
+Original Windows evidence outcomes: 05C-01 import/MRO PASS; 05C-02 guarded bound native optimizer-step 14/14; 05C-03 native bound setup 8/8; 05C-04 native bound loop 8/8; 05A R2 canonical prerequisites PASS; 05B R2 invalid constructors 24/24; 05C-05C-01 R2 positive constructors 2/2; 05D-01 architecture 2/2; 05D-02 canonical checkpoint transfer 2/2, 537/537 per arm; 05D-03 zero-rho synthetic numerical 14/14; 05D-04 synthetic loss 17/17. Sources contain the exact bounded fixture descriptions and negative outcomes. These are recorded Windows results, not reruns by the independent evidence auditor.
+
+Two original, outer SHA256-verified collections in `E:\PhD\Admitted\Research\Project 1\Detection_Evidence_Vault`:
+
+- Early four: `D4_E2_R3_05C_01_TO_04_EVIDENCE_RECONCILIATION_R1_20261010.zip`, 180444 bytes, SHA256 `64c1cdc4c5cbb6a4f556e20b0d4b7fdb73c4f03d3028005f16fa303f229fbeab`.
+- Later seven: `D4_E2_R3_05C_05A_TO_05D04_EVIDENCE_COLLECTION_R1_20261010.zip`, 102810 bytes, SHA256 `35c8caf3557fac8998f8a73294662de3ca47984a58bed656630ffae6aa0bb346`.
+
+Exact eleven nested archived evidence identities (SHAs recomputed from byte-preserved source ZIPs):
+
+| # | Original nested evidence ZIP | Bytes | SHA256 |
+|---:|---|---:|---|
+| 01 | `D4_E2_R3_05C_01_NATIVE_MRO_EVIDENCE_20261009T135238Z.zip` | 11475 | `c6677ba3614e327d4f156304632666fc31caca40d8964f0525153c63eeb434fe` |
+| 02 | `D4_E2_R3_05C_02_NATIVE_BOUND_STEP_CPU_R1_20261009T140617Z.zip` | 56057 | `6b94f5291b0b80349838f10c71938d26ece61ba78cb0656ea8aff1c30bf5a95e` |
+| 03 | `D4_E2_R3_05C_03_NATIVE_SETUP_CPU_R1_20261009T142503Z.zip` | 57897 | `59410a11d75d3acaee7cd2ce09eb9ff3f8bff57a6ba06365909428d25c1f7635` |
+| 04 | `D4_E2_R3_05C_04_NATIVE_LOOP_CPU_R1_20261009T144451Z.zip` | 60152 | `3f5fb01ffe5b91807a247d11863e6e7704361932c0c485275baf01e388c00156` |
+| 05 | `D4_E2_R3_05C_05A_R2_CANONICAL_ASSETS_20261009T171023Z.zip` | 8025 | `ddc2cfa49c7215d86220e51730d2e0df48af71262f8779d9575a405d011ae0bd` |
+| 06 | `D4_E2_R3_05C_05B_PREBASE_NEGATIVES_R2_20261010T034011Z.zip` | 13489 | `355ea13ab6f34ce43e138b36fc8b35833572c589ee3b4ccd5ad9632a75ccf71c` |
+| 07 | `D4_E2_R3_05C_05C_01_NATIVE_CONSTRUCTOR_R2_EVIDENCE.zip` | 19190 | `a82a9e3af432a5f7c02bb9c613033a3617829441e89314785e70ba9061d8651c` |
+| 08 | `D4_E2_R3_05C_05D_01_ARCHITECTURE_ONLY_R1_EVIDENCE.zip` | 24773 | `bb5c913977120785eae1c4a52319c39cad6b9c3cc388abe72b3f0a6ade5a3a16` |
+| 09 | `D4_E2_R3_05C_05D_02_PRETRAINED_TRANSFER_R1_EVIDENCE.zip` | 15149 | `b11ab674ec94c4067c94306abe31a9ecfe7c9dd896929558f3c874325df4e608` |
+| 10 | `D4_E2_R3_05C_05D_03_ZERO_RHO_NUMERICAL_R1_EVIDENCE.zip` | 12937 | `e1d0020cbebda5d2cf1514eb26912c265423a8c3e4fadea7e21dfd837c216a29` |
+| 11 | `D4_E2_R3_05C_05D_04_SYNTHETIC_LOSS_R1_EVIDENCE.zip` | 13578 | `1ccb280212ef902c9de8e831e160aed61167c2f90e7ba035d7e1ac2175900491` |
+
+Independent result `R3_05C_EVIDENCE_AUDIT_MACHINE_RECORD_2026-10-10.json`: 11/11 original ZIPs, 117/117 nested manifest payloads, 494/494 audit assertions. `R3_05C_FULL_INDEPENDENT_EVIDENCE_CLOSURE_2026-10-10.md` establishes acceptance, not a Git commit. Earlier four source and status pre/post snapshots match within their scoped assertions; neither they nor archive inspection guarantee entire machine/network side-effect absence.
+
+Pinned provenance: scientific `research/vgra-impl-01 @ 48cc059cfa133ae5fbfcec607f15daeda843d3ba` with five candidate/test files + one untracked settings file, no staged changes; docs preclosure `research/vgra-r3-evidence-20261009 @ 148e1d242124a4a6aad087957fdc4adad5938ed0`. Five LF source hashes: `vgra_trainer.py=9d8e81e00eabf65dd432470935c2384179c0c8a03565de2e9b495d111231b202`; `early_paired_trainer.py=5b45a2b0aab0a78eb13497138c617163978582a042b1e45a983ad231c22e69b5`; `early_paired_validator.py=599d1bc94f6122b7f8cce18728b8aaa23848749a97955589be36e5cf322d72b4`; `vgra_fail_closed.py=e1947b645202f3d73f6db035ffa673350837bd162ddd2822cc5ee6cd5bde082f`; `test_d4_e2_r2_guarded_unit.py=36a7a5bb113c9a9c66b15b8b69d6829e8fe5df7bac57b56de32264bc2c4d9be8`. Three native tracked Git blob identities: `trainer.py=a3ad643da2141a425b92cee6c51bcd3417ec3506`; `detect/train.py=074826b7b319d6999d3b2031f9eed23ce7154348`; `torch_utils.py=4a07f04a2b52992b15bd5f450d5ef838c8daebcb`.
+
+Chat16 read-only preflights: correct docs/science branch+HEAD, clean docs status, scientific six-path status, no staged changes; source SHA 5/5 and native blobs 3/3 PASS; immutable Windows-vault outer ZIP SHA256+bytes 2/2 PASS; all five docs present and clean. Initial `python -c` verifier failed with PowerShell argument quoting (`SyntaxError`), **before testing any file hashes**; the corrected in-memory LF-normalizing PowerShell verifier subsequently PASSed 8/8. This is a preflight launcher failure, not a scientific experiment failure. No worktree modifications were made by those preflights.
+
+Preserved failures/limits: 05A R1 missing canonical inputs; 05B R1 evidence schema error; 05C-05C-01 R1 wrong CPU world-size expectation (R2 changed test only). R3-04 poisoned-EMA pre-update failure, later bounded R3-04B remediation; fail-closed can halt after a partial optimizer mutation, **without rollback**. Later-seven collection rerun refused output overwrite by design (exit 4). Failed R1 raw evidence ZIPs are not presumed included in accepted collections. Checkpoint hash authenticates identity rather than arbitrary pickle safety. Real B-TRAIN/B-VAL recipe, CUDA/AMP/training, B-TEST, measured VGRA mAP and source freeze remain out of scope.
+
+Decision: `R3_05C_EVIDENCE_RECONCILIATION_ACCEPTED_PENDING_DOCUMENTED_GIT_CLOSURE`. A separately reviewed **documentation-only** commit/push and remote audit remain necessary before R3-06 synthetic sampler design. `HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`; B-TEST SEALED; D4-E/D4-F unauthorized.
+
+## 2026-10-10 - Chat16 Rule-5 documentation application R1 STOP and R2 recovery
+
+Type: `DOCUMENTATION_APPLICATION_LAUNCHER_FAILURE / CORRECTED_R2_DOCUMENT_WRITE / EXTERNAL_EXACT_BACKUP / UNSTAGED_GIT_DIFF`
+
+R1 application script SHA256 `498c9d6a3c0fbb1846c68bf13b57703ef7d9e0b13050a51d0038b447eca69428` stopped at its documentation-branch guard with `STOP: docs branch differs`. Root cause: the helper returned a scalar PowerShell string, and `[0]` selected the first character rather than the entire branch/HEAD/blob output. R1 did not reach its file-backup or write block. The historical failed R1 script and console diagnostics must be preserved; this was a launcher defect, not an actual Git branch mismatch or a scientific model failure.
+
+Corrected R2 script SHA256 `acceb295c5045eed73ec5ca0085d8877d5eb8e17d29a15bf182b1ddd699acfac` replaced eight faulty scalar Git result checks with a helper that demands exactly one complete line. The Windows execution reported source/evidence/document preflight PASS, preserved exact-byte backups, appended the five independently reviewed documentation updates, verified five additions-only Git diffs and `git diff --check`, and retained all changes **unstaged**. The R2 script performed no Git commit/push, scientific source write, training or B-TEST access.
+
+R2 external write journal: `E:\PhD\Admitted\Research\Project 1\Detection_Evidence_Vault\R3_05C_RULE5_DOCS_WRITE_2444250819f84448bdc9132690ac06a4`; exact prewrite backups under `BEFORE_EXACT_BYTES/`, and original actual unstaged diff `ACTUAL_UNSTAGED_GIT_DIFF_UTF8.patch`, SHA256 `f0e5fdff331923c80cf9d8692e0e0df404a60748bfeec844cf717383b930ac52`. That original R2 diff was independently reviewed: exactly five permitted paths, 83 additions, zero deletions, 13/13 archive registry identities and no text-corruption findings. This separate provenance addendum changes the subsequent **final** diff hash; final diff requires its own review before staging.
+
+Rule-5 Git documentation commit/push and independent remote verification remain pending. `R3_05C_EVIDENCE_RECONCILIATION_ACCEPTED_PENDING_DOCUMENTED_GIT_CLOSURE`; scientific gate `HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`. R3-06 not started, D4-E/D4-F not authorized, B-TEST sealed.

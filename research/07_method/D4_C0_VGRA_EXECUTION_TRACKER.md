@@ -48,3 +48,13 @@ Approved source scope: pre-update EMA finite assertion only. Windows synthetic E
 ## R3-05B bounded CPU AMP components and R3-05C handoff (2026-10-09)
 
 `R3_05B_CPU_COMPONENTS=PASS_9_OF_9_INDEPENDENT_ARCHIVE_VERIFIED`; original evidence 13 members, 57,318 bytes, SHA256 `d85587a4d263ea82ca5b2e3aa7b10bca0890c339a91aab35b5aa4f42dcfa82df`. Real CPU GradScaler/SGD, pinned AST-isolated guard and native ModelEMA, synthetic only. R3-05C **NOT EXECUTED**: native `BaseTrainer` setup/dispatch, MV-00/MV-01 accumulation, production optimizer selection, CUDA AMP and EMA lifecycle still require separate verification. `D4_E_SOURCE_FREEZE=LOCKED`; `D4_F=LOCKED`; B-TEST sealed. `SCIENTIFIC_GATE=HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`.
+
+## R3-05C independently accepted evidence / Rule-5 documentary closure checkpoint (2026-10-10)
+
+**Supersedes the historical R3-05B handoff statement above that R3-05C was not executed.** That statement remains visible as a dated prior-stage record. R3-05C native bounded/synthetic integration sequence completed on Windows and the full original evidence was independently reconciled: eleven original ZIPs, 117 internal payload SHA256 checks and 494 audit assertions PASS (not 494 experiments). Earlier-four and later-seven preserved outer ZIP SHA256: `64c1cdc4c5cbb6a4f556e20b0d4b7fdb73c4f03d3028005f16fa303f229fbeab` / `35c8caf3557fac8998f8a73294662de3ca47984a58bed656630ffae6aa0bb346`.
+
+- `R3_05C_EVIDENCE=INDEPENDENTLY_ACCEPTED_BOUNDED`; separate Rule-5 Git documentary closure is the current governance transaction, not automatically complete by this preview.
+- Historical 05A/05B/05C-05C-01 R1 STOPs remain preserved; accepted R2 outcomes are bounded to their corrected verification contracts.
+- `R3_06_SYNTHETIC_TWO_EPOCH_PAIR_SAMPLER=NOT_STARTED`; eligible for *design-only* review after documentary closure; R3-07–11 remain NOT STARTED.
+- `D4_E_SOURCE_AND_RECIPE_FREEZE=LOCKED`; `D4_F_TRAINING=NOT_AUTHORIZED`; `B_TEST=SEALED`. No B-TRAIN/B-VAL recipe or empirical VGRA metric is claimed.
+- `SCIENTIFIC_GATE=HOLD_NATIVE_MODEL_EMA_AMP_TRAINER_PENDING`; scientific candidate five source/test paths + settings remain uncommitted, HEAD `48cc059cfa133ae5fbfcec607f15daeda843d3ba`.
