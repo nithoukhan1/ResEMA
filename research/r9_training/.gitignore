@@ -1,0 +1,13 @@
+# Never commit private image data, checkpoints, results or runtime caches
+*.pt
+*.pth
+*.onnx
+*.npy
+*.npz
+*.zipblob
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+wandb/
+runs/
+*_raw.log

@@ -1,0 +1,25 @@
+{
+  "schema": "CHAT23_R9_100EPOCH_AMP_BATCH8_VAL16_RECIPE_CANDIDATE_R1",
+  "status": "RELEASE_CANDIDATE_NOT_AUTHORIZED",
+  "source_commit": "48cc059cfa133ae5fbfcec607f15daeda843d3ba",
+  "official_training_authorized": false,
+  "b_test_access": "NONE",
+  "controls": {
+    "train_batch": 8,
+    "val_batch": 16,
+    "imgsz": 1024,
+    "amp": true,
+    "optimizer": "SGD",
+    "seed": 42,
+    "nbs": 64,
+    "workers": 0,
+    "epochs_configuration_only": 100,
+    "save": true,
+    "val": true,
+    "mosaic": 0.0,
+    "mixup": 0.0,
+    "cutmix": 0.0,
+    "copy_paste": 0.0,
+    "deterministic": true
+  }
+}

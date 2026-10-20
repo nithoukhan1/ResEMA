@@ -1,0 +1,9 @@
+{
+  "runtime_yaml": "/kaggle/input/REPLACE_WITH_YOUR_ACCEPTED_MOUNT/RUNTIME_YAML.yaml",
+  "assignment": "/kaggle/input/REPLACE_WITH_YOUR_ACCEPTED_MOUNT/TRAIN_ASSIGNMENT.csv",
+  "visibility": "/kaggle/input/REPLACE_WITH_YOUR_ACCEPTED_MOUNT/TRAIN_VISIBILITY.json",
+  "pretrained_best": "/kaggle/input/REPLACE_WITH_YOUR_ACCEPTED_MOUNT/PRETRAINED_BEST.pt",
+  "pretrained_archive": "/kaggle/input/REPLACE_WITH_YOUR_ACCEPTED_MOUNT/PRETRAINED_ARCHIVE.zip",
+  "config_path": "/kaggle/input/REPLACE_WITH_YOUR_ACCEPTED_MOUNT/EXACT_R0_ASSET_OVERLAY_AND_CODE_PATH_MAP.json",
+  "stage_root": "/kaggle/working/r9r4_authentic_stage"
+}
