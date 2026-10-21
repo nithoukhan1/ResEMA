@@ -1,0 +1,19 @@
+{
+  "schema": "DETECTION_CHAT25_R8_RELEASE_IDENTITY_REVIEW_V1",
+  "status": "CPU_CANDIDATE_NEW_RELEASE_GIT_COMMIT_NOT_YET_PUBLISHED",
+  "frozen_science_commit": "b783eb3a470ab010785a8a24a90a666e9a3f2ed6",
+  "frozen_source_manifest_sha256": "e1abea8ae36f15d4e2589e4d267395acf7921bad347be72697dac114c47df53b",
+  "official_release_git_commit": null,
+  "external_pinned_notebook_release_commit": null,
+  "release_git_diff_allowlist": [
+    "research/r9_training/official_candidate/",
+    "research/r9_training/notebooks/"
+  ],
+  "official_training_authorized": false,
+  "r8_nonofficial_gpu_acceptance_authorized": false,
+  "r8_nonofficial_gpu_acceptance_executed": false,
+  "terminal_epoch100_verified": false,
+  "kaggle_save_run_all_persistence_verified": false,
+  "external_checkpoint_persistence_verified": false,
+  "b_test_access": "NONE"
+}

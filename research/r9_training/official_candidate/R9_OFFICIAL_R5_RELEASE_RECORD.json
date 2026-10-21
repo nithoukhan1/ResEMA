@@ -1,0 +1,14 @@
+{
+  "schema": "DETECTION_R9_OFFICIAL_INTEGRATION_CANDIDATE_R5",
+  "status": "INTEGRATION_REVIEW_ONLY",
+  "official_training_authorized": false,
+  "gpu_execution_allowed": false,
+  "scientific_source_commit": "b783eb3a470ab010785a8a24a90a666e9a3f2ed6",
+  "frozen_recipe_sha256": "dd0ef5903dc3229abfe0c5e9298d0c288e3c682d2d14a8314530caf4ad3ad074",
+  "b_test_access": "NONE",
+  "native_multi_epoch_worker_gpu_verified": false,
+  "kaggle_save_run_all_output_verified": false,
+  "terminal_epoch100_gpu_verified": false,
+  "external_persistence_verified": false,
+  "historical_scientific_source_modified": false
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "DETECTION_CHAT25_R6_INTEGRATION_RELEASE_RECORD",
+  "status": "INTEGRATION_CANDIDATE_NOT_AUTHORIZED",
+  "frozen_science_commit": "b783eb3a470ab010785a8a24a90a666e9a3f2ed6",
+  "frozen_source_manifest_sha256": "e1abea8ae36f15d4e2589e4d267395acf7921bad347be72697dac114c47df53b",
+  "frozen_recipe_sha256": "dd0ef5903dc3229abfe0c5e9298d0c288e3c682d2d14a8314530caf4ad3ad074",
+  "runtime_data_yaml_sha256": "f2cc6e31f5f1be152f4dd7603a397e142963923f1d35de613eb7c61b168bf0c0",
+  "official_training_authorized": false,
+  "run_executable": false,
+  "gpu_acceptance_performed": false,
+  "terminal_epoch100_gpu_verified": false,
+  "offsite_checkpoint_persistence_verified": false,
+  "b_test_access": "NONE",
+  "approval_record": null,
+  "source_science_mutations": 0
+}
