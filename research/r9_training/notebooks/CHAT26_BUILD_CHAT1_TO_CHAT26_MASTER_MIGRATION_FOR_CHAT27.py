@@ -92,6 +92,14 @@ def main():
   prior_members=z.namelist()
   required(len(prior_members)>0,"PRIOR_MASTER_EMPTY")
  prior_hash=sha_file(prior)
+ # An adjacent sidecar, when supplied by the earlier migration, must match exactly.
+ priorSidecar=Path(str(prior)+".sha256")
+ if priorSidecar.is_file():
+  tokens=priorSidecar.read_text(encoding="utf-8-sig").strip().split()
+  required(len(tokens)>=1 and tokens[0].lower()==prior_hash,"PRIOR_MASTER_SIDECAR_SHA256_MISMATCH")
+  print("PRIOR_MASTER_SIDECAR_HASH_MATCH_PASS")
+ else:
+  print("PRIOR_MASTER_SIDECAR_NOT_PRESENT: original ZIP content itself will be integrity-tested and nested unchanged")
  print("PRIOR_MASTER_SOURCE:",prior)
  print("PRIOR_MASTER_MEMBER_COUNT:",len(prior_members))
  print("PRIOR_MASTER_SHA256:",prior_hash)
