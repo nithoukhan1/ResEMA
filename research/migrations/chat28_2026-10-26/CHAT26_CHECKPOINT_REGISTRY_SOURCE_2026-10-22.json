@@ -1,0 +1,75 @@
+{
+  "authorization": {
+    "b_test_access": "NONE",
+    "official_100_epoch_training": false
+  },
+  "date": "2026-10-22",
+  "epochs": {
+    "MV00": {
+      "epoch1": {
+        "archive_sha256": "4fc1c22adda6265a48917de15efea4b1f0766db9a8ed6502aaedfe208e7d44e4",
+        "completed_epoch_zero_based": 0,
+        "filename": "MV00_epoch001_G4_LOCAL_EXPORT.zip.zipblob",
+        "g4_manifest_sha256": "b6de5a6f6463e91fcfb0ef076755849e1f5b503716be04f0efe7a89fdad8c6e7",
+        "selected_best_checkpoint_sha256": "0462acc851b91a9db49669b868c6dd2a4cb959cde1c71beed5cf5d282c2ba193",
+        "terminal": false,
+        "windows_offsession_byte_inspection_pass": true
+      },
+      "epoch2": {
+        "archive_sha256": "9c436620f9b10af927b8f6a964ea4ce666ba81b30174afa59bd5cfd038aa2b22",
+        "completed_epoch_zero_based": 1,
+        "filename": "MV00_epoch002_G4_LOCAL_EXPORT.zip.zipblob",
+        "g4_manifest_sha256": "e692921b6e37975f30706d69e4a16591a83788eea6bc40358f0af09e57b640d2",
+        "selected_best_checkpoint_sha256": "0462acc851b91a9db49669b868c6dd2a4cb959cde1c71beed5cf5d282c2ba193",
+        "terminal": false,
+        "windows_offsession_byte_inspection_pass": true
+      },
+      "note": "The selected_best_checkpoint_sha256 is unchanged across both epochs. It is not evidence that last.pt did not update; compare last.pt and optimizer state with original G4 receipts if needed.",
+      "run_id": "C1ACCEPT_MV00_20261021"
+    },
+    "MV01": {
+      "epoch1": {
+        "archive_sha256": "5b064fdb8a41a3d525fc6f45650e79bdeb53395fd7fc1a09fcc3d5150a83f4e7",
+        "completed_epoch_zero_based": 0,
+        "filename": "MV01_epoch001_G4_LOCAL_EXPORT.zip.zipblob",
+        "g4_manifest_sha256": "a1a5bc59a572a4a263588dc9fcb6184e957581bf41a174bb40fb5bcbccb1d810",
+        "selected_best_checkpoint_sha256": "34579d7ffdc279d5c38419c09f29b4ae30f0d9f5038adc667587c7768e639aba",
+        "terminal": false,
+        "windows_offsession_byte_inspection_pass": true
+      },
+      "epoch2": {
+        "archive_sha256": "66bc10de6abb9728752550999c70491018c0070ee56b886c156657d839ccc55e",
+        "completed_epoch_zero_based": 1,
+        "filename": "MV01_epoch002_G4_LOCAL_EXPORT.zip.zipblob",
+        "g4_manifest_sha256": "b5e2bc7c0dae3c99f1c9c2f0dc65a815751a2eb6328e0894cb49ce28eb624da7",
+        "selected_best_checkpoint_sha256": "34579d7ffdc279d5c38419c09f29b4ae30f0d9f5038adc667587c7768e639aba",
+        "terminal": false,
+        "windows_offsession_byte_inspection_pass": true
+      },
+      "note": "The selected_best_checkpoint_sha256 is unchanged across both epochs. It is not evidence that last.pt did not update; compare last.pt and optimizer state with original G4 receipts if needed.",
+      "run_id": "C1ACCEPT_MV01_20261021"
+    }
+  },
+  "evidence_boundary": "Transcribed direct console evidence supplied by user; original Windows JSON and .zipblob binary files not present in chat migration source.",
+  "frozen_science_commit": "b783eb3a470ab010785a8a24a90a666e9a3f2ed6",
+  "outer_transfer_archives": {
+    "epoch1": {
+      "bytes": 465613445,
+      "filename": "CHAT26_C1_EPOCH1_OFFSITE_TRANSFER.zip",
+      "source_side_outer_pin_compared": false,
+      "windows_inner_archive_verification": "PASS",
+      "windows_sha256": "eb432867d3640ce267458f599ec7620e60f7cd40a2db9f9af2dc1c87d683f75d"
+    },
+    "epoch2": {
+      "filename": "CHAT26_C1_EPOCH2_OFFSITE_TRANSFER.zip",
+      "original_members_verified": 12,
+      "source_side_outer_pin_compared": false,
+      "windows_inner_archive_verification": "PASS",
+      "windows_sha256": "59b41703df7a94768751a34647fe3d2133035ca34b9024aa7d8dd21630b0a38d",
+      "zip_entries": 13
+    }
+  },
+  "run_class": "NONOFFICIAL_FINALPATH_ACCEPTANCE",
+  "schema": "DETECTION_C1_CHAT26_CHECKPOINT_REGISTRY_R1",
+  "scientific_release_commit": "fa6a7675daae385a04c7b77e69a9de29f9e1b2f3"
+}
