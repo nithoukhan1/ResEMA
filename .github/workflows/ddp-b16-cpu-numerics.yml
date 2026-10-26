@@ -31,3 +31,5 @@ jobs:
         run: python research/r9_training/ddp_b16/torch_acceptance/ddp_g4_recovery_cpu.py -v
       - name: Run two-rank rank0-only B-VAL synchronization tests
         run: python research/r9_training/ddp_b16/torch_acceptance/ddp_rank0_val_cpu.py -v
+      - name: Run native two-rank epoch-end G4 hook tests
+        run: python research/r9_training/ddp_b16/torch_acceptance/ddp_native_g4_epoch_cpu.py -v
