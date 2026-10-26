@@ -44,11 +44,40 @@ separately governed. Do not pretend the sampler is already connected to training
 - CPU CI verifies exact-source hashing, Python syntax, presence of the intended integration hooks and rejection of modified source.
 - **Not yet executable:** requires isolated private staging, correct DDP gradient/loss policy, rank-0 full validation, synchronization and rank-complete G4 recovery.
 
+## DDP loss and AMP verification (CPU acceptance)
+
+The frozen `v8DetectionLoss` returns three weighted loss components multiplied
+by the **local** image batch size. The frozen VGRA criterion appends
+`0.25 * (2 * local_pair_count) * weighted_visibility_CE_mean`.
+The native trainer multiplies the summed scalar loss by DDP world size 2.
+DDP's mean-gradient reduction therefore returns the **sum of the two local
+objective gradients**. No artificial visibility target is used for a
+zero-pair local batch. The uneven TRAIN tail has local batch sizes 8/7.
+
+The mathematical/reference regression tests and a real two-process CPU/Gloo
+PyTorch autograd acceptance passed. Tests include a rank where VGRA-only
+parameters are unused (`find_unused_parameters=True`) and unequal local
+image counts. Source-only AMP checks confirm the new candidate retains
+`init_scale=1`, `growth_interval=2000`, gradient-finiteness checks and
+the original fatal-on-optimizer-skip policy.
+
+**Critical distinction:** Native YOLO's classification/box loss divides by
+each rank's local target-score sum. Thus rank-summed DDP objective is not
+bitwise or mathematically the same as a single-process unsharded global-16
+YOLO loss. This is an explicit DDP-B16 training condition applied equally
+to MV00/MV01, not a guarantee of original C1 numerical equivalence.
+
+**Still blocked:** actual frozen YOLO/VGRA DDP backward with real datasets,
+CUDA AMP/scaler synchronization and finite-guard behavior, full B-VAL rank-0
+validation with safe barriers, and authenticated multi-rank G4 resume. CPU
+Gloo smoke tests are not GPU training authority.
+
 ## Minimum remaining implementation
 1. Review and test isolated **private source staging and native trainer execution** of the three exact-blob-gated candidate patches. Keep `frozen_source/` and C1 unchanged; candidate output is never its own training authorization.
-2. Correctly test DDP forward, 4-component VGRA loss, zero-pair batches,
-   last-step rank batch differences, gradient averaging, optimizer accumulation,
-   AMP / finite guards and original 537 pretrained tensor transfers.
+2. Prove the complete **native YOLO/VGRA** DDP forward/loss and optimizer
+   accumulation using the private source stage; then verify CUDA AMP, finite
+   guards, and exact 537-tensor pretrained transfer on both ranks. Synthetic
+   DDP loss/gradient math alone has passed.
 3. Run whole B-VAL validation **once on rank 0** after synchronized training
    steps, while rank 1 waits safely; all 3,049 operational images counted once.
 4. Adapt G4 recovery for per-rank RNG/sampler state plus model, optimizer,
@@ -78,4 +107,4 @@ Only this one DDP development branch. No new attention, parameter sweeps,
 alternative datasets, B-TEST access or unrequested experiments. C1 is the
 immutable fallback. Large checkpoints remain outside Git with SHA256 receipts.
 
-Next action: test the staged DDP trainer with correct distributed loss/AMP behavior, then handle rank-0 validation and checkpoint recovery. Do **not** launch official training yet.
+Next action: stage the native DDP trainer and verify actual rank-aware YOLO/VGRA training and CUDA AMP; follow with rank-0 validation and checkpoint recovery. Do **not** launch official training yet.
