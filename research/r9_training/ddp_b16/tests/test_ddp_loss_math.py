@@ -83,14 +83,19 @@ class DDPVisibilityLossMathTests(unittest.TestCase):
         )
 
     def test_single_view_count_does_not_inflate_visibility_term(self):
-        rank0 = [pair_case(i) for i in range(4)]  # eight paired images
-        # A hypothetical rank with four pairs plus no singles must contribute
-        # the same vis objective as four pairs mixed with legitimate singles;
-        # frozen vis loss explicitly scales with pair_images, not batch size.
-        loss0 = rank_visibility_loss_grad(rank0, 3)
-        for singles in (0, 1, 5):
-            self.assertEqual(loss0, rank_visibility_loss_grad(rank0, 3),
-                             f"number of singles was {singles}")
+        pairs = [pair_case(i) for i in range(2)]  # 4 paired images
+        ce_total = sum(ce_and_derivative(*entry)[0]
+                       for pair in pairs for entry in pair)
+        # The frozen formula multiplies mean(pair,class) by PAIR_IMAGES.
+        frozen = LAMBDA * (2 * len(pairs)) * ce_total / (len(pairs) * 3)
+        self.assertAlmostEqual(frozen, rank_visibility_loss_grad(pairs, 3)[0])
+        for singles in (0, 1, 4):
+            # Wrong alternative: multiplying by TOTAL LOCAL BATCH size.
+            wrong = LAMBDA * (2 * len(pairs) + singles) * ce_total / (len(pairs) * 3)
+            if singles:
+                self.assertNotAlmostEqual(wrong, frozen)
+            else:
+                self.assertAlmostEqual(wrong, frozen)
 
     def test_frozen_source_keeps_four_component_and_ddp_world_scaling(self):
         base = REPO / "research/r9_training/frozen_source/ultralytics"
