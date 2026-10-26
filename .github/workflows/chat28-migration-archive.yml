@@ -1,0 +1,37 @@
+name: Chat28 Master Migration Archive
+
+on:
+  push:
+    branches:
+      - research/vgra-ddp-b16
+    paths:
+      - 'research/migrations/chat28_2026-10-26/**'
+      - '.github/workflows/chat28-migration-archive.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-verify-migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Assemble and SHA256 verify full tracked repository migration
+        run: |
+          python research/migrations/chat28_2026-10-26/build_chat28_bundle.py \
+            --output-dir "${RUNNER_TEMP}/chat28_migration"
+      - name: Upload verified migration ZIP and receipts
+        uses: actions/upload-artifact@v4
+        with:
+          name: DETECTION_PROJECT_CHAT1_TO_CHAT27_FOR_CHAT28_2026-10-26_PORTABLE
+          path: ${{ runner.temp }}/chat28_migration/*
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
