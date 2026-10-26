@@ -370,3 +370,55 @@ def restore_rank(
         "ema_updates": payload["ema_updates"],
         "early_stopper_state": payload["early_stopper_state"],
     }
+
+
+def distributed_capture_and_publish(
+    root: str | Path, *, rank: int, capture_kwargs: dict[str, Any],
+) -> dict[str, Any]:
+    """Collectively publish an epoch only after BOTH ranks authenticate state.
+
+    CPU/Gloo can exercise this API; release-time CUDA/NCCL training is NOT
+    implemented or authorized by it. Manifest SHA is LOCAL only until an
+    independent off-session receipt pins it.
+    """
+    import torch.distributed as dist
+    _need(dist.is_available() and dist.is_initialized(), "PROCESS_GROUP_REQUIRED")
+    _need(dist.get_world_size() == 2 and dist.get_rank() == rank, "PROCESS_GROUP_RANK")
+    _need(type(capture_kwargs) is dict and
+          capture_kwargs.get("rank") is None and
+          "identity" in capture_kwargs and "cursor" in capture_kwargs,
+          "CAPTURE_ARGUMENTS")
+    validate_identity(capture_kwargs["identity"])
+    validate_cursor(capture_kwargs["cursor"])
+    agreement = {
+        "rank": rank,
+        "identity": capture_kwargs["identity"],
+        "cursor": capture_kwargs["cursor"],
+    }
+    peers = [None, None]
+    dist.all_gather_object(peers, agreement)
+    _need(peers[0] is not None and peers[1] is not None and
+          [x["rank"] for x in peers] == [0, 1] and
+          peers[0]["identity"] == peers[1]["identity"] and
+          peers[0]["cursor"] == peers[1]["cursor"],
+          "CROSS_RANK_EPOCH_AGREEMENT")
+    dist.barrier()
+    state = capture_rank(rank=rank, **capture_kwargs)
+    receipt = save_rank(state, root)
+    dist.barrier()
+    if rank == 0:
+        publish_pair(root, identity=agreement["identity"], cursor=agreement["cursor"])
+    dist.barrier()
+    stem = (agreement["identity"]["run_id"] +
+            f'_epoch{agreement["cursor"]["next_epoch"]:03d}_two_rank_manifest.json')
+    manifest = _path(root, stem, exists=True)
+    digest = _sha(manifest.read_bytes())
+    hashes = [None, None]
+    dist.all_gather_object(hashes, digest)
+    _need(hashes == [digest, digest], "MANIFEST_NOT_SHARED_ACROSS_RANKS")
+    return {
+        "rank": rank, "rank_checkpoint_sha256": receipt["sha256"],
+        "manifest_sha256": digest,
+        "status": "LOCAL_SYNCHRONIZED_DDP_CAPSULE_EXTERNAL_AUTHENTICATION_PENDING",
+        "gpu_execution_authorized": False,
+    }
