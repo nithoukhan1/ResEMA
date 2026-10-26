@@ -93,7 +93,9 @@ class TwoRankPairSamplerTests(unittest.TestCase):
             {"seed": -1},
         ):
             with self.subTest(kw=kw), self.assertRaises(ValueError):
-                Sampler(units, rank=0, **kw)
+                args = {"rank": 0}
+                args.update(kw)
+                Sampler(units, **args)
 
     def test_rejects_bad_units(self):
         for units in (
