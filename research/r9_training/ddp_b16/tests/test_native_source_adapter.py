@@ -36,6 +36,8 @@ class DDPB16NativeSourceAdapterTests(unittest.TestCase):
         self.assertNotIn("self.train_loader.sampler.set_epoch(epoch)", engine)
         self.assertIn('self.world_size != 2', engine)
         self.assertIn("nn.parallel.DistributedDataParallel(", engine)
+        self.assertIn("rank0_validate_and_sync(self, epoch=epoch)", engine)
+        self.assertNotIn("self.metrics, self.fitness = self.validate()", engine)
         self.assertIn("if getattr(self, \"_d4e_recovery_configured\"", engine)
 
         vgra = result["ultralytics/models/yolo/detect/vgra_trainer.py"].decode()
@@ -44,6 +46,12 @@ class DDPB16NativeSourceAdapterTests(unittest.TestCase):
         self.assertIn('self.world_size != 2', vgra)
         self.assertIn('rank=-1, drop_last=False', vgra)
         self.assertIn("DDP_B16 requires per-rank TRAIN batch 8", vgra)
+
+        for name in ("vgra_validator.py", "early_paired_validator.py"):
+            adapted = result["ultralytics/models/yolo/detect/" + name].decode()
+            self.assertIn("_ddp_b16_rank0_validation_ready", adapted)
+            self.assertIn("RANK != 0", adapted)
+            self.assertIn("3049", adapted)
 
         early = result["ultralytics/models/yolo/detect/early_paired_trainer.py"].decode()
         self.assertIn("build_distributed_pair_training_loader(", early)
