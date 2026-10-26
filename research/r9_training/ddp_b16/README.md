@@ -1,6 +1,6 @@
 # VGRA DDP-B16 — single-branch implementation (candidate)
 
-**Status:** pair-sharding source and CPU tests added; *not executable DDP training*.
+**Status:** two-rank pair sharding AND rank-local training-loader/epoch-reset adapter added; CPU contract tests pass in GitHub Actions. *Not yet connected to native trainer; not executable DDP training*.
 **Parent / preserved C1 release:** `fa6a7675daae385a04c7b77e69a9de29f9e1b2f3`.
 **Development branch:** `research/vgra-ddp-b16`.
 **No edits to frozen C1 source; no official training, B-VAL inference or B-TEST access.**
@@ -30,7 +30,7 @@
 distributed pair sampler, verify loader iterator reset and keep source hashes
 separately governed. Do not pretend the sampler is already connected to training.
 
-## Minimum remaining implementation
+## Added: ddp_batch_loader.py\n- Builds a rank-local **TRAIN-only** `InfiniteDataLoader` using the actual pair batch sampler.\n- Preserves the frozen workers=0 and deterministic generator policy.\n- Validates `loader.batch_sampler.sampler` identity and exposes explicit `begin_distributed_pair_epoch(loader, epoch)`.\n- The native trainer must call this hook on both ranks and replace the stock `loader.sampler.set_epoch(epoch)`; the hook resets the cached iterator.\n- Pure CPU fake-runtime tests verify rank wiring, epoch reset and recipe refusal. This does not substitute for actual torch/GPU acceptance.\n\n## Minimum remaining implementation
 1. Add one **private staged DDP source adapter** and loader wiring for MV00/MV01.
    Do not edit the frozen `frozen_source/` or C1 launcher. Ensure every rank
    uses the same deterministic global step plan and the native epoch cursor.
