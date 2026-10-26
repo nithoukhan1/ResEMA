@@ -27,8 +27,8 @@ from torch import nn
 
 from research.r9_training.ddp_b16.distributed_pair_sampler import DistributedPairBatchSampler
 from research.r9_training.ddp_b16.ddp_g4_recovery import (
-    DDPG4Error, capture_rank, publish_pair, read_pinned_rank,
-    restore_rank, save_rank, validate_cursor, validate_identity,
+    DDPG4Error, distributed_capture_and_publish, publish_pair, read_pinned_rank,
+    restore_rank, validate_cursor, validate_identity,
 )
 
 
@@ -102,17 +102,17 @@ def _worker(rank, port, root, queue):
             "best_fitness": 0.5, "best_epoch": 0,
             "possible_stop": False, "selected_best_sha256": "f" * 64,
         }
-        payload = capture_rank(
-            rank=rank, identity=_identity(), cursor=_cursor(), model=model,
-            optimizer=optimizer, ema_model=ema, ema_updates=1,
-            scheduler=scheduler, scaler=scaler, loader_generator=gen,
-            augmentation_rng=augmentation, sampler=_pair_sampler(rank), stopper=stopper,
+        receipt = distributed_capture_and_publish(
+            root, rank=rank, capture_kwargs={
+                "identity": _identity(), "cursor": _cursor(), "model": model,
+                "optimizer": optimizer, "ema_model": ema, "ema_updates": 1,
+                "scheduler": scheduler, "scaler": scaler, "loader_generator": gen,
+                "augmentation_rng": augmentation, "sampler": _pair_sampler(rank),
+                "stopper": stopper,
+            },
         )
-        save_rank(payload, root)
-        dist.barrier()
-        if rank == 0:
-            publish_pair(root, identity=_identity(), cursor=_cursor())
-        dist.barrier()
+        assert receipt["rank"] == rank
+        assert receipt["status"] == "LOCAL_SYNCHRONIZED_DDP_CAPSULE_EXTERNAL_AUTHENTICATION_PENDING"
 
         # In this CPU test only, the locally produced digest simulates an
         # externally pinned digest. Do NOT call this off-session proof.
