@@ -1,0 +1,1 @@
+Chat 28 handoff: consult the migration's 00_READ_THIS_FIRST.md and 01_MASTER_HANDOFF_CHAT1_TO_CHAT27.md. Continue the VGRA DDP-B16 research from the verified CPU milestone and do not treat the implementation as authorized GPU training.
