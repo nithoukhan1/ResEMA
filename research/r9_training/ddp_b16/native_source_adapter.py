@@ -35,7 +35,7 @@ class DDPSourcePatchError(RuntimeError):
 
 def git_blob_sha(content: bytes) -> str:
     """Compute the Git blob hash for exact C1 source-byte authenticity."""
-    return hashlib.sha1(b"blob " + str(len(content)).encode("ascii") + b"\\x00" + content).hexdigest()
+    return hashlib.sha1(b"blob " + str(len(content)).encode("ascii") + b"\x00" + content).hexdigest()
 
 
 def _replace_once(source: str, old: str, new: str, *, name: str) -> str:
@@ -48,9 +48,9 @@ def _replace_once(source: str, old: str, new: str, *, name: str) -> str:
 def _patch_vgra(source: str) -> str:
     source = _replace_once(
         source,
-        'from ultralytics.data.vgra import build_vgra_dataloader, build_vgra_yolo_dataset\\n',
-        'from ultralytics.data.vgra import build_vgra_dataloader, build_vgra_yolo_dataset\\n'
-        'from research.r9_training.ddp_b16.ddp_batch_loader import build_distributed_pair_training_loader\\n',
+        'from ultralytics.data.vgra import build_vgra_dataloader, build_vgra_yolo_dataset\n',
+        'from ultralytics.data.vgra import build_vgra_dataloader, build_vgra_yolo_dataset\n'
+        'from research.r9_training.ddp_b16.ddp_batch_loader import build_distributed_pair_training_loader\n',
         name="VGRA_LOADER_IMPORT",
     )
     old = '''    if isinstance(device, (tuple, list)) and len(device) > 1:
@@ -65,17 +65,17 @@ def _patch_vgra(source: str) -> str:
     source = _replace_once(source, old, new, name="VGRA_NATIVE_PREFLIGHT")
     source = _replace_once(
         source,
-        '        if self.world_size > 1:\\n            raise NotImplementedError("VGRA V1 distributed training is not authorized")\\n',
-        '        if self.world_size != 2 or int(self.args.batch) != 16:\\n'
-        '            raise RuntimeError("DDP_B16 requires exactly two ranks and global batch 16")\\n',
+        '        if self.world_size > 1:\n            raise NotImplementedError("VGRA V1 distributed training is not authorized")\n',
+        '        if self.world_size != 2 or int(self.args.batch) != 16:\n'
+        '            raise RuntimeError("DDP_B16 requires exactly two ranks and global batch 16")\n',
         name="VGRA_INIT_WORLD_SIZE",
     )
     source = _replace_once(
         source,
-        '        if rank != -1 or self.world_size > 1:\\n'
-        '            raise NotImplementedError("VGRA V1 requires non-distributed training/validation")\\n',
-        '        if self.world_size != 2 or rank not in (0, 1):\\n'
-        '            raise RuntimeError("DDP_B16 requires rank 0 or 1")\\n',
+        '        if rank != -1 or self.world_size > 1:\n'
+        '            raise NotImplementedError("VGRA V1 requires non-distributed training/validation")\n',
+        '        if self.world_size != 2 or rank not in (0, 1):\n'
+        '            raise RuntimeError("DDP_B16 requires rank 0 or 1")\n',
         name="VGRA_GET_DATALOADER_GUARD",
     )
     old = '''        return build_vgra_dataloader(
@@ -110,17 +110,17 @@ def _patch_vgra(source: str) -> str:
 def _patch_early(source: str) -> str:
     source = _replace_once(
         source,
-        'from ultralytics.data.vgra import build_vgra_dataloader\\n',
-        'from ultralytics.data.vgra import build_vgra_dataloader\\n'
-        'from research.r9_training.ddp_b16.ddp_batch_loader import build_distributed_pair_training_loader\\n',
+        'from ultralytics.data.vgra import build_vgra_dataloader\n',
+        'from ultralytics.data.vgra import build_vgra_dataloader\n'
+        'from research.r9_training.ddp_b16.ddp_batch_loader import build_distributed_pair_training_loader\n',
         name="EARLY_LOADER_IMPORT",
     )
     source = _replace_once(
         source,
-        '        if rank != -1 or self.world_size > 1 or mode not in {"train", "val"}:\\n'
-        '            raise NotImplementedError("D4 MV-00 requires non-distributed TRAIN/VAL only")\\n',
-        '        if self.world_size != 2 or rank not in (0, 1) or mode not in {"train", "val"}:\\n'
-        '            raise RuntimeError("DDP_B16 MV00 requires rank 0/1 and TRAIN/VAL only")\\n',
+        '        if rank != -1 or self.world_size > 1 or mode not in {"train", "val"}:\n'
+        '            raise NotImplementedError("D4 MV-00 requires non-distributed TRAIN/VAL only")\n',
+        '        if self.world_size != 2 or rank not in (0, 1) or mode not in {"train", "val"}:\n'
+        '            raise RuntimeError("DDP_B16 MV00 requires rank 0/1 and TRAIN/VAL only")\n',
         name="EARLY_GET_DATALOADER_GUARD",
     )
     old = '''        return build_vgra_dataloader(
@@ -152,27 +152,27 @@ def _patch_engine(source: str) -> str:
     # ONLY single-world-size AMP checks and the sampler-set_epoch call.
     source = _replace_once(
         source,
-        '        if self.amp and RANK in {-1, 0}:  # Single-GPU and DDP\\n',
-        '        if self.amp and RANK in {-1, 0}:  # Single-GPU and DDP\\n',
+        '        if self.amp and RANK in {-1, 0}:  # Single-GPU and DDP\n',
+        '        if self.amp and RANK in {-1, 0}:  # Single-GPU and DDP\n',
         name="ENGINE_AMP_START_ANCHOR",
     )
     source = _replace_once(
         source,
-        '            if not getattr(self, "_r7c_amp_gate_ready", False) or self.world_size != 1:\\n',
-        '            if not getattr(self, "_r7c_amp_gate_ready", False) or self.world_size != 2:\\n',
+        '            if not getattr(self, "_r7c_amp_gate_ready", False) or self.world_size != 1:\n',
+        '            if not getattr(self, "_r7c_amp_gate_ready", False) or self.world_size != 2:\n',
         name="ENGINE_R7C_AMP_WORLD_SIZE",
     )
     source = _replace_once(
         source,
-        '            if not self.amp or self.world_size != 1:\\n',
-        '            if not self.amp or self.world_size != 2:\\n',
+        '            if not self.amp or self.world_size != 1:\n',
+        '            if not self.amp or self.world_size != 2:\n',
         name="ENGINE_R7C_SCALER_WORLD_SIZE",
     )
     source = _replace_once(
         source,
-        '                self.train_loader.sampler.set_epoch(epoch)\\n',
-        '                from research.r9_training.ddp_b16.ddp_batch_loader import begin_distributed_pair_epoch\\n'
-        '                begin_distributed_pair_epoch(self.train_loader, epoch)\\n',
+        '                self.train_loader.sampler.set_epoch(epoch)\n',
+        '                from research.r9_training.ddp_b16.ddp_batch_loader import begin_distributed_pair_epoch\n'
+        '                begin_distributed_pair_epoch(self.train_loader, epoch)\n',
         name="ENGINE_PAIR_SAMPLER_EPOCH",
     )
     return source
