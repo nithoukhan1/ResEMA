@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[4]
 
 
 class DDPPrivateSourceStageTests(unittest.TestCase):
-    def test_complete_c1_inventory_and_private_three_file_stage(self):
+    def test_complete_c1_inventory_and_private_five_file_stage(self):
         original_audit = verify_original_source(ROOT)
         self.assertEqual(original_audit["source_files_verified"], 336)
         self.assertEqual(original_audit["integration_modules_verified"], 7)
@@ -33,7 +33,7 @@ class DDPPrivateSourceStageTests(unittest.TestCase):
             self.assertEqual(receipt["b_test_access"], "NONE")
             self.assertEqual(receipt["science_files_verified"], 336)
             self.assertEqual(receipt["integration_modules_verified"], 7)
-            self.assertEqual(len(receipt["ddp_adapted_files"]), 3)
+            self.assertEqual(len(receipt["ddp_adapted_files"]), 5)
             on_disk = json.loads((dest / "STAGE_RECEIPT.json").read_text("utf8"))
             self.assertEqual(receipt, on_disk)
             for rel, digest in receipt["ddp_adapted_files"].items():
