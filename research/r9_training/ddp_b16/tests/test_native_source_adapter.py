@@ -37,6 +37,8 @@ class DDPB16NativeSourceAdapterTests(unittest.TestCase):
         self.assertIn('self.world_size != 2', engine)
         self.assertIn("nn.parallel.DistributedDataParallel(", engine)
         self.assertIn("rank0_validate_and_sync(self, epoch=epoch)", engine)
+        self.assertIn("ddp_b16_g4_epoch_end(self, epoch=epoch, nb=nb, last_opt_step=last_opt_step)", engine)
+        self.assertIn("elif getattr(self, \"_d4e_recovery_configured\", False):", engine)
         self.assertNotIn("self.metrics, self.fitness = self.validate()", engine)
         self.assertIn("if getattr(self, \"_d4e_recovery_configured\"", engine)
 
