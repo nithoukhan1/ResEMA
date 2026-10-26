@@ -25,6 +25,7 @@ import torch.distributed as dist
 import torch.multiprocessing as mp
 from torch import nn
 
+from research.r9_training.ddp_b16.distributed_pair_sampler import DistributedPairBatchSampler
 from research.r9_training.ddp_b16.ddp_g4_recovery import (
     DDPG4Error, capture_rank, publish_pair, read_pinned_rank,
     restore_rank, save_rank, validate_cursor, validate_identity,
@@ -49,6 +50,14 @@ def _cursor():
         "optimizer_updates": 1, "last_opt_step": 3,
         "accumulate": 4, "sampler_next_epoch": 1,
     }
+
+
+def _pair_sampler(rank):
+    pairs = [(2 * i, 2 * i + 1) for i in range(6496)]
+    singles = [(12992 + j,) for j in range(1235)]
+    sampler = DistributedPairBatchSampler(pairs + singles, rank=rank, seed=42)
+    sampler.set_epoch(1)
+    return sampler
 
 
 def _fresh_components(rank):
@@ -97,7 +106,7 @@ def _worker(rank, port, root, queue):
             rank=rank, identity=_identity(), cursor=_cursor(), model=model,
             optimizer=optimizer, ema_model=ema, ema_updates=1,
             scheduler=scheduler, scaler=scaler, loader_generator=gen,
-            augmentation_rng=augmentation, stopper=stopper,
+            augmentation_rng=augmentation, sampler=_pair_sampler(rank), stopper=stopper,
         )
         save_rank(payload, root)
         dist.barrier()
@@ -119,7 +128,8 @@ def _worker(rank, port, root, queue):
         restored = restore_rank(
             result, rank=rank, model=fresh_model, optimizer=fresh_opt,
             ema_model=fresh_ema, scheduler=fresh_sched, scaler=fresh_scaler,
-            loader_generator=fresh_gen, restore_augmentation=lambda x: seen.append(x),
+            loader_generator=fresh_gen, sampler=_pair_sampler(rank),
+            restore_augmentation=lambda x: seen.append(x),
         )
         for name, value in model.state_dict().items():
             torch.testing.assert_close(fresh_model.state_dict()[name], value, rtol=0, atol=0)
