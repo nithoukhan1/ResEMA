@@ -26,6 +26,8 @@ BASE_BLOBS = {
     "ultralytics/engine/trainer.py": "697cdc1388a3b02bc739fe4cca5f97f1d63f8170",
     "ultralytics/models/yolo/detect/vgra_trainer.py": "ef705bac5961b37e666e134ea425a5d0bfeff958",
     "ultralytics/models/yolo/detect/early_paired_trainer.py": "28f2de9baeeb6d7e48afcbc385b57d24fb350e75",
+    "ultralytics/models/yolo/detect/vgra_validator.py": "012d56f9d449183e8fb176d5660700aed9fc10e6",
+    "ultralytics/models/yolo/detect/early_paired_validator.py": "45a7cdf9ea80418a1f76e269d827fad08fd4c4af",
 }
 
 
@@ -156,10 +158,38 @@ def _patch_early(source: str) -> str:
     return source
 
 
+def _patch_vgra_validator(source: str) -> str:
+    return _replace_once(
+        source,
+        '        if trainer.world_size not in {0, 1} or RANK not in {-1, 0}:\n'
+        '            raise NotImplementedError("VGRA V1 DDP validation not supported")\n',
+        '        if trainer.world_size == 2:\n'
+        '            if RANK != 0 or getattr(trainer, "_ddp_b16_rank0_validation_ready", False) is not True:\n'
+        '                raise RuntimeError("DDP_B16_VGRA_RANK0_GOVERNED_VALIDATION_ONLY")\n'
+        '        elif trainer.world_size not in {0, 1} or RANK not in {-1, 0}:\n'
+        '            raise NotImplementedError("VGRA V1 DDP validation not supported")\n',
+        name="VGRA_VAL_RANK0_GUARD",
+    )
+
+
+def _patch_early_validator(source: str) -> str:
+    return _replace_once(
+        source,
+        '        if trainer.world_size not in {0, 1} or RANK not in {-1, 0}:\n'
+        '            raise NotImplementedError("D4 Early paired DDP validation unauthorized")\n',
+        '        if trainer.world_size == 2:\n'
+        '            if RANK != 0 or getattr(trainer, "_ddp_b16_rank0_validation_ready", False) is not True:\n'
+        '                raise RuntimeError("DDP_B16_EARLY_RANK0_GOVERNED_VALIDATION_ONLY")\n'
+        '        elif trainer.world_size not in {0, 1} or RANK not in {-1, 0}:\n'
+        '            raise NotImplementedError("D4 Early paired DDP validation unauthorized")\n',
+        name="EARLY_VAL_RANK0_GUARD",
+    )
+
+
 def _patch_engine(source: str) -> str:
     # Existing source emits rank-specific DDP commands. Keep its pre-existing
     # torch.distributed wrapping and official numerical guards, modifying
-    # ONLY single-world-size AMP checks and the sampler-set_epoch call.
+    # single-world-size AMP checks, sampler epoch and rank-0 validation.
     source = _replace_once(
         source,
         '        if self.amp and RANK in {-1, 0}:  # Single-GPU and DDP\n',
@@ -185,6 +215,13 @@ def _patch_engine(source: str) -> str:
         '                begin_distributed_pair_epoch(self.train_loader, epoch)\n',
         name="ENGINE_PAIR_SAMPLER_EPOCH",
     )
+    source = _replace_once(
+        source,
+        '                self.metrics, self.fitness = self.validate()\n',
+        '                from research.r9_training.ddp_b16.ddp_epoch_boundary import rank0_validate_and_sync\n'
+        '                rank0_validate_and_sync(self, epoch=epoch)\n',
+        name="ENGINE_RANK0_VAL_AND_SYNC",
+    )
     return source
 
 
@@ -192,6 +229,8 @@ PATCHES = {
     "ultralytics/engine/trainer.py": _patch_engine,
     "ultralytics/models/yolo/detect/vgra_trainer.py": _patch_vgra,
     "ultralytics/models/yolo/detect/early_paired_trainer.py": _patch_early,
+    "ultralytics/models/yolo/detect/vgra_validator.py": _patch_vgra_validator,
+    "ultralytics/models/yolo/detect/early_paired_validator.py": _patch_early_validator,
 }
 
 
