@@ -110,9 +110,14 @@ def ddp_b16_g4_epoch_end(
     meta = shared[0]
     _need(type(meta) is dict and meta.get("ok") is True,
           "RANK0_CHECKPOINT_" + str(meta.get("reason", "invalid")))
-    _need(meta["optimizer_updates"] == opt_steps and
-          meta["last_opt_step"] == last_opt_step and
-          meta["accumulate"] == trainer.accumulate, "RANK_STEP_DIVERGENCE")
+    local_matches = (meta["optimizer_updates"] == opt_steps and
+                     meta["last_opt_step"] == last_opt_step and
+                     meta["accumulate"] == trainer.accumulate)
+    # Do not let only one rank enter the G4 checkpoint collective after a
+    # local mismatch. Make both ranks fail at the same collective boundary.
+    agreements = [None, None]
+    dist.all_gather_object(agreements, bool(local_matches))
+    _need(agreements == [True, True], "RANK_STEP_DIVERGENCE")
 
     # A terminal epoch has no next-epoch resume capsule. Terminal best
     # evaluation/export is another, still-locked contract.
