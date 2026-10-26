@@ -161,15 +161,49 @@ validator, both ranks agree on metrics and cardinality, and an incorrect
 image count fails both ranks. This **does not** prove real YOLO/VGRA
 validation, CUDA/NCCL behavior or Kaggle checkpoint continuity.
 
+## Added: synchronized native G4 epoch-end callback (CPU/Gloo verified)
+
+\`ddp_native_g4_hook.py\` now provides the **nonterminal epoch** callback
+for the private two-rank candidate. The exact-source engine adapter inserts
+\`ddp_b16_g4_epoch_end(self, epoch=epoch, nb=nb, last_opt_step=last_opt_step)\`
+*after* rank-0 native best/last save and on-fit-epoch callbacks, in place
+of invoking original C1 single-worker G4 callbacks for \`world_size=2\`.
+
+- Rank 0 checks existence and hashes of native selected \`best.pt\` and
+  \`last.pt\` and broadcasts the authoritative selected-best SHA and stopper
+  state. Rank 1 must not independently select a checkpoint.
+- Both ranks collectively verify optimizer-update count, last optimizer-step
+  index, accumulation, 890-step pair sampler and identity before saving.
+- Both ranks publish their own complete G4 capsule and a synchronized
+  combined manifest through the already CPU-verified G4 library.
+- Missing selected best or divergent rank-step counters fail **both**
+  processes without publishing a resumable capsule.
+- Early-stop/final epochs produce **no** next-epoch recovery capsule; final
+  evaluation and terminal offsite publication remain pending.
+- The candidate callback requires explicitly bound DDP G4 identity/root
+  and refuses legacy \`_d4e_recovery_configured\` batch-8 mode.
+
+Real two-rank CPU/Gloo test cases pass for nonterminal publication, missing
+best, step divergence and terminal no-capsule. These are synthetic
+checkpoints and a fixture augmentation RNG provider, not scientific GPU
+training acceptance.
+
+**Hard blockers remain:** existing C1 startup checks still depend on
+legacy D4E/G3B4 and intentionally prevent executing this candidate; the
+authenticated torchrun child, full native loss/AMP/BN behavior, CUDA/NCCL
+G4/validation, independently pinned off-session transfer, interrupted-vs-
+uninterrupted replay and terminal export have **not** been authorized
+or proven.
+
 ## Minimum remaining implementation
-1. Integrate the new **two-rank G4 capsule candidate** with the explicitly authenticated torchrun training child and epoch callbacks. Stock Ultralytics auto-DDP remains forbidden; keep `frozen_source/` and C1 unchanged.
+1. Integrate the CPU-verified G4 epoch-end candidate with a properly authenticated **torchrun training child and separate two-rank startup/resume boundary**. Existing C1 D4E/G3B4 startup guards must remain fail-closed until an independently tested replacement exists. Stock auto-DDP forbidden; C1 unchanged.
 2. Prove the complete **native YOLO/VGRA** DDP forward/loss and optimizer
    accumulation using the private source stage; then verify CUDA AMP, finite
    guards, and exact 537-tensor pretrained transfer on both ranks. Synthetic
    DDP loss/gradient math alone has passed.
 3. Run real whole B-VAL validation **once on rank 0** after synchronized training
    steps, while rank 1 waits safely; verify all 3,049 operational images.
-4. Finish native G4 callback, distributed rank-zero validation/terminal logic and external SHA-pinned off-session transport, then verify genuine interrupted-vs-resumed GPU replay. Candidate rank-local state serialization and CPU verification now pass.
+4. Finish two-rank startup and resume integration, terminal evaluation/export and external SHA-pinned off-session transport; prove genuine interrupted-vs-resumed GPU replay. Rank-0 VAL and nonterminal G4 callback synchronization now pass CPU tests only.
 5. Add two slim notebooks calling the same verified DDP engine. Run short
    *nonofficial* GPU acceptance and real independent-session epoch-2 resume
    before freezing/authorizing the 100-epoch research experiments.
@@ -195,4 +229,4 @@ Only this one DDP development branch. No new attention, parameter sweeps,
 alternative datasets, B-TEST access or unrequested experiments. C1 is the
 immutable fallback. Large checkpoints remain outside Git with SHA256 receipts.
 
-Next action: replace the old single-worker G4 epoch callbacks in the private native training candidate with the already CPU-tested two-rank capsule and a synchronized epoch-boundary contract; then verify real CUDA/NCCL, B-VAL, terminal behavior and cross-session resume. Do **not** launch official training yet.
+Next action: freeze and archive the present CPU-verified DDP candidate before long Kaggle logs, then implement the authenticated native torchrun startup/resume path, real CUDA/NCCL validation and off-session recovery acceptance. Do **not** launch official training yet.
