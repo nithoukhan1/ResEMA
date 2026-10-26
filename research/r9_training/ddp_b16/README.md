@@ -111,16 +111,43 @@ The explicit per-rank `torchrun` training child is **still to be
 implemented**, including correct validated DDP recovery, before any GPU
 execution request is accepted.
 
+## Added: DDP-B16 two-rank G4 capsule candidate (CPU proven)
+
+`ddp_g4_recovery.py` adds a **separate** epoch-boundary recovery format,
+without modifying the historical batch-8 D4E/G4 classes or C1 receipts.
+
+- **Each rank** independently captures model/BN buffers, parameter gradients,
+  optimizer, EMA, scheduler, AMP GradScaler, CPU + local CUDA RNG,
+  Python/NumPy RNG, loader generator, Albumentations RNG snapshot,
+  frozen pair-sampler seed/epoch/population, stopper and optimizer cursor.
+- An explicit distributed collective requires matching run/release/recipe/data
+  identity and epoch on both ranks, then barriers around both rank saves and
+  the common SHA256 receipt manifest.
+- Saving refuses overwrites. Reading a rank checks the **externally supplied**
+  manifest SHA256, both rank receipts/checkpoints, and the requested rank.
+  `torch.load(..., weights_only=True)` is used only after byte verification.
+- The rank-specific sampler contract is exactly seed 42, next epoch cursor,
+  6,496 pairs, 1,235 singles, 14,227 images, 890 steps/rank.
+- PyTorch CPU/Gloo two-process CI confirms snapshot/restore, model/EMA,
+  optimizer, scheduler, scaler, loader state, rank checks, missing external
+  manifest pins and post-publication tamper rejection.
+
+**Evidence boundary:** the test digest is only a *simulated* external pin.
+Actual off-session transport, independent SHA receipt, CUDA AMP,
+interrupted-vs-uninterrupted training equivalence, native callback integration,
+rank-0 whole B-VAL, G4 publication and terminal-epoch logic are **not proven**.
+The normal C1 epoch saver must NOT call or consume this DDP capsule until those
+integration gates pass. No official execution has been enabled.
+
 ## Minimum remaining implementation
-1. Connect the verified worker preflight/private stage to a **new explicit two-rank torchrun TRAINING child**, after implementing DDP-specific G4 recovery. Stock Ultralytics auto-DDP is forbidden; bind all mandatory authenticated inputs separately per rank. Keep `frozen_source/` and C1 unchanged.
+1. Integrate the new **two-rank G4 capsule candidate** with the explicitly authenticated torchrun training child and epoch callbacks. Stock Ultralytics auto-DDP remains forbidden; keep `frozen_source/` and C1 unchanged.
 2. Prove the complete **native YOLO/VGRA** DDP forward/loss and optimizer
    accumulation using the private source stage; then verify CUDA AMP, finite
    guards, and exact 537-tensor pretrained transfer on both ranks. Synthetic
    DDP loss/gradient math alone has passed.
 3. Run whole B-VAL validation **once on rank 0** after synchronized training
    steps, while rank 1 waits safely; all 3,049 operational images counted once.
-4. Adapt G4 recovery for per-rank RNG/sampler state plus model, optimizer,
-   EMA, scaler, gradients and scheduler; off-session verified transport required.
+4. Finish native G4 callback, distributed rank-zero validation/terminal logic and external SHA-pinned off-session transport, then verify genuine interrupted-vs-resumed GPU replay. Candidate rank-local state serialization and CPU verification now pass.
 5. Add two slim notebooks calling the same verified DDP engine. Run short
    *nonofficial* GPU acceptance and real independent-session epoch-2 resume
    before freezing/authorizing the 100-epoch research experiments.
@@ -146,4 +173,4 @@ Only this one DDP development branch. No new attention, parameter sweeps,
 alternative datasets, B-TEST access or unrequested experiments. C1 is the
 immutable fallback. Large checkpoints remain outside Git with SHA256 receipts.
 
-Next action: build DDP-specific G4 recovery and the guarded torchrun training child, then verify actual rank-aware YOLO/VGRA, CUDA AMP and synchronized B-VAL. Do **not** launch official training yet.
+Next action: integrate tested DDP capsule with the guarded torchrun native training child and rank-0 B-VAL logic, then prove CUDA AMP and genuine cross-session GPU recovery. Do **not** launch official training yet.
