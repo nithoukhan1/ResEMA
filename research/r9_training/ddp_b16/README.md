@@ -90,8 +90,29 @@ The future worker must explicitly run under torchrun with two ranks and bind
 all C1-class scientific inputs and DDP-compatible recovery before use.
 A manually set internal boolean is NOT proof of release authorization.
 
+## Added: explicit DDP-B16 worker PRE-FLIGHT (no training)
+
+- `ddp_worker_stage.py` verifies all 336 original C1 source files,
+  seven existing integration modules, and the SHA-pinned historical
+  source manifest/recipe. It creates a **new disposable private source stage**,
+  changes only the three exact-source-gated native DDP candidates there, and
+  writes a new full-file SHA256 inventory. Original C1 files are never edited.
+- `ddp_worker.py` has strict **MV00/MV01, FRESH-only, two-rank batch-16**
+  review-plan parsing, a pinned Git commit requirement, read-only historic R0
+  authentic asset verification, and private staging. It has **no CUDA or
+  training implementation** and explicitly rejects `--execute`.
+- CPU tests check full private staging, original-source preservation,
+  fixed MV00/MV01 identities, sealed-test paths and unauthorized launch refusal.
+- Historical R0 file authentication proves *input identity only*. Its original
+  batch-8 source/recipe and G4 recovery identity **cannot** authorize a
+  batch-16 DDP run.
+
+The explicit per-rank `torchrun` training child is **still to be
+implemented**, including correct validated DDP recovery, before any GPU
+execution request is accepted.
+
 ## Minimum remaining implementation
-1. Implement the **explicit authenticated torchrun child worker** and isolated private source stage for both arms. The stock Ultralytics auto-DDP generator is forbidden; bind all mandatory dataset, pretrained, guard and resume inputs per rank. Keep `frozen_source/` and C1 unchanged.
+1. Connect the verified worker preflight/private stage to a **new explicit two-rank torchrun TRAINING child**, after implementing DDP-specific G4 recovery. Stock Ultralytics auto-DDP is forbidden; bind all mandatory authenticated inputs separately per rank. Keep `frozen_source/` and C1 unchanged.
 2. Prove the complete **native YOLO/VGRA** DDP forward/loss and optimizer
    accumulation using the private source stage; then verify CUDA AMP, finite
    guards, and exact 537-tensor pretrained transfer on both ranks. Synthetic
@@ -125,4 +146,4 @@ Only this one DDP development branch. No new attention, parameter sweeps,
 alternative datasets, B-TEST access or unrequested experiments. C1 is the
 immutable fallback. Large checkpoints remain outside Git with SHA256 receipts.
 
-Next action: implement the minimal explicit two-rank worker/source stage; then verify actual rank-aware YOLO/VGRA training, CUDA AMP, rank-0 validation and checkpoint recovery. Do **not** launch official training yet.
+Next action: build DDP-specific G4 recovery and the guarded torchrun training child, then verify actual rank-aware YOLO/VGRA, CUDA AMP and synchronized B-VAL. Do **not** launch official training yet.
