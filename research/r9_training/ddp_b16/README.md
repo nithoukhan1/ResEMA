@@ -72,8 +72,26 @@ CUDA AMP/scaler synchronization and finite-guard behavior, full B-VAL rank-0
 validation with safe barriers, and authenticated multi-rank G4 resume. CPU
 Gloo smoke tests are not GPU training authority.
 
+## Native DDP startup blocker resolved at the refusal boundary
+
+The C1 Ultralytics `BaseTrainer.train()` calls
+`generate_ddp_command()` when invoked from a non-torchrun process. Its
+generated child reconstructs the trainer with only `cfg` and `overrides`.
+This **loses mandatory VGRA constructor inputs** (frozen assignments,
+visibility evidence, authenticated Early checkpoint, recovery setup).
+
+The candidate now injects `require_authenticated_ddp_child(self)` into
+`VGRADetectionTrainer.train()`; `EarlyPairedTrainer` inherits the guard.
+It refuses stock Ultralytics auto-DDP invocation, wrong ranks/global batch,
+missing independently authenticated worker readiness or missing governed
+recovery setup. GitHub CI verifies refusal paths. **No DDP worker currently
+sets the verified-worker readiness marker, so actual training stays blocked.**
+The future worker must explicitly run under torchrun with two ranks and bind
+all C1-class scientific inputs and DDP-compatible recovery before use.
+A manually set internal boolean is NOT proof of release authorization.
+
 ## Minimum remaining implementation
-1. Review and test isolated **private source staging and native trainer execution** of the three exact-blob-gated candidate patches. Keep `frozen_source/` and C1 unchanged; candidate output is never its own training authorization.
+1. Implement the **explicit authenticated torchrun child worker** and isolated private source stage for both arms. The stock Ultralytics auto-DDP generator is forbidden; bind all mandatory dataset, pretrained, guard and resume inputs per rank. Keep `frozen_source/` and C1 unchanged.
 2. Prove the complete **native YOLO/VGRA** DDP forward/loss and optimizer
    accumulation using the private source stage; then verify CUDA AMP, finite
    guards, and exact 537-tensor pretrained transfer on both ranks. Synthetic
@@ -107,4 +125,4 @@ Only this one DDP development branch. No new attention, parameter sweeps,
 alternative datasets, B-TEST access or unrequested experiments. C1 is the
 immutable fallback. Large checkpoints remain outside Git with SHA256 receipts.
 
-Next action: stage the native DDP trainer and verify actual rank-aware YOLO/VGRA training and CUDA AMP; follow with rank-0 validation and checkpoint recovery. Do **not** launch official training yet.
+Next action: implement the minimal explicit two-rank worker/source stage; then verify actual rank-aware YOLO/VGRA training, CUDA AMP, rank-0 validation and checkpoint recovery. Do **not** launch official training yet.
