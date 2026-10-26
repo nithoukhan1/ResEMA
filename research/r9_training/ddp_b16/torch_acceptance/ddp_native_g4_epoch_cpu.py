@@ -59,12 +59,11 @@ def _trainer(rank, root, epoch, scenario):
     ema_model = copy.deepcopy(model)
     scaler = torch.amp.GradScaler("cpu", enabled=True, init_scale=1.0)
     sampler = _sampler(rank, epoch)
-    loader = SimpleNamespace(
+    loader = FakeLoader(
         vgra_pair_batch_sampler=sampler,
         generator=torch.Generator().manual_seed(42 + rank),
         dataset=SimpleNamespace(transforms=object()),
     )
-    loader.__class__ = FakeLoader
     options = SimpleNamespace(
         batch=16, imgsz=1024, epochs=100, workers=0, seed=42, nbs=64, amp=True,
     )
