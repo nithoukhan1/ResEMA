@@ -1,6 +1,6 @@
 # VGRA DDP-B16 — single-branch implementation (candidate)
 
-**Status:** two-rank pair sharding AND rank-local training-loader/epoch-reset adapter added; CPU contract tests pass in GitHub Actions. *Not yet connected to native trainer; not executable DDP training*.
+**Status:** Pair sampler, rank-local loader and exact-C1 native-trainer source adapter are implemented and CPU-reviewed in GitHub Actions. **The candidate is not GPU-runnable, validated or authorized yet.**
 **Parent / preserved C1 release:** `fa6a7675daae385a04c7b77e69a9de29f9e1b2f3`.
 **Development branch:** `research/vgra-ddp-b16`.
 **No edits to frozen C1 source; no official training, B-VAL inference or B-TEST access.**
@@ -30,10 +30,22 @@
 distributed pair sampler, verify loader iterator reset and keep source hashes
 separately governed. Do not pretend the sampler is already connected to training.
 
-## Added: ddp_batch_loader.py\n- Builds a rank-local **TRAIN-only** `InfiniteDataLoader` using the actual pair batch sampler.\n- Preserves the frozen workers=0 and deterministic generator policy.\n- Validates `loader.batch_sampler.sampler` identity and exposes explicit `begin_distributed_pair_epoch(loader, epoch)`.\n- The native trainer must call this hook on both ranks and replace the stock `loader.sampler.set_epoch(epoch)`; the hook resets the cached iterator.\n- Pure CPU fake-runtime tests verify rank wiring, epoch reset and recipe refusal. This does not substitute for actual torch/GPU acceptance.\n\n## Minimum remaining implementation
-1. Add one **private staged DDP source adapter** and loader wiring for MV00/MV01.
-   Do not edit the frozen `frozen_source/` or C1 launcher. Ensure every rank
-   uses the same deterministic global step plan and the native epoch cursor.
+## Added: ddp_batch_loader.py
+- Builds a rank-local **TRAIN-only** `InfiniteDataLoader` using the actual pair batch sampler.
+- Preserves the frozen workers=0 and deterministic generator policy.
+- Validates `loader.batch_sampler.sampler` identity and exposes explicit `begin_distributed_pair_epoch(loader, epoch)`.
+- The native trainer must call this hook on both ranks and replace the stock `loader.sampler.set_epoch(epoch)`; the hook resets the cached iterator.
+- Pure CPU fake-runtime tests verify rank wiring, epoch reset and recipe refusal. This does not substitute for actual torch/GPU acceptance.
+
+## Added: native_source_adapter.py
+- Produces **in-memory** candidate revisions of the pinned C1 `vgra_trainer.py`, `early_paired_trainer.py` and `engine/trainer.py`; does not overwrite or create executable C1 files.
+- Verifies each original file by its exact Git blob SHA and rejects missing, tampered or extra source entries.
+- Keeps existing pretrained authentication and TRAIN-only visibility binding logic, changes only 2-rank/batch-16 startup and data loader selection, resets the actual pair sampler at epoch start, and revises single-GPU AMP guards for later separate acceptance.
+- CPU CI verifies exact-source hashing, Python syntax, presence of the intended integration hooks and rejection of modified source.
+- **Not yet executable:** requires isolated private staging, correct DDP gradient/loss policy, rank-0 full validation, synchronization and rank-complete G4 recovery.
+
+## Minimum remaining implementation
+1. Review and test isolated **private source staging and native trainer execution** of the three exact-blob-gated candidate patches. Keep `frozen_source/` and C1 unchanged; candidate output is never its own training authorization.
 2. Correctly test DDP forward, 4-component VGRA loss, zero-pair batches,
    last-step rank batch differences, gradient averaging, optimizer accumulation,
    AMP / finite guards and original 537 pretrained tensor transfers.
@@ -58,12 +70,7 @@ numerical gradient-equivalence test; no scaling policy is declared accepted yet.
 python -m unittest discover -s research/r9_training/ddp_b16/tests -v
 ```
 
-The sampler tests cover frozen-population cardinality, no cross-rank pair splits,
-unique full data coverage, balanced ranks, exact step count, epoch determinism,
-non-shuffled validation behavior and invalid configuration rejection.
-
-These Python tests must be **executed and verified** before trainer integration
-is promoted. Adding tests to Git alone is not a passing test result.
+GitHub Actions executes the sampler, loader-factory, epoch-reset and exact-C1 native-source patch tests. PASS here establishes CPU/source checks only, **not** two-GPU numerical or recovery acceptance.
 
 ## Repository discipline
 
@@ -71,5 +78,4 @@ Only this one DDP development branch. No new attention, parameter sweeps,
 alternative datasets, B-TEST access or unrequested experiments. C1 is the
 immutable fallback. Large checkpoints remain outside Git with SHA256 receipts.
 
-Next action: verify the CPU sampler tests, then add the private staged DDP
-dataloader/native integration. Do **not** launch official training yet.
+Next action: test the staged DDP trainer with correct distributed loss/AMP behavior, then handle rank-0 validation and checkpoint recovery. Do **not** launch official training yet.
