@@ -65,6 +65,16 @@ def _patch_vgra(source: str) -> str:
     source = _replace_once(source, old, new, name="VGRA_NATIVE_PREFLIGHT")
     source = _replace_once(
         source,
+        '    MODEL_YAML_PATH = VGRA_YAML_PATH\n',
+        '    MODEL_YAML_PATH = VGRA_YAML_PATH\n\n'
+        '    def train(self):\n'
+        '        from research.r9_training.ddp_b16.ddp_launch_guard import require_authenticated_ddp_child\n'
+        '        require_authenticated_ddp_child(self)\n'
+        '        return super().train()\n',
+        name="VGRA_FAIL_CLOSED_DDP_LAUNCH",
+    )
+    source = _replace_once(
+        source,
         '        if self.world_size > 1:\n            raise NotImplementedError("VGRA V1 distributed training is not authorized")\n',
         '        if self.world_size != 2 or int(self.args.batch) != 16:\n'
         '            raise RuntimeError("DDP_B16 requires exactly two ranks and global batch 16")\n',
