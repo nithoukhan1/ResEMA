@@ -72,8 +72,10 @@ def validate_cursor(cursor: Any) -> None:
 
 
 def _path(root: str | Path, filename: str, *, exists: bool) -> Path:
-    r = Path(root).resolve(strict=True)
-    _need(r.is_dir() and not r.is_symlink(), "ROOT_NOT_DIRECTORY")
+    original_root = Path(root)
+    _need(not original_root.is_symlink(), "ROOT_SYMLINK")
+    r = original_root.resolve(strict=True)
+    _need(r.is_dir(), "ROOT_NOT_DIRECTORY")
     _need("/" not in filename and "\\" not in filename and filename not in (".", ".."), "FILE_NAME")
     p = r / filename
     _need(not p.is_symlink(), "SYMLINK")
@@ -145,10 +147,27 @@ def _rng_restore(data: dict[str, Any], rank: int) -> None:
         torch.cuda.set_rng_state(data["torch_cuda_local"].cpu(), device=rank)
 
 
+
+def _sampler_state(sampler: Any, rank: int, cursor: dict) -> dict[str, int]:
+    """Authenticate rank-local shuffling contract, not merely the epoch label."""
+    required = ("rank", "seed", "epoch", "num_images", "num_pairs", "num_singles")
+    _need(all(hasattr(sampler, key) for key in required), "SAMPLER_MISSING")
+    state = {key: getattr(sampler, key) for key in required}
+    _need(all(type(v) is int for v in state.values()), "SAMPLER_TYPES")
+    _need(state == {
+        "rank": rank, "seed": 42,
+        "epoch": cursor["sampler_next_epoch"],
+        "num_images": 14227, "num_pairs": 6496, "num_singles": 1235,
+    }, "SAMPLER_POPULATION_OR_EPOCH")
+    _need(len(sampler) == 890 and callable(getattr(sampler, "set_epoch", None)),
+          "SAMPLER_INTERFACE")
+    return state
+
+
 def capture_rank(
     *, rank: int, identity: dict, cursor: dict, model: Any, optimizer: Any,
     ema_model: Any, ema_updates: int, scheduler: Any, scaler: Any,
-    loader_generator: Any, augmentation_rng: dict,
+    loader_generator: Any, augmentation_rng: dict, sampler: Any,
     stopper: dict,
 ) -> dict[str, Any]:
     """Capture LOCAL state; DDP-wrapped models are unwrapped, never discarded."""
@@ -164,7 +183,8 @@ def capture_rank(
     _finite(stopper["best_fitness"])
     _need(type(augmentation_rng) is dict and
           augmentation_rng.get("schema") == "D4E_TRAIN_ALBUMENTATIONS_RNG_R2" and
-          isinstance(augmentation_rng.get("entries"), list), "AUGMENT_RNG")
+          isinstance(augmentation_rng.get("entries"), list) and
+          bool(augmentation_rng["entries"]), "AUGMENT_RNG")
     _need(isinstance(loader_generator, torch.Generator), "LOADER_GENERATOR")
     _need(model is not None and optimizer is not None and
           ema_model is not None and scheduler is not None and scaler is not None,
@@ -175,6 +195,7 @@ def capture_rank(
     result = {
         "schema": SCHEMA, "rank": rank,
         "identity": dict(identity), "cursor": dict(cursor),
+        "sampler_state": _sampler_state(sampler, rank, cursor),
         "model_state": _to_cpu(native.state_dict()),
         "parameter_grads": grads,
         "optimizer_state": _to_cpu(optimizer.state_dict()),
@@ -301,6 +322,10 @@ def read_pinned_rank(
     _need(payload.get("schema") == SCHEMA and payload.get("rank") == rank and
           payload.get("identity") == identity and payload.get("cursor") == cursor,
           "PAYLOAD_IDENTITY")
+    _need(payload.get("sampler_state") == {
+        "rank": rank, "seed": 42, "epoch": cursor["sampler_next_epoch"],
+        "num_images": 14227, "num_pairs": 6496, "num_singles": 1235,
+    }, "PAYLOAD_SAMPLER_IDENTITY")
     _finite(payload)
     return payload
 
@@ -308,11 +333,19 @@ def read_pinned_rank(
 def restore_rank(
     payload: dict[str, Any], *, rank: int, model: Any, optimizer: Any,
     ema_model: Any, scheduler: Any, scaler: Any, loader_generator: Any,
-    restore_augmentation: Any,
+    sampler: Any, restore_augmentation: Any,
 ) -> dict[str, Any]:
     """Restore captured state. Caller resets the verified local loader FIRST."""
     import torch
     _need(payload.get("rank") == rank, "RESTORE_RANK")
+    _need(callable(getattr(sampler, "set_epoch", None)), "RESTORE_SAMPLER")
+    _need(payload["sampler_state"] == {
+        "rank": rank, "seed": 42,
+        "epoch": payload["cursor"]["sampler_next_epoch"],
+        "num_images": 14227, "num_pairs": 6496, "num_singles": 1235,
+    }, "RESTORE_SAMPLER_IDENTITY")
+    _need(_sampler_state(sampler, rank, payload["cursor"]) == payload["sampler_state"],
+          "RESTORE_SAMPLER_NOT_PREPARED")
     native = model.module if isinstance(model, torch.nn.parallel.DistributedDataParallel) else model
     native.load_state_dict(payload["model_state"], strict=True)
     ema_model.load_state_dict(payload["ema_state"], strict=True)
