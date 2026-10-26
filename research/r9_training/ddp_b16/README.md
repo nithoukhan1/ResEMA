@@ -38,11 +38,11 @@ separately governed. Do not pretend the sampler is already connected to training
 - Pure CPU fake-runtime tests verify rank wiring, epoch reset and recipe refusal. This does not substitute for actual torch/GPU acceptance.
 
 ## Added: native_source_adapter.py
-- Produces **in-memory** candidate revisions of the pinned C1 `vgra_trainer.py`, `early_paired_trainer.py` and `engine/trainer.py`; does not overwrite or create executable C1 files.
+- Produces **in-memory** candidate revisions of five pinned C1 files: the two trainers, the engine trainer, and both paired validators. Does not overwrite or create executable C1 files.
 - Verifies each original file by its exact Git blob SHA and rejects missing, tampered or extra source entries.
 - Keeps existing pretrained authentication and TRAIN-only visibility binding logic, changes only 2-rank/batch-16 startup and data loader selection, resets the actual pair sampler at epoch start, and revises single-GPU AMP guards for later separate acceptance.
 - CPU CI verifies exact-source hashing, Python syntax, presence of the intended integration hooks and rejection of modified source.
-- **Not yet executable:** requires isolated private staging, correct DDP gradient/loss policy, rank-0 full validation, synchronization and rank-complete G4 recovery.
+- **Not yet executable:** native G4 callbacks, full-source CUDA tests and authenticated distributed recovery integration are still incomplete.
 
 ## DDP loss and AMP verification (CPU acceptance)
 
@@ -68,9 +68,9 @@ YOLO loss. This is an explicit DDP-B16 training condition applied equally
 to MV00/MV01, not a guarantee of original C1 numerical equivalence.
 
 **Still blocked:** actual frozen YOLO/VGRA DDP backward with real datasets,
-CUDA AMP/scaler synchronization and finite-guard behavior, full B-VAL rank-0
-validation with safe barriers, and authenticated multi-rank G4 resume. CPU
-Gloo smoke tests are not GPU training authority.
+CUDA AMP/scaler synchronization and finite-guard behavior, actual real-image
+B-VAL evaluation, and authenticated multi-rank G4 resume. CPU/Gloo tests are
+not GPU training authority.
 
 ## Native DDP startup blocker resolved at the refusal boundary
 
@@ -95,14 +95,15 @@ A manually set internal boolean is NOT proof of release authorization.
 - `ddp_worker_stage.py` verifies all 336 original C1 source files,
   seven existing integration modules, and the SHA-pinned historical
   source manifest/recipe. It creates a **new disposable private source stage**,
-  changes only the three exact-source-gated native DDP candidates there, and
+  changes only the five exact-source-gated native DDP candidates there, and
   writes a new full-file SHA256 inventory. Original C1 files are never edited.
 - `ddp_worker.py` has strict **MV00/MV01, FRESH-only, two-rank batch-16**
   review-plan parsing, a pinned Git commit requirement, read-only historic R0
   authentic asset verification, and private staging. It has **no CUDA or
   training implementation** and explicitly rejects `--execute`.
-- CPU tests check full private staging, original-source preservation,
-  fixed MV00/MV01 identities, sealed-test paths and unauthorized launch refusal.
+- CPU tests check full private staging of the five candidate patches,
+  original-source preservation, fixed MV00/MV01 identities, sealed-test paths
+  and unauthorized launch refusal.
 - Historical R0 file authentication proves *input identity only*. Its original
   batch-8 source/recipe and G4 recovery identity **cannot** authorize a
   batch-16 DDP run.
@@ -135,9 +136,30 @@ without modifying the historical batch-8 D4E/G4 classes or C1 receipts.
 **Evidence boundary:** the test digest is only a *simulated* external pin.
 Actual off-session transport, independent SHA receipt, CUDA AMP,
 interrupted-vs-uninterrupted training equivalence, native callback integration,
-rank-0 whole B-VAL, G4 publication and terminal-epoch logic are **not proven**.
+actual full B-VAL inference, native G4 callback publication and terminal-epoch logic are **not proven**.
 The normal C1 epoch saver must NOT call or consume this DDP capsule until those
 integration gates pass. No official execution has been enabled.
+
+## DDP rank-0 validation and native epoch source hook (CPU verified)
+
+`ddp_epoch_boundary.py` performs one rank-0-only governed pair-aware B-VAL
+evaluation, requires the validator to count all 3,049 operational images,
+and broadcasts finite, identical metrics and fitness to rank 1. A rank-0
+Python error is broadcast to both ranks instead of leaving rank 1 waiting.
+Only the **privately patched** validators accept two-rank training with the
+temporary rank-0 validation guard; rank 1 remains forbidden to invoke them.
+
+The exact-source private engine candidate replaces the native
+`self.validate()` call with `rank0_validate_and_sync(self, epoch=epoch)`.
+This deliberately avoids the stock trainer's extra EMA-broadcast collective
+inside a rank-0-only validation call. Both rank-local callbacks are not yet
+rewired to the new G4 capsule; the historical C1 single-worker hooks remain
+a **hard execution blocker**.
+
+GitHub CPU/Gloo two-process tests prove that only rank 0 invokes the fake
+validator, both ranks agree on metrics and cardinality, and an incorrect
+image count fails both ranks. This **does not** prove real YOLO/VGRA
+validation, CUDA/NCCL behavior or Kaggle checkpoint continuity.
 
 ## Minimum remaining implementation
 1. Integrate the new **two-rank G4 capsule candidate** with the explicitly authenticated torchrun training child and epoch callbacks. Stock Ultralytics auto-DDP remains forbidden; keep `frozen_source/` and C1 unchanged.
@@ -145,8 +167,8 @@ integration gates pass. No official execution has been enabled.
    accumulation using the private source stage; then verify CUDA AMP, finite
    guards, and exact 537-tensor pretrained transfer on both ranks. Synthetic
    DDP loss/gradient math alone has passed.
-3. Run whole B-VAL validation **once on rank 0** after synchronized training
-   steps, while rank 1 waits safely; all 3,049 operational images counted once.
+3. Run real whole B-VAL validation **once on rank 0** after synchronized training
+   steps, while rank 1 waits safely; verify all 3,049 operational images.
 4. Finish native G4 callback, distributed rank-zero validation/terminal logic and external SHA-pinned off-session transport, then verify genuine interrupted-vs-resumed GPU replay. Candidate rank-local state serialization and CPU verification now pass.
 5. Add two slim notebooks calling the same verified DDP engine. Run short
    *nonofficial* GPU acceptance and real independent-session epoch-2 resume
@@ -173,4 +195,4 @@ Only this one DDP development branch. No new attention, parameter sweeps,
 alternative datasets, B-TEST access or unrequested experiments. C1 is the
 immutable fallback. Large checkpoints remain outside Git with SHA256 receipts.
 
-Next action: integrate tested DDP capsule with the guarded torchrun native training child and rank-0 B-VAL logic, then prove CUDA AMP and genuine cross-session GPU recovery. Do **not** launch official training yet.
+Next action: replace the old single-worker G4 epoch callbacks in the private native training candidate with the already CPU-tested two-rank capsule and a synchronized epoch-boundary contract; then verify real CUDA/NCCL, B-VAL, terminal behavior and cross-session resume. Do **not** launch official training yet.
