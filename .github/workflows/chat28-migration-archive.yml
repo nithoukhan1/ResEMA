@@ -23,6 +23,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Verify cumulative full/portable assembler on synthetic parents
+        run: python research/migrations/chat28_2026-10-26/test_assemble_cumulative.py -v
       - name: Assemble and SHA256 verify full tracked repository migration
         run: |
           python research/migrations/chat28_2026-10-26/build_chat28_bundle.py \
