@@ -1,0 +1,60 @@
+{
+  "schema": "DETECTION_PROJECT_CHAT27_TO_CHAT28_CHECKPOINT_AND_MIGRATION_SHA256_REGISTRY_V1",
+  "updated_at": "2026-10-27",
+  "project": "GRAZPEDWRI-DX pediatric wrist 9-class object detection",
+  "authentication_class": "SOURCE_DERIVED_KNOWN_HASHES_NOT_NEW_CHECKPOINTS",
+  "frozen_science": {
+    "baseline_git_commit": "fa6a7675daae385a04c7b77e69a9de29f9e1b2f3",
+    "earlier_science_ancestor": "b783eb3a470ab010785a8a24a90a666e9a3f2ed6",
+    "early_checkpoint_sha256": "620594d3560310b5d24243e1b321ce4463b0795b295891c47f6ec177e5272ac1",
+    "early_archive_sha256": "4e3a811be5b8126e788ca4b7854e2df2b070a08e2abef396"
+  },
+  "ddp_b16": {
+    "branch": "research/vgra-ddp-b16",
+    "cpu_passed_code_checkpoint": "1b1696d3d77cf327452bcd40cb236c05c91098a2",
+    "original_science_mutated": false,
+    "source_patch_files": 5,
+    "cpu_acceptance": {
+      "integrity_workflow": "https://github.com/nithoukhan1/ResEMA/actions/runs/40287227288",
+      "numerical_workflow": "https://github.com/nithoukhan1/ResEMA/actions/runs/40287227412",
+      "both_passed": true
+    },
+    "real_cuda_ddp_training_passed": false,
+    "cross_session_ddp_recovery_passed": false,
+    "current_official_epochs": {
+      "MV00": 0,
+      "MV01": 0
+    }
+  },
+  "historical_nonofficial_c1": {
+    "mode": "TWO_INDEPENDENT_T4_SINGLE_GPU_ARMS_BATCH8",
+    "MV00": {
+      "epoch1_g4_archive_sha256": "4fc1c22adda6265a48917de15efea4b1f0766db9a8ed6502aaedfe208e7d44e4",
+      "epoch2_g4_archive_sha256": "9c436620f9b10af927b8f6a964ea4ce666ba81b30174afa59bd5cfd038aa2b22",
+      "epoch2_g4_manifest_sha256": "e692921b6e37975f30706d69e4a16591a83788eea6bc40358f0af09e57b640d2",
+      "selected_best_epoch1_and_epoch2_sha256": "0462acc851b91a9db49669b868c6dd2a4cb959cde1c71beed5cf5d282c2ba193"
+    },
+    "MV01": {
+      "epoch1_g4_archive_sha256": "5b064fdb8a41a3d525fc6f45650e79bdeb53395fd7fc1a09fcc3d5150a83f4e7",
+      "epoch2_g4_archive_sha256": "66bc10de6abb9728752550999c70491018c0070ee56b886c156657d839ccc55e",
+      "epoch2_g4_manifest_sha256": "b5e2bc7c0dae3c99f1c9c2f0dc65a815751a2eb6328e0894cb49ce28eb624da7",
+      "selected_best_epoch1_and_epoch2_sha256": "34579d7ffdc279d5c38419c09f29b4ae30f0d9f5038adc667587c7768e639aba"
+    },
+    "epoch2_outer_transfer_windows_sha256": "59b41703df7a94768751a34647fe3d2133035ca34b9024aa7d8dd21630b0a38d",
+    "source_note": "Historical Windows off-session checks recorded in prior user-supported handoff, not re-executed in Chat27."
+  },
+  "chat28": {
+    "previous_full_zip_sha256": "942983c166536e78c02a4fe1c4e5d67b626a9809c78fddec3cb0c10c6ad1af3f",
+    "previous_portable_zip_sha256": "ffebe21e221f4b548369ca9e5a90cdfc1e160f51b70bb22796d4bf5a8d9504ce",
+    "previous_portable_zip_bytes": 30515326,
+    "github_snapshot_zip_sha256": "dc141f9ab37bc3221b5f8139a9b01e7edd7f3f51b484c75ff4839de7b410a238",
+    "github_snapshot_zip_bytes": 8145059,
+    "github_snapshot_verified_members": 1593,
+    "github_snapshot_head": "e3c2110c039b09aa813ad42fdf1deb8ea270a982",
+    "github_snapshot_action": "https://github.com/nithoukhan1/ResEMA/actions/runs/40292351065",
+    "original_historical_parents_nested_in_github_snapshot": false,
+    "assembler_script": "research/migrations/chat28_2026-10-26/assemble_cumulative_from_parents.py",
+    "cumulative_full_and_portable_outputs_produced_in_this_assistant_container": false,
+    "b_test_access": "NONE"
+  }
+}
