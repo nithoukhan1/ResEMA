@@ -1,0 +1,27 @@
+DETECTION PROJECT — CHAT 28 FIRST PROMPT (27 OCTOBER 2026)
+
+We are migrating our Detection Project from Chat 27. Treat the attached/new Chat27 GitHub repository migration ZIP and the original cumulative Chat1–26 historical migration ZIP as TWO REQUIRED evidence sources unless I attach the already merged cumulative FULL or PORTABLE ZIP. Read 00_READ_THIS_FIRST.md, the complete CHAT1_TO_CHAT27 master handoff, DDP_B16_IMPLEMENTATION_AND_EVIDENCE.md, the progress tracker, checkpoint registry, source limitations and all Git tracked experiment documentation. Preserve historical C3k2 + DySample + ResEMA V1/V2/V3, the Split-A/B screens, subsequent paired-view VGRA C1 and all nonofficial Kaggle evidence. Do not silently substitute general assumptions for documented findings.
+
+LATEST SCIENTIFIC CONTROL:
+- Dataset GRAZPEDWRI-DX, frozen patient-disjoint Split-B: B-TRAIN 14,227 images / 6,496 complete AP-LAT pairs + 1,235 singles; B-VAL 3,050 listed / 3,049 operational; B-TEST 3,050 SEALED.
+- Nine fixed class order: boneanomaly, bonelesion, foreignbody, fracture, metal, periostealreaction, pronatorsign, softtissue, text.
+- MV00=YOLO11s+SCConv-Early (9,570,093 params); MV01=same plus VGRA-V1 (9,672,660 params). VGRA is target-specific signed, bounded zero-initialized companion residual on classification logits, no DFL box change. No synthetic partner images. Early pretrained SHA256=620594d3560310b5d24243e1b321ce4463b0795b295891c47f6ec177e5272ac1.
+- Frozen C1 release commit fa6a7675daae385a04c7b77e69a9de29f9e1b2f3. Original Chat26 single-T4-per-arm batch8 native epoch1 plus separate-session epoch2 recovery PASSED as NONOFFICIAL ENGINEERING ACCEPTANCE. No C1 acceptance epoch counts toward the 100-epoch research runs.
+
+CURRENT CHAT27 DDP ENGINEERING CHECKPOINT:
+- Only branch: research/vgra-ddp-b16, created off exact frozen C1. CPU-tested candidate code SHA 1b1696d3d77cf327452bcd40cb236c05c91098a2. C1 frozen source and official-candidate untouched. Both CI tests PASS at this source checkpoint:
+https://github.com/nithoukhan1/ResEMA/actions/runs/40287227288
+https://github.com/nithoukhan1/ResEMA/actions/runs/40287227412
+- New condition: one model per separate Kaggle T4x2 notebook, global batch16=8 per rank, seed42, 1024px, SGD original recipe, 100 epochs. It is NOT continuation of C1 batch8 and does NOT guarantee two simultaneous notebooks or Kaggle quotas.
+- Implemented and CPU/Gloo source-verified: rank-aware pair sampler and epoch reset (890 steps, exact unique coverage), exact-C1 source-stage adapter, worker preflight with execute LOCKED, synthetic two-rank gradients, visibility loss arithmetic, AMP static source guards, rank0-only B-VAL sync with 3,049 mocked count, two-rank G4 full-state source capsule/offline SHA gates, native G4 epoch selected-best/optimizer-counter synchronization.
+- NOT IMPLEMENTED OR ACCEPTED: fully authenticated executable two-rank torchrun startup and DDP-specific resume bridge replacing old single-GPU C1 startup hooks. NOT TESTED: real YOLO/VGRA paired CUDA backward, CUDA AMP/BN/optimizer parity, real full B-VAL inference, true different-session T4x2 G4 restore, terminal export. CPU tests DO NOT authorize any GPU experiment.
+- Official MV00 and MV01 100-epoch epochs completed=0/100 each. B-TEST remains SEALED.
+
+MIGRATION SHA PROVENANCE:
+Original prior Chats1–26 FULL ZIP SHA256 942983c166536e78c02a4fe1c4e5d67b626a9809c78fddec3cb0c10c6ad1af3f.
+Original prior Chats1–26 PORTABLE ZIP SHA256 ffebe21e221f4b548369ca9e5a90cdfc1e160f51b70bb22796d4bf5a8d9504ce.
+Chat27 Github repo snapshot ZIP SHA256 dc141f9ab37bc3221b5f8139a9b01e7edd7f3f51b484c75ff4839de7b410a238 from https://github.com/nithoukhan1/ResEMA/actions/runs/40292351065. This new GitHub snapshot by itself does NOT embed the old historical predecessor ZIPs. If supplied a locally merged cumulative ZIP, verify its inner parent hashes. Never invent missing original patient data or Kaggle checkpoint binaries.
+
+NEXT SINGLE TASK: After reading all evidence, continue the authorized DDP-B16 engineering direction by implementing the minimal authenticated torchrun native startup/resume bridge on the SAME branch, maintaining C1 as immutable, then perform ONLY the essential nonofficial two-T4 CUDA acceptance and true independent-session G4 replay after gates. Do not prematurely launch official 100-epoch training; explicit user authorization is necessary. No extra attention modules, architecture revisions, new branches, extra ablations, unsplit rework, or B-TEST leakage.
+
+Work step by step, show concrete evidence vs blockers, keep an overall tracker and progress tracker. Remind me before the next meaningful migration/archive is required.
