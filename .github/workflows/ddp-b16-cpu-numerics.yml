@@ -37,6 +37,8 @@ jobs:
         run: python research/r9_training/ddp_b16/torch_acceptance/ddp_rank_admission_cpu.py -v
       - name: Verify two-rank exact native constructor consensus
         run: python research/r9_training/ddp_b16/torch_acceptance/ddp_native_binding_cpu.py -v
+      - name: Run import-only two-rank native source probe tests
+        run: python research/r9_training/ddp_b16/torch_acceptance/ddp_native_import_cpu.py -v
       - name: Run native two-rank epoch-end G4 hook tests
         run: python research/r9_training/ddp_b16/torch_acceptance/ddp_native_g4_epoch_cpu.py -v
       - name: Run rank-0 selected BEST terminal boundary tests
