@@ -17,7 +17,7 @@ from typing import Any
 from .ddp_g4_recovery import validate_identity
 from .ddp_native_binding import CLASS, SCHEMA as BINDING_SCHEMA, SOURCE_MOD
 from .ddp_native_state import SCHEMA as STATE_SCHEMA
-from .ddp_verified_admission import RECIPE, sha_object
+from .ddp_verified_admission import RECIPE, sha_object, audit_existing_stage
 
 
 class DDPNativeBootstrapError(RuntimeError):
@@ -100,16 +100,52 @@ def assemble_amp_ready_native_class(native: type, expected_name: str) -> type:
     return result
 
 
-def load_pinned_native_class(binding: dict) -> type:
-    """Import only staged native source; never fall back to pip Ultralytics."""
+def reauthenticate_private_stage_for_import(binding: dict) -> dict:
+    """Rebuild expected source hashes from C1 immediately before native import.
+
+    The earlier two-rank admission record alone is not sufficient: a staged
+    file or receipt could change after the first review. This runs the
+    independent pinned-C1 source derivation and rehashes all staged files.
+    A fresh verification is mandatory; no fallback to a prior receipt.
+    """
     require_native_binding_identity(binding)
     need("ultralytics" not in sys.modules,
          "ULTRALYTICS_ALREADY_IMPORTED")
+    for key in ("checkout_root", "source_root", "modules_root"):
+        need(type(binding.get(key)) is str and
+             Path(binding[key]).is_absolute() and
+             ".." not in Path(binding[key]).parts,
+             "PRIVATE_SOURCE_PATH_" + key)
     source = Path(binding["source_root"]).resolve(strict=True)
     modules = Path(binding["modules_root"]).resolve(strict=True)
-    need(source.is_dir() and modules.is_dir() and
-         not source.is_symlink() and not modules.is_symlink(),
-         "PRIVATE_SOURCE_MISSING")
+    checkout = Path(binding["checkout_root"]).resolve(strict=True)
+    need(source.is_dir() and modules.is_dir() and checkout.is_dir() and
+         not source.is_symlink() and not modules.is_symlink() and
+         not checkout.is_symlink(), "PRIVATE_SOURCE_MISSING")
+    need(source.name == "source" and modules.name == "modules" and
+         source.parent == modules.parent and
+         not source.parent.is_relative_to(checkout),
+         "PRIVATE_STAGE_LAYOUT")
+    stage = audit_existing_stage(source.parent, checkout)
+    need(stage["source_manifest_sha256"] ==
+         binding["identity"]["stage_source_manifest_sha256"] and
+         stage["stage_receipt_sha256"] ==
+         binding["stage_receipt_sha256"],
+         "STAGED_BYTES_CHANGED_AFTER_REVIEW")
+    return {
+        "status": "C1_DERIVED_SOURCE_REVERIFIED_BEFORE_NATIVE_IMPORT",
+        "stage_receipt_sha256": stage["stage_receipt_sha256"],
+        "source_manifest_sha256": stage["source_manifest_sha256"],
+        "gpu_execution_allowed": False,
+        "official_training_authorized": False,
+    }
+
+
+def load_pinned_native_class(binding: dict) -> type:
+    """Import only newly reverified staged source, never pip Ultralytics."""
+    reauthenticate_private_stage_for_import(binding)
+    source = Path(binding["source_root"]).resolve(strict=True)
+    modules = Path(binding["modules_root"]).resolve(strict=True)
     sys.path.insert(0, str(modules))
     sys.path.insert(0, str(source))
     os.chdir(source)  # approved relative model YAML is under this exact source
