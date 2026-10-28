@@ -29,6 +29,8 @@ jobs:
           python research/r9_training/ddp_b16/torch_acceptance/ddp_autograd_cpu.py -v
       - name: Run two-rank G4 checkpoint recovery tests
         run: python research/r9_training/ddp_b16/torch_acceptance/ddp_g4_recovery_cpu.py -v
+      - name: Run native two-rank FRESH/G4 resume cursor tests
+        run: python research/r9_training/ddp_b16/torch_acceptance/ddp_native_state_cpu.py -v
       - name: Run two-rank rank0-only B-VAL synchronization tests
         run: python research/r9_training/ddp_b16/torch_acceptance/ddp_rank0_val_cpu.py -v
       - name: Run two-rank DDP admission consensus tests
