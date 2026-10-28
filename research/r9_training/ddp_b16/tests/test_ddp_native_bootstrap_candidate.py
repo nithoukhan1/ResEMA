@@ -9,6 +9,7 @@ import copy
 import hashlib
 import json
 import os
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -170,6 +171,25 @@ class DDPNativeBootstrapTests(unittest.TestCase):
                 with self.assertRaisesRegex(
                     DDPAdmissionError, "PINNED_C1_SOURCE_DERIVATION"):
                     load_pinned_native_class(b)
+
+    def test_native_import_disables_bytecode_before_stage_reauthentication(self):
+        from research.r9_training.ddp_b16 import ddp_native_bootstrap_candidate as module
+        binding = sample()
+        observed = []
+        prior = sys.dont_write_bytecode
+        try:
+            sys.dont_write_bytecode = False
+            def reject_before_import(_binding):
+                observed.append(sys.dont_write_bytecode)
+                raise DDPNativeBootstrapError("TEST_STOPS_BEFORE_IMPORT")
+            with patch.object(module, "reauthenticate_private_stage_for_import",
+                              side_effect=reject_before_import):
+                with self.assertRaisesRegex(DDPNativeBootstrapError,
+                                            "TEST_STOPS_BEFORE_IMPORT"):
+                    module.load_pinned_native_class(binding)
+            self.assertEqual(observed, [True])
+        finally:
+            sys.dont_write_bytecode = prior
 
     def test_candidate_fresh_state_does_not_grant_execution(self):
         with tempfile.TemporaryDirectory() as t:

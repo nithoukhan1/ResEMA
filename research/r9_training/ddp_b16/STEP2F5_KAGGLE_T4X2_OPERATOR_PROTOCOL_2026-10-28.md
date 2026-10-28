@@ -147,3 +147,16 @@ native trainer construction, forward/backward AMP/NCCL numerical
 acceptance, independent-session rank-specific G4 recovery,
 selected-best B-VAL export, or official 100-epoch training.
 All remain separately blocked. B-TEST remains sealed.
+
+## Bytecode-write race prevention
+
+A two-rank import-only probe shares one content-addressed staged source tree.
+Python must NOT create pycache files inside that tree while the other rank
+is auditing the 343-file inventory. The parent launcher now sets
+`PYTHONDONTWRITEBYTECODE=1` for both children. The native import loader
+also forces `sys.dont_write_bytecode=True` immediately before the second
+source audit/import boundary. CI includes an explicit ordering regression.
+A previously imported stage with bytecode artifacts is not reusable; prepare
+a new private stage. This only prevents interpreter-created bytecode files;
+it does not provide an OS-level read-only mount or protect against other
+untrusted filesystem writes.

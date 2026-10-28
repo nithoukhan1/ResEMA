@@ -8,6 +8,8 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
+from types import SimpleNamespace
 
 from research.r9_training.ddp_b16.ddp_kaggle_import_only import (
     DDPKaggleImportError, _check_probe_report, _parse_probe_log,
@@ -99,6 +101,16 @@ class KaggleImportOnlyContractTests(unittest.TestCase):
                   "--project", "/kaggle/working/new_project",
                   "--evidence-root", "/kaggle/working/new_evidence",
                   "--prepare-only"])
+
+    def test_child_launcher_disables_bytecode_writes_before_spawn(self):
+        # CI cannot use real Kaggle assets. Assert the exact launcher
+        # declaration and its placement in the real child env block.
+        from pathlib import Path
+        source = Path(__file__).resolve().parents[1] / "ddp_kaggle_import_only.py"
+        text = source.read_text("utf-8")
+        self.assertIn('env["PYTHONDONTWRITEBYTECODE"] = "1"', text)
+        self.assertLess(text.index('env["PYTHONDONTWRITEBYTECODE"] = "1"'),
+                        text.index('subprocess.run('))
 
     def test_no_overwrite_overlapping_or_sealed_output(self):
         plan = {

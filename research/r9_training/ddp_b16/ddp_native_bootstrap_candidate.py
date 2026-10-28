@@ -145,6 +145,12 @@ def reauthenticate_private_stage_for_import(binding: dict) -> dict:
 
 def load_pinned_native_class(binding: dict) -> type:
     """Import only newly reverified staged source, never pip Ultralytics."""
+    # File-by-file source verification and the subsequent import run on
+    # both ranks concurrently. Python bytecode writes would mutate the
+    # stage, invalidate its inventory, and cause a cross-rank race.
+    # This is import-only; disabling the interpreter's bytecode cache
+    # does not change scientific/model behavior.
+    sys.dont_write_bytecode = True
     reauthenticate_private_stage_for_import(binding)
     source = Path(binding["source_root"]).resolve(strict=True)
     modules = Path(binding["modules_root"]).resolve(strict=True)

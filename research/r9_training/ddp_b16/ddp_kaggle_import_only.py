@@ -218,6 +218,10 @@ def main(argv: list[str] | None = None) -> int:
     ]
     env = dict(os.environ)
     env["OMP_NUM_THREADS"] = "1"
+    # Both ranks inspect the SAME exact 336+7-file stage. Importing the
+    # verified native class must never create .pyc/__pycache__ files that
+    # would race with the other rank's inventory audit.
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
     checkout = str(Path(plan["checkout_root"]).resolve(strict=True))
     env["PYTHONPATH"] = checkout + (
         os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
