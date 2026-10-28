@@ -99,7 +99,9 @@ class NativeBindingTests(unittest.TestCase):
                 "research.r9_training.ddp_b16.ddp_native_binding.verified_file",
                 side_effect=self.fake_file), patch(
                 "research.r9_training.ddp_b16.ddp_native_binding.Path.resolve",
-                return_value=__import__("pathlib").Path("/kaggle/working/nonexistent")):
+                autospec=True, side_effect=lambda path, strict=False: path), patch(
+                "research.r9_training.ddp_b16.ddp_native_binding.Path.is_dir",
+                return_value=True):
                 result = make_native_binding(
                     p, a, config(), project="/kaggle/working/new_run")
             self.assertEqual(result["schema"], SCHEMA)
