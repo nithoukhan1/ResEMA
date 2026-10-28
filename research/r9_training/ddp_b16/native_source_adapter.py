@@ -241,6 +241,12 @@ def _patch_engine(source: str) -> str:
         '                self.d4e_recovery_epoch_end(epoch, nb, last_opt_step)\n',
         name="ENGINE_DDP_NATIVE_G4_CALLBACK",
     )
+    source = _replace_once(
+        source,
+        "        self.final_eval()\n        if getattr(self, \"_d4e_recovery_configured\", False):\n            self.d4e_g3b_guard_terminal()  # BLOCKED until terminal export independently accepted\n",
+        "        if self.world_size == 2:\n            from research.r9_training.ddp_b16.ddp_terminal_boundary import rank0_selected_best_terminal\n            rank0_selected_best_terminal(self)\n        else:\n            self.final_eval()\n            if getattr(self, \"_d4e_recovery_configured\", False):\n                self.d4e_g3b_guard_terminal()  # BLOCKED until terminal export independently accepted\n",
+        name="ENGINE_DDP_RANK0_TERMINAL_BEST",
+    )
     return source
 
 
