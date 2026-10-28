@@ -46,13 +46,14 @@ def main(argv=None) -> int:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--review-only", action="store_true")
     mode.add_argument("--native-binding-review", action="store_true")
+    mode.add_argument("--native-import-probe", action="store_true")
     mode.add_argument("--execute", action="store_true")
     parser.add_argument("--project", default=None)
     args = parser.parse_args(argv)
     # Reject execution BEFORE opening a plan or importing torch.
     if args.execute:
         raise DDPChildReviewError("DDP_CHILD_EXECUTION_NOT_IMPLEMENTED_OR_AUTHORIZED")
-    if args.native_binding_review and not args.project:
+    if (args.native_binding_review or args.native_import_probe) and not args.project:
         raise DDPChildReviewError("DDP_CHILD_PRIVATE_PROJECT_REQUIRED")
     if args.review_only and args.project is not None:
         raise DDPChildReviewError("DDP_CHILD_PROJECT_FOR_NATIVE_REVIEW_ONLY")
@@ -64,7 +65,7 @@ def main(argv=None) -> int:
         plan = _unique_json(__import__("pathlib").Path(args.plan))
         historical = review_worker_inputs(plan, stage_source=False)
         record = verify_staged_admission(plan, historical)
-        if args.native_binding_review:
+        if args.native_binding_review or args.native_import_probe:
             config = _unique_json(__import__("pathlib").Path(plan["r0_input_config"]))
             binding = make_native_binding(
                 plan, record, config, project=args.project)
@@ -78,10 +79,17 @@ def main(argv=None) -> int:
                             timeout=timedelta(seconds=120))
     try:
         approved = require_review_consensus(record, local_error=local_error)
-        if args.native_binding_review:
+        if args.native_binding_review or args.native_import_probe:
             approved = require_native_binding_consensus(binding)
+        if args.native_import_probe:
+            # This probe checks physical topology and native CLASS IMPORT only.
+            # It does not instantiate a trainer, deserialize weights or train.
+            from .ddp_native_import_probe import collective_native_import_probe
+            approved = collective_native_import_probe(binding)
         if rank == 0:
-            label = ("DDP_B16_NATIVE_BINDING_REVIEW_ONLY=" if args.native_binding_review
+            label = ("DDP_B16_NATIVE_IMPORT_PROBE_ONLY=" if args.native_import_probe
+                     else "DDP_B16_NATIVE_BINDING_REVIEW_ONLY="
+                     if args.native_binding_review
                      else "DDP_B16_TWO_RANK_REVIEW_ONLY=")
             print(label + json.dumps(approved, sort_keys=True), flush=True)
     finally:
