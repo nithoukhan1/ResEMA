@@ -160,3 +160,28 @@ A previously imported stage with bytecode artifacts is not reusable; prepare
 a new private stage. This only prevents interpreter-created bytecode files;
 it does not provide an OS-level read-only mount or protect against other
 untrusted filesystem writes.
+
+## G. Offline internal-consistency review of exported evidence
+
+After a live Kaggle import-only run, take the ORIGINAL raw evidence and
+log files, not screenshots or hand-transcribed text. The separate
+read-only verifier checks the evidence schema, original raw-log hash,
+child receipt identity, frozen DDP recipe SHA, explicit no-training
+and B-TEST-sealed flags, and the externally supplied release Git SHA.
+If the exact plan JSON is also available it checks the original plan
+file hash and release/arm/run identities.
+
+```bash
+python -m research.r9_training.ddp_b16.ddp_import_evidence_verify \\
+  --evidence /kaggle/working/<EVIDENCE_ROOT>/IMPORT_ONLY_EVIDENCE.json \\
+  --log /kaggle/working/<EVIDENCE_ROOT>/TWO_RANK_IMPORT_ONLY.log \\
+  --expected-head <EXACT_FROZEN_CANDIDATE_GIT_HEAD> \\
+  --plan /kaggle/working/<ORIGINAL_PLAN_JSON>
+```
+
+**Important:** Internal integrity is not independent Kaggle GPU
+attestation. An attacker can forge a matching log and receipt together.
+The verifier therefore returns status
+`INTERNAL_CONSISTENCY_VERIFIED_NOT_GPU_ATTESTATION`, never
+`GPU_ACCEPTED` or `TRAINING_AUTHORIZED`. Genuine T4 evidence still
+requires original Kaggle-run metadata and operator-provided artifacts.

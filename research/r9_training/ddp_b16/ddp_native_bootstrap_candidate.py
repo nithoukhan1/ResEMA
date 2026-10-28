@@ -66,7 +66,7 @@ def require_native_binding_identity(binding: dict) -> None:
          "EXACT_CONSTRUCTOR_PARAMETERS")
 
 
-def verify_two_t4_runtime(cuda: Any) -> None:
+def verify_two_t4_runtime(cuda: Any) -> list[str]:
     """Physical topology must be checked before importing native Ultralytics."""
     need(os.environ.get("CUDA_VISIBLE_DEVICES") == "0,1",
          "PHYSICAL_CUDA_MAPPING")
