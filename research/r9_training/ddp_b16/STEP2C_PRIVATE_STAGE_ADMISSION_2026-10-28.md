@@ -22,3 +22,13 @@ split changes are permitted.
 100 epochs, GPU deserialization, a torchrun child, or CUDA/G4 resume.
 The existing `ddp_worker.py --execute` still refuses before loading the plan.
 User authorization and actual nonofficial GPU acceptance remain separate.
+
+## Hardening update
+
+The stage receipt is **not** a root of trust. The auditor now re-verifies
+frozen C1, reconstructs the original pinned manifest, deterministically
+recomputes the five DDP native patches in memory, and compares all 336
+source and seven integration module digests to the staged receipt before
+rechecking every physical staged file. An attacker changing a source file
+and its matching stage receipt is rejected. The candidate recipe fingerprint
+also includes the remaining frozen C1 training controls.

@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[4]
 
 
 def plan(stage):
-    return {"stage_root": str(stage), "mode": "FRESH_FROM_EARLY",
+    return {"stage_root": str(stage), "checkout_root": str(ROOT),
+            "mode": "FRESH_FROM_EARLY",
             "arm": "MV00", "run_id": "fixture_only", "b_test_access": "NONE",
             "expected_git_head": "a" * 40}
 
@@ -54,13 +55,30 @@ class DDPAdmissionTests(unittest.TestCase):
             source = stage / "source/ultralytics/engine/trainer.py"
             source.write_bytes(source.read_bytes() + b"# unauthorized\n")
             with self.assertRaisesRegex(DDPAdmissionError, "BYTES_OR_FILESET_DRIFT"):
-                audit_existing_stage(stage)
+                audit_existing_stage(stage, ROOT)
         with tempfile.TemporaryDirectory() as t:
             stage = Path(t) / "stage"
             create_private_stage(ROOT, stage)
             (stage / "modules/extra.py").write_text("pass\n", "utf-8")
             with self.assertRaisesRegex(DDPAdmissionError, "BYTES_OR_FILESET_DRIFT"):
-                audit_existing_stage(stage)
+                audit_existing_stage(stage, ROOT)
+
+    def test_forged_matching_stage_receipt_cannot_override_pinned_c1(self):
+        with tempfile.TemporaryDirectory() as t:
+            stage = Path(t) / "stage"
+            create_private_stage(ROOT, stage)
+            target = stage / "source/ultralytics/engine/trainer.py"
+            target.write_bytes(target.read_bytes() + b"# malicious but receipt-consistent\\n")
+            receipt_file = stage / "STAGE_RECEIPT.json"
+            receipt = json.loads(receipt_file.read_text("utf-8"))
+            from hashlib import sha256
+            tampered = sha256(target.read_bytes()).hexdigest()
+            rel = "ultralytics/engine/trainer.py"
+            receipt["stage_source_sha256"][rel] = tampered
+            receipt["ddp_adapted_files"][rel] = tampered
+            receipt_file.write_text(json.dumps(receipt), "utf-8")
+            with self.assertRaisesRegex(DDPAdmissionError, "PINNED_C1_SOURCE_DERIVATION"):
+                audit_existing_stage(stage, ROOT)
 
     def test_wrong_identity_legacy_authority_or_test_access_is_rejected(self):
         with tempfile.TemporaryDirectory() as t:
@@ -88,7 +106,7 @@ class DDPAdmissionTests(unittest.TestCase):
             data["official_training_authorized"] = True
             receipt.write_text(json.dumps(data), "utf-8")
             with self.assertRaisesRegex(DDPAdmissionError, "STAGE_NOT_EXECUTABLE"):
-                audit_existing_stage(stage)
+                audit_existing_stage(stage, ROOT)
         with tempfile.TemporaryDirectory() as t:
             stage = Path(t) / "stage"
             create_private_stage(ROOT, stage)
@@ -96,7 +114,7 @@ class DDPAdmissionTests(unittest.TestCase):
             s = receipt.read_text("utf-8")
             receipt.write_text(s.replace('"status":', '"status": "dup", "status":', 1), "utf-8")
             with self.assertRaisesRegex(DDPAdmissionError, "DUPLICATE_JSON_KEY"):
-                audit_existing_stage(stage)
+                audit_existing_stage(stage, ROOT)
 
 
 if __name__ == "__main__":

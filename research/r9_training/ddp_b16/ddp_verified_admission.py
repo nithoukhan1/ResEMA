@@ -11,7 +11,8 @@ import re
 from pathlib import Path
 
 from .ddp_g4_recovery import validate_identity
-from .ddp_worker_stage import C1_COMMIT, file_sha256
+from .ddp_worker_stage import C1_COMMIT, file_sha256, verify_original_source
+from .native_source_adapter import BASE_BLOBS, create_candidate_sources
 
 SHA64 = re.compile(r"^[0-9a-f]{64}$")
 SHA40 = re.compile(r"^[0-9a-f]{40}$")
@@ -24,7 +25,13 @@ RECIPE = {
     "steps_per_rank": 890, "imgsz": 1024, "epochs": 100,
     "seed": 42, "optimizer": "SGD", "lr0": 0.01, "lrf": 0.01,
     "momentum": 0.937, "weight_decay": 0.0005, "cos_lr": True,
-    "nbs": 64, "workers": 0, "amp": True, "b_test_access": "NONE",
+    "nbs": 64, "workers": 0, "amp": True,
+    "deterministic": True, "patience": 100, "cache": False,
+    "compile": False, "rect": False, "multi_scale": 0.0,
+    "fraction": 1.0, "single_cls": False, "mosaic": 0.0,
+    "mixup": 0.0, "cutmix": 0.0, "copy_paste": 0.0,
+    "plots": False, "save": True, "val": True, "resume": False,
+    "exist_ok": False, "b_test_access": "NONE",
 }
 ADMISSION_SCHEMA = "DDP_B16_STAGE_ATTESTATION_REVIEW_NOT_GPU_AUTHORITY_V1"
 
@@ -77,7 +84,27 @@ def audit_tree(root, expected, count, name):
     require(actual == expected, name + "_BYTES_OR_FILESET_DRIFT")
 
 
-def audit_existing_stage(path):
+def audit_existing_stage(path, checkout_root):
+    # Never allow the mutable stage receipt to be its own ultimate authority.
+    # Reproduce the exact five patched files from authenticated C1 Git blobs,
+    # and derive the remaining 331 + seven module hashes from a fixed manifest.
+    checkout = Path(checkout_root).resolve(strict=True)
+    verify_original_source(checkout)
+    original_base = checkout / "research/r9_training"
+    original_manifest = json.loads(
+        (original_base / "code/R9_CANDIDATE_MANIFEST_R1.json").read_text("utf-8")
+    )
+    originals = {
+        rel: (original_base / "frozen_source" / rel).read_bytes()
+        for rel in BASE_BLOBS
+    }
+    patched = create_candidate_sources(originals)
+    expected_source = dict(original_manifest["candidate_source_sha256"])
+    expected_source.update({
+        rel: hashlib.sha256(value).hexdigest()
+        for rel, value in patched.items()
+    })
+    expected_modules = original_manifest["unchanged_integration_modules_sha256"]
     candidate = Path(path)
     require(candidate.is_absolute() and ".." not in candidate.parts,
             "STAGE_ABSOLUTE_PATH")
@@ -99,6 +126,8 @@ def audit_existing_stage(path):
             r.get("b_test_access") == "NONE", "STAGE_NOT_EXECUTABLE")
     source = r.get("stage_source_sha256")
     modules = r.get("stage_modules_sha256")
+    require(source == expected_source and modules == expected_modules,
+            "PINNED_C1_SOURCE_DERIVATION")
     audit_tree(stage / "source", source, 336, "SOURCE")
     audit_tree(stage / "modules", modules, 7, "MODULES")
     patches = r.get("ddp_adapted_files")
@@ -134,7 +163,7 @@ def verify_staged_admission(plan, r0_review):
             "RELEASE_COMMIT")
     require(r0_review.get("gpu_execution_allowed") is False and
             r0_review.get("official_training_authorized") is False, "R0_NO_AUTHORITY")
-    stage = audit_existing_stage(plan["stage_root"])
+    stage = audit_existing_stage(plan["stage_root"], plan["checkout_root"])
     identity = {
         "arm": plan["arm"], "run_id": plan["run_id"],
         "ddp_release_sha": head, "ddp_recipe_sha256": sha_object(RECIPE),
