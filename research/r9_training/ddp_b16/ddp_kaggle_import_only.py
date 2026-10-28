@@ -176,6 +176,9 @@ def main(argv: list[str] | None = None) -> int:
                       ("RANK", "WORLD_SIZE", "LOCAL_RANK")),
               "LAUNCHER_MUST_BE_OUTSIDE_TORCHRUN")
     plan_path = Path(args.plan)
+    _need(plan_path.is_absolute() and ".." not in plan_path.parts and
+          not any(p.is_symlink() for p in (plan_path, *plan_path.parents)) and
+          plan_path.is_file(), "EXACT_ABSOLUTE_PLAN_FILE_REQUIRED")
     plan = _unique_json(plan_path)
     validate_plan(plan)
     project = _new_private_output(args.project, plan, label="PROJECT")
@@ -238,7 +241,7 @@ def main(argv: list[str] | None = None) -> int:
         print("DDP_B16_EVIDENCE_SHA256=" + sha_file(report_file))
         print("DDP_B16_LOG_SHA256=" + sha_file(log_file))
         return 0
-    except (DDPKaggleImportError, subprocess.TimeoutExpired) as exc:
+    except (DDPKaggleImportError, subprocess.TimeoutExpired, OSError) as exc:
         report = _make_receipt(
             plan=plan, plan_path=plan_path, source_record=source_record,
             binding=binding, mode="IMPORT_ONLY_FAILED",
