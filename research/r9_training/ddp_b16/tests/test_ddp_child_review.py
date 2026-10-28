@@ -18,8 +18,15 @@ class ChildReviewTests(unittest.TestCase):
     def test_native_binding_review_needs_explicit_private_project(self):
         with self.assertRaisesRegex(DDPChildReviewError, "PRIVATE_PROJECT_REQUIRED"):
             main(["--plan", "/does-not-exist", "--native-binding-review"])
+        with self.assertRaisesRegex(DDPChildReviewError, "PRIVATE_PROJECT_REQUIRED"):
+            main(["--plan", "/does-not-exist", "--native-import-probe"])
         with self.assertRaisesRegex(DDPChildReviewError, "PROJECT_FOR_NATIVE_REVIEW_ONLY"):
             main(["--plan", "/does-not-exist", "--review-only",
+                  "--project", "/kaggle/working/new_run"])
+        # Even when a project path exists, the execute mode is always
+        # refused before loading the plan or starting PyTorch.
+        with self.assertRaisesRegex(DDPChildReviewError, "EXECUTION_NOT_IMPLEMENTED"):
+            main(["--plan", "/does-not-exist", "--execute",
                   "--project", "/kaggle/working/new_run"])
 
     def test_requires_actual_two_rank_torchrun_mapping(self):
