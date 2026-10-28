@@ -210,6 +210,12 @@ def _patch_engine(source: str) -> str:
     )
     source = _replace_once(
         source,
+        "        if hasattr(self, \"d4e_recovery_start\") and not getattr(self, \"_d4e_recovery_configured\", False):\n            raise RuntimeError(\"D4E_R2_GOVERNED_RECOVERY_CONFIGURATION_REQUIRED\")\n        if hasattr(self, \"d4e_recovery_start\") and not hasattr(self, \"d4e_g3b_guard_preflight\"):\n            raise RuntimeError(\"G3B4_MANDATORY_GUARD_MIXIN_MISSING\")\n        if getattr(self, \"_d4e_recovery_configured\", False) and not getattr(self, \"_g3b4_ready\", False):\n            raise RuntimeError(\"G3B4_EXPLICIT_GUARD_BINDING_MISSING\")\n",
+        "        if self.world_size == 2:\n            # Candidate DDP-B16 requires separately authenticated fresh/resume\n            # state AFTER native model/optimizer/loader setup. Never satisfy\n            # this by setting the legacy D4E batch-eight recovery marker.\n            from research.r9_training.ddp_b16.ddp_startup_boundary import require_ddp_b16_native_preloop\n            require_ddp_b16_native_preloop(self)\n        else:\n            if hasattr(self, \"d4e_recovery_start\") and not getattr(self, \"_d4e_recovery_configured\", False):\n                raise RuntimeError(\"D4E_R2_GOVERNED_RECOVERY_CONFIGURATION_REQUIRED\")\n            if hasattr(self, \"d4e_recovery_start\") and not hasattr(self, \"d4e_g3b_guard_preflight\"):\n                raise RuntimeError(\"G3B4_MANDATORY_GUARD_MIXIN_MISSING\")\n            if getattr(self, \"_d4e_recovery_configured\", False) and not getattr(self, \"_g3b4_ready\", False):\n                raise RuntimeError(\"G3B4_EXPLICIT_GUARD_BINDING_MISSING\")\n",
+        name="ENGINE_DDP_SEPARATE_NATIVE_STARTUP_BOUNDARY",
+    )
+    source = _replace_once(
+        source,
         '                self.train_loader.sampler.set_epoch(epoch)\n',
         '                from research.r9_training.ddp_b16.ddp_batch_loader import begin_distributed_pair_epoch\n'
         '                begin_distributed_pair_epoch(self.train_loader, epoch)\n',

@@ -46,5 +46,24 @@ def require_authenticated_ddp_child(trainer) -> None:
     if getattr(trainer, "_ddp_b16_verified_worker_ready", None) is not True:
         raise DDPB16LaunchError("DDP_B16_VERIFIED_WORKER_NOT_IMPLEMENTED")
 
-    if not getattr(trainer, "_d4e_recovery_configured", False):
-        raise DDPB16LaunchError("DDP_B16_GOVERNED_RECOVERY_NOT_BOUND")
+    # DDP-B16 must NEVER inherit the single-worker, batch-eight D4E/G3B4
+    # recovery authorization. The independent two-rank G4 state is required.
+    if getattr(trainer, "_d4e_recovery_configured", False):
+        raise DDPB16LaunchError("DDP_B16_LEGACY_BATCH8_RECOVERY_FORBIDDEN")
+    if getattr(trainer, "_g3b4_ready", False):
+        raise DDPB16LaunchError("DDP_B16_LEGACY_G3B4_BINDING_FORBIDDEN")
+    if getattr(trainer, "_ddp_b16_g4_native_bound", None) is not True:
+        raise DDPB16LaunchError("DDP_B16_TWO_RANK_G4_NOT_BOUND")
+    from .ddp_g4_recovery import validate_identity
+    identity = getattr(trainer, "_ddp_b16_g4_identity", None)
+    try:
+        validate_identity(identity)
+    except (ValueError, TypeError, RuntimeError) as exc:
+        raise DDPB16LaunchError("DDP_B16_TWO_RANK_IDENTITY_INVALID") from exc
+    actual_arm = (
+        "MV00" if type(trainer).__name__ == "EarlyPairedTrainer"
+        else "MV01" if type(trainer).__name__ == "VGRADetectionTrainer"
+        else None
+    )
+    if actual_arm is None or identity["arm"] != actual_arm:
+        raise DDPB16LaunchError("DDP_B16_TRAINER_ARM_MISMATCH")
