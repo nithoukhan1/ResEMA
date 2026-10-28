@@ -87,6 +87,19 @@ class KaggleImportOnlyContractTests(unittest.TestCase):
             with self.assertRaises(DDPKaggleImportError):
                 _parse_probe_log(log)
 
+    def test_main_rejects_relative_missing_or_symlink_plan_before_staging(self):
+        from research.r9_training.ddp_b16.ddp_kaggle_import_only import main
+        with self.assertRaisesRegex(DDPKaggleImportError, "EXACT_ABSOLUTE_PLAN"):
+            main(["--plan", "./untrusted_plan.json",
+                  "--project", "/kaggle/working/new_project",
+                  "--evidence-root", "/kaggle/working/new_evidence",
+                  "--prepare-only"])
+        with self.assertRaisesRegex(DDPKaggleImportError, "EXACT_ABSOLUTE_PLAN"):
+            main(["--plan", "/kaggle/working/missing_plan.json",
+                  "--project", "/kaggle/working/new_project",
+                  "--evidence-root", "/kaggle/working/new_evidence",
+                  "--prepare-only"])
+
     def test_no_overwrite_overlapping_or_sealed_output(self):
         plan = {
             "checkout_root": "/kaggle/working/ResEMA_DDP_RELEASE",
