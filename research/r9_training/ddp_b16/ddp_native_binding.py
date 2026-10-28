@@ -194,6 +194,9 @@ def make_native_binding(plan: Any, admission: Any, config: Any, *,
         "identity": identity,
         "source_root": str(source),
         "modules_root": str(modules),
+        # Authenticated checkout is needed to independently recreate all five
+        # source patches immediately before importing the staged native code.
+        "checkout_root": str(checkout),
         "trainer_class": CLASS[plan["arm"]],
         "trainer_module": SOURCE_MOD[plan["arm"]],
         "constructor": constructor,
