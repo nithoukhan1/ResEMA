@@ -71,7 +71,7 @@ class DDPConsensusTests(unittest.TestCase):
         ctx = mp.get_context("spawn")
         q = ctx.SimpleQueue()
         mp.spawn(worker, args=(port(), tamper, q), nprocs=2, join=True)
-        return dict(q.get() for _ in range(2))
+        return {rank: (status, detail) for rank, status, detail in (q.get() for _ in range(2))}
 
     def test_matching_verified_fixture_identity_only(self):
         r = self.run_pair(None)
