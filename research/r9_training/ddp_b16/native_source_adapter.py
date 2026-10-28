@@ -223,15 +223,15 @@ def _patch_engine(source: str) -> str:
     )
     source = _replace_once(
         source,
-        '        last_opt_step = -1\\n',
-        '        last_opt_step = self._ddp_b16_native_last_opt_step if self.world_size == 2 else -1\\n',
+        '        last_opt_step = -1\n',
+        '        last_opt_step = self._ddp_b16_native_last_opt_step if self.world_size == 2 else -1\n',
         name="ENGINE_DDP_RESTORED_LAST_OPT_STEP",
     )
     source = _replace_once(
         source,
-        '        if not getattr(self, "_d4e_recovery_restored", False):\\n',
-        '        if not (getattr(self, "_d4e_recovery_restored", False) or\\n'
-        '                (self.world_size == 2 and getattr(self, "_ddp_b16_native_restored", False))):\\n',
+        '        if not getattr(self, "_d4e_recovery_restored", False):\n',
+        '        if not (getattr(self, "_d4e_recovery_restored", False) or\n'
+        '                (self.world_size == 2 and getattr(self, "_ddp_b16_native_restored", False))):\n',
         name="ENGINE_DDP_PRESERVE_G4_GRADIENTS",
     )
     source = _replace_once(
