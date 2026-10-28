@@ -6,6 +6,8 @@ construction, datasets, Ultralytics import, or GPU training occurs.
 from __future__ import annotations
 
 import copy
+import hashlib
+import json
 import os
 import tempfile
 import unittest
@@ -15,13 +17,17 @@ from unittest.mock import patch
 
 from research.r9_training.ddp_b16.ddp_native_bootstrap_candidate import (
     DDPNativeBootstrapError, assemble_amp_ready_native_class,
-    bind_candidate_fresh_state, require_native_binding_identity,
-    verify_two_t4_runtime,
+    bind_candidate_fresh_state, load_pinned_native_class,
+    reauthenticate_private_stage_for_import,
+    require_native_binding_identity, verify_two_t4_runtime,
 )
 from research.r9_training.ddp_b16.ddp_native_binding import (
     SCHEMA, CLASS, SOURCE_MOD,
 )
-from research.r9_training.ddp_b16.ddp_verified_admission import RECIPE, sha_object
+from research.r9_training.ddp_b16.ddp_verified_admission import (
+    RECIPE, sha_object, audit_existing_stage, DDPAdmissionError,
+)
+from research.r9_training.ddp_b16.ddp_worker_stage import create_private_stage
 
 
 def sample(arm="MV00"):
@@ -37,6 +43,7 @@ def sample(arm="MV00"):
         "arm": arm, "identity": identity,
         "source_root": "/kaggle/working/stage/source",
         "modules_root": "/kaggle/working/stage/modules",
+        "checkout_root": "/kaggle/working/pinned_checkout",
         "trainer_class": CLASS[arm],
         "trainer_module": SOURCE_MOD[arm],
         "constructor": {
@@ -118,6 +125,51 @@ class DDPNativeBootstrapTests(unittest.TestCase):
         corrupted["identity"]["arm"] = "MV01"
         with self.assertRaises(DDPNativeBootstrapError):
             require_native_binding_identity(corrupted)
+
+    def test_real_c1_source_rechecked_before_import_and_forged_receipt_rejected(self):
+        # Actual 336 original source files + seven integration modules, not mocks.
+        repo_root = Path(__file__).resolve().parents[4]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            stage = Path(temp_dir) / "private"
+            create_private_stage(repo_root, stage)
+            audited = audit_existing_stage(stage, repo_root)
+            b = sample()
+            b["source_root"] = str(stage / "source")
+            b["modules_root"] = str(stage / "modules")
+            b["checkout_root"] = str(repo_root)
+            b["identity"]["stage_source_manifest_sha256"] = (
+                audited["source_manifest_sha256"])
+            b["stage_receipt_sha256"] = audited["stage_receipt_sha256"]
+            b["binding_sha256"] = sha_object({
+                k: v for k, v in b.items()
+                if k not in ("schema", "binding_sha256", "status",
+                             "gpu_execution_allowed", "official_training_authorized",
+                             "b_test_access")
+            })
+            report = reauthenticate_private_stage_for_import(b)
+            self.assertEqual(
+                report["status"],
+                "C1_DERIVED_SOURCE_REVERIFIED_BEFORE_NATIVE_IMPORT")
+            self.assertFalse(report["gpu_execution_allowed"])
+
+            # A forged receipt that agrees with a modified source must
+            # still fail against independently recomputed frozen C1 bytes.
+            target = stage / "source/ultralytics/engine/trainer.py"
+            target.write_bytes(target.read_bytes() + b"# forged source\\n")
+            receipt_file = stage / "STAGE_RECEIPT.json"
+            receipt = json.loads(receipt_file.read_text("utf-8"))
+            mutation_sha = hashlib.sha256(target.read_bytes()).hexdigest()
+            rel = "ultralytics/engine/trainer.py"
+            receipt["stage_source_sha256"][rel] = mutation_sha
+            receipt["ddp_adapted_files"][rel] = mutation_sha
+            receipt_file.write_text(json.dumps(receipt), encoding="utf-8")
+            with patch(
+                "research.r9_training.ddp_b16.ddp_native_bootstrap_candidate.importlib.import_module",
+                side_effect=AssertionError("import must not be attempted"),
+            ):
+                with self.assertRaisesRegex(
+                    DDPAdmissionError, "PINNED_C1_SOURCE_DERIVATION"):
+                    load_pinned_native_class(b)
 
     def test_candidate_fresh_state_does_not_grant_execution(self):
         with tempfile.TemporaryDirectory() as t:
