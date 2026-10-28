@@ -144,6 +144,9 @@ def review_worker_inputs(plan: dict[str, Any], *, stage_source: bool = False) ->
     if record["identity"]["arm"] != plan["arm"]:
         raise DDPWorkerError("DDP_WORKER_ARM_IDENTITY_DRIFT")
     summary["historical_input_identity_verified"] = True
+    summary["historical_r0_record_sha256"] = record["all_input_hashes_sha256"]
+    summary["historical_pretrained_sha256"] = record["identity"]["pretrained_sha256"]
+    summary["historical_assignment_sha256"] = record["identity"]["assignment_sha256"]
     summary["historical_scientific_source_commit"] = C1_COMMIT
     summary["historical_input_recipe_is_ddp_training_authority"] = False
     if stage_source:
@@ -159,6 +162,7 @@ def main(argv: list[str] | None = None) -> int:
     mode = p.add_mutually_exclusive_group(required=True)
     mode.add_argument("--review-only", action="store_true")
     mode.add_argument("--review-and-stage", action="store_true")
+    mode.add_argument("--attest-staged", action="store_true")
     mode.add_argument("--execute", action="store_true")
     args = p.parse_args(argv)
     # Unlike the future released worker, this stage has no train path.
@@ -167,6 +171,9 @@ def main(argv: list[str] | None = None) -> int:
         raise DDPWorkerError("DDP_B16_EXECUTION_LOCKED_PENDING_DDP_G4_AND_CUDA_ACCEPTANCE")
     plan = _unique_json(Path(args.plan))
     report = review_worker_inputs(plan, stage_source=args.review_and_stage)
+    if args.attest_staged:
+        from research.r9_training.ddp_b16.ddp_verified_admission import verify_staged_admission
+        report["ddp_candidate_admission"] = verify_staged_admission(plan, report)
     print(json.dumps(report, sort_keys=True, indent=2))
     return 0
 
