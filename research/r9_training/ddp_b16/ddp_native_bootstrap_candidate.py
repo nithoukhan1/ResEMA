@@ -79,8 +79,10 @@ def verify_two_t4_runtime(cuda: Any) -> None:
          "TORCHRUN_RANK_MAPPING")
     need(cuda.is_available() and cuda.device_count() == 2,
          "TWO_VISIBLE_CUDA_DEVICES_REQUIRED")
-    need(all("T4" in str(cuda.get_device_name(i)).upper() for i in (0, 1)),
+    names = [str(cuda.get_device_name(i)) for i in (0, 1)]
+    need(all("T4" in name.upper() for name in names),
          "PHYSICAL_GPU_MUST_BE_T4")
+    return names
 
 
 def assemble_amp_ready_native_class(native: type, expected_name: str) -> type:

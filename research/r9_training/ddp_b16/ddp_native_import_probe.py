@@ -39,7 +39,7 @@ def collective_native_import_probe(binding: Any) -> dict:
     signature = None
     try:
         require_native_binding_identity(binding)
-        verify_two_t4_runtime(torch.cuda)
+        gpu_names = verify_two_t4_runtime(torch.cuda)
         # The loader itself regenerates C1-derived source and checks all stage
         # SHA256 values AGAIN immediately before the Python module import.
         native_class = load_pinned_native_class(binding)
@@ -53,6 +53,9 @@ def collective_native_import_probe(binding: Any) -> dict:
             "trainer_module": native_class.__module__,
             "source_sha256": binding["identity"]["stage_source_manifest_sha256"],
             "stage_receipt_sha256": binding["stage_receipt_sha256"],
+            "gpu_names": gpu_names,
+            "torch_version": str(torch.__version__),
+            "cuda_runtime_version": torch.version.cuda,
         }
     except Exception as exc:
         error = type(exc).__name__ + ": " + str(exc)[:180]
@@ -76,6 +79,10 @@ def collective_native_import_probe(binding: Any) -> dict:
         "native_class": wire[0]["signature"]["trainer_class"],
         "source_manifest_sha256": wire[0]["signature"]["source_sha256"],
         "gpu_topology_only_checked": True,
+        "visible_gpu_names": wire[0]["signature"]["gpu_names"],
+        "torch_version": wire[0]["signature"]["torch_version"],
+        "cuda_runtime_version": wire[0]["signature"]["cuda_runtime_version"],
+        "process_group_backend": "gloo",
         "native_train_invoked": False,
         "model_deserialization_performed": False,
         "official_training_authorized": False,

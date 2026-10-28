@@ -94,6 +94,7 @@ def _worker(rank, port, scenario, queue):
         def fake_t4(_cuda):
             if scenario == "not_t4" and rank == 1:
                 raise RuntimeError("simulated topology mismatch")
+            return ["Tesla T4", "Tesla T4"]
 
         with patch(
             "research.r9_training.ddp_b16.ddp_native_import_probe.verify_two_t4_runtime",
@@ -129,6 +130,8 @@ class NativeImportProbeTests(unittest.TestCase):
             self.assertFalse(report["official_training_authorized"])
             self.assertFalse(report["model_deserialization_performed"])
             self.assertEqual(report["b_test_access"], "NONE")
+            self.assertEqual(report["visible_gpu_names"], ["Tesla T4", "Tesla T4"])
+            self.assertEqual(report["process_group_backend"], "gloo")
 
     def test_rank_local_topology_source_or_binding_drift_fails_both(self):
         for scenario in ("not_t4", "source_reject", "cross_rank_drift"):
