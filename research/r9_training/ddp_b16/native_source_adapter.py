@@ -159,7 +159,7 @@ def _patch_early(source: str) -> str:
 
 
 def _patch_vgra_validator(source: str) -> str:
-    return _replace_once(
+    source = _replace_once(
         source,
         '        if trainer.world_size not in {0, 1} or RANK not in {-1, 0}:\n'
         '            raise NotImplementedError("VGRA V1 DDP validation not supported")\n',
@@ -170,10 +170,19 @@ def _patch_vgra_validator(source: str) -> str:
         '            raise NotImplementedError("VGRA V1 DDP validation not supported")\n',
         name="VGRA_VAL_RANK0_GUARD",
     )
+    return _replace_once(
+        source,
+        '        self.gather_stats()\n        stats = self.get_stats()\n',
+        '        # Full B-VAL runs on rank 0; rank 1 does not join this gather.\n'
+        '        if trainer.world_size != 2:\n'
+        '            self.gather_stats()\n'
+        '        stats = self.get_stats()\n',
+        name="VGRA_VAL_SKIP_RANK0_ONLY_DDP_GATHER",
+    )
 
 
 def _patch_early_validator(source: str) -> str:
-    return _replace_once(
+    source = _replace_once(
         source,
         '        if trainer.world_size not in {0, 1} or RANK not in {-1, 0}:\n'
         '            raise NotImplementedError("D4 Early paired DDP validation unauthorized")\n',
@@ -183,6 +192,15 @@ def _patch_early_validator(source: str) -> str:
         '        elif trainer.world_size not in {0, 1} or RANK not in {-1, 0}:\n'
         '            raise NotImplementedError("D4 Early paired DDP validation unauthorized")\n',
         name="EARLY_VAL_RANK0_GUARD",
+    )
+    return _replace_once(
+        source,
+        '        self.gather_stats()\n        stats = self.get_stats()\n',
+        '        # Full B-VAL runs on rank 0; rank 1 does not join this gather.\n'
+        '        if trainer.world_size != 2:\n'
+        '            self.gather_stats()\n'
+        '        stats = self.get_stats()\n',
+        name="EARLY_VAL_SKIP_RANK0_ONLY_DDP_GATHER",
     )
 
 

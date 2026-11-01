@@ -58,11 +58,35 @@ class DDPB16NativeSourceAdapterTests(unittest.TestCase):
             self.assertIn("_ddp_b16_rank0_validation_ready", adapted)
             self.assertIn("RANK != 0", adapted)
             self.assertIn("3049", adapted)
+            self.assertIn(
+                "if trainer.world_size != 2:\n            self.gather_stats()\n        stats = self.get_stats()",
+                adapted,
+            )
+            self.assertEqual(adapted.count("self.gather_stats()"), 1)
 
         early = result["ultralytics/models/yolo/detect/early_paired_trainer.py"].decode()
         self.assertIn("build_distributed_pair_training_loader(", early)
         self.assertIn("DDP_B16 requires per-rank TRAIN batch 8", early)
         self.assertIn('rank=-1, drop_last=False', early)
+
+    def test_rank0_only_gather_is_syntactically_guarded_for_both_validators(self):
+        adapted = create_candidate_sources(original_bytes())
+        for name in ("vgra_validator.py", "early_paired_validator.py"):
+            path = "ultralytics/models/yolo/detect/" + name
+            tree = ast.parse(adapted[path].decode("utf-8"), filename=path)
+            validators = [n for n in tree.body if isinstance(n, ast.ClassDef)]
+            self.assertEqual(len(validators), 1, path)
+            methods = [n for n in validators[0].body if isinstance(n, ast.FunctionDef) and n.name == "__call__"]
+            self.assertEqual(len(methods), 1, path)
+            guard = [
+                node for node in ast.walk(methods[0])
+                if isinstance(node, ast.If)
+                and ast.unparse(node.test) == "trainer.world_size != 2"
+                and len(node.body) == 1
+                and isinstance(node.body[0], ast.Expr)
+                and ast.unparse(node.body[0].value) == "self.gather_stats()"
+            ]
+            self.assertEqual(len(guard), 1, path)
 
     def test_refuse_modified_original_bytes(self):
         originals = original_bytes()
