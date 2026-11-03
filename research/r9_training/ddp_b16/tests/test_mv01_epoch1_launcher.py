@@ -21,7 +21,7 @@ class MV01LauncherContract(unittest.TestCase):
         self.assertIn('"--max_restarts=0", str(Path(__file__).resolve())', worker)
         self.assertNotIn('"--module", str(Path(__file__).resolve())', worker)
         self.assertIn('"arm": "MV01"', src)
-        self.assertIn('trainer_class', worker)
+        self.assertIn('native.__name__ == "VGRADetectionTrainer"', worker)
         self.assertIn('f440d329d4544ec08ad63c1972bcf9a8b8a7eed8', src)
         self.assertIn('4dc26b7277d58ed0b1fbcc1f4fac68aaf7ad417951e735bc8be2b040764861bb', src)
 
