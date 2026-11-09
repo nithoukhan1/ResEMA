@@ -82,7 +82,8 @@ try {
 $zipSHA=SHA $zipFile
 Set-Content -LiteralPath "$zipFile.sha256" -Encoding ASCII -Value ($zipSHA+"  "+$zipName)
 $meta=@{title="BL00 Epoch 95 Private Recovery";id=($KaggleOwner+"/bl00-e95-recovery-20261109");licenses=@(@{name="other"})}
-$meta | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $Destination "dataset-metadata.json") -Encoding UTF8
+$metaPath=Join-Path $Destination "dataset-metadata.json"
+[System.IO.File]::WriteAllText($metaPath,($meta | ConvertTo-Json -Depth 5),(New-Object System.Text.UTF8Encoding($false)))
 Write-Host "BL00 PORTABLE DATASET PACKAGE: PASS"
 Write-Host "DATASET DIR:" $Destination
 Write-Host "DATASET ID:" $meta.id
