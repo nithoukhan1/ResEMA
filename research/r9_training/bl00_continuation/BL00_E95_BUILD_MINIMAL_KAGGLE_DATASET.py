@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a SHA-authenticated minimal BL00 Epoch95 Kaggle Dataset from extracted failed output.
+r"""Create a SHA-authenticated minimal BL00 Epoch95 Kaggle Dataset from extracted failed output.
 
 Example:
 python BL00_E95_BUILD_MINIMAL_KAGGLE_DATASET.py --source "C:\Users\ik_pa\Downloads\results (15)bl00\BL00_CONTINUOUS_B16_OUTPUT\g4"
